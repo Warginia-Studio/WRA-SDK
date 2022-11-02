@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Core.Scripts.Patterns
+namespace Patterns
 {
     public class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {

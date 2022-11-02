@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DragDrop.Scripts.Managers
+namespace DragDrop.Managers
 {
     public class DDManager : MonoBehaviour
     {

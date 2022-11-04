@@ -1,27 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MonoBehaviourSingletonAutoLoad<T> : MonoBehaviour where T : MonoBehaviour
+namespace Patterns
 {
-    public static T Instance
+    public class MonoBehaviourSingletonAutoLoad<T> : MonoBehaviour where T : MonoBehaviour
     {
-        get
+        public static T Instance
         {
-            if (instance == null)
+            get
             {
-                instance = FindObjectOfType<T>();
-                if (instance != null)
-                    return instance;
-                instance = Resources.FindObjectsOfTypeAll<T>()[0];
                 if (instance == null)
                 {
-                    Debug.LogError($"No autoload instance in resources: {typeof(T)}");
+                    instance = FindObjectOfType<T>();
+                    if (instance != null)
+                        return instance;
+                    instance = Resources.FindObjectsOfTypeAll<T>()[0];
+                    if (instance == null)
+                    {
+                        Debug.LogError($"No autoload instance in resources: {typeof(T)}");
+                    }
                 }
+                return instance;
             }
-            return instance;
         }
-    }
 
-    private static T instance;
+        private static T instance;
+    }
 }

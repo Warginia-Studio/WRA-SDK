@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using Patterns;
-using UnityEngine;
 
-public class DescriptionManager : MonoBehaviourSingletonAutoLoad<DescriptionManager>
+namespace UIExtension.Managers
 {
-
-    public void ShowDescription(string description)
+    public class DescriptionManager : MonoBehaviourSingletonAutoLoad<DescriptionManager>
     {
-        
-    }
 
-    public void HideDescription()
-    {
+        public void ShowDescription(string description)
+        {
         
+        }
+
+        public void HideDescription()
+        {
+        
+        }
     }
 }

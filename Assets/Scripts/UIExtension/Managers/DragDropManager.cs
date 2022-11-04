@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using DragDrop.UI;
 using Patterns;
-using UnityEngine;
+using UIExtension.UI;
 
-public class DragDropManager : MonoBehaviourSingletonAutoCreate<DragDropManager>
+namespace UIExtension.Managers
 {
-    public void BeginDragItem(Dragable dragable)
+    public class DragDropManager : MonoBehaviourSingletonAutoCreate<DragDropManager>
     {
+        public void BeginDragItem(Dragable dragable)
+        {
         
-    }
+        }
 
-    public void EndDragItem()
-    {
+        public void EndDragItem()
+        {
         
+        }
     }
 }

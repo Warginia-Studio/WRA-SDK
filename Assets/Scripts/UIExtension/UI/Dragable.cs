@@ -1,7 +1,8 @@
+using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace DragDrop.UI
+namespace UIExtension.UI
 {
     public abstract class Dragable : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
     {

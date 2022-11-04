@@ -1,25 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ScriptableSingleton<T> : ScriptableObject where T : ScriptableObject
+namespace Patterns
 {
-    public static T Instance
+    public class ScriptableSingleton<T> : ScriptableObject where T : ScriptableObject
     {
-        get
+        public static T Instance
         {
-            if (instance == null)
+            get
             {
-                instance = Resources.FindObjectsOfTypeAll<T>()[0];
                 if (instance == null)
                 {
-                    Debug.LogError($"No scriptable instance in resources: {typeof(T)}");
+                    instance = Resources.FindObjectsOfTypeAll<T>()[0];
+                    if (instance == null)
+                    {
+                        Debug.LogError($"No scriptable instance in resources: {typeof(T)}");
+                    }
                 }
+
+                return instance;
             }
-
-            return instance;
         }
-    }
 
-    private static T instance;
+        private static T instance;
+    }
 }

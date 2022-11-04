@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Patterns
 {
-    public class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviour
+    public class MonoBehaviourSingletonAutoCreate<T> : MonoBehaviour where T : MonoBehaviour
     {
         public static T Instance
         {

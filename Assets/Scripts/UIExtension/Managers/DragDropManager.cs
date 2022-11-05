@@ -6,18 +6,19 @@ namespace UIExtension.Managers
     public class DragDropManager : MonoBehaviourSingletonAutoCreate<DragDropManager>
     {
         public Dragable DraggingItem => draggingItem;
-        public bool Dragging { get; private set; }
+        public bool Dragging => dragging;
 
         private Dragable draggingItem;
+        private bool dragging;
         public void BeginDragItem(Dragable dragable)
         {
-            Dragging = true;
+            dragging = true;
             draggingItem = dragable;
         }
 
         public void EndDragItem()
         {
-            Dragging = false;
+            dragging = false;
             draggingItem = null;
         }
     }

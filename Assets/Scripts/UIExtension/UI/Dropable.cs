@@ -1,44 +1,42 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
-public abstract class Dropable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+namespace UIExtension.UI
 {
-    [SerializeField] protected DropableConfiguration dropableConfiguration;
-    
-    protected Image image
+    public abstract class Dropable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
-        get
+        [SerializeField] protected DropableConfiguration dropableConfiguration;
+    
+        protected Image DropableStatus
         {
-            if (_image == null)
+            get
             {
-                _image = GetComponent<Image>();
+                if (dropableStatus == null)
+                {
+                    dropableStatus = GetComponent<Image>();
+                }
+
+                return dropableStatus;
             }
-
-            return _image;
         }
-    }
     
-    private Image _image;
+        private Image dropableStatus;
 
-    public abstract void OnPointerEnter(PointerEventData eventData);
+        public abstract void OnPointerEnter(PointerEventData eventData);
     
-    public abstract void OnPointerExit(PointerEventData eventData);
+        public abstract void OnPointerExit(PointerEventData eventData);
     
-    public abstract void OnDrop(PointerEventData eventData);
+        public abstract void OnDrop(PointerEventData eventData);
 
-    protected abstract bool IsPossibleToDrop();
+        protected abstract bool IsPossibleToDrop();
 
-    protected virtual void SetStatus(DropableConfiguration.Status status, string customStatusName = "")
-    {
-        if (dropableConfiguration == null)
-            return;
-        
-        Color finalColor = dropableConfiguration.GetFinalColor(status, customStatusName);
-        
+        protected virtual void SetStatus(DropableConfiguration.Status status, string customStatusName = "")
+        {
+            if (dropableConfiguration == null)
+                return;
+
+            dropableStatus.color = dropableConfiguration.GetFinalColor(status, customStatusName);
+        }
     }
 }

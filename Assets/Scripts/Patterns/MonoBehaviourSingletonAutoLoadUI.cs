@@ -1,9 +1,8 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Patterns
 {
-    public class MonoBehaviourSingletonAutoLoad<T> : MonoBehaviour where T : MonoBehaviour
+    public class MonoBehaviourSingletonAutoLoadUI<T> : MonoBehaviour where T : MonoBehaviour
     {
         public static T Instance
         {
@@ -14,6 +13,12 @@ namespace Patterns
                     instance = FindObjectOfType<T>();
                     if (instance != null)
                         return instance;
+                    var allObjects = Resources.FindObjectsOfTypeAll<T>();
+                    if (allObjects.Length == 0)
+                    {
+                        print($"<color=\"red\">Not found: {typeof(T)}.");
+                        return instance;
+                    }
                     instance = Resources.FindObjectsOfTypeAll<T>()[0];
 
                     if (instance == null)
@@ -23,6 +28,10 @@ namespace Patterns
                     else
                     {
                         instance = Instantiate(instance);
+                        if (MainCanvas.mainCanvas != null)
+                            instance.transform.parent = MainCanvas.mainCanvas;
+                        else
+                            Debug.LogError("<color=\"red\">NO MAIN CANVAS</color>");
                     }
                 }
                 return instance;

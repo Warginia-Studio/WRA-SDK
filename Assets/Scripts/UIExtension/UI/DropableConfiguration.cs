@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace UIExtension.UI
 {
+    [CreateAssetMenu(fileName = "Dropable Configuration", menuName = "thief01/UI Extension/Dropable Configuration")]
     public class DropableConfiguration : ScriptableObject
     {
         public enum Status

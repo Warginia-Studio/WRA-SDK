@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Patterns;
 using UnityEngine;
@@ -5,32 +6,24 @@ using UnityEngine.UI;
 
 namespace UIExtension.Managers
 {
-    public class DescriptionManager : MonoBehaviourSingletonAutoLoad<DescriptionManager>
+    public class DescriptionManager : MonoBehaviourSingletonAutoCreateUI<DescriptionManager>
     {
-        [SerializeField] private Transform descriptionWindow;
+        [SerializeField] private DescriptionWindow descriptionWindow;
+
+        private void Awake()
+        {
+            descriptionWindow = DescriptionWindow.Instance;
+        }
 
         public void ShowDescription(string description, float timeIn = 0.2f)
         {
-            StopAllCoroutines();
-            StartCoroutine(Animate(Color.white, timeIn));
+            descriptionWindow.ShowDescription(description, timeIn);
+            
         }
 
         public void HideDescription(float timeOut = 0.2f)
         {
-            StopAllCoroutines();
-            StartCoroutine(Animate(Color.clear, timeOut));
-        }
-
-        private IEnumerator Animate(Color newColor, float time)
-        {
-            Color currentColor = Color.white;
-            float delta = 0;
-
-            while (delta < 1)
-            {
-                yield return null;
-                delta += Time.deltaTime / time;
-            }
+            descriptionWindow.HideDescription(timeOut);
         }
     }
 }

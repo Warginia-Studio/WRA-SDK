@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class ContainerHolder : MonoBehaviour
 {
+    protected Container container;
     
 
-    public void SetContainer()
+    public void SetContainer(Container container)
     {
-        
+        this.container = container;
     }
 }

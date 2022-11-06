@@ -8,7 +8,8 @@ public class ContainerItem : ScriptableObject
 {
     public int ID;
     public Vector2Int Size;
+    public Sprite Icon;
 
-    public bool stacking;
-    public int maxStack;
+    public bool Stacking;
+    public int MaxStack;
 }

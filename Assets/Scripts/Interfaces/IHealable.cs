@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IHealable
+namespace Interfaces
 {
-    void Heal();
+    public interface IHealable
+    {
+        void Heal();
+    }
 }

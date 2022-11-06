@@ -1,13 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MainCanvas : MonoBehaviour
+namespace Utility
 {
-    public static Transform mainCanvas;
-    private void Awake()
+    public class MainCanvas : MonoBehaviour
     {
-        mainCanvas = transform;
+        public static Transform mainCanvas;
+        private void Awake()
+        {
+            mainCanvas = transform;
+        }
     }
 }

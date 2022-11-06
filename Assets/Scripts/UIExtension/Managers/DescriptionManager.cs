@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Patterns;
+using UIExtension.UI;
 using UnityEngine;
 
 namespace UIExtension.Managers

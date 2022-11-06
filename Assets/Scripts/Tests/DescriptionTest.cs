@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UIExtension.Managers;
 using UnityEngine;
 
-public class DescriptionTest : MonoBehaviour
+namespace Tests
 {
-
-    [SerializeField] private string description;
-    void Update()
+    public class DescriptionTest : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            DescriptionManager.Instance.ShowDescription(description);
-        }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        [SerializeField] private string description;
+        void Update()
         {
-            DescriptionManager.Instance.HideDescription();
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                DescriptionManager.Instance.ShowDescription(description);
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                DescriptionManager.Instance.HideDescription();
+            }
         }
     }
 }

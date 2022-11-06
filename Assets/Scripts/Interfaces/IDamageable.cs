@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IDamageable
+namespace Interfaces
 {
-    void DealDamage();
+    public interface IDamageable
+    {
+        void DealDamage();
+    }
 }

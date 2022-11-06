@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ISaveable
+namespace Interfaces
 {
-    string GetSaveData();
+    public interface ISaveable
+    {
+        string GetSaveData();
 
-    void LoadFromData(string data);
+        void LoadFromData(string data);
+    }
 }

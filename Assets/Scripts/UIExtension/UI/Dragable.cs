@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UIExtension.UI
 {
-    public abstract class Dragable : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
+    public abstract class Dragable : ContainerHolder, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] protected  Color defaultColor = Color.white;
         [SerializeField] protected Color draggingColor = new (1,1,1, 0.7f);

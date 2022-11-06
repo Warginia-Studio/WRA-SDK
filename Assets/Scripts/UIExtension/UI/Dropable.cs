@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UIExtension.UI
 {
-    public abstract class Dropable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+    public abstract class Dropable : ContainerHolder, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
         [SerializeField] protected DropableConfiguration dropableConfiguration;
     

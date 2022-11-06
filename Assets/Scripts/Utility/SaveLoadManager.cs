@@ -24,7 +24,7 @@ namespace Utility
         }
 
         public static Status ProcessStatus;
-        private Type xd;
+        
         private class GlobalSaveData
         {
             public string SceneName;

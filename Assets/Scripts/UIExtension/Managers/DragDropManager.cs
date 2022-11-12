@@ -4,25 +4,25 @@ using UnityEngine;
 
 namespace UIExtension.Managers
 {
-    public class DragDropManager : MonoBehaviourSingletonAutoCreate<DragDropManager>
+    public class DragDropManager : MonoBehaviourSingletonAutoLoadUI<DragDropManager>
     {
         public Dragable DraggingItem => draggingItem;
         public bool Dragging => dragging;
 
-        public static DragDropProfile DragDropProfile
+        public DragDropProfile DragDropProfile
         {
             get
             {
                 if (dragDropProfile == null)
                 {
-                    dragDropProfile = Resources.Load<DragDropProfile>("");
+                    dragDropProfile = Resources.Load<DragDropProfile>("DDP_Default");
                 }
 
                 return dragDropProfile;
             }
         }
 
-        [SerializeField] private static DragDropProfile dragDropProfile;
+        [SerializeField] private DragDropProfile dragDropProfile;
         
         // [SerializeField] private 
 

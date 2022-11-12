@@ -33,9 +33,9 @@ namespace UIExtension.UI
 
         protected virtual void SetStatus(DragDropProfile.Status status, string customStatusName = "")
         {
-            if (DragDropManager.DragDropProfile == null)
+            if (DragDropManager.Instance.DragDropProfile == null)
                 return;
-            dropableStatus.color = DragDropManager.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);
+            dropableStatus.color = DragDropManager.Instance.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);
         }
     }
 }

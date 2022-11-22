@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ContainerHolder : MonoBehaviour
+namespace Container
 {
-    
-
-    public void SetContainer()
+    public class ContainerHolder<T> : MonoBehaviour
     {
-        
+        protected Container<T> container;
+    
+        public void SetContainer(Container<T> container)
+        {
+            this.container = container;
+        }
     }
 }

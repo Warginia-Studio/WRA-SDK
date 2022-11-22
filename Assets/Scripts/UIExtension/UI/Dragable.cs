@@ -7,10 +7,17 @@ using UnityEngine.UI;
 
 namespace UIExtension.UI
 {
-    public abstract class Dragable : ContainerHolder, IBeginDragHandler, IEndDragHandler, IDragHandler
+    public abstract class Dragable<T> : ContainerHolder<T>, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
-        [SerializeField] protected  Color defaultColor = Color.white;
+        [SerializeField] protected Color defaultColor = Color.white;
         [SerializeField] protected Color draggingColor = new (1,1,1, 0.7f);
+
+        public ContainerItem ContainerItem
+        {
+            get => containerItem;
+            set => containerItem = value;
+        }
+
         protected Image Image
         {
             get
@@ -41,6 +48,7 @@ namespace UIExtension.UI
         
         private Image image;
         private CanvasGroup canvasGroup;
+        private ContainerItem containerItem;
 
         public void SetIcon(Sprite sprite)
         {
@@ -49,7 +57,7 @@ namespace UIExtension.UI
 
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
-            DragDropManager.Instance.BeginDragItem(this);
+            DragDropManager<T>.Instance.BeginDragItem(this);
             image.color = draggingColor;
             offset = (transform.position - Input.mousePosition);
             CanvasGroup.blocksRaycasts = false;
@@ -57,7 +65,7 @@ namespace UIExtension.UI
 
         public virtual void OnEndDrag(PointerEventData eventData)
         {
-            DragDropManager.Instance.EndDragItem();
+            DragDropManager<T>.Instance.EndDragItem();
             image.color = defaultColor;
             CanvasGroup.blocksRaycasts = true;
         }

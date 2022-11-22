@@ -27,8 +27,6 @@ namespace Container
             return false;
         }
 
-    
-
         public bool TryStack(ContainerItem containerItem)
         {
             if (Item.Stacking)

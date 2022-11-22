@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Container
 {
-    public class Container
+    public class Container<T>
     {
         public UnityEvent OnContainerChanged = new UnityEvent();
     
@@ -41,6 +41,27 @@ namespace Container
             return item;
         }
 
+        public ContainerItem IsPossibleToAddItemOnPossition(ContainerItem containerItem, Vector2Int position)
+        {
+            if(CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
+            {
+                return null;
+            }
+
+
+            var item = ScriptableObject.Instantiate(containerItem);
+            slots.Add(new ContainerSlot(item, position));
+
+            OnContainerChanged.Invoke();
+            return item;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="containerItem"></param>
+        /// <returns></returns>
+
         public bool TryRemoveItem(ContainerItem containerItem)
         {
             bool result = slots.Remove(slots.Find(ctg => ctg.Item == containerItem));
@@ -60,6 +81,13 @@ namespace Container
         {
             return slots.ToArray();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="position"></param>
+        /// <returns>If position is outside inventory return true, else return false</returns>
     
         private bool IsOutsideOfInventory(ContainerItem item, Vector2Int position)
         {
@@ -69,6 +97,12 @@ namespace Container
                 return true;
             return false;
         }
+
+        /// <summary>
+        /// Finding empty place
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns>Return position if found free slot, return new Vector2Int(-1-1) if not found.</returns>
     
         private Vector2Int FindEmptyPlace(ContainerItem item)
         {
@@ -76,7 +110,7 @@ namespace Container
             {
                 for (int j = 0; j < containerSize.x; j++)
                 {
-                    if (!IsOutsideOfInventory(item, new Vector2Int(j,i)) && !CheckSlots(item, new Vector2Int(j, i)))
+                    if (!IsOutsideOfInventory(item, new Vector2Int(j,i)) && !CheckSlot(item, new Vector2Int(j, i)))
                     {
                         return new Vector2Int(j, i);
                     }
@@ -84,8 +118,15 @@ namespace Container
             }
             return -Vector2Int.one;
         }
+
+        /// <summary>
+        /// Checking slots by item size and position
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="position"></param>
+        /// <returns>Return true if slot is busy, false if empty</returns>
     
-        private bool CheckSlots(ContainerItem item, Vector2Int position)
+        private bool CheckSlot(ContainerItem item, Vector2Int position)
         {
             for (int i = 0; i < slots.Count; i++)
             {

@@ -1,13 +1,14 @@
+using System;
+using Container;
+using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UIExtension.UI
 {
-    public abstract class Dropable : ContainerHolder, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+    public abstract class Dropable<T> : ContainerHolder<T>, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
-        [SerializeField] protected DropableConfiguration dropableConfiguration;
-    
         protected Image DropableStatus
         {
             get
@@ -20,6 +21,14 @@ namespace UIExtension.UI
                 return dropableStatus;
             }
         }
+
+        public Vector2Int SlotPosition
+        {
+            get => slotPosition;
+            set => slotPosition = value;
+        }
+
+        private Vector2Int slotPosition;
     
         private Image dropableStatus;
 
@@ -31,12 +40,11 @@ namespace UIExtension.UI
 
         protected abstract bool IsPossibleToDrop();
 
-        protected virtual void SetStatus(DropableConfiguration.Status status, string customStatusName = "")
+        protected virtual void SetStatus(DragDropProfile.Status status, string customStatusName = "")
         {
-            if (dropableConfiguration == null)
+            if (DragDropManager<T>.Instance.DragDropProfile == null)
                 return;
-
-            dropableStatus.color = dropableConfiguration.GetFinalColor(status, customStatusName);
+            dropableStatus.color = DragDropManager<T>.Instance.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);
         }
     }
 }

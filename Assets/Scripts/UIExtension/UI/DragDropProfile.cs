@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace UIExtension.UI
 {
-    [CreateAssetMenu(fileName = "Dropable Configuration", menuName = "thief01/UI Extension/Dropable Configuration")]
-    public class DropableConfiguration : ScriptableObject
+    [CreateAssetMenu(fileName = "Drag Drop Profile", menuName = "thief01/UI Extension/Drag Drop Profile")]
+    public class DragDropProfile : ScriptableObject
     {
         public enum Status
         {
@@ -21,12 +21,16 @@ namespace UIExtension.UI
             [SerializeField] public Color colorStatus;
             [SerializeField] public string statusName;
         }
+    
+        [SerializeField] private Color dragColor;
+        [SerializeField] private Color idlecolor;
+    
         [SerializeField] private Color possible;
         [SerializeField] private Color notPossible;
         [SerializeField] private Color busy;
         [SerializeField] private Color wrongType;
         [SerializeField] private CustomStatus[] customStatusConfiguration;
-
+    
         private Dictionary<string, Color> CustomStatuses
         {
             get
@@ -60,7 +64,7 @@ namespace UIExtension.UI
 
         private Dictionary<string, Color> customStatuses;
     
-        public Color GetFinalColor(Status status, string customStatusName = "")
+        public Color GetFinalColorOfDropStatus(Status status, string customStatusName = "")
         {
             switch (status)
             {
@@ -69,6 +73,11 @@ namespace UIExtension.UI
                 default:
                     return Colors[(int)status];
             }
+        }
+
+        public Color DragableColor(bool dragging)
+        {
+            return dragging ? dragColor : idlecolor;
         }
     }
 }

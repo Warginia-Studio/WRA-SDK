@@ -1,4 +1,5 @@
 using System;
+using Container;
 using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,76 +7,72 @@ using UnityEngine.UI;
 
 namespace UIExtension.UI
 {
-    public abstract class Dragable : ContainerHolder, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
+    public abstract class Dragable<T> : ContainerHolder<T>, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
-        [SerializeField] protected  Color defaultColor = Color.white;
+        [SerializeField] protected Color defaultColor = Color.white;
         [SerializeField] protected Color draggingColor = new (1,1,1, 0.7f);
-        protected Image image
+
+        public ContainerItem ContainerItem
+        {
+            get => containerItem;
+            set => containerItem = value;
+        }
+
+        protected Image Image
         {
             get
             {
-                if (_image == null)
+                if (image == null)
                 {
-                    _image = GetComponent<Image>();
+                    image = GetComponent<Image>();
                 }
 
-                return _image;
+                return image;
             }
         }
         
-        protected CanvasGroup canvasGroup
+        protected CanvasGroup CanvasGroup
         {
             get
             {
-                if (_canvasGroup == null)
+                if (canvasGroup == null)
                 {
-                    _canvasGroup = GetComponent<CanvasGroup>();
+                    canvasGroup = GetComponent<CanvasGroup>();
                 }
 
-                return _canvasGroup;
+                return canvasGroup;
             }
         }
-
+        
         protected Vector3 offset;
         
-        private Image _image;
-        private CanvasGroup _canvasGroup;
+        private Image image;
+        private CanvasGroup canvasGroup;
+        private ContainerItem containerItem;
 
         public void SetIcon(Sprite sprite)
         {
-            image.sprite = sprite;
+            Image.sprite = sprite;
         }
 
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
-            DragDropManager.Instance.BeginDragItem(this);
-            _image.color = draggingColor;
+            DragDropManager<T>.Instance.BeginDragItem(this);
+            image.color = draggingColor;
             offset = (transform.position - Input.mousePosition);
-            canvasGroup.blocksRaycasts = false;
+            CanvasGroup.blocksRaycasts = false;
         }
 
         public virtual void OnEndDrag(PointerEventData eventData)
         {
-            DragDropManager.Instance.EndDragItem();
-            _image.color = defaultColor;
-            canvasGroup.blocksRaycasts = true;
+            DragDropManager<T>.Instance.EndDragItem();
+            image.color = defaultColor;
+            CanvasGroup.blocksRaycasts = true;
         }
 
         public virtual void OnDrag(PointerEventData eventData)
         {
             transform.position = Input.mousePosition + offset;
         }
-
-        public virtual void OnPointerEnter(PointerEventData eventData)
-        {
-            DescriptionManager.Instance.ShowDescription(GetDescription());
-        }
-
-        public virtual void OnPointerExit(PointerEventData eventData)
-        {
-            DescriptionManager.Instance.HideDescription();
-        }
-
-        protected abstract string GetDescription();
     }
 }

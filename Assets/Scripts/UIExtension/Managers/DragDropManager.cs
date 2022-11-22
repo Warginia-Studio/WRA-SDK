@@ -1,16 +1,35 @@
 using Patterns;
 using UIExtension.UI;
+using UnityEngine;
 
 namespace UIExtension.Managers
 {
-    public class DragDropManager : MonoBehaviourSingletonAutoCreate<DragDropManager>
+    public class DragDropManager<T> : Singleton<DragDropManager<T>>
     {
-        public Dragable DraggingItem => draggingItem;
+        public Dragable<T> DraggingItem => draggingItem;
         public bool Dragging => dragging;
 
-        private Dragable draggingItem;
+        public DragDropProfile DragDropProfile
+        {
+            get
+            {
+                if (dragDropProfile == null)
+                {
+                    dragDropProfile = Resources.Load<DragDropProfile>("DDP_Default");
+                }
+
+                return dragDropProfile;
+            }
+        }
+
+        [SerializeField] private DragDropProfile dragDropProfile;
+        
+        // [SerializeField] private 
+
+        private Dragable<T> draggingItem;
         private bool dragging;
-        public void BeginDragItem(Dragable dragable)
+
+        public void BeginDragItem(Dragable<T> dragable)
         {
             dragging = true;
             draggingItem = dragable;

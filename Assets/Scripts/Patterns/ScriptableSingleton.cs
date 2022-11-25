@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Patterns
 {
-    public class ScriptableSingleton<T> : ScriptableObject where T : ScriptableObject
+    public class ScriptableSingleton<T> : ScriptableObject where T : ScriptableSingleton<T>
     {
         public static T Instance
         {
@@ -10,7 +10,8 @@ namespace Patterns
             {
                 if (instance == null)
                 {
-                    instance = Resources.FindObjectsOfTypeAll<T>()[0];
+                    T[] assets = Resources.LoadAll<T>("");
+                    instance = assets[0];
                     if (instance == null)
                     {
                         Debug.LogError($"No scriptable instance in resources: {typeof(T)}");

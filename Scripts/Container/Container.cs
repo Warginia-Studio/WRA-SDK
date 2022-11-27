@@ -6,22 +6,20 @@ using UnityEngine.Events;
 
 namespace Container
 {
-    public class Container
+    public abstract class Container : MonoBehaviour
     {
-        public UnityEvent OnContainerChanged = new UnityEvent();
+        [HideInInspector] public UnityEvent OnContainerChanged = new UnityEvent();
         public Type HoldingType => holdingType;
     
+        [SerializeField] private int xSize;
+        [SerializeField] private int ySize;
+        
         private List<ContainerSlot> slots = new List<ContainerSlot>();
-        private Vector2Int containerSize;
+        private Vector2Int containerSize => new Vector2Int(xSize, ySize);
         private Type holdingType;
+        
 
-        public Container(Vector2Int containerSize, Type holdingType)
-        {
-            this.containerSize = containerSize;
-            this.holdingType = holdingType;
-        }
-
-        public ContainerItem TryAddItem(ContainerItem containerItem)
+        public virtual ContainerItem TryAddItem(ContainerItem containerItem)
         {
         
             var slot = FindEmptyPlace(containerItem);
@@ -45,7 +43,7 @@ namespace Container
             return item;
         }
 
-        public ContainerItem TryAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
+        public virtual ContainerItem TryAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
         {
             if(CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
             {
@@ -53,14 +51,14 @@ namespace Container
             }
 
 
-            var item = ScriptableObject.Instantiate(containerItem);
+            var item = Instantiate(containerItem);
             slots.Add(new ContainerSlot(item, position));
 
             OnContainerChanged.Invoke();
             return item;
         }
 
-        public void TryMoveItem(ContainerItem containerItem, Vector2Int position)
+        public virtual void TryMoveItem(ContainerItem containerItem, Vector2Int position)
         {
             if (IsPossibleToMoveItem(containerItem, position))
             {
@@ -71,7 +69,7 @@ namespace Container
             OnContainerChanged.Invoke();
         }
 
-        public bool IsPossibleToAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
+        public virtual bool IsPossibleToAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
         {
             if (CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
             {
@@ -80,7 +78,7 @@ namespace Container
             return false;
         }
 
-        public bool IsPossibleToMoveItem(ContainerItem containerItem, Vector2Int position)
+        public virtual bool IsPossibleToMoveItem(ContainerItem containerItem, Vector2Int position)
         {
             if (CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
             {
@@ -95,7 +93,7 @@ namespace Container
         /// <param name="containerItem"></param>
         /// <returns></returns>
 
-        public bool TryRemoveItem(ContainerItem containerItem)
+        public virtual bool TryRemoveItem(ContainerItem containerItem)
         {
             bool result = slots.Remove(slots.Find(ctg => ctg.Item == containerItem));
 
@@ -103,14 +101,14 @@ namespace Container
             return result;
         }
 
-        public ContainerItem[] GetItems()
+        public virtual ContainerItem[] GetItems()
         {
             var items = this.slots.Select(ctg => ctg.Item);
 
             return items.ToArray();
         }
 
-        public ContainerSlot[] GetSlots()
+        public virtual ContainerSlot[] GetSlots()
         {
             return slots.ToArray();
         }
@@ -122,7 +120,7 @@ namespace Container
         /// <param name="position"></param>
         /// <returns>If position is outside inventory return true, else return false</returns>
     
-        private bool IsOutsideOfInventory(ContainerItem item, Vector2Int position)
+        protected virtual bool IsOutsideOfInventory(ContainerItem item, Vector2Int position)
         {
             if (position.x < 0 || position.y < 0)
                 return true;
@@ -137,7 +135,7 @@ namespace Container
         /// <param name="item"></param>
         /// <returns>Return position if found free slot, return new Vector2Int(-1-1) if not found.</returns>
     
-        private Vector2Int FindEmptyPlace(ContainerItem item)
+        protected virtual Vector2Int FindEmptyPlace(ContainerItem item)
         {
             for (int i = 0; i < containerSize.y; i++)
             {
@@ -159,7 +157,7 @@ namespace Container
         /// <param name="position"></param>
         /// <returns>Return true if slot is busy, false if empty</returns>
     
-        private bool CheckSlot(ContainerItem item, Vector2Int position)
+        protected virtual bool CheckSlot(ContainerItem item, Vector2Int position)
         {
             for (int i = 0; i < slots.Count; i++)
             {

@@ -64,7 +64,7 @@ namespace UIExtension.UI
         public void OnDrop(PointerEventData eventData)
         {
             var dragging = DragDropManager.Instance.Dragging;
-            if (dragging.DraggingType == container.HoldingType)
+            if (dragging.DraggingGameObjcet.ContainerItem.GetType() == container.GetType())
             {
                 SetStatus(DragDropProfile.Status.wrongType);
                 return;
@@ -82,6 +82,8 @@ namespace UIExtension.UI
         
         protected void SetStatus(DragDropProfile.Status status, string customStatusName = "")
         {
+            // if (DragDropManager.Instance == null)
+            //     return;
             if (DragDropManager.Instance.DragDropProfile == null)
                 return;
             dropableStatus.color = DragDropManager.Instance.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);

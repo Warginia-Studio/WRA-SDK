@@ -1,35 +1,41 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Container;
+using UnityEngine;
 
-
-public class Inventory : MonoBehaviour
+namespace Inventory
 {
-    protected Container.Container<Item> container;
-    private List<Item> items = new List<Item>();
-
-    public bool TryAddItem(Item item)
+    public class Inventory : ContainerService<Item>
     {
-        if (!container.TryAddItem(item))
-            return false;
+        // [SerializeField] private Vector2Int containerSize;
+        
+        // public override bool TryAddItem(Item item)
+        // {
+        //     if (!container.TryAddItem(item))
+        //         return false;
+        //
+        //     items.Add(item);
+        //     return true;
+        // }
+        //
+        // public override bool TryRemoveItem(Item item)
+        // {
+        //     if (!container.TryRemoveItem(item))
+        //         return false;
+        //
+        //     items.Remove(item);
+        //     return true;
+        // }
 
-        items.Add(item);
-        return true;
+        // public override List<Item> GetItems()
+        // {
+        //     return items;
+        // }
+        
+        // public override Container<Item> GetContainer()
+        // {
+        //     return container;
+        // }
+
     }
-
-    public bool TryRemoveItem(Item item)
-    {
-        if (!container.TryRemoveItem(item))
-            return false;
-
-        items.Remove(item);
-        return true;
-    }
-
-    public Container.Container<Item> GetContainer()
-    {
-        return container;
-    }
-
 }

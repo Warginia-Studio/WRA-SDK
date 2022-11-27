@@ -1,20 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Singleton<T>
+namespace Patterns
 {
-    public static T Instance
+    public class Singleton<T>
     {
-        get
+        public static T Instance
         {
-            if(instance==null)
+            get
             {
-                instance = default(T);
+                if(instance==null)
+                {
+                    instance = default(T);
+                }
+                return instance;
             }
-            return instance;
         }
-    }
 
-    protected static T instance;
+        protected static T instance;
+    }
 }

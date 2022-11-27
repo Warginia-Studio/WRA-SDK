@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ContainerWindowIniter<T> : MonoBehaviour
+namespace UIExtension.UI
 {
-    private Container.Container<T> container; 
-
-    public void InitContainer(Container.Container<T> container)
+    public class ContainerWindowIniter<T> : MonoBehaviour
     {
-        this.container = container;
+        private Container.Container<T> container; 
+
+        public void InitContainer(Container.Container<T> container)
+        {
+            this.container = container;
+        }
     }
 }

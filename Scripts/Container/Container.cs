@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Container
 {
-    public class Container<T>
+    public class Container
     {
         public UnityEvent OnContainerChanged = new UnityEvent();
     
@@ -41,7 +41,7 @@ namespace Container
             return item;
         }
 
-        public ContainerItem IsPossibleToAddItemOnPossition(ContainerItem containerItem, Vector2Int position)
+        public ContainerItem TryAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
         {
             if(CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
             {
@@ -55,7 +55,7 @@ namespace Container
             OnContainerChanged.Invoke();
             return item;
         }
-
+        
         /// <summary>
         /// 
         /// </summary>

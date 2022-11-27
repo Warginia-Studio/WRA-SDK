@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace UIExtension.Managers
 {
-    public class DragDropManager<T> : Singleton<DragDropManager<T>>
+    public class DragDropManager : Singleton<DragDropManager>
     {
-        public Dragable<T> DraggingItem => draggingItem;
+        public Dragable DraggingItem => draggingItem;
         public bool Dragging => dragging;
 
         public DragDropProfile DragDropProfile
@@ -26,10 +26,10 @@ namespace UIExtension.Managers
         
         // [SerializeField] private 
 
-        private Dragable<T> draggingItem;
+        private Dragable draggingItem;
         private bool dragging;
         
-        public void BeginDragItem(Dragable<T> dragable)
+        public void BeginDragItem(Dragable dragable)
         {
             dragging = true;
             draggingItem = dragable;

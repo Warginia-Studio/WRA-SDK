@@ -6,16 +6,16 @@ using UnityEngine;
 
 namespace UIExtension.Managers
 {
-    public class ContainerWindowManager<T> : MonoBehaviourSingletonAutoLoadUI<ContainerWindowManager<T>> where T : ContainerItem
+    public class ContainerWindowManager : MonoBehaviourSingletonAutoLoadUI<ContainerWindowManager>
     {
         private const string NOT_FOUND_CONTAINER = "Not found container in array with name: ";
         private const string ADVANCED_CONTAINER = "ADVANCED CONTAINER ERROR: ";
         private const string SIMPLE_CONTAINER = "SIMPLE CONTAINER ERROR: ";
 
-        [SerializeField] private ContainerWindowIniter<T>[] simpleContainers;
-        [SerializeField] private AdvancedContainerWindowIniter<T>[] advancedContainers;
+        [SerializeField] private ContainerWindowIniter[] simpleContainers;
+        [SerializeField] private AdvancedContainerWindowIniter[] advancedContainers;
 
-        public void OpenSimpleContainer(Container<T> container, string containerName)
+        public void OpenSimpleContainer(Container.Container container, string containerName)
         {
             var containerWindow = simpleContainers.Where(ctg => ctg.gameObject.name == containerName).First();
             if (containerWindow == null)
@@ -28,7 +28,7 @@ namespace UIExtension.Managers
 
         }
 
-        public void OpenAdvancedContainer(Container<T> container1, Container<T> container2, string containerName)
+        public void OpenAdvancedContainer(Container.Container container1, Container.Container container2, string containerName)
         {
             var containerWindow = advancedContainers.Where(ctg => ctg.gameObject.name == containerName).First();
             if(containerWindow== null)

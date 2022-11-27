@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UIExtension.UI
 {
-    public class AdvancedContainerWindowIniter<T> : MonoBehaviour where T: ContainerItem
+    public class AdvancedContainerWindowIniter : MonoBehaviour
     {
         [SerializeField] private ContainerWindowIniter containerWindow1;
         [SerializeField] private ContainerWindowIniter containerWindow2;

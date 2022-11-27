@@ -28,7 +28,7 @@ namespace UIExtension.Managers
 
         private Dragable<T> draggingItem;
         private bool dragging;
-
+        
         public void BeginDragItem(Dragable<T> dragable)
         {
             dragging = true;

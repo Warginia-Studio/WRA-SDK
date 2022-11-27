@@ -5,11 +5,11 @@ using UnityEngine.Events;
 
 namespace Container
 {
-    public class Container
+    public class Container<T> where T : ContainerItem
     {
         public UnityEvent OnContainerChanged = new UnityEvent();
     
-        private List<ContainerSlot> slots = new List<ContainerSlot>();
+        private List<ContainerSlot<T>> slots = new List<ContainerSlot<T>>();
         private Vector2Int containerSize;
 
         public Container(Vector2Int containerSize)
@@ -17,7 +17,7 @@ namespace Container
             this.containerSize = containerSize;
         }
 
-        public ContainerItem TryAddItem(ContainerItem containerItem)
+        public ContainerItem TryAddItem(T containerItem)
         {
         
             var slot = FindEmptyPlace(containerItem);
@@ -35,13 +35,13 @@ namespace Container
                 return null;
         
             var item = ScriptableObject.Instantiate(containerItem);
-            slots.Add(new ContainerSlot(item, slot));
+            slots.Add(new ContainerSlot<T>(item, slot));
         
             OnContainerChanged.Invoke();
             return item;
         }
 
-        public ContainerItem TryAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
+        public ContainerItem TryAddItemAtPosition(T containerItem, Vector2Int position)
         {
             if(CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
             {
@@ -50,7 +50,7 @@ namespace Container
 
 
             var item = ScriptableObject.Instantiate(containerItem);
-            slots.Add(new ContainerSlot(item, position));
+            slots.Add(new ContainerSlot<T>(item, position));
 
             OnContainerChanged.Invoke();
             return item;
@@ -77,7 +77,7 @@ namespace Container
             return items.ToArray();
         }
 
-        public ContainerSlot[] GetSlots()
+        public ContainerSlot<T>[] GetSlots()
         {
             return slots.ToArray();
         }

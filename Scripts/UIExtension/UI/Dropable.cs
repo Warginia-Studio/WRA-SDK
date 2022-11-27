@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace UIExtension.UI
 {
-    public abstract class Dropable : ContainerHolder, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+    public abstract class Dropable<T> : ContainerHolder<T>, IPointerEnterHandler, IPointerExitHandler, IDropHandler where T : ContainerItem
     {
         protected Image DropableStatus
         {
@@ -42,9 +42,9 @@ namespace UIExtension.UI
 
         protected virtual void SetStatus(DragDropProfile.Status status, string customStatusName = "")
         {
-            if (DragDropManager.Instance.DragDropProfile == null)
+            if (DragDropManager<T>.Instance.DragDropProfile == null)
                 return;
-            dropableStatus.color = DragDropManager.Instance.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);
+            dropableStatus.color = DragDropManager<T>.Instance.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);
         }
     }
 }

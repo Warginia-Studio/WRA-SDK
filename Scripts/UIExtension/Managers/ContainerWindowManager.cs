@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UIExtension.Managers
 {
-    public class ContainerWindowManager<T> : MonoBehaviourSingletonAutoLoadUI<ContainerWindowManager<T>>
+    public class ContainerWindowManager<T> : MonoBehaviourSingletonAutoLoadUI<ContainerWindowManager<T>> where T : ContainerItem
     {
         private const string NOT_FOUND_CONTAINER = "Not found container in array with name: ";
         private const string ADVANCED_CONTAINER = "ADVANCED CONTAINER ERROR: ";

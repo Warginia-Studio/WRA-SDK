@@ -9,12 +9,12 @@ namespace Container
     {
         [SerializeField] private Vector2Int containerSize;
 
-        protected Container container;
+        protected Container<T> container;
         protected List<ContainerItem> items;
 
         private void Awake()
         {
-            container = new Container(containerSize);
+            container = new Container<T>(containerSize);
         }
         
         public virtual bool TryAddItem(T item)
@@ -51,7 +51,7 @@ namespace Container
         //     return items;
         // }
 
-        public virtual Container GetContainer()
+        public virtual Container<T> GetContainer()
         {
             return container;
         }

@@ -1,8 +1,9 @@
+using Container;
 using UnityEngine;
 
 namespace UIExtension.UI
 {
-    public class AdvancedContainerWindowIniter<T> : MonoBehaviour
+    public class AdvancedContainerWindowIniter<T> : MonoBehaviour where T: ContainerItem
     {
         [SerializeField] private ContainerWindowIniter<T> containerWindow1;
         [SerializeField] private ContainerWindowIniter<T> containerWindow2;

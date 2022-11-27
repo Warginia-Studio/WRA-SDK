@@ -3,13 +3,13 @@ using Utility;
 
 namespace Container
 {
-    public class ContainerSlot
+    public class ContainerSlot<T> where T : ContainerItem
     {
-        public ContainerItem Item;
+        public T Item;
         public Vector2Int Position;
         public int stack;
 
-        public ContainerSlot(ContainerItem containerItem, Vector2Int position)
+        public ContainerSlot(T containerItem, Vector2Int position)
         {
             Item = containerItem;
             Position = position;
@@ -27,7 +27,7 @@ namespace Container
             return false;
         }
 
-        public bool TryStack(ContainerItem containerItem)
+        public bool TryStack(T containerItem)
         {
             if (Item.Stacking)
                 return false;

@@ -1,12 +1,13 @@
+using Container;
 using Patterns;
 using UIExtension.UI;
 using UnityEngine;
 
 namespace UIExtension.Managers
 {
-    public class DragDropManager : Singleton<DragDropManager>
+    public class DragDropManager<T> : Singleton<DragDropManager<T>> where T : ContainerItem
     {
-        public Dragable DraggingItem => draggingItem;
+        public Dragable<T> DraggingItem => draggingItem;
         public bool Dragging => dragging;
 
         public DragDropProfile DragDropProfile
@@ -26,10 +27,10 @@ namespace UIExtension.Managers
         
         // [SerializeField] private 
 
-        private Dragable draggingItem;
+        private Dragable<T> draggingItem;
         private bool dragging;
         
-        public void BeginDragItem(Dragable dragable)
+        public void BeginDragItem(Dragable<T> dragable)
         {
             dragging = true;
             draggingItem = dragable;

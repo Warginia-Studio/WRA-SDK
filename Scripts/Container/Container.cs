@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,19 +6,22 @@ using UnityEngine.Events;
 
 namespace Container
 {
-    public class Container<T> where T : ContainerItem
+    public class Container
     {
         public UnityEvent OnContainerChanged = new UnityEvent();
+        public Type HoldingType => holdingType;
     
-        private List<ContainerSlot<T>> slots = new List<ContainerSlot<T>>();
+        private List<ContainerSlot> slots = new List<ContainerSlot>();
         private Vector2Int containerSize;
+        private Type holdingType;
 
-        public Container(Vector2Int containerSize)
+        public Container(Vector2Int containerSize, Type holdingType)
         {
             this.containerSize = containerSize;
+            this.holdingType = holdingType;
         }
 
-        public ContainerItem TryAddItem(T containerItem)
+        public ContainerItem TryAddItem(ContainerItem containerItem)
         {
         
             var slot = FindEmptyPlace(containerItem);
@@ -35,13 +39,13 @@ namespace Container
                 return null;
         
             var item = ScriptableObject.Instantiate(containerItem);
-            slots.Add(new ContainerSlot<T>(item, slot));
+            slots.Add(new ContainerSlot(item, slot));
         
             OnContainerChanged.Invoke();
             return item;
         }
 
-        public ContainerItem TryAddItemAtPosition(T containerItem, Vector2Int position)
+        public ContainerItem TryAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
         {
             if(CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
             {
@@ -50,10 +54,27 @@ namespace Container
 
 
             var item = ScriptableObject.Instantiate(containerItem);
-            slots.Add(new ContainerSlot<T>(item, position));
+            slots.Add(new ContainerSlot(item, position));
 
             OnContainerChanged.Invoke();
             return item;
+        }
+
+        public void TryMoveItem(ContainerItem containerItem, Vector2Int position)
+        {
+            
+        }
+
+        public bool IsPossibleToAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
+        {
+
+            return false;
+        }
+
+        public bool IsPossibleToMoveItem(ContainerItem containerItem, Vector2Int position)
+        {
+
+            return false;
         }
         
         /// <summary>
@@ -77,7 +98,7 @@ namespace Container
             return items.ToArray();
         }
 
-        public ContainerSlot<T>[] GetSlots()
+        public ContainerSlot[] GetSlots()
         {
             return slots.ToArray();
         }

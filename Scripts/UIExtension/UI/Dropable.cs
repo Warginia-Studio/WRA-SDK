@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace UIExtension.UI
 {
-    public abstract class Dropable<T> : ContainerHolder<T>, IPointerEnterHandler, IPointerExitHandler, IDropHandler where T : ContainerItem
+    public class Dropable : ContainerHolder, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
         protected Image DropableStatus
         {
@@ -32,19 +32,68 @@ namespace UIExtension.UI
     
         private Image dropableStatus;
 
-        public abstract void OnPointerEnter(PointerEventData eventData);
-    
-        public abstract void OnPointerExit(PointerEventData eventData);
-    
-        public abstract void OnDrop(PointerEventData eventData);
+        public virtual void OnPointerEnter(PointerEventData eventData)
+        {
+            var dragging = DragDropManager.Instance.Dragging;
+            if (dragging.DraggingType == container.HoldingType)
+            {
+                SetStatus(DragDropProfile.Status.wrongType);
+                return;
+            }
 
-        protected abstract bool IsPossibleToDrop();
+            if (IsTheSameContainer() && container.IsPossibleToMoveItem(dragging.DraggingGameObjcet.ContainerItem, SlotPosition))
+            {
+                SetStatus(DragDropProfile.Status.possible);
+                return;
+            }
 
+            if (container.IsPossibleToAddItemAtPosition(dragging.DraggingGameObjcet.ContainerItem, SlotPosition))
+            {
+                SetStatus(DragDropProfile.Status.possible);
+                return;
+            }
+            
+            SetStatus(DragDropProfile.Status.notPossible);
+        }
+
+        public virtual void OnPointerExit(PointerEventData eventData)
+        {
+            SetStatus(DragDropProfile.Status.empty);
+        }
+
+        public virtual void OnDrop(PointerEventData eventData)
+        {
+            var dragging = DragDropManager.Instance.Dragging;
+            if (dragging.DraggingType == container.HoldingType)
+            {
+                SetStatus(DragDropProfile.Status.wrongType);
+                return;
+            }
+
+            if (IsTheSameContainer())
+            {
+                container.TryMoveItem(dragging.DraggingGameObjcet.ContainerItem, slotPosition);
+                SetStatus(DragDropProfile.Status.possible);
+                return;
+            }
+
+            container.TryAddItemAtPosition(dragging.DraggingGameObjcet.ContainerItem, slotPosition);
+        }
+        
         protected virtual void SetStatus(DragDropProfile.Status status, string customStatusName = "")
         {
-            if (DragDropManager<T>.Instance.DragDropProfile == null)
+            if (DragDropManager.Instance.DragDropProfile == null)
                 return;
-            dropableStatus.color = DragDropManager<T>.Instance.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);
+            dropableStatus.color = DragDropManager.Instance.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);
+        }
+
+        private bool IsTheSameContainer()
+        {
+            if (DragDropManager.Instance.Dragging.DraggingGameObjcet.Container == Container)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

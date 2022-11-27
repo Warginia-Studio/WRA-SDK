@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace UIExtension.UI
 {
-    public class ContainerWindowIniter<T> : MonoBehaviour where T : ContainerItem
+    public class ContainerWindowIniter : MonoBehaviour
     {
-        private Container.Container<T> container; 
+        private Container.Container container; 
 
-        public void InitContainer(Container.Container<T> container)
+        public void InitContainer(Container.Container container)
         {
             this.container = container;
         }

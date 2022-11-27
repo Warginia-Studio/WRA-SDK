@@ -8,6 +8,7 @@ namespace UIExtension.UI
     {
         public enum Status
         {
+            empty,
             possible,
             notPossible,
             busy,
@@ -54,7 +55,7 @@ namespace UIExtension.UI
             {
                 if (colors == null)
                 {
-                    colors = new[] { possible, notPossible, busy, wrongType };
+                    colors = new[] { Color.clear, possible, notPossible, busy, wrongType };
                 }
                 return colors;
             }

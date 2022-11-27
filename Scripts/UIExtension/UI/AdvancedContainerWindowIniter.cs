@@ -5,10 +5,10 @@ namespace UIExtension.UI
 {
     public class AdvancedContainerWindowIniter<T> : MonoBehaviour where T: ContainerItem
     {
-        [SerializeField] private ContainerWindowIniter<T> containerWindow1;
-        [SerializeField] private ContainerWindowIniter<T> containerWindow2;
+        [SerializeField] private ContainerWindowIniter containerWindow1;
+        [SerializeField] private ContainerWindowIniter containerWindow2;
 
-        public void InitContainer(Container.Container<T> container1, Container.Container<T> container2)
+        public void InitContainer(Container.Container container1, Container.Container container2)
         {
             containerWindow1.InitContainer(container1);
             containerWindow2.InitContainer(container2);

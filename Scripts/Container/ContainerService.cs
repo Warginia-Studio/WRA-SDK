@@ -5,19 +5,19 @@ using UnityEngine;
 
 namespace Container
 {
-    public abstract class ContainerService<T> : MonoBehaviour where T : ContainerItem
+    public abstract class ContainerService<T> : MonoBehaviour
     {
         [SerializeField] private Vector2Int containerSize;
 
-        protected Container<T> container;
+        protected Container container;
         protected List<ContainerItem> items;
 
         private void Awake()
         {
-            container = new Container<T>(containerSize);
+            container = new Container(containerSize, typeof(T));
         }
         
-        public virtual bool TryAddItem(T item)
+        public virtual bool TryAddItem(ContainerItem item)
         {
             var addedItem = container.TryAddItem(item);
             if (addedItem == null)
@@ -27,7 +27,7 @@ namespace Container
             return true;
         }
 
-        public virtual bool TryAddItemAtPosition(T item, Vector2Int position)
+        public virtual bool TryAddItemAtPosition(ContainerItem item, Vector2Int position)
         {
             var addedItem = container.TryAddItemAtPosition(item, position);
             if(addedItem==null)
@@ -37,7 +37,7 @@ namespace Container
             return true;
         }
 
-        public virtual bool TryRemoveItem(T item)
+        public virtual bool TryRemoveItem(ContainerItem item)
         {
             if (!container.TryRemoveItem(item))
                 return false;
@@ -51,7 +51,7 @@ namespace Container
         //     return items;
         // }
 
-        public virtual Container<T> GetContainer()
+        public virtual Container GetContainer()
         {
             return container;
         }

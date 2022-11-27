@@ -1,8 +1,9 @@
+using Container;
 using UnityEngine;
 
 namespace UIExtension.UI
 {
-    public class ContainerWindowIniter<T> : MonoBehaviour
+    public class ContainerWindowIniter<T> : MonoBehaviour where T : ContainerItem
     {
         private Container.Container<T> container; 
 

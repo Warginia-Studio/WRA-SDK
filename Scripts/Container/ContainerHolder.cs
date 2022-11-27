@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Container
 {
-    public class ContainerHolder : MonoBehaviour
+    public abstract class ContainerHolder : MonoBehaviour
     {
         public Container Container => container;
         
@@ -12,5 +12,7 @@ namespace Container
         {
             this.container = container;
         }
+
+        public abstract void Reset();
     }
 }

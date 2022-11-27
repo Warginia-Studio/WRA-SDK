@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace UIExtension.UI
 {
-    public class Dropable : ContainerHolder, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+    public sealed class Dropable : ContainerHolder, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
         protected Image DropableStatus
         {
@@ -32,7 +32,7 @@ namespace UIExtension.UI
     
         private Image dropableStatus;
 
-        public virtual void OnPointerEnter(PointerEventData eventData)
+        public void OnPointerEnter(PointerEventData eventData)
         {
             var dragging = DragDropManager.Instance.Dragging;
             if (dragging.DraggingType == container.HoldingType)
@@ -56,12 +56,12 @@ namespace UIExtension.UI
             SetStatus(DragDropProfile.Status.notPossible);
         }
 
-        public virtual void OnPointerExit(PointerEventData eventData)
+        public void OnPointerExit(PointerEventData eventData)
         {
             SetStatus(DragDropProfile.Status.empty);
         }
 
-        public virtual void OnDrop(PointerEventData eventData)
+        public void OnDrop(PointerEventData eventData)
         {
             var dragging = DragDropManager.Instance.Dragging;
             if (dragging.DraggingType == container.HoldingType)
@@ -80,7 +80,7 @@ namespace UIExtension.UI
             container.TryAddItemAtPosition(dragging.DraggingGameObjcet.ContainerItem, slotPosition);
         }
         
-        protected virtual void SetStatus(DragDropProfile.Status status, string customStatusName = "")
+        protected void SetStatus(DragDropProfile.Status status, string customStatusName = "")
         {
             if (DragDropManager.Instance.DragDropProfile == null)
                 return;
@@ -94,6 +94,11 @@ namespace UIExtension.UI
                 return true;
             }
             return false;
+        }
+
+        public override void Reset()
+        {
+            SetStatus(DragDropProfile.Status.empty);   
         }
     }
 }

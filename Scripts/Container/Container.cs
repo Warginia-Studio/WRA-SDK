@@ -62,19 +62,31 @@ namespace Container
 
         public void TryMoveItem(ContainerItem containerItem, Vector2Int position)
         {
-            
+            if (IsPossibleToMoveItem(containerItem, position))
+            {
+                return;
+            }
+
+            slots.Find(ctg => ctg.Item == containerItem).Position = position;
+            OnContainerChanged.Invoke();
         }
 
         public bool IsPossibleToAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
         {
-
+            if (CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
+            {
+                return false;
+            }
             return false;
         }
 
         public bool IsPossibleToMoveItem(ContainerItem containerItem, Vector2Int position)
         {
-
-            return false;
+            if (CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
+            {
+                return false;
+            }
+            return true;
         }
         
         /// <summary>
@@ -151,7 +163,7 @@ namespace Container
         {
             for (int i = 0; i < slots.Count; i++)
             {
-                if (slots[i].IsInside(position, item.Size))
+                if (slots[i].IsInside(position, item))
                     return true;
             }
             return false;

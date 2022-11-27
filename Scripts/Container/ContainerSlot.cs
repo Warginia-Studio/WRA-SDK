@@ -15,9 +15,11 @@ namespace Container
             Position = position;
         }
 
-        public bool IsInside(Vector2 position, Vector2 size)
+        public bool IsInside(Vector2 position, ContainerItem item)
         {
-            var corners = BoxMath.GetCorners(position, size);
+            if (item == Item)
+                return false;
+            var corners = BoxMath.GetCorners(position, item.Size);
 
             for (int i = 0; i < corners.Length; i++)
             {

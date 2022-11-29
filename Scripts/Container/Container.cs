@@ -19,7 +19,7 @@ namespace Container
         private Type holdingType;
         
 
-        public virtual ContainerItem TryAddItem(ContainerItem containerItem)
+        public virtual bool TryAddItem(ContainerItem containerItem)
         {
         
             var slot = FindEmptyPlace(containerItem);
@@ -29,25 +29,25 @@ namespace Container
                 if (slots[i].TryStack(containerItem))
                 {
                     OnContainerChanged.Invoke();
-                    return slots[i].Item;
+                    return true;
                 }
             }
         
             if (slot == -Vector2Int.one)
-                return null;
+                return false;
         
             var item = ScriptableObject.Instantiate(containerItem);
             slots.Add(new ContainerSlot(item, slot));
         
             OnContainerChanged.Invoke();
-            return item;
+            return true;
         }
 
-        public virtual ContainerItem TryAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
+        public virtual bool TryAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
         {
             if(CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
             {
-                return null;
+                return false;
             }
 
 
@@ -55,18 +55,19 @@ namespace Container
             slots.Add(new ContainerSlot(item, position));
 
             OnContainerChanged.Invoke();
-            return item;
+            return true;
         }
 
-        public virtual void TryMoveItem(ContainerItem containerItem, Vector2Int position)
+        public virtual bool TryMoveItem(ContainerItem containerItem, Vector2Int position)
         {
             if (IsPossibleToMoveItem(containerItem, position))
             {
-                return;
+                return false;
             }
 
             slots.Find(ctg => ctg.Item == containerItem).Position = position;
             OnContainerChanged.Invoke();
+            return true;
         }
 
         public virtual bool IsPossibleToAddItemAtPosition(ContainerItem containerItem, Vector2Int position)

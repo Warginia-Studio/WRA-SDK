@@ -15,7 +15,7 @@ namespace Container
         [SerializeField] private int ySize;
         
         private List<ContainerSlot> slots = new List<ContainerSlot>();
-        private Vector2Int containerSize => new Vector2Int(xSize, ySize);
+        public Vector2Int containerSize => new Vector2Int(xSize, ySize);
         private Type holdingType;
         
 

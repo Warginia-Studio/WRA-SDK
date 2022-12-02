@@ -1,14 +1,16 @@
 using System.Collections.Generic;
+using Patterns;
 using UnityEngine;
 
 namespace UIExtension.UI
 {
     [CreateAssetMenu(fileName = "Drag Drop Profile", menuName = "thief01/UI Extension/Drag Drop Profile")]
-    public class DragDropProfile : ScriptableObject
+    public class DragDropProfile : ScriptableSingleton<DragDropProfile>
     {
         public enum Status
         {
             empty,
+            selected,
             possible,
             notPossible,
             busy,
@@ -25,7 +27,8 @@ namespace UIExtension.UI
     
         [SerializeField] private Color dragColor;
         [SerializeField] private Color idlecolor;
-    
+
+        [SerializeField] private Color selected;
         [SerializeField] private Color possible;
         [SerializeField] private Color notPossible;
         [SerializeField] private Color busy;
@@ -55,7 +58,7 @@ namespace UIExtension.UI
             {
                 if (colors == null)
                 {
-                    colors = new[] { Color.clear, possible, notPossible, busy, wrongType };
+                    colors = new[] { Color.clear, selected, possible, notPossible, busy, wrongType };
                 }
                 return colors;
             }

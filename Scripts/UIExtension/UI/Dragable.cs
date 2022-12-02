@@ -9,9 +9,6 @@ namespace UIExtension.UI
 {
     public sealed class Dragable : ContainerHolder, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
-        [SerializeField] protected Color defaultColor = Color.white;
-        [SerializeField] protected Color draggingColor = new (1,1,1, 0.7f);
-
         public ContainerItem ContainerItem
         {
             get => containerItem;
@@ -54,12 +51,12 @@ namespace UIExtension.UI
         {
             Image.sprite = sprite;
         }
-
+        
         public void OnBeginDrag(PointerEventData eventData)
         {
             
             DragDropManager.Instance.BeginDragItem(new DraggingData(this, container.HoldingType));
-            image.color = draggingColor;
+            image.color = DragDropProfile.Instance.DragableColor(true);
             offset = (transform.position - Input.mousePosition);
             CanvasGroup.blocksRaycasts = false;
         }
@@ -67,7 +64,7 @@ namespace UIExtension.UI
         public void OnEndDrag(PointerEventData eventData)
         {
             DragDropManager.Instance.EndDragItem();
-            image.color = defaultColor;
+            image.color = DragDropProfile.Instance.DragableColor(false);;
             CanvasGroup.blocksRaycasts = true;
         }
 

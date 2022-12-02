@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UIExtension.UI
 {
-    public class DescriptionWindow : MonoBehaviourSingletonAutoLoadUI<DescriptionWindow>
+    public class DescriptionWindow : PopupBase<DescriptionWindow>
     {
         private const float DESCRIPTION_BASE_SIZE_X = 400;
         private const float DESCRIPTION_BASE_SIZE_Y = 10;
@@ -21,6 +21,7 @@ namespace UIExtension.UI
 
         public void ShowDescription(string description, float timeIn)
         {
+            Open();
             descriptionBackground.sizeDelta = new Vector2(DESCRIPTION_BASE_SIZE_X, 0);
             text.text = description;
             descriptionBackground.sizeDelta = new Vector2(DESCRIPTION_BASE_SIZE_X,
@@ -31,6 +32,7 @@ namespace UIExtension.UI
 
         public void HideDescription(float timeOut)
         {
+            Close();
             StopAllCoroutines();
             StartCoroutine(Animate(timeOut));
         }
@@ -45,6 +47,16 @@ namespace UIExtension.UI
                 delta += Time.deltaTime / time;
                 canvasGroup.alpha = delta;
             }
+        }
+
+        public override void Open()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Close()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

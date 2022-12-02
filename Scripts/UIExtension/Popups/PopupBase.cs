@@ -1,18 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Patterns;
 using UnityEngine;
 
-public class PopupBase : MonoBehaviour
+public abstract class PopupBase<T> : MonoBehaviourSingletonAutoLoadUI<T> where T : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public abstract void Open();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void Close();
 }

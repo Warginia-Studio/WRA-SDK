@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UIExtension.Managers
 {
-    public class DragDropManager : Singleton<DragDropManager>
+    public class DragDropManager : MonoBehaviourSingletonAutoLoad<DragDropManager>
     {
         public DraggingData Dragging => dragging;
         public bool IsDragging => isDragging;

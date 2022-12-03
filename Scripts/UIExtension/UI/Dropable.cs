@@ -35,6 +35,11 @@ namespace UIExtension.UI
         public void OnPointerEnter(PointerEventData eventData)
         {
             var dragging = DragDropManager.Instance.Dragging;
+            if (dragging == null)
+            {
+                // light up??
+                return;
+            }
             if (dragging.DraggingType == container.HoldingType)
             {
                 SetStatus(DragDropProfile.Status.wrongType);

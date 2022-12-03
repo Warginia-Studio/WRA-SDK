@@ -12,8 +12,15 @@ namespace UIExtension.UI
         public ContainerItem ContainerItem
         {
             get => containerItem;
-            set => containerItem = value;
+            set
+            {
+                containerItem = value;
+                Image.sprite = containerItem.Icon;
+                transform.localScale = new Vector3(containerItem.Size.x, containerItem.Size.y, 0);
+            }
         }
+
+        public int Stacked { get; set; }
 
         protected Image Image
         {
@@ -46,12 +53,18 @@ namespace UIExtension.UI
         private Image image;
         private CanvasGroup canvasGroup;
         private ContainerItem containerItem;
+        private RectTransform rectTransform;
 
-        public void SetIcon(Sprite sprite)
+        private void Awake()
         {
-            Image.sprite = sprite;
+            
         }
-        
+
+        private void OnDestroy()
+        {
+            
+        }
+
         public void OnBeginDrag(PointerEventData eventData)
         {
             

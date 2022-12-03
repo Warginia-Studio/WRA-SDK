@@ -10,16 +10,13 @@ namespace UIExtension.UI
     [ExecuteInEditMode]
     public class ContainerWindowIniter : MonoBehaviour
     {
-        [SerializeField] private Vector2Int inventorySize;
-        [SerializeField] private Vector2Int slotSize;
-        [SerializeField] private Transform debugParrent;
-        [SerializeField] private bool debug;
-        
+        [SerializeField] private Transform dragableParrent;
         private Container.Container container;
 
         private int childCount = 0;
         
         private List<Dropable> dropables = new List<Dropable>();
+        private List<Dragable> spawnedDragable = new List<Dragable>();
         private void Awake()
         {
             
@@ -35,24 +32,18 @@ namespace UIExtension.UI
             }
         }
         
-        private void OnDrawGizmos()
-        {
-            if(debugParrent == null || !debug)
-                return;
 
-            Gizmos.matrix = debugParrent.localToWorldMatrix;
-            for (int i = 0; i < inventorySize.x; i++)
-            {
-                for (int j = 0; j < inventorySize.y; j++)
-                {
-                    Gizmos.DrawWireCube( new Vector3(slotSize.x*i,slotSize.y*j,0), new Vector3(slotSize.x, slotSize.y,0));
-                }
-            }
-        }
-
-        public void InitContainer(Container.Container container)
+        public void OpenContainer(Container.Container container)
         {
             this.container = container;
+            container.OnContainerChanged.AddListener(UpdateInventory);
+            UpdateInventory();
+        }
+
+        public void CloseContainer()
+        {
+            container = null;
+            container.OnContainerChanged.RemoveListener(UpdateInventory);
         }
 
         private void UpdateSlots()
@@ -68,6 +59,35 @@ namespace UIExtension.UI
             for (int i = 0; i < dropables.Count; i++)
             {
                 dropables[i].SlotPosition = TranslatePosition(i);
+                dropables[i].gameObject.name = $"Dropable(ID: {i})(POS: {dropables[i].SlotPosition})";
+            }
+        }
+
+        private void UpdateInventory()
+        {
+            var slots = container.GetSlots();
+            int difference = spawnedDragable.Count - slots.Length;
+            if (difference < 0)
+            {
+                var dragable = Resources.FindObjectsOfTypeAll<Dragable>()[0];
+                for (int i = 0; i < Math.Abs(difference); i++)
+                {
+                    spawnedDragable.Add(Instantiate(dragable.gameObject, dragableParrent).GetComponent<Dragable>());
+                }
+            }
+
+            if (difference > 0)
+            {
+                for (int i = spawnedDragable.Count - difference; i < spawnedDragable.Count; i++)
+                {
+                    spawnedDragable[i].gameObject.SetActive(false);
+                }
+            }
+
+            for (int i = 0; i < slots.Length; i++)
+            {
+                spawnedDragable[i].ContainerItem = slots[i].Item;
+                spawnedDragable[i].Stacked = slots[i].stack;
             }
         }
 

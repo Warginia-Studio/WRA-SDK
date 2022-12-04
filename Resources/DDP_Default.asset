@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51aac4287fbbc9842b77655fc2ea6ba0, type: 3}
   m_Name: DDP_Default
   m_EditorClassIdentifier: 
+  cellSize: {x: 64, y: 64}
   dragColor: {r: 1, g: 1, b: 1, a: 0.40392157}
   idlecolor: {r: 1, g: 1, b: 1, a: 1}
+  selected: {r: 0.9339623, g: 0.92048526, b: 0.43614274, a: 0.28235295}
   possible: {r: 0.11645889, g: 1, b: 0, a: 1}
-  notPossible: {r: 1, g: 0, b: 0, a: 1}
-  busy: {r: 1, g: 0, b: 0, a: 1}
-  wrongType: {r: 1, g: 0, b: 0, a: 1}
+  notPossible: {r: 0.33962262, g: 0, b: 0.25305218, a: 1}
+  busy: {r: 0.7176547, g: 0, b: 1, a: 1}
+  wrongType: {r: 0, g: 1, b: 0.94065905, a: 1}
   customStatusConfiguration: []

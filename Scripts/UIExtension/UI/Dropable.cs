@@ -9,13 +9,13 @@ namespace UIExtension.UI
 {
     public sealed class Dropable : ContainerHolder, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
-        protected Image DropableStatus
+        protected StatusChanger DropableStatus
         {
             get
             {
                 if (dropableStatus == null)
                 {
-                    dropableStatus = GetComponent<Image>();
+                    dropableStatus = GetComponentInChildren<StatusChanger>();
                 }
 
                 return dropableStatus;
@@ -30,17 +30,22 @@ namespace UIExtension.UI
 
         private Vector2Int slotPosition;
     
-        private Image dropableStatus;
+        private StatusChanger dropableStatus;
+
+        private void Awake()
+        {
+            GetComponent<RectTransform>().sizeDelta = DragDropProfile.Instance.CellSize;
+        }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             var dragging = DragDropManager.Instance.Dragging;
             if (dragging == null)
             {
-                // light up??
+                SetStatus(DragDropProfile.Status.selected);
                 return;
             }
-            if (dragging.DraggingType == container.HoldingType)
+            if (dragging.DraggingType.GetHashCode() != container.HoldingType.GetHashCode())
             {
                 SetStatus(DragDropProfile.Status.wrongType);
                 return;
@@ -69,7 +74,7 @@ namespace UIExtension.UI
         public void OnDrop(PointerEventData eventData)
         {
             var dragging = DragDropManager.Instance.Dragging;
-            if (dragging.DraggingGameObjcet.ContainerItem.GetType() == container.GetType())
+            if (dragging.DraggingType.GetHashCode() != container.HoldingType.GetHashCode())
             {
                 SetStatus(DragDropProfile.Status.wrongType);
                 return;
@@ -85,13 +90,13 @@ namespace UIExtension.UI
             container.TryAddItemAtPosition(dragging.DraggingGameObjcet.ContainerItem, slotPosition);
         }
         
-        protected void SetStatus(DragDropProfile.Status status, string customStatusName = "")
+        public void SetStatus(DragDropProfile.Status status, string customStatusName = "")
         {
             // if (DragDropManager.Instance == null)
             //     return;
             if (DragDropManager.Instance.DragDropProfile == null)
                 return;
-            dropableStatus.color = DragDropManager.Instance.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);
+            DropableStatus.SetStatus(status, customStatusName);
         }
 
         private bool IsTheSameContainer()

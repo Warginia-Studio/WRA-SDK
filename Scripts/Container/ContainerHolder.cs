@@ -10,10 +10,10 @@ namespace Container
         protected Container container;
         protected ContainerItem holdingItem;
     
-        public void InitContainerHolder(Container container, ContainerItem holdingItem)
+        public virtual void InitContainerHolder(Container container, ContainerSlot holdingItem)
         {
             this.container = container;
-            this.holdingItem = holdingItem;
+            this.holdingItem = holdingItem == null ? null : holdingItem.Item;
         }
 
         public abstract void Reset();

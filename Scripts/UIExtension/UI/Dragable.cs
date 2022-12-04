@@ -16,7 +16,7 @@ namespace UIExtension.UI
             {
                 containerItem = value;
                 Image.sprite = containerItem.Icon;
-                transform.localScale = new Vector3(containerItem.Size.x, containerItem.Size.y, 0);
+                transform.localScale = new Vector3(value.Size.x, value.Size.y, 0);
             }
         }
 
@@ -57,7 +57,7 @@ namespace UIExtension.UI
 
         private void Awake()
         {
-            
+            GetComponent<RectTransform>().sizeDelta = DragDropProfile.Instance.CellSize;
         }
 
         private void OnDestroy()
@@ -65,11 +65,21 @@ namespace UIExtension.UI
             
         }
 
+        public override void InitContainerHolder(Container.Container container, ContainerSlot slot)
+        {
+            base.InitContainerHolder(container, slot);
+            transform.localPosition = new Vector3(slot.Position.x * DragDropProfile.Instance.CellSize.x,
+                -slot.Position.y * DragDropProfile.Instance.CellSize.y, 0);
+            transform.localScale = new Vector3(slot.Item.Size.x, slot.Item.Size.y, 0);
+            containerItem = slot.Item;
+            Stacked = slot.stack;
+            Debug.Log($"Position: {slot.Position*32} , Size: {slot.Item.Size}");
+        }
+
         public void OnBeginDrag(PointerEventData eventData)
         {
-            
             DragDropManager.Instance.BeginDragItem(new DraggingData(this, container.HoldingType));
-            image.color = DragDropProfile.Instance.DragableColor(true);
+            Image.color = DragDropProfile.Instance.DragableColor(true);
             offset = (transform.position - Input.mousePosition);
             CanvasGroup.blocksRaycasts = false;
         }

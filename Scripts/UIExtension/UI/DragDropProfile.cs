@@ -24,16 +24,21 @@ namespace UIExtension.UI
             [SerializeField] public Color colorStatus;
             [SerializeField] public string statusName;
         }
+
+        [SerializeField] private Vector2Int cellSize;
     
         [SerializeField] private Color dragColor;
         [SerializeField] private Color idlecolor;
 
+        [Header("Statuses")]
         [SerializeField] private Color selected;
         [SerializeField] private Color possible;
         [SerializeField] private Color notPossible;
         [SerializeField] private Color busy;
         [SerializeField] private Color wrongType;
         [SerializeField] private CustomStatus[] customStatusConfiguration;
+
+        public Vector2Int CellSize => cellSize;
     
         private Dictionary<string, Color> CustomStatuses
         {
@@ -56,7 +61,7 @@ namespace UIExtension.UI
         {
             get
             {
-                if (colors == null)
+                if (colors == null || colors.Length==0) 
                 {
                     colors = new[] { Color.clear, selected, possible, notPossible, busy, wrongType };
                 }
@@ -82,6 +87,11 @@ namespace UIExtension.UI
         public Color DragableColor(bool dragging)
         {
             return dragging ? dragColor : idlecolor;
+        }
+
+        public void UpdateColors()
+        {
+            colors = new[] { Color.clear, selected, possible, notPossible, busy, wrongType };
         }
     }
 }

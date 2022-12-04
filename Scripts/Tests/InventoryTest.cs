@@ -41,7 +41,10 @@ public class InventoryTest : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            inventory.TryAddItem(items[id]);
+            if (inventory.TryAddItem(items[id]))
+            {
+                Debug.LogError("Added item.");
+            }
         }
         
     }

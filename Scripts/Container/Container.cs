@@ -16,7 +16,7 @@ namespace Container
         
         private List<ContainerSlot> slots = new List<ContainerSlot>();
         public Vector2Int containerSize => new Vector2Int(xSize, ySize);
-        private Type holdingType;
+        protected Type holdingType;
         
 
         public virtual bool TryAddItem(ContainerItem containerItem)
@@ -60,7 +60,7 @@ namespace Container
 
         public virtual bool TryMoveItem(ContainerItem containerItem, Vector2Int position)
         {
-            if (IsPossibleToMoveItem(containerItem, position))
+            if (!IsPossibleToMoveItem(containerItem, position))
             {
                 return false;
             }
@@ -81,7 +81,7 @@ namespace Container
 
         public virtual bool IsPossibleToMoveItem(ContainerItem containerItem, Vector2Int position)
         {
-            if (CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
+            if (CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
             {
                 return false;
             }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Container;
+using UIExtension.Managers;
 using UnityEngine;
+using Utility;
 
 namespace UIExtension.UI
 {
@@ -26,24 +28,32 @@ namespace UIExtension.UI
         {
             if (transform.childCount != childCount)
             {
-                dropables = GetComponentsInChildren<Dropable>().ToList();
-                childCount = transform.childCount;
-                UpdateSlots();
+                GetDropable();   
             }
         }
         
-
         public void OpenContainer(Container.Container container)
         {
             this.container = container;
             container.OnContainerChanged.AddListener(UpdateInventory);
+            GetDropable();
             UpdateInventory();
+            for (int i = 0; i < dropables.Count; i++)
+            {
+                dropables[i].InitContainerHolder(container, null);
+            }
         }
-
         public void CloseContainer()
         {
             container = null;
             container.OnContainerChanged.RemoveListener(UpdateInventory);
+        }
+        
+        private void GetDropable()
+        {
+            dropables = GetComponentsInChildren<Dropable>().ToList();
+            childCount = transform.childCount;
+            UpdateSlots();
         }
 
         private void UpdateSlots()
@@ -69,7 +79,7 @@ namespace UIExtension.UI
             int difference = spawnedDragable.Count - slots.Length;
             if (difference < 0)
             {
-                var dragable = Resources.FindObjectsOfTypeAll<Dragable>()[0];
+                var dragable = Resources.LoadAll<Dragable>("")[0];
                 for (int i = 0; i < Math.Abs(difference); i++)
                 {
                     spawnedDragable.Add(Instantiate(dragable.gameObject, dragableParrent).GetComponent<Dragable>());
@@ -86,8 +96,7 @@ namespace UIExtension.UI
 
             for (int i = 0; i < slots.Length; i++)
             {
-                spawnedDragable[i].ContainerItem = slots[i].Item;
-                spawnedDragable[i].Stacked = slots[i].stack;
+                spawnedDragable[i].InitContainerHolder(container, slots[i]);
             }
         }
 

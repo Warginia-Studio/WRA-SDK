@@ -14,26 +14,20 @@ namespace Patterns
                     instance = FindObjectOfType<T>();
                     if (instance != null)
                         return instance;
-                    var allObjects = Resources.FindObjectsOfTypeAll<T>();
-                    if (allObjects.Length == 0)
+                    var allObjects = Resources.LoadAll<T>("");
+                    
+                    if (allObjects == null && allObjects.Length == 0)
                     {
                         print($"<color=\"red\">Not found: {typeof(T)}.");
                         return instance;
                     }
                     instance = Resources.FindObjectsOfTypeAll<T>()[0];
 
-                    if (instance == null)
-                    {
-                        Debug.LogError($"No autoload instance in resources: {typeof(T)}");
-                    }
+                    instance = Instantiate(instance.gameObject).GetComponent<T>();
+                    if (MainCanvas.mainCanvas != null)
+                        instance.transform.parent = MainCanvas.mainCanvas;
                     else
-                    {
-                        instance = Instantiate(instance);
-                        if (MainCanvas.mainCanvas != null)
-                            instance.transform.parent = MainCanvas.mainCanvas;
-                        else
-                            Debug.LogError("<color=\"red\">NO MAIN CANVAS</color>");
-                    }
+                        Debug.LogError("<color=\"red\">NO MAIN CANVAS</color>");
                 }
                 return instance;
             }

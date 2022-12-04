@@ -76,7 +76,7 @@ namespace Container
             {
                 return false;
             }
-            return false;
+            return true;
         }
 
         public virtual bool IsPossibleToMoveItem(ContainerItem containerItem, Vector2Int position)

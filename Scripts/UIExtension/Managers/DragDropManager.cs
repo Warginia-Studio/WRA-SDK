@@ -8,7 +8,7 @@ namespace UIExtension.Managers
 {
     public class DragDropManager : MonoBehaviourSingletonAutoLoad<DragDropManager>
     {
-        public DraggingData Dragging => dragging;
+        public Dragable Dragging => dragging;
         public bool IsDragging => isDragging;
 
         public DragDropProfile DragDropProfile
@@ -28,10 +28,10 @@ namespace UIExtension.Managers
         
         // [SerializeField] private 
 
-        private DraggingData dragging;
+        private Dragable dragging;
         private bool isDragging;
 
-        public void BeginDragItem(DraggingData draggingData)
+        public void BeginDragItem(Dragable draggingData)
         {
             dragging = draggingData;
             isDragging = true;

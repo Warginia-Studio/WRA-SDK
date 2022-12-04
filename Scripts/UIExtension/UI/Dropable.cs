@@ -4,6 +4,7 @@ using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Utility;
 
 namespace UIExtension.UI
 {
@@ -35,6 +36,12 @@ namespace UIExtension.UI
         private void Awake()
         {
             GetComponent<RectTransform>().sizeDelta = DragDropProfile.Instance.CellSize;
+            StatusManager.Instance.OnStatusChanged.AddListener(OnStatusChanged);
+        }
+
+        private void OnDestroy()
+        {
+            StatusManager.Instance.OnStatusChanged.RemoveListener(OnStatusChanged);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -45,19 +52,21 @@ namespace UIExtension.UI
                 SetStatus(DragDropProfile.Status.selected);
                 return;
             }
-            if (dragging.DraggingType.GetHashCode() != container.HoldingType.GetHashCode())
+            if (dragging.Container.HoldingType.GetHashCode() != container.HoldingType.GetHashCode())
             {
                 SetStatus(DragDropProfile.Status.wrongType);
                 return;
             }
 
-            if (IsTheSameContainer() && container.IsPossibleToMoveItem(dragging.DraggingGameObjcet.ContainerItem, SlotPosition))
+            if (IsTheSameContainer() && container.IsPossibleToMoveItem(dragging.ContainerItem,
+                    SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset)) 
             {
                 SetStatus(DragDropProfile.Status.possible);
                 return;
             }
 
-            if (container.IsPossibleToAddItemAtPosition(dragging.DraggingGameObjcet.ContainerItem, SlotPosition))
+            if (container.IsPossibleToAddItemAtPosition(dragging.ContainerItem,
+                    SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset)) 
             {
                 SetStatus(DragDropProfile.Status.possible);
                 return;
@@ -74,20 +83,18 @@ namespace UIExtension.UI
         public void OnDrop(PointerEventData eventData)
         {
             var dragging = DragDropManager.Instance.Dragging;
-            if (dragging.DraggingType.GetHashCode() != container.HoldingType.GetHashCode())
+            if (dragging.Container.HoldingType.GetHashCode() != container.HoldingType.GetHashCode())
             {
-                SetStatus(DragDropProfile.Status.wrongType);
                 return;
             }
 
             if (IsTheSameContainer())
             {
-                container.TryMoveItem(dragging.DraggingGameObjcet.ContainerItem, slotPosition);
-                SetStatus(DragDropProfile.Status.possible);
+                container.TryMoveItem(dragging.ContainerItem, slotPosition);
                 return;
             }
 
-            container.TryAddItemAtPosition(dragging.DraggingGameObjcet.ContainerItem, slotPosition);
+            container.TryAddItemAtPosition(dragging.ContainerItem, slotPosition);
         }
         
         public void SetStatus(DragDropProfile.Status status, string customStatusName = "")
@@ -96,21 +103,33 @@ namespace UIExtension.UI
             //     return;
             if (DragDropManager.Instance.DragDropProfile == null)
                 return;
-            DropableStatus.SetStatus(status, customStatusName);
+
+            StatusManager.Instance.SetStatus(status, customStatusName,
+                slotPosition - DragDropManager.Instance.Dragging.InventoryOffset,
+                DragDropManager.Instance.Dragging.ContainerItem.Size);
+            // DropableStatus.SetStatus(status, customStatusName);
         }
 
         private bool IsTheSameContainer()
         {
-            if (DragDropManager.Instance.Dragging.DraggingGameObjcet.Container == Container)
+            if (DragDropManager.Instance.Dragging.Container == Container)
             {
                 return true;
             }
             return false;
         }
 
+        private void OnStatusChanged(DragDropProfile.Status status, string customStatus, Vector2Int startPos, Vector2Int endPos)
+        {
+            if (BoxMath.InBox(startPos, endPos, slotPosition))
+            {
+                DropableStatus.SetStatus(status, customStatus);
+            }
+        }
+
         public override void Reset()
         {
-            SetStatus(DragDropProfile.Status.empty);   
+            throw new NotImplementedException();
         }
     }
 }

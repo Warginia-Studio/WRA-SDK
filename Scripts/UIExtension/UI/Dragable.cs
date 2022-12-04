@@ -20,6 +20,17 @@ namespace UIExtension.UI
             }
         }
 
+        public Vector2Int InventoryOffset
+        {
+            get
+            {
+                Vector2Int inventoryOffset;
+                var cellSize = DragDropProfile.Instance.CellSize;
+                inventoryOffset = new Vector2Int((int)(offset.x / cellSize.x), (int)(offset.y / cellSize.y));
+                return inventoryOffset;
+            }
+        }
+
         public int Stacked { get; set; }
 
         protected Image Image
@@ -78,7 +89,7 @@ namespace UIExtension.UI
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            DragDropManager.Instance.BeginDragItem(new DraggingData(this, container.HoldingType));
+            DragDropManager.Instance.BeginDragItem(this);
             Image.color = DragDropProfile.Instance.DragableColor(true);
             offset = (transform.position - Input.mousePosition);
             CanvasGroup.blocksRaycasts = false;

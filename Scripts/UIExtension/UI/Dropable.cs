@@ -103,6 +103,11 @@ namespace UIExtension.UI
             //     return;
             if (DragDropManager.Instance.DragDropProfile == null)
                 return;
+            if (DragDropManager.Instance.Dragging == null)
+            {
+                SetStatus(DragDropProfile.Status.selected);
+                return;
+            }
 
             StatusManager.Instance.SetStatus(status, customStatusName,
                 slotPosition - DragDropManager.Instance.Dragging.InventoryOffset,

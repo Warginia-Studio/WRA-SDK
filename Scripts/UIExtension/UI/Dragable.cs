@@ -27,7 +27,7 @@ namespace UIExtension.UI
                 Vector2Int inventoryOffset;
                 var cellSize = DragDropProfile.Instance.CellSize;
                 inventoryOffset = new Vector2Int((int)(offset.x / cellSize.x), (int)(offset.y / cellSize.y));
-                return inventoryOffset;
+                return Vector2Int.zero;
             }
         }
 
@@ -104,6 +104,7 @@ namespace UIExtension.UI
             DragDropManager.Instance.EndDragItem();
             image.color = DragDropProfile.Instance.DragableColor(false);;
             CanvasGroup.blocksRaycasts = true;
+            StatusManager.Instance.Reset();
         }
 
         public void OnDrag(PointerEventData eventData)

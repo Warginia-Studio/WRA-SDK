@@ -58,6 +58,10 @@ namespace UIExtension.UI
                 return;
             }
 
+            Debug.Log(
+                $"SlotPosition: {SlotPosition} , DraggingOffset: {DragDropManager.Instance.Dragging.InventoryOffset}" +
+                $"Finall vector: {SlotPosition-DragDropManager.Instance.Dragging.InventoryOffset}");
+
             if (IsTheSameContainer() && container.IsPossibleToMoveItem(dragging.ContainerItem,
                     SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset)) 
             {
@@ -65,8 +69,8 @@ namespace UIExtension.UI
                 return;
             }
 
-            if (container.IsPossibleToAddItemAtPosition(dragging.ContainerItem,
-                    SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset)) 
+            if (!IsTheSameContainer() && container.IsPossibleToAddItemAtPosition(dragging.ContainerItem,
+                    SlotPosition + DragDropManager.Instance.Dragging.InventoryOffset)) 
             {
                 SetStatus(DragDropProfile.Status.possible);
                 return;
@@ -90,17 +94,15 @@ namespace UIExtension.UI
 
             if (IsTheSameContainer())
             {
-                container.TryMoveItem(dragging.ContainerItem, slotPosition);
+                container.TryMoveItem(dragging.ContainerItem, SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset);
                 return;
             }
 
-            container.TryAddItemAtPosition(dragging.ContainerItem, slotPosition);
+            container.TryAddItemAtPosition(dragging.ContainerItem, SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset);
         }
         
         public void SetStatus(DragDropProfile.Status status, string customStatusName = "")
         {
-            // if (DragDropManager.Instance == null)
-            //     return;
             if (DragDropManager.Instance.DragDropProfile == null)
                 return;
             if (DragDropManager.Instance.Dragging == null)
@@ -112,7 +114,6 @@ namespace UIExtension.UI
             StatusManager.Instance.SetStatus(status, customStatusName,
                 slotPosition - DragDropManager.Instance.Dragging.InventoryOffset,
                 DragDropManager.Instance.Dragging.ContainerItem.Size);
-            // DropableStatus.SetStatus(status, customStatusName);
         }
 
         private bool IsTheSameContainer()

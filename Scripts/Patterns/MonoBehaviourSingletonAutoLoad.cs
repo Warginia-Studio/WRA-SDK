@@ -13,16 +13,16 @@ namespace Patterns
                     instance = FindObjectOfType<T>();
                     if (instance != null)
                         return instance;
-                    instance = Resources.FindObjectsOfTypeAll<T>()[0];
+                    //var objects = Resources.FindObjectsOfTypeAll<T>();
+                    var objects = Resources.LoadAll<T>("");
 
-                    if (instance == null)
+                    if (objects == null || objects.Length == 0)
                     {
-                        Debug.LogError($"No autoload instance in resources: {typeof(T)}");
+                        Debug.LogError($"Not found resources: {typeof(T)}");
+                        return null;
                     }
-                    else
-                    {
-                        instance = Instantiate(instance);
-                    }
+
+                    instance = Instantiate(objects[0].gameObject).GetComponent<T>();
                 }
                 return instance;
             }

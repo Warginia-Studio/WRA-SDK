@@ -15,8 +15,8 @@ namespace Container
         [SerializeField] private int ySize;
         
         private List<ContainerSlot> slots = new List<ContainerSlot>();
-        private Vector2Int containerSize => new Vector2Int(xSize, ySize);
-        private Type holdingType;
+        public Vector2Int containerSize => new Vector2Int(xSize, ySize);
+        protected Type holdingType;
         
 
         public virtual bool TryAddItem(ContainerItem containerItem)
@@ -45,7 +45,7 @@ namespace Container
 
         public virtual bool TryAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
         {
-            if(CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
+            if(CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
             {
                 return false;
             }
@@ -60,7 +60,7 @@ namespace Container
 
         public virtual bool TryMoveItem(ContainerItem containerItem, Vector2Int position)
         {
-            if (IsPossibleToMoveItem(containerItem, position))
+            if (!IsPossibleToMoveItem(containerItem, position))
             {
                 return false;
             }
@@ -72,16 +72,16 @@ namespace Container
 
         public virtual bool IsPossibleToAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
         {
-            if (CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
+            if (CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
             {
                 return false;
             }
-            return false;
+            return true;
         }
 
         public virtual bool IsPossibleToMoveItem(ContainerItem containerItem, Vector2Int position)
         {
-            if (CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
+            if (CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
             {
                 return false;
             }

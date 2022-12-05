@@ -12,7 +12,7 @@ namespace UIExtension.Managers
         private const string ADVANCED_CONTAINER = "ADVANCED CONTAINER ERROR: ";
         private const string SIMPLE_CONTAINER = "SIMPLE CONTAINER ERROR: ";
 
-        [SerializeField] private ContainerWindowIniter[] simpleContainers;
+        [SerializeField] private ContainerWindowIniterGenerated[] simpleContainers;
         [SerializeField] private AdvancedContainerWindowIniter[] advancedContainers;
 
         public void OpenSimpleContainer(Container.Container container, string containerName)

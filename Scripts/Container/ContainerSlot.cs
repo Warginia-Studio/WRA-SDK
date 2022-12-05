@@ -23,7 +23,7 @@ namespace Container
 
             for (int i = 0; i < corners.Length; i++)
             {
-                if (BoxMath.InBox(position, Item.Size, corners[i]))
+                if (BoxMath.InBox(Position, Item.Size, corners[i]))
                     return true;
             }
             return false;

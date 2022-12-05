@@ -4,18 +4,19 @@ using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Utility;
 
 namespace UIExtension.UI
 {
     public sealed class Dropable : ContainerHolder, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
-        protected Image DropableStatus
+        protected StatusChanger DropableStatus
         {
             get
             {
                 if (dropableStatus == null)
                 {
-                    dropableStatus = GetComponent<Image>();
+                    dropableStatus = GetComponentInChildren<StatusChanger>();
                 }
 
                 return dropableStatus;
@@ -30,24 +31,46 @@ namespace UIExtension.UI
 
         private Vector2Int slotPosition;
     
-        private Image dropableStatus;
+        private StatusChanger dropableStatus;
+
+        private void Awake()
+        {
+            GetComponent<RectTransform>().sizeDelta = DragDropProfile.Instance.CellSize;
+            StatusManager.Instance.OnStatusChanged.AddListener(OnStatusChanged);
+        }
+
+        private void OnDestroy()
+        {
+            StatusManager.Instance.OnStatusChanged.RemoveListener(OnStatusChanged);
+        }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             var dragging = DragDropManager.Instance.Dragging;
-            if (dragging.DraggingType == container.HoldingType)
+            if (dragging == null)
+            {
+                SetStatus(DragDropProfile.Status.selected);
+                return;
+            }
+            if (dragging.Container.HoldingType.GetHashCode() != container.HoldingType.GetHashCode())
             {
                 SetStatus(DragDropProfile.Status.wrongType);
                 return;
             }
 
-            if (IsTheSameContainer() && container.IsPossibleToMoveItem(dragging.DraggingGameObjcet.ContainerItem, SlotPosition))
+            // Debug.Log(
+            //     $"SlotPosition: {SlotPosition} , DraggingOffset: {DragDropManager.Instance.Dragging.InventoryOffset}" +
+            //     $"Finall vector: {SlotPosition-DragDropManager.Instance.Dragging.InventoryOffset}");
+
+            if (IsTheSameContainer() && container.IsPossibleToMoveItem(dragging.ContainerItem,
+                    SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset)) 
             {
                 SetStatus(DragDropProfile.Status.possible);
                 return;
             }
 
-            if (container.IsPossibleToAddItemAtPosition(dragging.DraggingGameObjcet.ContainerItem, SlotPosition))
+            if (!IsTheSameContainer() && container.IsPossibleToAddItemAtPosition(dragging.ContainerItem,
+                    SlotPosition + DragDropManager.Instance.Dragging.InventoryOffset)) 
             {
                 SetStatus(DragDropProfile.Status.possible);
                 return;
@@ -58,49 +81,75 @@ namespace UIExtension.UI
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            SetStatus(DragDropProfile.Status.empty);
+            DropableStatus.SetStatus(DragDropProfile.Status.empty, "");
         }
 
         public void OnDrop(PointerEventData eventData)
         {
             var dragging = DragDropManager.Instance.Dragging;
-            if (dragging.DraggingGameObjcet.ContainerItem.GetType() == container.GetType())
+            if (dragging.Container.HoldingType.GetHashCode() != container.HoldingType.GetHashCode())
             {
-                SetStatus(DragDropProfile.Status.wrongType);
                 return;
             }
 
             if (IsTheSameContainer())
             {
-                container.TryMoveItem(dragging.DraggingGameObjcet.ContainerItem, slotPosition);
-                SetStatus(DragDropProfile.Status.possible);
+                container.TryMoveItem(dragging.ContainerItem, SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset);
                 return;
             }
 
-            container.TryAddItemAtPosition(dragging.DraggingGameObjcet.ContainerItem, slotPosition);
+            if (container.TryAddItemAtPosition(dragging.ContainerItem,
+                    SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset))
+            {
+                Debug.Log("Removed: " + dragging.Container.TryRemoveItem(dragging.ContainerItem));
+            }
+            DragDropManager.Instance.EndDragItem();
         }
         
-        protected void SetStatus(DragDropProfile.Status status, string customStatusName = "")
+        public void SetStatus(DragDropProfile.Status status, string customStatusName = "")
         {
-            // if (DragDropManager.Instance == null)
-            //     return;
             if (DragDropManager.Instance.DragDropProfile == null)
                 return;
-            dropableStatus.color = DragDropManager.Instance.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);
+            if (DragDropManager.Instance.Dragging == null)
+            {
+                DropableStatus.SetStatus(DragDropProfile.Status.selected, "");
+                return;
+            }
+
+            StatusManager.Instance.SetStatus(status, customStatusName, container,
+                slotPosition - DragDropManager.Instance.Dragging.InventoryOffset,
+                DragDropManager.Instance.Dragging.ContainerItem.Size);
         }
 
         private bool IsTheSameContainer()
         {
-            if (DragDropManager.Instance.Dragging.DraggingGameObjcet.Container == Container)
+            if (DragDropManager.Instance.Dragging.Container == Container)
             {
                 return true;
             }
             return false;
         }
 
+        private void OnStatusChanged(StatusManager.OnStatusChangedInfo info)
+        {
+            if (info.Holder != container)
+            {
+                DropableStatus.SetStatus(DragDropProfile.Status.empty, "");
+                return;
+            }
+            if (BoxMath.InBox(info.StartPos, info.EndPos, slotPosition))
+            {
+                DropableStatus.SetStatus(info.Status, info.CustomStatus);
+            }
+            else
+            {
+                DropableStatus.SetStatus(DragDropProfile.Status.empty, "");
+            }
+        }
+
         public override void Reset()
         {
-            SetStatus(DragDropProfile.Status.empty);   
+            throw new NotImplementedException();
         }
     }
 }

@@ -130,6 +130,10 @@ namespace UIExtension.UI
             {
                 DropableStatus.SetStatus(status, customStatus);
             }
+            else
+            {
+                DropableStatus.SetStatus(DragDropProfile.Status.empty, "");
+            }
         }
 
         public override void Reset()

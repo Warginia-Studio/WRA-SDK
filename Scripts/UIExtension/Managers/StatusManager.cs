@@ -14,4 +14,9 @@ public class StatusManager : MonoBehaviourSingletonAutoCreateUI<StatusManager>
     {
         OnStatusChanged.Invoke(status, customStatus, startPos, endPos);
     }
+
+    public void Reset()
+    {
+        OnStatusChanged.Invoke(DragDropProfile.Status.empty, "", -Vector2Int.one, -Vector2Int.one);
+    }
 }

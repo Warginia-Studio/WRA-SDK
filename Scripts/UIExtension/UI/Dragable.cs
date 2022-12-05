@@ -65,6 +65,7 @@ namespace UIExtension.UI
         private CanvasGroup canvasGroup;
         private ContainerItem containerItem;
         private RectTransform rectTransform;
+        private Vector2 basicPosition;
 
         private void Awake()
         {
@@ -81,6 +82,7 @@ namespace UIExtension.UI
             base.InitContainerHolder(container, slot);
             transform.localPosition = new Vector3(slot.Position.x * DragDropProfile.Instance.CellSize.x,
                 -slot.Position.y * DragDropProfile.Instance.CellSize.y, 0);
+            basicPosition = transform.localPosition;
             transform.localScale = new Vector3(slot.Item.Size.x, slot.Item.Size.y, 0);
             containerItem = slot.Item;
             Stacked = slot.stack;
@@ -97,6 +99,7 @@ namespace UIExtension.UI
 
         public void OnEndDrag(PointerEventData eventData)
         {
+            Reset();
             DragDropManager.Instance.EndDragItem();
             image.color = DragDropProfile.Instance.DragableColor(false);;
             CanvasGroup.blocksRaycasts = true;
@@ -109,7 +112,7 @@ namespace UIExtension.UI
 
         public override void Reset()
         {
-            // reset position
+            transform.localPosition = basicPosition;
         }
     }
 }

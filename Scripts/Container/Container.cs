@@ -45,7 +45,7 @@ namespace Container
 
         public virtual bool TryAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
         {
-            if(CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
+            if(CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
             {
                 return false;
             }
@@ -72,7 +72,7 @@ namespace Container
 
         public virtual bool IsPossibleToAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
         {
-            if (CheckSlot(containerItem, position) && IsOutsideOfInventory(containerItem, position))
+            if (CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
             {
                 return false;
             }

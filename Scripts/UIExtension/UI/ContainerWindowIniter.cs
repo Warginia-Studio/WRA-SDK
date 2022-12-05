@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using Container;
 using UIExtension.Managers;
+using Unity.VisualScripting;
 using UnityEngine;
 using Utility;
 
@@ -92,6 +93,7 @@ namespace UIExtension.UI
 
             for (int i = 0; i < slots.Length; i++)
             {
+                spawnedDragable[i].gameObject.SetActive(true);
                 spawnedDragable[i].InitContainerHolder(container, slots[i]);
             }
         }

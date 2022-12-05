@@ -87,7 +87,7 @@ namespace UIExtension.UI
             transform.localScale = new Vector3(slot.Item.Size.x, slot.Item.Size.y, 0);
             containerItem = slot.Item;
             Stacked = slot.stack;
-            Debug.Log($"Position: {slot.Position*32} , Size: {slot.Item.Size}");
+            // Debug.Log($"Position: {slot.Position*32} , Size: {slot.Item.Size}");
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -102,24 +102,25 @@ namespace UIExtension.UI
         {
             Reset();
             DragDropManager.Instance.EndDragItem();
-            image.color = DragDropProfile.Instance.DragableColor(false);;
-            CanvasGroup.blocksRaycasts = true;
-            StatusManager.Instance.Reset();
         }
 
         public void OnDrag(PointerEventData eventData)
         {
+            CanvasGroup.blocksRaycasts = false;
             transform.position = Input.mousePosition + offset;
         }
 
         public override void Reset()
         {
-            transform.localPosition = basicPosition;
+            transform.localPosition = basicPosition;;
+            image.color = DragDropProfile.Instance.DragableColor(false);
+            CanvasGroup.blocksRaycasts = true;
         }
 
         private void OnDraggingChanged(bool dragging)
         {
             CanvasGroup.blocksRaycasts = !dragging;
+            Image.color = DragDropProfile.Instance.DragableColor(dragging);
         }
     }
 }

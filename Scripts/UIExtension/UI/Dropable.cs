@@ -58,9 +58,9 @@ namespace UIExtension.UI
                 return;
             }
 
-            Debug.Log(
-                $"SlotPosition: {SlotPosition} , DraggingOffset: {DragDropManager.Instance.Dragging.InventoryOffset}" +
-                $"Finall vector: {SlotPosition-DragDropManager.Instance.Dragging.InventoryOffset}");
+            // Debug.Log(
+            //     $"SlotPosition: {SlotPosition} , DraggingOffset: {DragDropManager.Instance.Dragging.InventoryOffset}" +
+            //     $"Finall vector: {SlotPosition-DragDropManager.Instance.Dragging.InventoryOffset}");
 
             if (IsTheSameContainer() && container.IsPossibleToMoveItem(dragging.ContainerItem,
                     SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset)) 
@@ -98,7 +98,12 @@ namespace UIExtension.UI
                 return;
             }
 
-            container.TryAddItemAtPosition(dragging.ContainerItem, SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset);
+            if (container.TryAddItemAtPosition(dragging.ContainerItem,
+                    SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset))
+            {
+                Debug.Log("Removed: " + dragging.Container.TryRemoveItem(dragging.ContainerItem));
+            }
+            DragDropManager.Instance.EndDragItem();
         }
         
         public void SetStatus(DragDropProfile.Status status, string customStatusName = "")

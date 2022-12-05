@@ -46,17 +46,5 @@ namespace UIExtension.Managers
             isDragging = false;
             OnDragChanged.Invoke(isDragging);
         }
-        
-        // public void BeginDragItem(Dragable<T> dragable)
-        // {
-        //     isDragging = true;
-        //     draggingItem = dragable;
-        // }
-        //
-        // public void EndDragItem()
-        // {
-        //     isDragging = false;
-        //     draggingItem = null;
-        // }
     }
 }

@@ -19,10 +19,6 @@ namespace UIExtension.UI
         
         private List<Dropable> dropables = new List<Dropable>();
         private List<Dragable> spawnedDragable = new List<Dragable>();
-        private void Awake()
-        {
-            
-        }
 
         private void Update()
         {

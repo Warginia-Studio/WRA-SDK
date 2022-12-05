@@ -111,7 +111,7 @@ namespace UIExtension.UI
                 return;
             }
 
-            StatusManager.Instance.SetStatus(status, customStatusName,
+            StatusManager.Instance.SetStatus(status, customStatusName, container,
                 slotPosition - DragDropManager.Instance.Dragging.InventoryOffset,
                 DragDropManager.Instance.Dragging.ContainerItem.Size);
         }
@@ -125,11 +125,16 @@ namespace UIExtension.UI
             return false;
         }
 
-        private void OnStatusChanged(DragDropProfile.Status status, string customStatus, Vector2Int startPos, Vector2Int endPos)
+        private void OnStatusChanged(StatusManager.OnStatusChangedInfo info)
         {
-            if (BoxMath.InBox(startPos, endPos, slotPosition))
+            if (info.Holder != container)
             {
-                DropableStatus.SetStatus(status, customStatus);
+                DropableStatus.SetStatus(DragDropProfile.Status.empty, "");
+                return;
+            }
+            if (BoxMath.InBox(info.StartPos, info.EndPos, slotPosition))
+            {
+                DropableStatus.SetStatus(info.Status, info.CustomStatus);
             }
             else
             {

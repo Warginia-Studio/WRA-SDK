@@ -6,16 +6,17 @@ using UnityEngine;
 
 public class InventoryTest : MonoBehaviour
 {
+    [SerializeField] private Inventory.Inventory inventory1;
+    [SerializeField] private Inventory.Inventory inventory2;
+    
     [SerializeField] private Item[] items;
 
     private int id;
-
-    private Inventory.Inventory inventory;
-    // Start is called before the first frame update
+    
     void Start()
     {
-        inventory = FindObjectOfType<Inventory.Inventory>();
-        FindObjectOfType<ContainerWindowIniter>().OpenContainer(inventory);
+        FindObjectOfType<AdvancedContainerWindowIniter>().InitContainer(inventory1, inventory2);
+        // FindObjectOfType<ContainerWindowIniter>().OpenContainer(inventory);
     }
 
     // Update is called once per frame
@@ -41,7 +42,7 @@ public class InventoryTest : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (inventory.TryAddItem(items[id]))
+            if (inventory1.TryAddItem(items[id]))
             {
                 Debug.LogError("Added item.");
             }

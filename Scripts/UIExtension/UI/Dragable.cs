@@ -70,11 +70,12 @@ namespace UIExtension.UI
         private void Awake()
         {
             GetComponent<RectTransform>().sizeDelta = DragDropProfile.Instance.CellSize;
+            DragDropManager.Instance.OnDragChanged.AddListener(OnDraggingChanged);
         }
 
         private void OnDestroy()
         {
-            
+            DragDropManager.Instance.OnDragChanged.RemoveListener(OnDraggingChanged);
         }
 
         public override void InitContainerHolder(Container.Container container, ContainerSlot slot)
@@ -113,6 +114,11 @@ namespace UIExtension.UI
         public override void Reset()
         {
             transform.localPosition = basicPosition;
+        }
+
+        private void OnDraggingChanged(bool dragging)
+        {
+            CanvasGroup.blocksRaycasts = !dragging;
         }
     }
 }

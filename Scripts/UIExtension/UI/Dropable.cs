@@ -77,7 +77,7 @@ namespace UIExtension.UI
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            SetStatus(DragDropProfile.Status.empty);
+            DropableStatus.SetStatus(DragDropProfile.Status.empty, "");
         }
 
         public void OnDrop(PointerEventData eventData)

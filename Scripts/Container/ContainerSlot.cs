@@ -15,17 +15,22 @@ namespace Container
             Position = position;
         }
 
-        public bool IsInside(Vector2 position, ContainerItem item)
+        public bool IsInside(Vector2Int position, ContainerItem item)
         {
             if (item == Item)
                 return false;
-            var corners = BoxMath.GetCorners(position, item.Size);
-
-            for (int i = 0; i < corners.Length; i++)
+            // var corners = BoxMath.GetCorners(position, item.Size);
+            
+            for (int i = 0; i < item.Size.x; i++)
             {
-                if (BoxMath.InBox(Position, Item.Size, corners[i]))
-                    return true;
+                for (int j = 0; j < item.Size.y; j++)
+                {
+                    if (BoxMath.InBox(Position, Item.Size, position + new Vector2Int(i, j)))
+                        return true;
+                }
             }
+
+
             return false;
         }
 
@@ -41,6 +46,7 @@ namespace Container
             stack++;
             return true;
         }
+        
 
     }
 }

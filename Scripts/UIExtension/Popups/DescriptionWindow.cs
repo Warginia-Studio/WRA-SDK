@@ -1,10 +1,9 @@
 using System.Collections;
-using Patterns;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UIExtension.UI
+namespace UIExtension.Popups
 {
     public class DescriptionWindow : PopupBase<DescriptionWindow>
     {
@@ -51,12 +50,12 @@ namespace UIExtension.UI
 
         public override void Open()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public override void Close()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

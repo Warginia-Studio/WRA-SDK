@@ -2,7 +2,7 @@ using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UIExtension.UI
+namespace UIExtension.Popups
 {
     public abstract class Descriptable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {

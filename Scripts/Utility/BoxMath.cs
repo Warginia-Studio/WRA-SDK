@@ -11,8 +11,12 @@ namespace Utility
     
         public static bool InBox(Vector2 boxPosition, Vector2 boxSize, Vector2 point)
         {
-            point -= boxPosition;
-            return 0 <= point.x && 0 <= point.y && boxSize.x > point.x && boxSize.y > point.y;
+            return boxPosition.x <= point.x  // left top: x
+                   && boxPosition.y <= point.y  // left top: y
+                   && boxPosition.x + boxSize.x > point.x  // right down: x 
+                   && boxPosition.y + boxSize.y > point.y; // right down: y
         }
+        
+
     }
 }

@@ -26,8 +26,8 @@ namespace UIExtension.UI
             {
                 Vector2Int inventoryOffset;
                 var cellSize = DragDropProfile.Instance.CellSize;
-                inventoryOffset = new Vector2Int((int)(offset.x / cellSize.x), (int)(offset.y / cellSize.y));
-                return Vector2Int.zero;
+                inventoryOffset = new Vector2Int(-(int)(offset.x / 64), (int)(offset.y / 64));
+                return inventoryOffset;
             }
         }
 

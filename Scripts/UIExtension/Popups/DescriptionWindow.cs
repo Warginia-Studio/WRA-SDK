@@ -51,12 +51,12 @@ namespace UIExtension.UI
 
         public override void Open()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public override void Close()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

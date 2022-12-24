@@ -15,6 +15,7 @@ public class ContainerItemEditor : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
+        
 
         ContainerItem containerItem = (ContainerItem)target;
 
@@ -29,6 +30,7 @@ public class ContainerItemEditor : Editor
         }
 
         serializedObject.ApplyModifiedProperties();
+        EditorUtility.SetDirty(target);
     }
 }
 

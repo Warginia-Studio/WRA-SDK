@@ -1,10 +1,9 @@
 using System.Collections;
-using Patterns;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UIExtension.UI
+namespace UIExtension.Popups
 {
     public class DescriptionWindow : PopupBase<DescriptionWindow>
     {

@@ -1,52 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using Inventory;
 using UIExtension.UI;
 using UnityEngine;
 
-public class InventoryTest : MonoBehaviour
+namespace Tests
 {
-    [SerializeField] private Inventory.Inventory inventory1;
-    [SerializeField] private Inventory.Inventory inventory2;
-    
-    [SerializeField] private Item[] items;
-
-    private int id;
-    
-    void Start()
+    public class InventoryTest : MonoBehaviour
     {
-        FindObjectOfType<AdvancedContainerWindowIniter>().InitContainer(inventory1, inventory2);
-        // FindObjectOfType<ContainerWindowIniter>().OpenContainer(inventory);
-    }
+        [SerializeField] private Inventory.Inventory inventory1;
+        [SerializeField] private Inventory.Inventory inventory2;
+    
+        [SerializeField] private Item[] items;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
+        private int id;
+    
+        void Start()
         {
-            id--;
-            if (id < 0)
-            {
-                id = 0;
-            }
+            FindObjectOfType<AdvancedContainerWindowIniter>().InitContainer(inventory1, inventory2);
+            // FindObjectOfType<ContainerWindowIniter>().OpenContainer(inventory);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        // Update is called once per frame
+        void Update()
         {
-            id++;
-            if (id >= items.Length)
+            if (Input.GetKeyDown(KeyCode.Q))
             {
-                id = items.Length-1;
+                id--;
+                if (id < 0)
+                {
+                    id = 0;
+                }
             }
-        }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (inventory1.TryAddItem(items[id]))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                Debug.LogError("Added item.");
+                id++;
+                if (id >= items.Length)
+                {
+                    id = items.Length-1;
+                }
             }
-        }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (inventory1.TryAddItem(items[id]))
+                {
+                    Debug.LogError("Added item.");
+                }
+            }
         
+        }
     }
 }

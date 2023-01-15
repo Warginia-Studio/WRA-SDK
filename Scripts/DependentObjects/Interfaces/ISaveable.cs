@@ -1,4 +1,4 @@
-namespace Interfaces
+namespace DependentObjects.Interfaces
 {
     public interface ISaveable
     {

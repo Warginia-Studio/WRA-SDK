@@ -1,3 +1,4 @@
+using DependentObjects.ScriptableObjects;
 using UnityEngine;
 
 namespace Container

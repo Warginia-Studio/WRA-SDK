@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Container
+namespace DependentObjects.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "Container Item", menuName = "thief01/Container/Container Item")]
     public abstract class ContainerItem : ScriptableObject

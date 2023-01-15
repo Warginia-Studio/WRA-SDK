@@ -1,3 +1,4 @@
+using DependentObjects.ScriptableObjects;
 using Inventory;
 using UIExtension.UI;
 using UnityEngine;

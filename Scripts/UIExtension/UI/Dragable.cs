@@ -1,5 +1,6 @@
 using System;
 using Container;
+using DependentObjects.ScriptableObjects;
 using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;

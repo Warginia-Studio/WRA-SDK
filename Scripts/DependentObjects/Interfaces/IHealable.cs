@@ -1,6 +1,6 @@
 using Utility;
 
-namespace Interfaces
+namespace DependentObjects.Interfaces
 {
     public interface IHealable
     {

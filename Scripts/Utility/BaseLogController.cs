@@ -3,7 +3,7 @@ using Patterns;
 
 namespace Utility
 {
-    public abstract class BaseLogController : Singleton<BaseLogController>
+    public class BaseLogController
     {
         private List<Dictionary<string, string>> log = new List<Dictionary<string, string>>();
         private int maxInLog = -1;

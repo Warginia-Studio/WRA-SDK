@@ -1,7 +1,9 @@
+using Classes;
+
 namespace Interfaces
 {
     public interface IDamageable
     {
-        void DealDamage();
+        void DealDamage(DamageInfo damageInfo);
     }
 }

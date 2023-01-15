@@ -1,7 +1,9 @@
+using Utility;
+
 namespace Interfaces
 {
     public interface IHealable
     {
-        void Heal();
+        void Heal(HealInfo healInfo);
     }
 }

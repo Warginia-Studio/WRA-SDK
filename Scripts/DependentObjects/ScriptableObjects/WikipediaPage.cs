@@ -1,3 +1,4 @@
+using DependentObjects.Enums;
 using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects
@@ -8,5 +9,6 @@ namespace DependentObjects.ScriptableObjects
         public string PageTitle;
         public string[] PageTexts;
         public Sprite[] PageImages;
+        public WikipediaCategories WikipediaCategories;
     }
 }

@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects
@@ -5,6 +7,8 @@ namespace DependentObjects.ScriptableObjects
     [CreateAssetMenu(fileName ="Item", menuName = "thief01/Inventory/Item")]
     public class Item : ContainerItem
     {
+        public ValueOfItem ValueType;
+        
         public override string GetDescription(Transform parrent)
         {
             throw new System.NotImplementedException();
@@ -13,6 +17,25 @@ namespace DependentObjects.ScriptableObjects
         public override float GetCooldown(Transform parrent)
         {
             throw new System.NotImplementedException();
+        }
+
+        public virtual ItemType GetItemType()
+        {
+            if (this.GetType() == typeof(ArmableItem))
+            {
+                
+            }
+            
+            
+            switch (GetType())
+            {
+                case var ctg when ctg == typeof(ArmableItem):
+                    return ItemType.armable;
+                case var ctg when ctg == typeof(UseableItem):
+                    return ItemType.useable;
+            }
+
+            return ItemType.defaultItem;
         }
     }
 }

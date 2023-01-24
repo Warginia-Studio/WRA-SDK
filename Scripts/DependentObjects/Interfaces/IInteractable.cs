@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Character;
 
-public interface IInteractable
+namespace DependentObjects.Interfaces
 {
-    void Interract(InteractionController who);
+    public interface IInteractable
+    {
+        void Interract(InteractionController who);
+    }
 }

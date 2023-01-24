@@ -1,15 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum ArmableType 
+namespace DependentObjects.Enums
 {
-    helmet,
-    chest,
-    shoe,
-    pant,
-    glove,
-    ring,
-    oneHandedWeapon,
-    twoHandedWeapon,
+    public enum ArmableType 
+    {
+        helmet,
+        chest,
+        shoe,
+        pant,
+        glove,
+        ring,
+        oneHandedWeapon,
+        twoHandedWeapon,
+    }
 }

@@ -1,16 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using DependentObjects.Enums;
 using UnityEngine;
 
-public class EnumedLayer : MonoBehaviour
+namespace Utility
 {
-    public EnumedLayers Layer => layer;
-    [SerializeField] private EnumedLayers layer;
-    
-    private void Awake()
+    public class EnumedLayer : MonoBehaviour
     {
-        gameObject.layer = LayerMask.NameToLayer("EnumLayer");
-    }
+        public EnumedLayers Layer => layer;
+        [SerializeField] private EnumedLayers layer;
+    
+        private void Awake()
+        {
+            gameObject.layer = LayerMask.NameToLayer("EnumLayer");
+        }
 
+    }
 }

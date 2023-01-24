@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum ItemType
+namespace DependentObjects.Enums
 {
-    defaultItem,
-    useable,
-    armable
+    public enum ItemType
+    {
+        defaultItem,
+        useable,
+        armable
+    }
 }

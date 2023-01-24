@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum ValueOfItem 
+namespace DependentObjects.Enums
 {
-    common,
-    uncommon,
-    rare,
-    epic,
-    legendary,
-    mythic
+    public enum ValueOfItem 
+    {
+        common,
+        uncommon,
+        rare,
+        epic,
+        legendary,
+        mythic
+    }
 }

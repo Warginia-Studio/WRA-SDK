@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum EnumedLayers
+namespace DependentObjects.Enums
 {
-    interactable,
-    liftable,
+    public enum EnumedLayers
+    {
+        interactable,
+        liftable,
+    }
 }

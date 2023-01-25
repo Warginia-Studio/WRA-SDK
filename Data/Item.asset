@@ -17,3 +17,4 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Stacking: 0
   MaxStack: 0
+  ValueType: 4

@@ -26,25 +26,26 @@ namespace UIExtension.Popups
             descriptionBackground.sizeDelta = new Vector2(DESCRIPTION_BASE_SIZE_X,
                 LayoutUtility.GetPreferredHeight(text.rectTransform) + DESCRIPTION_BASE_SIZE_Y);
             StopAllCoroutines();
-            StartCoroutine(Animate(timeIn));
+            StartCoroutine(Animate(timeIn, 1));
         }
 
         public void HideDescription(float timeOut)
         {
             Close();
             StopAllCoroutines();
-            StartCoroutine(Animate(timeOut));
+            StartCoroutine(Animate(timeOut, 0));
         }
 
-        private IEnumerator Animate(float time)
+        private IEnumerator Animate(float time, float target)
         {
             float delta = 0;
+            float baseAlpha = canvasGroup.alpha;
 
             while (delta < 1)
             {
                 yield return null;
                 delta += Time.deltaTime / time;
-                canvasGroup.alpha = delta;
+                canvasGroup.alpha = Mathf.Lerp(baseAlpha, target, delta);
             }
         }
 

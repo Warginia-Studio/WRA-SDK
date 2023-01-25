@@ -15,23 +15,24 @@ public class ContainerItemEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        serializedObject.Update();
-        
-
-        ContainerItem containerItem = (ContainerItem)target;
-
-        containerItem.ID = EditorGUILayout.IntField("Item ID: ", containerItem.ID);
-        containerItem.Size = EditorGUILayout.Vector2IntField("Size: ", containerItem.Size);
-        EditorGUILayout.PropertyField(icon);
-
-        containerItem.Stacking = EditorGUILayout.Toggle("Stacking: ", containerItem.Stacking);
-        if (containerItem.Stacking)
-        {
-            containerItem.MaxStack = EditorGUILayout.IntField("Max on stack: ", containerItem.MaxStack);
-        }
-
-        serializedObject.ApplyModifiedProperties();
-        EditorUtility.SetDirty(target);
+        base.OnInspectorGUI();
+        // serializedObject.Update();
+        //
+        //
+        // ContainerItem containerItem = (ContainerItem)target;
+        //
+        // containerItem.ID = EditorGUILayout.IntField("Item ID: ", containerItem.ID);
+        // containerItem.Size = EditorGUILayout.Vector2IntField("Size: ", containerItem.Size);
+        // EditorGUILayout.PropertyField(icon);
+        //
+        // containerItem.Stacking = EditorGUILayout.Toggle("Stacking: ", containerItem.Stacking);
+        // if (containerItem.Stacking)
+        // {
+        //     containerItem.MaxStack = EditorGUILayout.IntField("Max on stack: ", containerItem.MaxStack);
+        // }
+        //
+        // serializedObject.ApplyModifiedProperties();
+        // EditorUtility.SetDirty(target);
     }
 }
 

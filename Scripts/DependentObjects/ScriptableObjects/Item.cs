@@ -12,12 +12,12 @@ namespace DependentObjects.ScriptableObjects
         
         public override string GetDescription(Transform parrent)
         {
-            throw new System.NotImplementedException();
+            return "NO DESCRIPTION FOR NOW";
         }
 
         public override float GetCooldown(Transform parrent)
         {
-            throw new System.NotImplementedException();
+            return 1;
         }
 
         public virtual ItemType GetItemType()

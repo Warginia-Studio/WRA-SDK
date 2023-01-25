@@ -1,8 +1,12 @@
 namespace DependentObjects.Classes
 {
-    public class StatValue
+    [System.Serializable]
+    public struct StatValue
     {
+        public bool IsPercent => isPercent;
+        
         private bool asInt;
+        private bool isPercent;
 
         public float Value
         {
@@ -16,12 +20,14 @@ namespace DependentObjects.Classes
                 statValue = value;
             }
         }
+
+        private float statValue;
     
-        private float statValue = 0;
-    
-        public StatValue(bool asInt)
+        public StatValue(bool asInt, bool isPercent)
         {
             this.asInt = asInt;
+            this.isPercent = isPercent;
+            statValue = 0;
         }
     
         public static StatValue operator+(StatValue first, StatValue second)
@@ -33,6 +39,18 @@ namespace DependentObjects.Classes
         public static StatValue operator-(StatValue first, StatValue second)
         {
             first.statValue -= second.statValue;
+            return first;
+        }
+
+        public static StatValue operator +(StatValue first, float value)
+        {
+            first.statValue = value;
+            return first;
+        }
+        
+        public static StatValue operator -(StatValue first, float value)
+        {
+            first.statValue = value;
             return first;
         }
     

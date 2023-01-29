@@ -8,7 +8,6 @@ namespace UIExtension.UI.Feedback
 
         [SerializeField] private Color deactiveColor;
 
-
         public override void ChangedStatus(bool active)
         {
             controlledObject.color = active ? activeColor : deactiveColor;

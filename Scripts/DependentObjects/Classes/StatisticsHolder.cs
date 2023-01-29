@@ -47,7 +47,6 @@ namespace DependentObjects.Classes
             s1.Health.Value = 5;
             s2.Health.Value = 50;
             Debug.LogError((s1+s2).Health.Value);
-            LanguageManager.LoadLang("pl");
         }
     
         public static StatisticsHolder operator +(StatisticsHolder s1, StatisticsHolder s2)

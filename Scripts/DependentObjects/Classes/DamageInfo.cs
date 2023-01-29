@@ -7,6 +7,7 @@ namespace DependentObjects.Classes
         public int PhysicalDamage;
         public int FireDamage;
         public int IceDamage;
+        public bool CriticalHit;
         public Transform Owner;
     }
 }

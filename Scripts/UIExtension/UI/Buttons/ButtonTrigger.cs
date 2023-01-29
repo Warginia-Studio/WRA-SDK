@@ -6,23 +6,23 @@ namespace UIExtension.UI.Buttons
 {
     public class ButtonTrigger : ButtonBase, IPointerClickHandler
     {
+        public UnityEvent OnReset = new UnityEvent();
         public void OnPointerClick(PointerEventData eventData)
         {
             if (isActive)
                 return;
             isActive = true;
-            Onclick.Invoke();
             OnStatusChanged.Invoke(isActive);
+            Onclick.Invoke();
         }
 
         public void ResetTrigger()
         {
+            if (!isActive)
+                return;
+            isActive = false;
             OnStatusChanged.Invoke(isActive);
-        }
-
-        public override void ChangedStatus(bool active)
-        {
-            throw new System.NotImplementedException();
+            OnReset.Invoke();
         }
     }
 }

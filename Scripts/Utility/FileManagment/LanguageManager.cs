@@ -1,16 +1,18 @@
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Utility.FileManagment
 {
     public class LanguageManager
     {
-        private const string DEFAULT_LANGEUAGE = "pl";
+        public static UnityEvent LanguageChanged = new UnityEvent();
+        
         private static Dictionary<string, string> LoadedLang;
-        public static void LoadLang(string langName)
+        public static void LoadLang()
         {
-            var path = Application.dataPath + "/Resources/Langs/" + langName + ".xml";
+            var path = Application.dataPath + "/Resources/Langs/" + ApplicationConfiguration.Instance.Language + ".xml";
         
             XmlDocument doc = new XmlDocument();
             doc.Load(path);
@@ -27,7 +29,7 @@ namespace Utility.FileManagment
         public static string GetTransation(string keyWord)
         {
             if(LoadedLang==null)
-                LoadLang(DEFAULT_LANGEUAGE);
+                LoadLang();
             return LoadedLang[keyWord];
         }
     }

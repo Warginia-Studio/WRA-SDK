@@ -3,4 +3,8 @@
         <Start>Start</Start>
         <Options>Opcje</Options>
         <Load>Wczytaj</Load>
+        
+<!--WINDOW TITLEs-->
+        <Inventory>Ekwipunek</Inventory>
+        <Skills>Umiejętności</Skills>
 </data>

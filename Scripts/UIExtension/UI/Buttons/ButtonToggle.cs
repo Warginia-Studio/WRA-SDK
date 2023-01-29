@@ -11,10 +11,5 @@ namespace UIExtension.UI.Buttons
             isActive = !isActive;
             OnStatusChanged.Invoke(isActive);
         }
-
-        public override void ChangedStatus(bool active)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

@@ -4,7 +4,8 @@ namespace DependentObjects.Classes
 {
     public class HealInfo
     {
-        public int healValue;
-        public Transform owner;
+        public int HealValue;
+        public float PercentHealValue;
+        public Transform Owner;
     }
 }

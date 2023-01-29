@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,17 @@ namespace UIExtension.UI
         private TextMeshProUGUI textMeshProUGUI;
 
         private void Awake()
+        { 
+            LanguageManager.LanguageChanged.AddListener(UpdateLang); 
+            UpdateLang();
+        }
+
+        private void OnDestroy()
+        {
+            LanguageManager.LanguageChanged.RemoveListener(UpdateLang);
+        }
+
+        private void UpdateLang()
         {
             text = GetComponent<Text>();
             textMeshProUGUI = GetComponent<TextMeshProUGUI>();

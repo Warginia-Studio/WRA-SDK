@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using Container;
+using UIExtension.UI.Dragables;
 using UnityEngine;
 
-namespace UIExtension.UI
+namespace UIExtension.UI.Containers
 {
     [ExecuteInEditMode]
     public class ContainerWindowIniterGenerated : MonoBehaviour
@@ -19,7 +17,7 @@ namespace UIExtension.UI
 
         private int childCount = 0;
         
-        private List<Dropable> dropables = new List<Dropable>();
+        private List<DropableContainerItem> dropables = new List<DropableContainerItem>();
         private void Awake()
         {
             
@@ -29,7 +27,7 @@ namespace UIExtension.UI
         {
             if (transform.childCount != childCount)
             {
-                dropables = GetComponentsInChildren<Dropable>().ToList();
+                dropables = GetComponentsInChildren<DropableContainerItem>().ToList();
                 childCount = transform.childCount;
                 UpdateSlots();
             }

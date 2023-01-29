@@ -1,17 +1,18 @@
 using System;
-using Container;
 using DependentObjects.ScriptableObjects;
 using UIExtension.Managers;
+using UIExtension.UI.Containers;
+using UIExtension.UI.Feedback;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using Utility;
+using Utility.Math;
 
-namespace UIExtension.UI
+namespace UIExtension.UI.Dragables
 {
-    public sealed class Dropable : ContainerHolder, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+    public sealed class DropableContainerItem : ContainerHolder, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {
-        protected StatusChanger DropableStatus
+        private StatusChanger DropableStatus
         {
             get
             {

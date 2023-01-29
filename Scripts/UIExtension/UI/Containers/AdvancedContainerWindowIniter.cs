@@ -1,7 +1,6 @@
-using Container;
 using UnityEngine;
 
-namespace UIExtension.UI
+namespace UIExtension.UI.Containers
 {
     public class AdvancedContainerWindowIniter : MonoBehaviour
     {

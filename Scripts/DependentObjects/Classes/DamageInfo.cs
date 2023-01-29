@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utility
+namespace DependentObjects.Classes
 {
     public class DamageInfo
     {

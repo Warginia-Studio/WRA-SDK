@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utility
+namespace DependentObjects.Classes
 {
     public class HealInfo
     {

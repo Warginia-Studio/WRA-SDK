@@ -1,14 +1,14 @@
-using System;
 using Container;
 using DependentObjects.ScriptableObjects;
 using UIExtension.Managers;
+using UIExtension.UI.Containers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace UIExtension.UI
+namespace UIExtension.UI.Dragables
 {
-    public sealed class Dragable : ContainerHolder, IBeginDragHandler, IEndDragHandler, IDragHandler
+    public sealed class DragableContainerItem : ContainerHolder, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
         public ContainerItem ContainerItem
         {
@@ -34,7 +34,7 @@ namespace UIExtension.UI
 
         public int Stacked { get; set; }
 
-        protected Image Image
+        private Image Image
         {
             get
             {
@@ -47,7 +47,7 @@ namespace UIExtension.UI
             }
         }
         
-        protected CanvasGroup CanvasGroup
+        private CanvasGroup CanvasGroup
         {
             get
             {
@@ -60,7 +60,7 @@ namespace UIExtension.UI
             }
         }
         
-        protected Vector3 offset;
+        private Vector3 offset;
         
         private Image image;
         private CanvasGroup canvasGroup;

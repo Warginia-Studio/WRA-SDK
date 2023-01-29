@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using Container;
-using UIExtension.Managers;
+using UIExtension.UI.Dragables;
 using UnityEngine;
-using Utility;
 
-namespace UIExtension.UI
+namespace UIExtension.UI.Containers
 {
     [ExecuteInEditMode]
     public class ContainerWindowIniter : MonoBehaviour
@@ -17,8 +14,8 @@ namespace UIExtension.UI
 
         private int childCount = 0;
         
-        private List<Dropable> dropables = new List<Dropable>();
-        private List<Dragable> spawnedDragable = new List<Dragable>();
+        private List<DropableContainerItem> dropables = new List<DropableContainerItem>();
+        private List<DragableContainerItem> spawnedDragable = new List<DragableContainerItem>();
 
         private void Update()
         {
@@ -47,7 +44,7 @@ namespace UIExtension.UI
         
         private void GetDropable()
         {
-            dropables = GetComponentsInChildren<Dropable>().ToList();
+            dropables = GetComponentsInChildren<DropableContainerItem>().ToList();
             childCount = transform.childCount;
             UpdateSlots();
         }
@@ -75,10 +72,10 @@ namespace UIExtension.UI
             int difference = spawnedDragable.Count - slots.Length;
             if (difference < 0)
             {
-                var dragable = Resources.LoadAll<Dragable>("")[0];
+                var dragable = Resources.LoadAll<DragableContainerItem>("")[0];
                 for (int i = 0; i < Math.Abs(difference); i++)
                 {
-                    spawnedDragable.Add(Instantiate(dragable.gameObject, dragableParrent).GetComponent<Dragable>());
+                    spawnedDragable.Add(Instantiate(dragable.gameObject, dragableParrent).GetComponent<DragableContainerItem>());
                 }
             }
 

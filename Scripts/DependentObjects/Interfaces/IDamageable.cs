@@ -1,3 +1,4 @@
+using DependentObjects.Classes;
 using Utility;
 
 namespace DependentObjects.Interfaces

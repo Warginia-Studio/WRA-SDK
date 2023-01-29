@@ -2,7 +2,7 @@ using Container;
 using DependentObjects.ScriptableObjects;
 using UnityEngine;
 
-namespace UIExtension.UI
+namespace UIExtension.UI.Containers
 {
     public abstract class ContainerHolder : MonoBehaviour
     {

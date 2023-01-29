@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utility
+namespace Utility.Math
 {
     public class BoxMath
     {

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace UIExtension.UI.Feedback
 {
     [RequireComponent(typeof(ButtonBase))]
-    public abstract class ButtonStatusBase : MonoBehaviour
+    public abstract class ButtonEffectBase : MonoBehaviour
     {
         [SerializeField] protected Graphic controlledObject;
     

@@ -1,8 +1,9 @@
+using DG.Tweening;
 using UnityEngine;
 
 namespace UIExtension.UI.Feedback
 {
-    public class ButtonStatusChangeColor : ButtonStatusBase
+    public class ButtonEffectChangeColor : ButtonEffectBase
     {
         [SerializeField] private Color activeColor;
 
@@ -11,6 +12,8 @@ namespace UIExtension.UI.Feedback
         public override void ChangedStatus(bool active)
         {
             controlledObject.color = active ? activeColor : deactiveColor;
+            transform.DOScale(Vector3.one * (active ? 1.1f : 1), 0.1f);
+            transform.SetSiblingIndex(5);
         }
     }
 }

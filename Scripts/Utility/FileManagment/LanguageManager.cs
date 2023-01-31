@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Xml;
+using DependentObjects.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 

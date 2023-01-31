@@ -6,23 +6,18 @@ namespace UIExtension.UI.Buttons
 {
     public class ButtonTrigger : ButtonBase, IPointerClickHandler
     {
-        public UnityEvent OnReset = new UnityEvent();
+        [HideInInspector] public UnityEvent<int> OnClick = new UnityEvent<int>();
+        public int ButtonId => buttonId;
+        [SerializeField] private int buttonId;
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (isActive)
-                return;
-            isActive = true;
-            OnStatusChanged.Invoke(isActive);
-            Onclick.Invoke();
+            OnClick.Invoke(buttonId);
         }
-
-        public void ResetTrigger()
+        
+        public void SetStatus(bool active)
         {
-            if (!isActive)
-                return;
-            isActive = false;
+            isActive = active;
             OnStatusChanged.Invoke(isActive);
-            OnReset.Invoke();
         }
     }
 }

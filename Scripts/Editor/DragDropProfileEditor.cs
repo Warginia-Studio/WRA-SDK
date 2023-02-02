@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DependentObjects.ScriptableObjects;
 using UIExtension.UI;
 using UnityEditor;
 using UnityEngine;

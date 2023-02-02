@@ -1,7 +1,9 @@
 using System.Linq;
 using Container;
+using DependentObjects.Structs;
 using Patterns;
 using UIExtension.UI;
+using UIExtension.UI.Containers;
 using UnityEngine;
 
 namespace UIExtension.Managers
@@ -14,6 +16,11 @@ namespace UIExtension.Managers
 
         [SerializeField] private ContainerWindowIniterGenerated[] simpleContainers;
         [SerializeField] private AdvancedContainerWindowIniter[] advancedContainers;
+
+        public void OpenContainers(params OpenContainerInfo[] containerInfo)
+        {
+            
+        }
 
         public void OpenSimpleContainer(Container.Container container, string containerName)
         {

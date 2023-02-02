@@ -1,0 +1,10 @@
+using UnityEngine;
+
+namespace DependentObjects.ScriptableObjects
+{
+    [CreateAssetMenu(menuName = "thief01/Inventory/Armable")]
+    public class ArmableItem : Item
+    {
+    
+    }
+}

@@ -1,7 +1,9 @@
 using System;
 using Container;
+using DependentObjects.ScriptableObjects;
 using Patterns;
 using UIExtension.UI;
+using UIExtension.UI.Dragables;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +12,7 @@ namespace UIExtension.Managers
     public class DragDropManager : MonoBehaviourSingletonAutoLoad<DragDropManager>
     {
         public UnityEvent<bool> OnDragChanged = new UnityEvent<bool>();
-        public Dragable Dragging => dragging;
+        public DragableContainerItem Dragging => dragging;
         public bool IsDragging => isDragging;
 
         public DragDropProfile DragDropProfile
@@ -30,10 +32,10 @@ namespace UIExtension.Managers
         
         // [SerializeField] private 
 
-        private Dragable dragging;
+        private DragableContainerItem dragging;
         private bool isDragging;
 
-        public void BeginDragItem(Dragable draggingData)
+        public void BeginDragItem(DragableContainerItem draggingData)
         {
             dragging = draggingData;
             isDragging = true;

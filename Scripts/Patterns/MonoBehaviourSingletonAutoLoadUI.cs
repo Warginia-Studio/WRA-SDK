@@ -24,11 +24,16 @@ namespace Patterns
                     }
                     instance = Resources.FindObjectsOfTypeAll<T>()[0];
 
-                    instance = Instantiate(instance.gameObject).GetComponent<T>();
+
                     if (MainCanvas.mainCanvas != null)
-                        instance.transform.parent = MainCanvas.mainCanvas;
+                    {
+                        instance = Instantiate(instance.gameObject, MainCanvas.mainCanvas).GetComponent<T>();
+                    }
                     else
+                    {
+                        instance = Instantiate(instance.gameObject).GetComponent<T>();
                         Debug.LogError("<color=\"red\">NO MAIN CANVAS</color>");
+                    }
                 }
                 return instance;
             }

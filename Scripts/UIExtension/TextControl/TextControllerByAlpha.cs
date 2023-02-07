@@ -3,8 +3,17 @@ using UnityEngine;
 
 namespace UIExtension.TextControl
 {
+    [RequireComponent(typeof(CanvasGroup))]
     public class TextControllerByAlpha : TextController
     {
+        private CanvasGroup canvasGroup;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            canvasGroup = GetComponent<CanvasGroup>();
+        }
+
         public override void ShowText(string text)
         {
             tmpText.text = text;
@@ -29,6 +38,7 @@ namespace UIExtension.TextControl
             {
                 yield return null;
                 delta += Time.deltaTime;
+                canvasGroup.alpha = delta;
             }
         }
 
@@ -40,6 +50,7 @@ namespace UIExtension.TextControl
             {
                 yield return null;
                 delta += Time.deltaTime;
+                canvasGroup.alpha = 1-delta;
             }
         }
     }

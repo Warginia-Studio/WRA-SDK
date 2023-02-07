@@ -1,7 +1,7 @@
 using UnityEngine;
-using Utility.Diagnostics;
+using WRACore.Utility.Diagnostics;
 
-namespace Patterns
+namespace WRACore.Patterns
 {
     public class ScriptableSingleton<T> : ScriptableObject where T : ScriptableSingleton<T>
     {

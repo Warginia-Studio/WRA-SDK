@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utility.Math
+namespace WRACore.Utility.Math
 {
     public class BoxMath
     {

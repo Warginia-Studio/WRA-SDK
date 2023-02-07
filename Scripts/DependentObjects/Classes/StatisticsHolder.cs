@@ -1,8 +1,6 @@
 using UnityEditor;
-using UnityEngine;
-using Utility.FileManagment;
 
-namespace DependentObjects.Classes
+namespace WRACore.DependentObjects.Classes
 {
     [System.Serializable]
     public class StatisticsHolder

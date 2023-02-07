@@ -1,4 +1,4 @@
-namespace DependentObjects.Enums
+namespace WRACore.DependentObjects.Enums
 {
     public enum ItemType
     {

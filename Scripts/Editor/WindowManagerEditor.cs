@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UIExtension.Managers;
 using UnityEditor;
 using UnityEngine;
+using WRACore.UIExtension.Managers;
 
 
 [CustomEditor(typeof(WindowManager))]

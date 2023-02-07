@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using DependentObjects.Interfaces;
 using UnityEngine;
+using WRACore.DependentObjects.Interfaces;
 
-namespace Utility.FileManagment
+namespace WRACore.Utility.FileManagment
 {
     public class SaveLoadManager : MonoBehaviour
     {

@@ -1,7 +1,7 @@
-using DependentObjects.Enums;
 using UnityEngine;
+using WRACore.DependentObjects.Enums;
 
-namespace Utility
+namespace WRACore.Utility
 {
     public class EnumedLayer : MonoBehaviour
     {

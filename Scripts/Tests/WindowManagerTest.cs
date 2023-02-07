@@ -1,7 +1,7 @@
-using UIExtension.Managers;
 using UnityEngine;
+using WRACore.UIExtension.Managers;
 
-namespace Tests
+namespace WRACore.Tests
 {
     public class WindowManagerTest : MonoBehaviour
     {

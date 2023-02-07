@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Physics.Lifting
+namespace WRACore.Physics.Lifting
 {
     public class Lift : MonoBehaviour
     {

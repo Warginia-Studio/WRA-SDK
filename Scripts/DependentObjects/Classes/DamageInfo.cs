@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DependentObjects.Classes
+namespace WRACore.DependentObjects.Classes
 {
     public class DamageInfo
     {

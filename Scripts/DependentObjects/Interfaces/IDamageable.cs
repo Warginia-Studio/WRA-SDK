@@ -1,7 +1,6 @@
-using DependentObjects.Classes;
-using Utility;
+using WRACore.DependentObjects.Classes;
 
-namespace DependentObjects.Interfaces
+namespace WRACore.DependentObjects.Interfaces
 {
     public interface IDamageable
     {

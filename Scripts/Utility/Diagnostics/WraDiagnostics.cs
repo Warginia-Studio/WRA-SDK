@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utility.Diagnostics
+namespace WRACore.Utility.Diagnostics
 {
     public static class WraDiagnostics
     {

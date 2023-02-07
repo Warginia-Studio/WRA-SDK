@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using Patterns;
-using UIExtension.Controls;
 using UnityEngine;
+using WRACore.Patterns;
+using WRACore.UIExtension.Controls;
 
-namespace UIExtension.Managers
+namespace WRACore.UIExtension.Managers
 {
     [ExecuteInEditMode]
     public class WindowManager : MonoBehaviourSingletonMustExist<WindowManager>

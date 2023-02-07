@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 using UnityEngine.Events;
 
-namespace UIExtension.Windows
+namespace WRACore.UIExtension.Windows
 {
     public class WindowWithTabs : MonoBehaviour
     {

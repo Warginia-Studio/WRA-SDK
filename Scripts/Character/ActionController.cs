@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using DependentObjects.ScriptableObjects;
 using UnityEngine;
+using WRACore.DependentObjects.ScriptableObjects;
 
-namespace Character
+namespace WRACore.Character
 {
     public class ActionController : MonoBehaviour
     {

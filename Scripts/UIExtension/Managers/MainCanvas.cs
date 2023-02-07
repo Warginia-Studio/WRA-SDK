@@ -1,9 +1,6 @@
-using Patterns;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace UIExtension.Managers
+namespace WRACore.UIExtension.Managers
 {
     public class MainCanvas : MonoBehaviour
     {

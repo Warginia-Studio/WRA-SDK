@@ -1,9 +1,8 @@
-using DependentObjects.ScriptableObjects;
 using UnityEngine;
-using Utility;
-using Utility.Math;
+using WRACore.DependentObjects.ScriptableObjects;
+using WRACore.Utility.Math;
 
-namespace Container
+namespace WRACore.Container
 {
     public class ContainerSlot
     {

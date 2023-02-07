@@ -1,4 +1,4 @@
-namespace DependentObjects.Classes
+namespace WRACore.DependentObjects.Classes
 {
     [System.Serializable]
     public struct StatValue

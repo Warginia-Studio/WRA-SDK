@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace UIExtension.TextControl
+namespace WRACore.UIExtension.TextControl
 {
     [RequireComponent(typeof(TMP_Text))]
     public abstract class TextController : MonoBehaviour

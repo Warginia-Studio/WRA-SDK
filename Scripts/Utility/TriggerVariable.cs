@@ -1,4 +1,4 @@
-namespace Utility
+namespace WRACore.Utility
 {
     public class TriggerVariable
     {

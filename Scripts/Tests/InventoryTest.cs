@@ -1,9 +1,8 @@
-using DependentObjects.ScriptableObjects;
-using Inventory;
-using UIExtension.Controls.Containers;
 using UnityEngine;
+using WRACore.DependentObjects.ScriptableObjects;
+using WRACore.UIExtension.Controls.Containers;
 
-namespace Tests
+namespace WRACore.Tests
 {
     public class InventoryTest : MonoBehaviour
     {

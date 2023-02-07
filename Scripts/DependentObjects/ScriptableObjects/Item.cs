@@ -1,9 +1,7 @@
-using System;
-using DependentObjects.Enums;
-using Unity.VisualScripting;
 using UnityEngine;
+using WRACore.DependentObjects.Enums;
 
-namespace DependentObjects.ScriptableObjects
+namespace WRACore.DependentObjects.ScriptableObjects
 {
     [CreateAssetMenu(fileName ="Item", menuName = "thief01/Inventory/Item")]
     public class Item : ContainerItem

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-namespace UIExtension.Controls.Buttons
+namespace WRACore.UIExtension.Controls.Buttons
 {
     public class ButtonTrigger : ButtonBase, IPointerClickHandler
     {

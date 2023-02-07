@@ -1,4 +1,4 @@
-namespace DependentObjects.Interfaces
+namespace WRACore.DependentObjects.Interfaces
 {
     public interface ISaveable
     {

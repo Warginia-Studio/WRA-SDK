@@ -1,9 +1,9 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Utility.FileManagment;
+using WRACore.Utility.FileManagment;
 
-namespace UIExtension.Controls
+namespace WRACore.UIExtension.Controls
 {
     public class TextTranslator : MonoBehaviour
     {

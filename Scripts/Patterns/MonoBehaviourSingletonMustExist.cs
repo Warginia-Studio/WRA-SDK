@@ -1,7 +1,7 @@
 using UnityEngine;
-using Utility.Diagnostics;
+using WRACore.Utility.Diagnostics;
 
-namespace Patterns
+namespace WRACore.Patterns
 {
     public class MonoBehaviourSingletonMustExist<T> : MonoBehaviour where T : MonoBehaviour
     {

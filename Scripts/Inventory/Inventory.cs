@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using Container;
-using DependentObjects.ScriptableObjects;
-using UnityEngine;
+using WRACore.DependentObjects.ScriptableObjects;
 
-namespace Inventory
+namespace WRACore.Inventory
 {
     public class Inventory : Container.Container
     {

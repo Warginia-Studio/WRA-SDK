@@ -1,9 +1,9 @@
-using DependentObjects.ScriptableObjects;
-using Patterns;
 using UnityEngine;
 using UnityEngine.Events;
+using WRACore.DependentObjects.ScriptableObjects;
+using WRACore.Patterns;
 
-namespace UIExtension.Managers
+namespace WRACore.UIExtension.Managers
 {
     public class StatusManager : MonoBehaviourSingletonAutoCreateUI<StatusManager>
     {

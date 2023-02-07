@@ -1,9 +1,9 @@
 using System.Collections;
-using Patterns;
 using UnityEngine;
 using UnityEngine.UI;
+using WRACore.Patterns;
 
-namespace UIExtension
+namespace WRACore.UIExtension
 {
     public class FadeScreen : MonoBehaviourSingletonAutoLoadUI<FadeScreen>
     {

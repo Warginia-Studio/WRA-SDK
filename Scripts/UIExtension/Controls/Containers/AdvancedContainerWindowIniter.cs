@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UIExtension.Controls.Containers
+namespace WRACore.UIExtension.Controls.Containers
 {
     public class AdvancedContainerWindowIniter : MonoBehaviour
     {

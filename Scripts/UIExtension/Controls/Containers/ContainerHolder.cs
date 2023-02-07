@@ -1,8 +1,8 @@
-using Container;
-using DependentObjects.ScriptableObjects;
 using UnityEngine;
+using WRACore.Container;
+using WRACore.DependentObjects.ScriptableObjects;
 
-namespace UIExtension.Controls.Containers
+namespace WRACore.UIExtension.Controls.Containers
 {
     public abstract class ContainerHolder : MonoBehaviour
     {

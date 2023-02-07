@@ -1,7 +1,7 @@
-using UIExtension.Managers;
 using UnityEngine;
+using WRACore.UIExtension.Managers;
 
-namespace UIExtension.Controls
+namespace WRACore.UIExtension.Controls
 {
     public class Window : MonoBehaviour
     {

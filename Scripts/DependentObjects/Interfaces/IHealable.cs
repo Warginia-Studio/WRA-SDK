@@ -1,6 +1,6 @@
-using WRACore.DependentObjects.Classes;
+using DependentObjects.Classes;
 
-namespace WRACore.DependentObjects.Interfaces
+namespace DependentObjects.Interfaces
 {
     public interface IHealable
     {

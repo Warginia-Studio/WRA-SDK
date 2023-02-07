@@ -1,7 +1,7 @@
 using UnityEngine;
-using WRACore.Utility.Diagnostics;
+using Utility.Diagnostics;
 
-namespace WRACore.Patterns
+namespace Patterns
 {
     public class MonoBehaviourSingletonAutoLoad<T> : MonoBehaviour where T : MonoBehaviour
     {

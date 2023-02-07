@@ -1,4 +1,4 @@
-namespace WRACore.DependentObjects.Structs
+namespace DependentObjects.Structs
 {
     public struct OpenContainerInfo
     {

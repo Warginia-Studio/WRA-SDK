@@ -1,10 +1,10 @@
 using System.Linq;
+using DependentObjects.Structs;
+using Patterns;
+using UIExtension.Controls.Containers;
 using UnityEngine;
-using WRACore.DependentObjects.Structs;
-using WRACore.Patterns;
-using WRACore.UIExtension.Controls.Containers;
 
-namespace WRACore.UIExtension.Managers
+namespace UIExtension.Managers
 {
     public class ContainerWindowManager : MonoBehaviourSingletonAutoLoadUI<ContainerWindowManager>
     {

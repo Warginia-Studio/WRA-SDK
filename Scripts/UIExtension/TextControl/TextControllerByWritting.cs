@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace WRACore.UIExtension.TextControl
+namespace UIExtension.TextControl
 {
     public class TextControllerByWritting : TextController
     {

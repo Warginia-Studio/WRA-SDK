@@ -1,8 +1,8 @@
+using UIExtension.Managers;
 using UnityEngine;
-using WRACore.UIExtension.Managers;
-using WRACore.Utility.Diagnostics;
+using Utility.Diagnostics;
 
-namespace WRACore.Patterns
+namespace Patterns
 {
     public class MonoBehaviourSingletonAutoLoadUI<T> : MonoBehaviour where T : MonoBehaviour
     {

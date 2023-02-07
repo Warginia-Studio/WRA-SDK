@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRACore.UIExtension.Managers
+namespace UIExtension.Managers
 {
     public class MainCanvas : MonoBehaviour
     {

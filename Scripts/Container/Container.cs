@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DependentObjects.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
-using WRACore.DependentObjects.ScriptableObjects;
 
-namespace WRACore.Container
+namespace Container
 {
     public abstract class Container : MonoBehaviour
     {

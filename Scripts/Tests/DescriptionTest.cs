@@ -1,7 +1,7 @@
+using UIExtension.Managers;
 using UnityEngine;
-using WRACore.UIExtension.Managers;
 
-namespace WRACore.Tests
+namespace Tests
 {
     public class DescriptionTest : MonoBehaviour
     {

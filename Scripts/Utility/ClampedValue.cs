@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRACore.Utility
+namespace Utility
 {
     public class ClampedValue
     {

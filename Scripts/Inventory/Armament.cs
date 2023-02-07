@@ -1,4 +1,4 @@
-namespace WRACore.Inventory
+namespace Inventory
 {
     public enum SlotType
     {

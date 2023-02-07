@@ -1,8 +1,8 @@
 using System.Collections.Generic;
+using Patterns;
 using UnityEngine;
-using WRACore.Patterns;
 
-namespace WRACore.DependentObjects.ScriptableObjects
+namespace DependentObjects.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "Drag Drop Profile", menuName = "thief01/UI Extension/Drag Drop Profile")]
     public class DragDropProfile : ScriptableSingleton<DragDropProfile>

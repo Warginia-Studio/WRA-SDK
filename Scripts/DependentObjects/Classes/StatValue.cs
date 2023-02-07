@@ -1,4 +1,6 @@
-namespace WRACore.DependentObjects.Classes
+using UnityEngine;
+
+namespace DependentObjects.Classes
 {
     [System.Serializable]
     public struct StatValue
@@ -21,7 +23,7 @@ namespace WRACore.DependentObjects.Classes
             }
         }
 
-        private float statValue;
+        [SerializeField] private float statValue;
     
         public StatValue(bool asInt, bool isPercent)
         {

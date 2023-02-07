@@ -1,8 +1,8 @@
 using System.Collections;
+using Character;
 using UnityEngine;
-using WRACore.Character;
 
-namespace WRACore.DependentObjects.ScriptableObjects
+namespace DependentObjects.ScriptableObjects
 {
     public abstract class ActionBase : ScriptableObject
     {

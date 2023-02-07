@@ -1,8 +1,8 @@
+using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.UI;
-using WRACore.UIExtension.Managers;
 
-namespace WRACore.UIExtension.Controls.Buttons
+namespace UIExtension.Controls.Buttons
 {
     [RequireComponent(typeof(Button))]
     public class ButtonWindowController : MonoBehaviour

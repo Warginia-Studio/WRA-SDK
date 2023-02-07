@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRACore.DependentObjects.ScriptableObjects
+namespace DependentObjects.ScriptableObjects
 {
     public abstract class ContainerItem : ScriptableObject
     {

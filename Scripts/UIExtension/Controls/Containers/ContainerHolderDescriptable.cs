@@ -1,9 +1,9 @@
+using DependentObjects.ScriptableObjects;
+using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using WRACore.DependentObjects.ScriptableObjects;
-using WRACore.UIExtension.Managers;
 
-namespace WRACore.UIExtension.Controls.Containers
+namespace UIExtension.Controls.Containers
 {
     public class ContainerHolderDescriptable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {

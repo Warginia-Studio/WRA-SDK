@@ -1,15 +1,15 @@
 using UnityEngine;
 using UnityEngine.Events;
-using WRACore.Utility;
-using WRACore.Utility.Diagnostics;
+using Utility;
+using Utility.Diagnostics;
 
-namespace WRACore.Character
+namespace Character
 {
     public abstract class SourceController : MonoBehaviour
     {
         public UnityEvent OnValueChanged = new UnityEvent();
 
-        public float Value
+        public float CurrentValue
         {
             get
             {
@@ -22,9 +22,18 @@ namespace WRACore.Character
                 return sourceValue.Value;
             }
         }
+
+        public abstract float PercentValue { get; }
         
+        public abstract float MaxValue { get; }
+
         private ClampedValue sourceValue;
-        
+
+        protected virtual void Awake()
+        {
+            Init(0, 100);
+        }
+
         public virtual void AddValue(float value)
         {
             sourceValue += value;

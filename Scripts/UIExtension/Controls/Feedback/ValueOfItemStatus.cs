@@ -1,10 +1,10 @@
 using System.Collections;
+using DependentObjects.ScriptableObjects;
+using UIExtension.Controls.Containers;
 using UnityEngine;
 using UnityEngine.UI;
-using WRACore.DependentObjects.ScriptableObjects;
-using WRACore.UIExtension.Controls.Containers;
 
-namespace WRACore.UIExtension.Controls.Feedback
+namespace UIExtension.Controls.Feedback
 {
     public class ValueOfItemStatus : MonoBehaviour
     {

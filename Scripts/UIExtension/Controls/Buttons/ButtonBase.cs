@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace WRACore.UIExtension.Controls.Buttons
+namespace UIExtension.Controls.Buttons
 {
     public abstract class ButtonBase : MonoBehaviour
     {

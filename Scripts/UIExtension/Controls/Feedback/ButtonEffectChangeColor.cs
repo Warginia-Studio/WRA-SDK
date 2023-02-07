@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace WRACore.UIExtension.Controls.Feedback
+namespace UIExtension.Controls.Feedback
 {
     public class ButtonEffectChangeColor : ButtonEffectBase
     {

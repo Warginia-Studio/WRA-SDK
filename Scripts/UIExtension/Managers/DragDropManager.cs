@@ -1,10 +1,10 @@
+using DependentObjects.ScriptableObjects;
+using Patterns;
+using UIExtension.Controls.Dragables;
 using UnityEngine;
 using UnityEngine.Events;
-using WRACore.DependentObjects.ScriptableObjects;
-using WRACore.Patterns;
-using WRACore.UIExtension.Controls.Dragables;
 
-namespace WRACore.UIExtension.Managers
+namespace UIExtension.Managers
 {
     public class DragDropManager : MonoBehaviourSingletonAutoLoad<DragDropManager>
     {

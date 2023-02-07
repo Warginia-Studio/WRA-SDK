@@ -1,7 +1,7 @@
+using DependentObjects.Enums;
 using UnityEngine;
-using WRACore.DependentObjects.Enums;
 
-namespace WRACore.DependentObjects.ScriptableObjects
+namespace DependentObjects.ScriptableObjects
 {
     [CreateAssetMenu(menuName = "thief01/Wikipedia/Page", fileName = "New WikipediaPage")]
     public class WikipediaPage : ScriptableObject

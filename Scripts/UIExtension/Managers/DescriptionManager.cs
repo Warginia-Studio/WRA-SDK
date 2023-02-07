@@ -1,8 +1,8 @@
+using Patterns;
+using UIExtension.Popups;
 using UnityEngine;
-using WRACore.Patterns;
-using WRACore.UIExtension.Popups;
 
-namespace WRACore.UIExtension.Managers
+namespace UIExtension.Managers
 {
     public class DescriptionManager : MonoBehaviourSingletonAutoCreateUI<DescriptionManager>
     {

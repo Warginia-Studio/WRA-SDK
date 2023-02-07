@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using DependentObjects.ScriptableObjects;
 using UnityEditor;
 using UnityEngine;
-using WRACore.DependentObjects.ScriptableObjects;
 
 [CustomEditor(typeof(DragDropProfile))]
 public class DragDropProfileEditor : Editor

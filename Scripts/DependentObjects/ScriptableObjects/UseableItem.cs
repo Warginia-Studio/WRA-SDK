@@ -1,4 +1,4 @@
-namespace WRACore.DependentObjects.ScriptableObjects
+namespace DependentObjects.ScriptableObjects
 {
     public class UseableItem : Item
     {

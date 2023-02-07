@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace WRACore.Utility
+namespace Utility
 {
     public class BaseLogController
     {

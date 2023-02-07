@@ -1,6 +1,6 @@
-using WRACore.Patterns;
+using Patterns;
 
-namespace WRACore.Managers
+namespace Managers
 {
     public class PlayerInfo : MonoBehaviourSingletonMustExist<PlayerInfo>
     {

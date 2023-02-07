@@ -1,6 +1,6 @@
 using UnityEngine.EventSystems;
 
-namespace WRACore.UIExtension.Controls.Buttons
+namespace UIExtension.Controls.Buttons
 {
     public class ButtonToggle : ButtonBase, IPointerClickHandler
     {

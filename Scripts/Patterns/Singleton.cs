@@ -1,4 +1,4 @@
-namespace WRACore.Patterns
+namespace Patterns
 {
     public class Singleton<T>
     {

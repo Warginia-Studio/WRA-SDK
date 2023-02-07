@@ -1,7 +1,7 @@
+using Patterns;
 using UnityEngine;
-using WRACore.Patterns;
 
-namespace WRACore.UIExtension.Popups
+namespace UIExtension.Popups
 {
     public abstract class PopupBase<T> : MonoBehaviourSingletonAutoLoadUI<T> where T : MonoBehaviour
     {

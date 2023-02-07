@@ -1,12 +1,12 @@
+using Container;
+using DependentObjects.ScriptableObjects;
+using UIExtension.Controls.Containers;
+using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using WRACore.Container;
-using WRACore.DependentObjects.ScriptableObjects;
-using WRACore.UIExtension.Controls.Containers;
-using WRACore.UIExtension.Managers;
 
-namespace WRACore.UIExtension.Controls.Dragables
+namespace UIExtension.Controls.Dragables
 {
     public sealed class DragableContainerItem : ContainerHolder, IBeginDragHandler, IEndDragHandler, IDragHandler
     {

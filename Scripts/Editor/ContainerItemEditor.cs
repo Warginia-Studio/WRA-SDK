@@ -1,5 +1,5 @@
+using DependentObjects.ScriptableObjects;
 using UnityEditor;
-using WRACore.DependentObjects.ScriptableObjects;
 
 
 [CustomEditor(typeof(ContainerItem))]

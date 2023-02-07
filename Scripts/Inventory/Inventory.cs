@@ -1,6 +1,6 @@
-using WRACore.DependentObjects.ScriptableObjects;
+using DependentObjects.ScriptableObjects;
 
-namespace WRACore.Inventory
+namespace Inventory
 {
     public class Inventory : Container.Container
     {

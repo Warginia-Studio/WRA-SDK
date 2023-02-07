@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRACore.Physics.Lifting
+namespace Physics.Lifting
 {
     public class Liftable : MonoBehaviour
     {

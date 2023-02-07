@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace WRACore.UIExtension.Popups
+namespace UIExtension.Popups
 {
     public class DescriptionWindow : PopupBase<DescriptionWindow>
     {

@@ -19039,6 +19039,51 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 164649475864046458, guid: 722f4cbcd707cf34cb6bd2346abe8924, type: 3}
   m_PrefabInstance: {fileID: 1490198155}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1490249635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1490249637}
+  - component: {fileID: 1490249636}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1490249636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490249635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2fb50c4d718654d85aa4701415806c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthController: {fileID: 1909090993}
+--- !u!4 &1490249637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490249635}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1341.3418, y: 843.3446, z: -6.2507763}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1499903783
 GameObject:
   m_ObjectHideFlags: 0
@@ -24385,6 +24430,130 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 164649475864046458, guid: 722f4cbcd707cf34cb6bd2346abe8924, type: 3}
   m_PrefabInstance: {fileID: 1908101727}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1909090992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1909090995}
+  - component: {fileID: 1909090994}
+  - component: {fileID: 1909090993}
+  m_Layer: 0
+  m_Name: Testing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1909090993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909090992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bebc5e2e531cae43bc288724afc89e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBeforeHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBeforeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDamaged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBeforeKill:
+    m_PersistentCalls:
+      m_Calls: []
+  OnKilled:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1909090994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909090992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee882ed97e6071d45b4830a04e284899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStatisticsChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  baseStatistics:
+    Health:
+      statValue: 100
+    Condition:
+      statValue: 0
+    Resource:
+      statValue: 0
+    Mana:
+      statValue: 0
+    HealthRegen:
+      statValue: 0
+    ConditionRegen:
+      statValue: 0
+    ResourceRegen:
+      statValue: 0
+    ManaRegen:
+      statValue: 0
+    AttackDamage:
+      statValue: 0
+    MagicPower:
+      statValue: 0
+    PhysicalDef:
+      statValue: 0
+    MagicalDef:
+      statValue: 0
+    AttackSpeed:
+      statValue: 0
+    MovementSpeed:
+      statValue: 0
+    Strenght:
+      statValue: 0
+    Inteligence:
+      statValue: 0
+    Dexterity:
+      statValue: 0
+    Thoughtness:
+      statValue: 0
+    LifeSteal:
+      statValue: 0
+    CriticalChance:
+      statValue: 0
+    CooldownReduction:
+      statValue: 0
+--- !u!4 &1909090995
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909090992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1341.3418, y: 843.3446, z: -6.2507763}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1913669697
 PrefabInstance:
   m_ObjectHideFlags: 0

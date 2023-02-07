@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRACore.Patterns
+namespace Patterns
 {
     public class MonoBehaviourSingletonAutoCreate<T> : MonoBehaviour where T : MonoBehaviour
     {

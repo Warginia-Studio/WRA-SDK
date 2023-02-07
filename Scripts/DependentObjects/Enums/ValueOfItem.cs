@@ -1,4 +1,4 @@
-namespace WRACore.DependentObjects.Enums
+namespace DependentObjects.Enums
 {
     public enum ValueOfItem 
     {

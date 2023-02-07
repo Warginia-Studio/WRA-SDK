@@ -1,7 +1,7 @@
+using UIExtension;
 using UnityEngine;
-using WRACore.UIExtension;
 
-namespace WRACore.Tests
+namespace Tests
 {
     public class TestFade : MonoBehaviour
     {

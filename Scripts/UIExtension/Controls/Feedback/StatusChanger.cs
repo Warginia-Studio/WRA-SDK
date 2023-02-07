@@ -1,9 +1,9 @@
+using DependentObjects.ScriptableObjects;
+using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.UI;
-using WRACore.DependentObjects.ScriptableObjects;
-using WRACore.UIExtension.Managers;
 
-namespace WRACore.UIExtension.Controls.Feedback
+namespace UIExtension.Controls.Feedback
 {
    public class StatusChanger : MonoBehaviour
    {

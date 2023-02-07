@@ -1,7 +1,7 @@
+using DependentObjects.Interfaces;
 using UnityEngine;
-using WRACore.DependentObjects.Interfaces;
 
-namespace WRACore.Character
+namespace Character
 {
     public class InteractionController : MonoBehaviour
     {

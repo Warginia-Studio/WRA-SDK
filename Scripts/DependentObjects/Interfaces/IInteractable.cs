@@ -1,6 +1,6 @@
-using WRACore.Character;
+using Character;
 
-namespace WRACore.DependentObjects.Interfaces
+namespace DependentObjects.Interfaces
 {
     public interface IInteractable
     {

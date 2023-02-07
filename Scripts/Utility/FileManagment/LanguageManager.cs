@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Xml;
+using DependentObjects.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
-using WRACore.DependentObjects.ScriptableObjects;
 
-namespace WRACore.Utility.FileManagment
+namespace Utility.FileManagment
 {
     public class LanguageManager
     {

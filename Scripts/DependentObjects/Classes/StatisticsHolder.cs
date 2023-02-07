@@ -1,40 +1,41 @@
 using UnityEditor;
+using UnityEngine;
 
-namespace WRACore.DependentObjects.Classes
+namespace DependentObjects.Classes
 {
     [System.Serializable]
     public class StatisticsHolder
     {
         // HP/CONDITION/MANA
-        public StatValue Health;
-        public StatValue Condition;
-        public StatValue Resource;
-        public StatValue Mana;
+        [SerializeField] public StatValue Health;
+        [SerializeField] public StatValue Condition;
+        [SerializeField] public StatValue Resource;
+        [SerializeField] public StatValue Mana;
     
         // REGENERATIONS
-        public StatValue HealthRegen;
-        public StatValue ConditionRegen;
-        public StatValue ResourceRegen;
-        public StatValue ManaRegen;
+        [SerializeField] public StatValue HealthRegen;
+        [SerializeField] public StatValue ConditionRegen;
+        [SerializeField] public StatValue ResourceRegen;
+        [SerializeField] public StatValue ManaRegen;
     
         // Light Statistics
-        public StatValue AttackDamage;
-        public StatValue MagicPower;
-        public StatValue PhysicalDef;
-        public StatValue MagicalDef;
-        public StatValue AttackSpeed;
-        public StatValue MovementSpeed;
+        [SerializeField] public StatValue AttackDamage;
+        [SerializeField] public StatValue MagicPower;
+        [SerializeField] public StatValue PhysicalDef;
+        [SerializeField] public StatValue MagicalDef;
+        [SerializeField] public StatValue AttackSpeed;
+        [SerializeField] public StatValue MovementSpeed;
     
         // Hard Statistics
-        public StatValue Strenght; // e.g. AttackDamage multipliter / or additional smth 1 strenght = 100 armor
-        public StatValue Inteligence; // e.g MagicPower multipliter / or additional smth 1 strenght = 100 armor
-        public StatValue Dexterity; // e.g AttackSpeed / MovementSpeed multipliter / or additional smth 1 strenght = 100 armor
-        public StatValue Thoughtness; // e.g AmorMultipliter / or additional smth 1 strenght = 100 armor
+        [SerializeField] public StatValue Strenght; // e.g. AttackDamage multipliter / or additional smth 1 strenght = 100 armor
+        [SerializeField] public StatValue Inteligence; // e.g MagicPower multipliter / or additional smth 1 strenght = 100 armor
+        [SerializeField] public StatValue Dexterity; // e.g AttackSpeed / MovementSpeed multipliter / or additional smth 1 strenght = 100 armor
+        [SerializeField] public StatValue Thoughtness; // e.g AmorMultipliter / or additional smth 1 strenght = 100 armor
 
         // Passive Statistics
-        public StatValue LifeSteal;
-        public StatValue CriticalChance;
-        public StatValue CooldownReduction;
+        [SerializeField] public StatValue LifeSteal;
+        [SerializeField] public StatValue CriticalChance;
+        [SerializeField] public StatValue CooldownReduction;
 
 #if UNITY_EDITOR
         [InitializeOnLoadMethod]
@@ -61,7 +62,6 @@ namespace WRACore.DependentObjects.Classes
                 stat1.Value += stat2.Value;
                 fields1[i].SetValue(s1, stat1);
             }
-        
             // template help it works
             // foreach (var VARIABLE in fields)
             // {
@@ -91,7 +91,6 @@ namespace WRACore.DependentObjects.Classes
                 stat1.Value -= stat2.Value;
                 fields1[i].SetValue(s1, stat1);
             }
-
             return s1;
         }
     

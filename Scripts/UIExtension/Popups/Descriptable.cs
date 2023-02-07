@@ -1,8 +1,8 @@
+using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using WRACore.UIExtension.Managers;
 
-namespace WRACore.UIExtension.Popups
+namespace UIExtension.Popups
 {
     public abstract class Descriptable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {

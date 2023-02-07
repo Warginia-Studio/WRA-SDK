@@ -7,7 +7,7 @@ using UnityEngine;
  * Add new console window with layers etc.
  **********************************************************************/
 
-namespace WRACore.Utility.Diagnostics
+namespace Utility.Diagnostics
 {
     
     public static class WraDiagnostics

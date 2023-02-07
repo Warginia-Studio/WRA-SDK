@@ -1,6 +1,6 @@
-using WRACore.Patterns;
+using Patterns;
 
-namespace WRACore.UIExtension.Managers
+namespace UIExtension.Managers
 {
     public enum TextType
     {

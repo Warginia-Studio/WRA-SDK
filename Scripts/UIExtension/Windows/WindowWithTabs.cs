@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UIExtension.UI.Buttons;
 using UnityEngine.Events;
 
 namespace UIExtension.Windows

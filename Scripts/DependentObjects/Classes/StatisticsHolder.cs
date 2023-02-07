@@ -38,6 +38,7 @@ namespace DependentObjects.Classes
         public StatValue CriticalChance;
         public StatValue CooldownReduction;
 
+#if UNITY_EDITOR
         [InitializeOnLoadMethod]
         public static void Test()
         {
@@ -48,6 +49,7 @@ namespace DependentObjects.Classes
             s2.Health.Value = 50;
             // Debug.LogError((s1+s2).Health.Value);
         }
+#endif
     
         public static StatisticsHolder operator +(StatisticsHolder s1, StatisticsHolder s2)
         {

@@ -1,6 +1,7 @@
 using UIExtension.Managers;
 using UnityEngine;
 using Utility;
+using Utility.Diagnostics;
 
 namespace Patterns
 {
@@ -19,20 +20,21 @@ namespace Patterns
                     
                     if (allObjects == null && allObjects.Length == 0)
                     {
-                        print($"<color=\"red\">Not found: {typeof(T)}.");
+                        WraDiagnostics.Log($"Not found: {typeof(T)}");
                         return instance;
                     }
                     instance = Resources.FindObjectsOfTypeAll<T>()[0];
 
 
-                    if (MainCanvas.mainCanvas != null)
+                    if (MainCanvas.TheMainCanvas != null)
                     {
-                        instance = Instantiate(instance.gameObject, MainCanvas.mainCanvas).GetComponent<T>();
+                        instance = Instantiate(instance.gameObject, MainCanvas.TheMainCanvas).GetComponent<T>();
                     }
                     else
                     {
                         instance = Instantiate(instance.gameObject).GetComponent<T>();
-                        Debug.LogError("<color=\"red\">NO MAIN CANVAS</color>");
+                        WraDiagnostics.LogError(
+                            $"You called this singleton class: {typeof(T)}, it is using MainCanvas script, please add it to MainCanvas which is choiced by yourself.");
                     }
                 }
                 return instance;

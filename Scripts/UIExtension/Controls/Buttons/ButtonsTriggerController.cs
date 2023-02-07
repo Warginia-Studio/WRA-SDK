@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace UIExtension.UI.Buttons
+namespace UIExtension.Controls.Buttons
 {
     public class ButtonsTriggerController : MonoBehaviour
     {

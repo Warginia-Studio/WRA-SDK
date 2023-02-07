@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Patterns;
-using UIExtension.UI;
+using UIExtension.Controls;
 using UnityEngine;
 
 namespace UIExtension.Managers

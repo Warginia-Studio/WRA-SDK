@@ -1,9 +1,8 @@
-using System;
-using UIExtension.UI.Buttons;
+using UIExtension.Controls.Buttons;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UIExtension.UI.Feedback
+namespace UIExtension.Controls.Feedback
 {
     [RequireComponent(typeof(ButtonBase))]
     public abstract class ButtonEffectBase : MonoBehaviour

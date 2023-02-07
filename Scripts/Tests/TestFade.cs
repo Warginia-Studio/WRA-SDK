@@ -1,29 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using UIExtension;
 using UnityEngine;
 
-public class TestFade : MonoBehaviour
+namespace Tests
 {
-    // Start is called before the first frame update
-    void Start()
+    public class TestFade : MonoBehaviour
     {
+        // Start is called before the first frame update
+        void Start()
+        {
         
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
+        // Update is called once per frame
+        void Update()
         {
-            FadeScreen.Instance.FadeIn();
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            FadeScreen.Instance.FadeOut();
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            FadeScreen.Instance.FadeInOut(1, 2);
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                FadeScreen.Instance.FadeIn();
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                FadeScreen.Instance.FadeOut();
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                FadeScreen.Instance.FadeInOut(1, 2);
+            }
         }
     }
 }

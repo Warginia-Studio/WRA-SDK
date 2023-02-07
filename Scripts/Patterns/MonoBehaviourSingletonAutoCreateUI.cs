@@ -1,6 +1,7 @@
 using UIExtension.Managers;
 using UnityEngine;
 using Utility;
+using Utility.Diagnostics;
 
 namespace Patterns
 {
@@ -16,10 +17,11 @@ namespace Patterns
                     if (instance == null)
                     {
                         instance = new GameObject().AddComponent<T>();
-                        if (MainCanvas.mainCanvas != null)
-                            instance.transform.parent = MainCanvas.mainCanvas;
+                        if (MainCanvas.TheMainCanvas != null)
+                            instance.transform.parent = MainCanvas.TheMainCanvas;
                         else
-                            Debug.LogError("<color=\"red\">NO MAIN CANVAS</color>");
+                            WraDiagnostics.LogError(
+                                $"You called this singleton class: {typeof(T)}, it is using MainCanvas script, please add it to MainCanvas which is choiced by yourself.");
                     }
                 }
                 return instance;

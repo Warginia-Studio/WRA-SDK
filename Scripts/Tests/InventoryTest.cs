@@ -1,7 +1,6 @@
 using DependentObjects.ScriptableObjects;
 using Inventory;
-using UIExtension.UI;
-using UIExtension.UI.Containers;
+using UIExtension.Controls.Containers;
 using UnityEngine;
 
 namespace Tests

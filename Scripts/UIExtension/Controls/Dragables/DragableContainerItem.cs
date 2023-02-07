@@ -1,12 +1,12 @@
 using Container;
 using DependentObjects.ScriptableObjects;
+using UIExtension.Controls.Containers;
 using UIExtension.Managers;
-using UIExtension.UI.Containers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace UIExtension.UI.Dragables
+namespace UIExtension.Controls.Dragables
 {
     public sealed class DragableContainerItem : ContainerHolder, IBeginDragHandler, IEndDragHandler, IDragHandler
     {

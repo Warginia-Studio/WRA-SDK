@@ -2,7 +2,7 @@ using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UIExtension.UI.Buttons
+namespace UIExtension.Controls.Buttons
 {
     [RequireComponent(typeof(Button))]
     public class ButtonWindowController : MonoBehaviour

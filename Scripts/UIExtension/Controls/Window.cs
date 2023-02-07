@@ -1,7 +1,7 @@
 using UIExtension.Managers;
 using UnityEngine;
 
-namespace UIExtension.UI
+namespace UIExtension.Controls
 {
     public class Window : MonoBehaviour
     {

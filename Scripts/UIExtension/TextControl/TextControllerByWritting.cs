@@ -1,39 +1,41 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TextControllerByWritting : TextController
+namespace UIExtension.TextControl
 {
-    // [SerializeField] private 
-    public override void ShowText(string text)
+    public class TextControllerByWritting : TextController
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void CloseText()
-    {
-        throw new System.NotImplementedException();
-    }
-    
-    private IEnumerator ShowText()
-    {
-        float delta = 0;
-        
-        while (delta<1)
+        // [SerializeField] private 
+        public override void ShowText(string text)
         {
-            yield return null;
-            delta += Time.deltaTime;
+            throw new System.NotImplementedException();
         }
-    }
 
-    private IEnumerator HideText()
-    {
-        float delta = 0;
-
-        while (delta<1)
+        public override void CloseText()
         {
-            yield return null;
-            delta += Time.deltaTime;
+            throw new System.NotImplementedException();
+        }
+    
+        private IEnumerator ShowText()
+        {
+            float delta = 0;
+        
+            while (delta<1)
+            {
+                yield return null;
+                delta += Time.deltaTime;
+            }
+        }
+
+        private IEnumerator HideText()
+        {
+            float delta = 0;
+
+            while (delta<1)
+            {
+                yield return null;
+                delta += Time.deltaTime;
+            }
         }
     }
 }

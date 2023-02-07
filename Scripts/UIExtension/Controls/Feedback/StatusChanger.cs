@@ -3,7 +3,7 @@ using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UIExtension.UI.Feedback
+namespace UIExtension.Controls.Feedback
 {
    public class StatusChanger : MonoBehaviour
    {

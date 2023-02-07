@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utility.Diagnostics;
 
 namespace Patterns
 {
@@ -14,7 +15,7 @@ namespace Patterns
                     instance = assets[0];
                     if (instance == null)
                     {
-                        Debug.LogError($"No scriptable instance in resources: {typeof(T)}");
+                        WraDiagnostics.LogError($"No scriptable instance in resources: {typeof(T)}");
                     }
                 }
 

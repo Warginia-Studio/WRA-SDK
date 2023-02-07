@@ -1,3 +1,4 @@
+using DependentObjects.Interfaces;
 using UnityEngine;
 
 namespace Character
@@ -6,17 +7,9 @@ namespace Character
     {
 
         
-
-        // Start is called before the first frame update
-        void Start()
+        public void InteractableInRange(IInteractable interactable)
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            
         }
     }
 }

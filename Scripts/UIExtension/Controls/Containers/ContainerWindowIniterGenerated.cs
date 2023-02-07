@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using UIExtension.UI.Dragables;
+using UIExtension.Controls.Dragables;
 using UnityEngine;
 
-namespace UIExtension.UI.Containers
+namespace UIExtension.Controls.Containers
 {
     [ExecuteInEditMode]
     public class ContainerWindowIniterGenerated : MonoBehaviour

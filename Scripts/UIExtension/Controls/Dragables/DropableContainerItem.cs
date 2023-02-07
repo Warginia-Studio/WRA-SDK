@@ -1,14 +1,13 @@
 using System;
 using DependentObjects.ScriptableObjects;
+using UIExtension.Controls.Containers;
+using UIExtension.Controls.Feedback;
 using UIExtension.Managers;
-using UIExtension.UI.Containers;
-using UIExtension.UI.Feedback;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Utility;
 using Utility.Math;
 
-namespace UIExtension.UI.Dragables
+namespace UIExtension.Controls.Dragables
 {
     public sealed class DropableContainerItem : ContainerHolder, IPointerEnterHandler, IPointerExitHandler, IDropHandler
     {

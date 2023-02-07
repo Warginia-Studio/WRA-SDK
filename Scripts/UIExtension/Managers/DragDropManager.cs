@@ -2,8 +2,7 @@ using System;
 using Container;
 using DependentObjects.ScriptableObjects;
 using Patterns;
-using UIExtension.UI;
-using UIExtension.UI.Dragables;
+using UIExtension.Controls.Dragables;
 using UnityEngine;
 using UnityEngine.Events;
 

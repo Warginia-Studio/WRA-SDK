@@ -1,7 +1,15 @@
 using UnityEngine;
 
+/**********************************************************************
+ * Upgrades TODO:
+ * Add events and list to generate logs in game
+ * Add messages layers + layers configurator with hidding it.
+ * Add new console window with layers etc.
+ **********************************************************************/
+
 namespace WRACore.Utility.Diagnostics
 {
+    
     public static class WraDiagnostics
     {
         public static void Log(object message)

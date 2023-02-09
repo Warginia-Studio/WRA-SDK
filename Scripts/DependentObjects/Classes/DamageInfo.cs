@@ -8,6 +8,8 @@ namespace DependentObjects.Classes
         public float FireDamage;
         public float IceDamage;
         public bool CriticalHit;
+        public bool CanBeReflected;
+        
         public Transform Owner;
         
         public float DealtDamage = 0;

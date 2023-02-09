@@ -4,10 +4,9 @@ using UnityEngine;
 
 namespace UIExtension.TextControl
 {
-    [RequireComponent(typeof(TMP_Text))]
     public abstract class TextController : MonoBehaviour
     {
-        protected TMP_Text tmpText;
+        [SerializeField] protected TMP_Text tmpText;
         protected bool isActive = false;
         protected List<string> waitingTexts = new List<string>();
 
@@ -18,7 +17,8 @@ namespace UIExtension.TextControl
     
         protected virtual void InitVariables()
         {
-            tmpText = GetComponent<TMP_Text>();
+            if(tmpText==null)
+                tmpText = GetComponent<TMP_Text>();
         }
 
         public abstract void ShowText(string text);

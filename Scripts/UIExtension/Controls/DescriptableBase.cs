@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace UIExtension.Popups
 {
-    public abstract class Descriptable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public abstract class DescriptableBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public void OnPointerEnter(PointerEventData eventData)
         {

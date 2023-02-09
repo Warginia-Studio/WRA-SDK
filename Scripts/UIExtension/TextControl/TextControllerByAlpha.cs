@@ -6,6 +6,9 @@ namespace UIExtension.TextControl
     [RequireComponent(typeof(CanvasGroup))]
     public class TextControllerByAlpha : TextController
     {
+        [SerializeField] private float alphaInSpeed = 1;
+        [SerializeField] private float alphaOutSpeed = 1;
+        
         private CanvasGroup canvasGroup;
 
         protected override void Awake()
@@ -17,11 +20,13 @@ namespace UIExtension.TextControl
         public override void ShowText(string text)
         {
             tmpText.text = text;
+            ResetCorotines();
             StartCoroutine(ShowText());
         }
 
         public override void CloseText()
         {
+            ResetCorotines();
             StartCoroutine(HideText());
         }
 
@@ -37,7 +42,7 @@ namespace UIExtension.TextControl
             while (delta<1)
             {
                 yield return null;
-                delta += Time.deltaTime;
+                delta += Time.deltaTime * alphaInSpeed;
                 canvasGroup.alpha = delta;
             }
         }
@@ -49,7 +54,7 @@ namespace UIExtension.TextControl
             while (delta<1)
             {
                 yield return null;
-                delta += Time.deltaTime;
+                delta += Time.deltaTime * alphaOutSpeed;
                 canvasGroup.alpha = 1-delta;
             }
         }

@@ -21283,7 +21283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e68661e985caa3d44861ae126901c738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  window: {fileID: 2141860726}
+  windowBase: {fileID: 2141860726}
   args: 
 --- !u!114 &1707672142
 MonoBehaviour:
@@ -26816,4 +26816,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowName: testingWindow
-  startAsActive: 0

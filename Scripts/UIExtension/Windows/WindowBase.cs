@@ -1,7 +1,6 @@
-using UIExtension.Managers;
 using UnityEngine;
 
-namespace UIExtension.Controls
+namespace UIExtension.Windows
 {
     public class WindowBase : MonoBehaviour
     {

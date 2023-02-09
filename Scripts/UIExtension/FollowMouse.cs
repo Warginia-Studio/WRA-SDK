@@ -1,23 +1,23 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowMouse : MonoBehaviour
+namespace UIExtension
 {
-    [Tooltip("If rect transform is null then will use self.")]
-    [SerializeField] private RectTransform rectTransform;
-
-    [SerializeField] private Vector3 offset;
-
-    private void Awake()
+    public class FollowMouse : MonoBehaviour
     {
-        if(rectTransform==null)
-            rectTransform = GetComponent<RectTransform>();
-    }
+        [Tooltip("If rect transform is null then will use self.")]
+        [SerializeField] private RectTransform rectTransform;
 
-    void Update()
-    {
-        rectTransform.position = Input.mousePosition + offset;
+        [SerializeField] private Vector3 offset;
+
+        private void Awake()
+        {
+            if(rectTransform==null)
+                rectTransform = GetComponent<RectTransform>();
+        }
+
+        void Update()
+        {
+            rectTransform.position = Input.mousePosition + offset;
+        }
     }
 }

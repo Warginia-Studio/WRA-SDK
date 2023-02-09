@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UIExtension.Popups;
 using UnityEngine;
 
-public class Descriptable : DescriptableBase
+namespace UIExtension.Controls
 {
-    [SerializeField][TextArea(15,20)] private string description;
-    protected override string GetDescription()
+    public class Descriptable : DescriptableBase
     {
-        return description;
+        [SerializeField][TextArea(15,20)] private string description;
+        protected override string GetDescription()
+        {
+            return description;
+        }
     }
 }

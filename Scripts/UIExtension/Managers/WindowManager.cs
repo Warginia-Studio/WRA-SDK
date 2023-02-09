@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Patterns;
 using UIExtension.Controls;
+using UIExtension.Windows;
 using UnityEngine;
 
 namespace UIExtension.Managers

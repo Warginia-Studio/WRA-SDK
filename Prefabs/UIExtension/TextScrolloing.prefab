@@ -332,6 +332,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tmpText: {fileID: 2268111416672653194}
-  addTextAtStartAndEnd: '***'
+  addTextAtStartAndEnd: ---
   scrollTextSpeed: 1
   startPosition: 0

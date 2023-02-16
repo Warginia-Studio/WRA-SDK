@@ -88,8 +88,8 @@ namespace UIExtension
         {
             IsFadding = true;
             yield return Fader(1, simpleFadeTime);
-            IsFadding = true;
             yield return new WaitForSeconds(waitTime);
+            IsFadding = true;
             yield return Fader(0, simpleFadeTime);
             IsFadding = false;
         }

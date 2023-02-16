@@ -1,18 +1,29 @@
+using System;
 using System.Collections.Generic;
 using Patterns;
-using UIExtension.UI;
+using UIExtension.Controls;
+using UIExtension.Windows;
 using UnityEngine;
 
 namespace UIExtension.Managers
 {
     [ExecuteInEditMode]
-    public class WindowManager : MonoBehaviourSingletonMustExist<WindowManager>
+    public class WindowManager : MonoBehaviourSingletonAutoCreateUI<WindowManager>
     {
         private int WindowCount;
-        private Dictionary<string, Window> allWindows = new Dictionary<string, Window>();
+        private Dictionary<string, WindowBase> allWindows = new Dictionary<string, WindowBase>();
 
-        private List<Window> openedWindows = new List<Window>();
-    
+        private List<WindowBase> openedWindows = new List<WindowBase>();
+
+        private void Awake()
+        {
+            var allWindows = Resources.FindObjectsOfTypeAll<WindowBase>();
+            for (int i = 0; i<allWindows.Length; i++)
+            {
+                this.allWindows.Add(allWindows[i].WindowName, allWindows[i]);
+            }
+        }
+
         public void OpenWindow(string windowName, params string[] args)
         {
             var window= allWindows[windowName];
@@ -27,9 +38,10 @@ namespace UIExtension.Managers
                 Debug.LogError($"Window {windowName} is opened.");
                 return;
             }
-        
-            window.Open(args);
-            openedWindows.Add(window);
+
+            var newWindow = Instantiate(window.gameObject).GetComponent<WindowBase>();
+            newWindow.Open(args);
+            openedWindows.Add(newWindow);
         }
 
         public void CloseWindow(string windowName, params string[] args)
@@ -39,10 +51,12 @@ namespace UIExtension.Managers
             if (window == null)
             {
                 Debug.LogError($"Not found opened {windowName} window");
+                return;
             }
         
             window.Close(args);
             openedWindows.Remove(window);
+            Destroy(window.gameObject);
         }
 
         public void SwitchWindow(string windowName, params string[] args)
@@ -53,24 +67,6 @@ namespace UIExtension.Managers
                 return;
             }
             OpenWindow(windowName, args);
-        }
-
-        public void AddNewWindow(string windowName, Window window)
-        {
-            allWindows.Add(windowName, window);
-            Debug.Log("Added window: " + windowName);
-        }
-
-        public void FindAllWindows()
-        {
-            var windows = FindObjectsOfType<Window>();
-
-            for (int i = 0; i < windows.Length; i++)
-            {
-                allWindows.Add(windows[i].WindowName, windows[i]);
-            }
-
-            WindowCount = allWindows.Count;
         }
     }
 }

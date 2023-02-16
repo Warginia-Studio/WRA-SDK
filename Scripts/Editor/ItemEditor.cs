@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using DependentObjects.ScriptableObjects;
-using Inventory;
 using UnityEngine;
 using UnityEditor;
 

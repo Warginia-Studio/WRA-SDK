@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utility.Diagnostics;
 
 namespace Patterns
 {
@@ -13,7 +14,7 @@ namespace Patterns
                     instance = FindObjectOfType<T>();
                     if (instance == null)
                     {
-                        Debug.LogError($"Istance of {typeof(T)} must exist in the scene.");
+                        WraDiagnostics.LogError($"Instance of {typeof(T)} must exist in the scene.");
                         return null;
                     }
 

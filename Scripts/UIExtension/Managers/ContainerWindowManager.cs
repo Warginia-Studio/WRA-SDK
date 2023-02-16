@@ -1,9 +1,7 @@
 using System.Linq;
-using Container;
 using DependentObjects.Structs;
 using Patterns;
-using UIExtension.UI;
-using UIExtension.UI.Containers;
+using UIExtension.Controls.Containers;
 using UnityEngine;
 
 namespace UIExtension.Managers

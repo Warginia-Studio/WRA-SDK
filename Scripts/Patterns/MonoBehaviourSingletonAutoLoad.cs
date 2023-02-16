@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utility.Diagnostics;
 
 namespace Patterns
 {
@@ -18,7 +19,7 @@ namespace Patterns
 
                     if (objects == null || objects.Length == 0)
                     {
-                        Debug.LogError($"Not found resources: {typeof(T)}");
+                        WraDiagnostics.LogError($"Not found resources: {typeof(T)}");
                         return null;
                     }
 

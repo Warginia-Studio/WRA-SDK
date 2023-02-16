@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace DependentObjects.Classes
 {
     [System.Serializable]
@@ -21,7 +23,7 @@ namespace DependentObjects.Classes
             }
         }
 
-        private float statValue;
+        [SerializeField] private float statValue;
     
         public StatValue(bool asInt, bool isPercent)
         {

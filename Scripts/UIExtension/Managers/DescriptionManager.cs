@@ -1,30 +1,33 @@
-using System;
-using System.Collections;
 using Patterns;
-using UIExtension.Popups;
-using UIExtension.UI;
+using UIExtension.TextControl;
 using UnityEngine;
 
 namespace UIExtension.Managers
 {
-    public class DescriptionManager : MonoBehaviourSingletonAutoCreateUI<DescriptionManager>
+    public class DescriptionManager : MonoBehaviourSingletonAutoLoadUI<DescriptionManager>
     {
-        [SerializeField] private DescriptionWindow descriptionWindow;
+        [SerializeField] private TextController window;
 
-        private void Awake()
+        private TextController spawnedTextController;
+        
+        public void ShowDescription(string description)
         {
-            descriptionWindow = DescriptionWindow.Instance;
-        }
-
-        public void ShowDescription(string description, float timeIn = 0.2f)
-        {
-            descriptionWindow.ShowDescription(description, timeIn);
+            CheckThatIsSpawned();
+            spawnedTextController.ShowText(description);
             
         }
 
-        public void HideDescription(float timeOut = 0.2f)
+        public void HideDescription()
         {
-            descriptionWindow.HideDescription(timeOut);
+            CheckThatIsSpawned();
+            spawnedTextController.CloseText();
+        }
+
+        private void CheckThatIsSpawned()
+        {
+            if (spawnedTextController != null)
+                return;
+            spawnedTextController = Instantiate(window.gameObject, MainCanvas.TheMainCanvas).GetComponent<TextController>();
         }
     }
 }

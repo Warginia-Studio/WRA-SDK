@@ -4,10 +4,14 @@ namespace UIExtension.Managers
 {
     public class MainCanvas : MonoBehaviour
     {
-        public static Transform mainCanvas;
+        public static Transform TheMainCanvas;
+
         private void Awake()
         {
-            mainCanvas = transform;
+            if (TheMainCanvas == null)
+                TheMainCanvas = transform;
+            else
+                Destroy(gameObject);
         }
     }
 }

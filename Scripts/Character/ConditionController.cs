@@ -1,12 +1,13 @@
+using DependentObjects.Classes;
 using DependentObjects.Interfaces;
 using UnityEngine.Events;
 
 namespace Character
 {
-    public class StaminaController : SourceController, IStaminaable
+    public class ConditionController : ResourceController, IConitionable
     {
-        public UnityEvent<float> OnStaminaUse = new UnityEvent<float>();
-        public UnityEvent<float> OnStaminaRegen = new UnityEvent<float>();
+        public UnityEvent<ConditionInfo> OnStaminaUse = new UnityEvent<ConditionInfo>();
+        public UnityEvent<ConditionInfo> OnStaminaRegen = new UnityEvent<ConditionInfo>();
         public UnityEvent OnNotEnoughStamina = new UnityEvent();
     
         public override float PercentValue => CurrentValue / MaxValue;
@@ -21,9 +22,9 @@ namespace Character
             InitStamina();
         }
 
-        public bool TryUseStamina(float stamina)
+        public bool TryUseStamina(ConditionInfo stamina)
         {
-            if (CurrentValue < stamina)
+            if (CurrentValue < stamina.CalculatedValueChanged)
             {
                 OnNotEnoughStamina.Invoke();
                 return false;
@@ -34,9 +35,9 @@ namespace Character
             return true;
         }
 
-        public void RegenStamina(float stamina)
+        public void RegenStamina(ConditionInfo stamina)
         {
-            throw new System.NotImplementedException();
+            AddValue(stamina);
         }
 
         private void InitStamina()

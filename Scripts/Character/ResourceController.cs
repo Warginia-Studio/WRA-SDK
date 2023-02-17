@@ -1,3 +1,4 @@
+using DependentObjects.Classes;
 using UnityEngine;
 using UnityEngine.Events;
 using Utility;
@@ -5,7 +6,7 @@ using Utility.Diagnostics;
 
 namespace Character
 {
-    public abstract class SourceController : MonoBehaviour
+    public abstract class ResourceController : MonoBehaviour
     {
         public UnityEvent<float> OnValueChanged = new UnityEvent<float>();
         public UnityEvent<float> OnIncreaseValue = new UnityEvent<float>();
@@ -38,22 +39,20 @@ namespace Character
             Init(0, 100);
         }
 
-        public virtual float AddValue(float value)
+        public virtual void AddValue(ResourcesChangedBase value)
         {
-            sourceValue += value;
-            float relValue = useFixedValue ? sourceValue.LastChangedFixed : value;
-            OnValueChanged.Invoke(relValue);
-            OnIncreaseValue.Invoke(relValue);
-            return relValue;
+            sourceValue += value.CalculatedValueChanged;
+            value.RelValueChanged = useFixedValue ? sourceValue.LastChangedFixed : value.CalculatedValueChanged;
+            OnValueChanged.Invoke(value.RelValueChanged);
+            OnIncreaseValue.Invoke(value.RelValueChanged);
         }
         
-        public virtual float RemoveValue(float value)
+        public virtual void RemoveValue(ResourcesChangedBase value)
         {
-            sourceValue -= value;
-            float relValue = useFixedValue ? sourceValue.LastChangedFixed : value;
-            OnValueChanged.Invoke(relValue);
-            OnDecreaseValue.Invoke(relValue);
-            return relValue;
+            sourceValue -= value.CalculatedValueChanged;
+            value.RelValueChanged = useFixedValue ? sourceValue.LastChangedFixed : value.CalculatedValueChanged;
+            OnValueChanged.Invoke(value.RelValueChanged);
+            OnDecreaseValue.Invoke(value.RelValueChanged);
         }
 
         protected void Init(float min, float  max)

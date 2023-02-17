@@ -1,9 +1,11 @@
+using DependentObjects.Classes;
+
 namespace DependentObjects.Interfaces
 {
     public interface IManaable
     {
-        bool TryUseMana(float mana);
+        bool TryUseMana(ManaInfo mana);
     
-        void RegenMana(float mana);
+        void RegenMana(ManaInfo mana);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 namespace Character
 {
     [RequireComponent(typeof(StatisticsController))]
-    public class HealthController : SourceController, IHealable, IDamageable
+    public class HealthController : ResourceController, IHealable, IDamageable
     {
         public UnityEvent<HealInfo> OnBeforeHeal = new UnityEvent<HealInfo>();
         public UnityEvent<HealInfo> OnHealed = new UnityEvent<HealInfo>();
@@ -34,7 +34,7 @@ namespace Character
             OnBeforeHeal.Invoke(healInfo);
             healInfo.FinalHeal = healInfo.HealValue + CurrentValue * healInfo.PercentHealValueOfCurrentHealth +
                                  MaxValue * healInfo.PercentHealValueOfMaxHealth;
-            AddValue(healInfo.FinalHeal);
+            AddValue(healInfo);
             OnHealed.Invoke(healInfo);
         }
         
@@ -45,13 +45,15 @@ namespace Character
         public virtual void DealDamage(DamageInfo damageInfo)
         {
             OnBeforeDamage.Invoke(damageInfo);
-            RemoveValue(damageInfo.PhysicalDamage);
+            RemoveValue(damageInfo);
             OnDamaged.Invoke(damageInfo);
         }
 
         public virtual void Kill(KillInfo killInfo)
         {
             OnBeforeKill.Invoke(killInfo);
+            if (!killInfo.WillBeDead)
+                return;
             OnKilled.Invoke(killInfo);
         }
 

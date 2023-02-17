@@ -1,12 +1,13 @@
+using DependentObjects.Classes;
 using DependentObjects.Interfaces;
 using UnityEngine.Events;
 
 namespace Character
 {
-    public class ManaController : SourceController, IManaable
+    public class ManaController : ResourceController, IManaable
     {
-        public UnityEvent<float> OnManaUse = new UnityEvent<float>();
-        public UnityEvent<float> OnManaRegen = new UnityEvent<float>();
+        public UnityEvent<ManaInfo> OnManaUse = new UnityEvent<ManaInfo>();
+        public UnityEvent<ManaInfo> OnManaRegen = new UnityEvent<ManaInfo>();
         public UnityEvent OnNotEnoughMana = new UnityEvent();
     
         public override float PercentValue => CurrentValue / MaxValue;
@@ -21,9 +22,9 @@ namespace Character
             InitMana();
         }
 
-        public bool TryUseMana(float mana)
+        public bool TryUseMana(ManaInfo mana)
         {
-            if (CurrentValue < mana)
+            if (CurrentValue < mana.CalculatedValueChanged)
             {
                 OnNotEnoughMana.Invoke();
                 return false;
@@ -34,7 +35,7 @@ namespace Character
             return true;
         }
 
-        public void RegenMana(float mana)
+        public void RegenMana(ManaInfo mana)
         {
             AddValue(mana);
             OnManaRegen.Invoke(mana);

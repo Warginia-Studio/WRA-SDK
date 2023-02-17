@@ -12,7 +12,7 @@ public abstract class OnSourceChangedEffect : MonoBehaviour
     [SerializeField] protected SourceType sourceType;
     private void Awake()
     {
-        var v = GetComponent(SOURCE_CLASS_NAMES[(int)sourceType]) as SourceController;
+        var v = GetComponent(SOURCE_CLASS_NAMES[(int)sourceType]) as ResourceController;
         if (v == null)
             return;
         v.OnValueChanged.AddListener(PlayEffect);

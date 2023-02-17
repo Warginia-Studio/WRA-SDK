@@ -1,3 +1,4 @@
+using DependentObjects.Structs;
 using UnityEngine;
 
 namespace DependentObjects.Classes

@@ -1,29 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using UIExtension.TextControl;
 using UnityEngine;
 
-public class TestScrollingText : MonoBehaviour
+namespace Tests
 {
-    [SerializeField] private TextScrolling textScrolling;
-
-    [SerializeField] private string text;
-    // Start is called before the first frame update
-    void Start()
+    public class TestScrollingText : MonoBehaviour
     {
-        
-    }
+        [SerializeField] private TextScrolling textScrolling;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
+        [SerializeField] private string text;
+        // Start is called before the first frame update
+        void Start()
         {
-            textScrolling.ShowText(text);
+        
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        // Update is called once per frame
+        void Update()
         {
-            textScrolling.ShowText("XDDXDD");
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                textScrolling.ShowText(text);
+            }
+
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                textScrolling.ShowText("XDDXDD");
+            }
         }
     }
 }

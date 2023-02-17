@@ -7,7 +7,7 @@ namespace Character
 {
     public abstract class SourceController : MonoBehaviour
     {
-        public UnityEvent OnValueChanged = new UnityEvent();
+        public UnityEvent<float> OnValueChanged = new UnityEvent<float>();
 
         public float CurrentValue
         {
@@ -27,6 +27,8 @@ namespace Character
         
         public abstract float MaxValue { get; }
 
+        [SerializeField] private bool useFixedValue = false;
+
         private ClampedValue sourceValue;
 
         protected virtual void Awake()
@@ -34,21 +36,35 @@ namespace Character
             Init(0, 100);
         }
 
-        public virtual void AddValue(float value)
+        public virtual float AddValue(float value)
         {
             sourceValue += value;
-            OnValueChanged.Invoke();
+            float relValue = useFixedValue ? sourceValue.LastChangedFixed : value;
+            OnValueChanged.Invoke(relValue);
+            return relValue;
         }
         
-        public virtual void RemoveValue(float value)
+        public virtual float RemoveValue(float value)
         {
             sourceValue -= value;
-            OnValueChanged.Invoke();
+            float relValue = useFixedValue ? sourceValue.LastChangedFixed : value;
+            OnValueChanged.Invoke(relValue);
+            return relValue;
         }
 
         protected void Init(float min, float  max)
         {
-            sourceValue = new ClampedValue(min, max);
+            if (sourceValue == null)
+                sourceValue = new ClampedValue(min, max);
+            sourceValue.SetNewValues(min, max);
+        }
+
+        protected void InitAndRegen(float min, float max)
+        {
+            if (sourceValue == null)
+                sourceValue = new ClampedValue(min, max);
+            sourceValue.SetNewValues(min, max);
+            sourceValue.Value = max;
         }
     
     }

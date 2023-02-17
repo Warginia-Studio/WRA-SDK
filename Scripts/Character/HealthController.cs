@@ -57,7 +57,7 @@ namespace Character
 
         private void InitHealth()
         {
-            Init(0, statisticsController.GetStatistics().Health.Value);
+            InitAndRegen(0, statisticsController.GetStatistics().Health.Value);
         }
     }
 }

@@ -8,6 +8,8 @@ namespace Character
     public abstract class SourceController : MonoBehaviour
     {
         public UnityEvent<float> OnValueChanged = new UnityEvent<float>();
+        public UnityEvent<float> OnIncreaseValue = new UnityEvent<float>();
+        public UnityEvent<float> OnDecreaseValue = new UnityEvent<float>();
 
         public float CurrentValue
         {
@@ -41,6 +43,7 @@ namespace Character
             sourceValue += value;
             float relValue = useFixedValue ? sourceValue.LastChangedFixed : value;
             OnValueChanged.Invoke(relValue);
+            OnIncreaseValue.Invoke(relValue);
             return relValue;
         }
         
@@ -49,6 +52,7 @@ namespace Character
             sourceValue -= value;
             float relValue = useFixedValue ? sourceValue.LastChangedFixed : value;
             OnValueChanged.Invoke(relValue);
+            OnDecreaseValue.Invoke(relValue);
             return relValue;
         }
 

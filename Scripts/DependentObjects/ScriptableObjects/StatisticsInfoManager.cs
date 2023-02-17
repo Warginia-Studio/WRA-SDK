@@ -19,5 +19,16 @@ namespace DependentObjects.ScriptableObjects
 
             return statisticInfos[id];
         }
+
+        public string GetStatisticName(string statisticName, float value)
+        {
+            var id = statisticInfos.FindIndex(ctg => ctg.StatisticName == statisticName);
+            if (id == -1)
+            {
+                return new StatisticInfo(Color.white).GetStringWithStat(value);
+            }
+
+            return statisticInfos[id].GetStringWithStat(value);
+        }
     }
 }

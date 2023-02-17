@@ -3,8 +3,10 @@ using DependentObjects.Classes.ResourcesInfos;
 
 namespace DependentObjects.Interfaces
 {
-    public interface IHealable
+    public interface IManaable
     {
-        void Heal(HealInfo healInfo);
+        bool TryUseMana(ManaInfo mana);
+    
+        void RegenMana(ManaInfo mana);
     }
 }

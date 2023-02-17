@@ -1,5 +1,6 @@
 using Character;
 using DependentObjects.Classes;
+using DependentObjects.Classes.ResourcesInfos;
 using UnityEngine;
 
 namespace Tests

@@ -13,6 +13,9 @@ namespace Utility
             }
         }
 
+        public float LastChangedFixed { get; private set; }
+        private float lastRemerValue = 0;
+
         private float value;
         private float min;
         private float max;
@@ -23,34 +26,40 @@ namespace Utility
             this.max = max;
         }
 
+        public void SetNewValues(float min, float max)
+        {
+            this.min = min;
+            this.max = max;
+        }
+        
         #region Self_Operators
 
         public static ClampedValue operator +(ClampedValue x, ClampedValue y)
         {
-            ClampedValue clampedValue = new ClampedValue(x.min, x.max);
-            clampedValue.value = x.value + y.value;
-            return clampedValue;
+            x.value += y.value;
+            x.CheckChange();
+            return x;
         }
     
         public static ClampedValue operator -(ClampedValue x, ClampedValue y)
         {
-            ClampedValue clampedValue = new ClampedValue(x.min, x.max);
-            clampedValue.value = x.value - y.value;
-            return clampedValue;
+            x.value -= y.value;
+            x.CheckChange();
+            return x;
         }
     
         public static ClampedValue operator /(ClampedValue x, ClampedValue y)
         {
-            ClampedValue clampedValue = new ClampedValue(x.min, x.max);
-            clampedValue.value = x.value / y.value;
-            return clampedValue;
+            x.value /= y.value;
+            x.CheckChange();
+            return x;
         }
     
         public static ClampedValue operator *(ClampedValue x, ClampedValue y)
         {
-            ClampedValue clampedValue = new ClampedValue(x.min, x.max);
-            clampedValue.value = x.value * y.value;
-            return clampedValue;
+            x.value *= y.value;
+            x.CheckChange();
+            return x;
         }
     
         public static bool operator==(ClampedValue x, ClampedValue y)
@@ -78,30 +87,30 @@ namespace Utility
         
         public static ClampedValue operator +(ClampedValue x, float y)
         {
-            ClampedValue clampedValue = new ClampedValue(x.min, x.max);
-            clampedValue.value = x.value + y;
-            return clampedValue;
+            x.value += y;
+            x.CheckChange();
+            return x;
         }
     
         public static ClampedValue operator -(ClampedValue x, float y)
         {
-            ClampedValue clampedValue = new ClampedValue(x.min, x.max);
-            clampedValue.value = x.value - y;
-            return clampedValue;
+            x.value -= y;
+            x.CheckChange();
+            return x;
         }
     
         public static ClampedValue operator /(ClampedValue x, float y)
         {
-            ClampedValue clampedValue = new ClampedValue(x.min, x.max);
-            clampedValue.value = x.value / y;
-            return clampedValue;
+            x.value /= y;
+            x.CheckChange();
+            return x;
         }
     
         public static ClampedValue operator *(ClampedValue x, float y)
         {
-            ClampedValue clampedValue = new ClampedValue(x.min, x.max);
-            clampedValue.value = x.value * y;
-            return clampedValue;
+            x.value *= y;
+            x.CheckChange();
+            return x;
         }
     
         public static bool operator==(ClampedValue x, float y)
@@ -125,5 +134,11 @@ namespace Utility
         }
 
         #endregion
+
+        private void CheckChange()
+        {
+            LastChangedFixed = lastRemerValue - value;
+            lastRemerValue = value;
+        }
     }
 }

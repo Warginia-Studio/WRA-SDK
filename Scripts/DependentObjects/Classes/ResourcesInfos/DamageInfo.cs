@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace DependentObjects.Classes
+namespace DependentObjects.Classes.ResourcesInfos
 {
     public class DamageInfo : ResourcesChangedBase
     {

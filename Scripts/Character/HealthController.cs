@@ -1,4 +1,5 @@
 using DependentObjects.Classes;
+using DependentObjects.Classes.ResourcesInfos;
 using DependentObjects.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;

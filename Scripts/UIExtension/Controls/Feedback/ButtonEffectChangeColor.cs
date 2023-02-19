@@ -11,9 +11,12 @@ namespace UIExtension.Controls.Feedback
 
         [SerializeField] private Color pointerEnterColor;
 
+        private bool state = false;
+
         public override void ChangedStatus(bool active)
         {
             controlledObject.color = active ? activeColor : deactiveColor;
+            state = active;
         }
 
         public override void PointerEnterEffect()
@@ -23,7 +26,7 @@ namespace UIExtension.Controls.Feedback
 
         public override void PointerExitEffect()
         {
-            controlledObject.color = deactiveColor;
+            controlledObject.color = state ? activeColor : deactiveColor;
         }
     }
 }

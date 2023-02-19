@@ -24,12 +24,12 @@ namespace UIExtension.Controls.Feedback
         
         public void OnPointerExit(PointerEventData eventData)
         {
-            PointerEnterEffect();
+            PointerExitEffect();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            PointerExitEffect();
+            PointerEnterEffect();
         }
 
         public abstract void ChangedStatus(bool active);

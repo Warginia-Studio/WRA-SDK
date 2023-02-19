@@ -11,12 +11,13 @@ namespace Container
     {
         [HideInInspector] public UnityEvent OnContainerChanged = new UnityEvent();
         public Type HoldingType => holdingType;
-    
-        [SerializeField] private int xSize;
-        [SerializeField] private int ySize;
-        
-        private List<ContainerSlot> slots = new List<ContainerSlot>();
         public Vector2Int containerSize => new Vector2Int(xSize, ySize);
+    
+        [SerializeField] protected int xSize;
+        [SerializeField] protected int ySize;
+        
+        protected List<ContainerSlot> slots = new List<ContainerSlot>();
+       
         protected Type holdingType;
         
 
@@ -114,7 +115,7 @@ namespace Container
         {
             return slots.ToArray();
         }
-
+        
         /// <summary>
         /// 
         /// </summary>

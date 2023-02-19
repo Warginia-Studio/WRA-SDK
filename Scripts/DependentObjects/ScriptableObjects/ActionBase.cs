@@ -7,6 +7,7 @@ namespace DependentObjects.ScriptableObjects
     public abstract class ActionBase : ScriptableObject
     {
         public string ActionName;
+        public Sprite ActionSprite;
     
         protected ActionController ActionController;
     

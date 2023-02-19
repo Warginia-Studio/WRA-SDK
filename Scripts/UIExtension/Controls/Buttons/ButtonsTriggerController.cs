@@ -23,6 +23,10 @@ namespace UIExtension.Controls.Buttons
         {
             if (SelectedButton == id)
                 return;
+            if (id >= buttonTriggers.Count)
+                id = 0;
+            if (id < 0)
+                id = buttonTriggers.Count - 1;
         
             ResetButtons(id);
             SelectedButton = id;

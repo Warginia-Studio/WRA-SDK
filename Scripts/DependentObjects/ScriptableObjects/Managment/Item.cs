@@ -8,16 +8,6 @@ namespace DependentObjects.ScriptableObjects
     {
         public ValueOfItem ValueType;
         
-        public override string GetDescription(Transform parrent)
-        {
-            return "NO DESCRIPTION FOR NOW";
-        }
-
-        public override float GetCooldown(Transform parrent)
-        {
-            return 1;
-        }
-
         public virtual ItemType GetItemType()
         {
             if (this.GetType() == typeof(ArmableItem))

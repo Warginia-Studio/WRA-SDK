@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DependentObjects.ScriptableObjects;
 using UIExtension.Controls.Dragables;
 using UnityEngine;
 
@@ -28,18 +29,19 @@ namespace UIExtension.Controls.Containers
         public void OpenContainer(Container.Container container)
         {
             this.container = container;
-            container.OnContainerChanged.AddListener(UpdateInventory);
+            // container.OnContainerChanged.AddListener(UpdateInventory);
             GetDropable();
+            UpdateSlots();
             UpdateInventory();
             for (int i = 0; i < dropables.Count; i++)
             {
-                dropables[i].InitContainerHolder(container, null);
+                // dropables[i].InitContainerHolder(container, null);
             }
         }
         public void CloseContainer()
         {
             container = null;
-            container.OnContainerChanged.RemoveListener(UpdateInventory);
+            // container.OnContainerChanged.RemoveListener(UpdateInventory);
         }
         
         private void GetDropable()
@@ -68,7 +70,7 @@ namespace UIExtension.Controls.Containers
 
         private void UpdateInventory()
         {
-            var slots = container.GetSlots();
+            var slots = container.GetSlots<InventorySlot,Item>();
             int difference = spawnedDragable.Count - slots.Length;
             if (difference < 0)
             {
@@ -96,9 +98,10 @@ namespace UIExtension.Controls.Containers
 
         private Vector2Int TranslatePosition(int index)
         {
-            int x = index % container.containerSize.x;
-            int y = index / container.containerSize.x;
-            return new Vector2Int( x, y);
+            // int x = index % container.containerSize.x;
+            // int y = index / container.containerSize.x;
+            // return new Vector2Int( x, y);
+            return Vector2Int.zero;
         }
     }
 }

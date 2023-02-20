@@ -7,12 +7,14 @@ namespace DependentObjects.ScriptableObjects
         public int ID;
         public Vector2Int Size;
         public Sprite Icon;
+        public string Description;
 
         public bool Stacking;
         public int MaxStack;
 
-        public abstract string GetDescription(Transform parrent);
-
-        public abstract float GetCooldown(Transform parrent);
+        public virtual string GetDescription(Transform parrent)
+        {
+            return Description;
+        }
     }
 }

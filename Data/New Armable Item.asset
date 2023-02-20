@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ecbe27bdd088b43a7a3a6ed4ba73c4, type: 3}
-  m_Name: Item
+  m_Script: {fileID: 11500000, guid: 496570eea78720643bf489f16be34d2f, type: 3}
+  m_Name: New Armable Item
   m_EditorClassIdentifier: 
   ID: 0
-  Size: {x: 3, y: 3}
+  Size: {x: 1, y: 1}
   Icon: {fileID: 0}
-  Description: nothing
+  Description: weapon
   Stacking: 0
   MaxStack: 0
-  ValueType: 4
+  ValueType: 0
+  ArmamentCategory: 0

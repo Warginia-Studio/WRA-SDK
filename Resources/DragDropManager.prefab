@@ -49,4 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8dc615307f8acb4c9b9f40fd9ff5c6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dragDropProfile: {fileID: 11400000, guid: a419227b96bfbd54a9315329244565f3, type: 2}
+  OnDragChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  dragDropProfile: {fileID: 11400000, guid: c8a87ec39e54edc488cbcd383b60c5eb, type: 2}

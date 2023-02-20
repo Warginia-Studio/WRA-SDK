@@ -58,9 +58,10 @@ namespace UIExtension.Controls.Containers
 
         private Vector2Int TranslatePosition(int index)
         {
-            int x = index % container.containerSize.x;
-            int y = index / container.containerSize.x;
-            return new Vector2Int( x, y);
+            // int x = index % container.containerSize.x;
+            // int y = index / container.containerSize.x;
+            // return new Vector2Int( x, y);
+            return Vector2Int.zero;
         }
     }
 }

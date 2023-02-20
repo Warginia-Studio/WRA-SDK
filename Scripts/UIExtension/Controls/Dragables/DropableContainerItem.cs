@@ -30,11 +30,13 @@ namespace UIExtension.Controls.Dragables
             set => slotPosition = value;
         }
 
+        [SerializeField] private bool useOffset = true;
+
         private Vector2Int slotPosition;
     
         private StatusChanger dropableStatus;
 
-        private void Awake()
+        private void Start()
         {
             GetComponent<RectTransform>().sizeDelta = DragDropProfile.Instance.CellSize;
             StatusManager.Instance.OnStatusChanged.AddListener(OnStatusChanged);
@@ -53,25 +55,26 @@ namespace UIExtension.Controls.Dragables
                 SetStatus(DragDropProfile.Status.selected);
                 return;
             }
-            if (dragging.Container.HoldingType.GetHashCode() != container.HoldingType.GetHashCode())
-            {
-                SetStatus(DragDropProfile.Status.wrongType);
-                return;
-            }
+            
+            // if (dragging.GetType().IsSubclassOf(container.HoldingType) || dragging.GetType() == Container.HoldingType)
+            // {
+            //     SetStatus(DragDropProfile.Status.wrongType);
+            //     return;
+            // }
 
             // Debug.Log(
             //     $"SlotPosition: {SlotPosition} , DraggingOffset: {DragDropManager.Instance.Dragging.InventoryOffset}" +
             //     $"Finall vector: {SlotPosition-DragDropManager.Instance.Dragging.InventoryOffset}");
 
             if (IsTheSameContainer() && container.IsPossibleToMoveItem(dragging.ContainerItem,
-                    SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset)) 
+                    SlotPosition - (useOffset ? DragDropManager.Instance.Dragging.InventoryOffset : Vector2Int.one))) 
             {
                 SetStatus(DragDropProfile.Status.possible);
                 return;
             }
 
             if (!IsTheSameContainer() && container.IsPossibleToAddItemAtPosition(dragging.ContainerItem,
-                    SlotPosition + DragDropManager.Instance.Dragging.InventoryOffset)) 
+                    SlotPosition + (useOffset ? DragDropManager.Instance.Dragging.InventoryOffset : Vector2Int.one))) 
             {
                 SetStatus(DragDropProfile.Status.possible);
                 return;
@@ -88,19 +91,19 @@ namespace UIExtension.Controls.Dragables
         public void OnDrop(PointerEventData eventData)
         {
             var dragging = DragDropManager.Instance.Dragging;
-            if (dragging.Container.HoldingType.GetHashCode() != container.HoldingType.GetHashCode())
-            {
-                return;
-            }
+            // if (dragging.GetType().IsSubclassOf(container.HoldingType) || dragging.GetType() == Container.HoldingType)
+            // {
+            //     return;
+            // }
 
             if (IsTheSameContainer())
             {
-                container.TryMoveItem(dragging.ContainerItem, SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset);
+                container.TryMoveItem(dragging.ContainerItem, SlotPosition - (useOffset ? DragDropManager.Instance.Dragging.InventoryOffset : Vector2Int.one));
                 return;
             }
 
             if (container.TryAddItemAtPosition(dragging.ContainerItem,
-                    SlotPosition - DragDropManager.Instance.Dragging.InventoryOffset))
+                    SlotPosition - (useOffset ? DragDropManager.Instance.Dragging.InventoryOffset : Vector2Int.one)))
             {
                 Debug.Log("Removed: " + dragging.Container.TryRemoveItem(dragging.ContainerItem));
             }
@@ -118,7 +121,7 @@ namespace UIExtension.Controls.Dragables
             }
 
             StatusManager.Instance.SetStatus(status, customStatusName, container,
-                slotPosition - DragDropManager.Instance.Dragging.InventoryOffset,
+                slotPosition - (useOffset ? DragDropManager.Instance.Dragging.InventoryOffset : Vector2Int.one),
                 DragDropManager.Instance.Dragging.ContainerItem.Size);
         }
 

@@ -6,16 +6,16 @@ namespace Tests
 {
     public class InventoryTest : MonoBehaviour
     {
-        [SerializeField] private Inventory.Inventory inventory1;
-        [SerializeField] private Inventory.Inventory inventory2;
+        [SerializeField] private Inventory inventory1;
+        [SerializeField] private Armament inventory2;
     
-        [SerializeField] private Item[] items;
+        [SerializeField] private ContainerItem[] items;
 
         private int id;
     
         void Start()
         {
-            FindObjectOfType<AdvancedContainerWindowIniter>().InitContainer(inventory1, inventory2);
+            // FindObjectOfType<AdvancedContainerWindowIniter>().InitContainer(inventory1, inventory2);
             // FindObjectOfType<ContainerWindowIniter>().OpenContainer(inventory);
         }
 
@@ -42,10 +42,10 @@ namespace Tests
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (inventory1.TryAddItem(items[id]))
-                {
-                    Debug.LogError("Added item.");
-                }
+                // if (inventory1.TryAddItem(items[id]))
+                // {
+                //     Debug.LogError("Added item.");
+                // }
             }
         
         }

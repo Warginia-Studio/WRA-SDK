@@ -79,15 +79,15 @@ namespace UIExtension.Controls.Dragables
             DragDropManager.Instance.OnDragChanged.RemoveListener(OnDraggingChanged);
         }
 
-        public override void InitContainerHolder(Container.Container container, ContainerSlot slot)
+        public void InitContainerHolder(Container.Container container, ContainerSlot<Item> slot)
         {
-            base.InitContainerHolder(container, slot);
-            transform.localPosition = new Vector3(slot.Position.x * DragDropProfile.Instance.CellSize.x,
-                -slot.Position.y * DragDropProfile.Instance.CellSize.y, 0);
-            basicPosition = transform.localPosition;
-            transform.localScale = new Vector3(slot.Item.Size.x, slot.Item.Size.y, 0);
-            containerItem = slot.Item;
-            Stacked = slot.stack;
+            // base.InitContainerHolder(container, slot);
+            // transform.localPosition = new Vector3(slot.Position.x * DragDropProfile.Instance.CellSize.x,
+            //     -slot.Position.y * DragDropProfile.Instance.CellSize.y, 0);
+            // basicPosition = transform.localPosition;
+            // transform.localScale = new Vector3(slot.Item.Size.x, slot.Item.Size.y, 0);
+            // containerItem = slot.Item;
+            // Stacked = slot.stack;
             // Debug.Log($"Position: {slot.Position*32} , Size: {slot.Item.Size}");
         }
 

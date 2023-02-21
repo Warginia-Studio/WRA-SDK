@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ArmamentSlot : ContainerSlot<ArmableItem>
 {
-    public ArmamentSlot(ArmableItem containerItem, Vector2Int position) : base(containerItem)
+    public ArmamentSlot(ArmableItem containerItem, int id) : base(containerItem)
     {
     }
 }

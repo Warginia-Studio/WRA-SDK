@@ -4,30 +4,28 @@ using Container;
 using DependentObjects.ScriptableObjects;
 using UnityEngine;
 
-public class QuickBar : Container.Container
+public class QuickBar : Container.Container<ContainerSlot<ContainerItem>, ContainerItem>
 {
 
     public override bool TryAddItem(ContainerItem containerItem)
     {
-        throw new System.NotImplementedException();
-    }
+        var useable = containerItem as IUseable;
+        if (useable == null)
+            return false;
 
-    public override bool TryAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
-    {
-        throw new System.NotImplementedException();
+        return true;
     }
-
+    
     public override bool TryAddItemAtSlot(ContainerItem containerItem, int position)
     {
-        throw new System.NotImplementedException();
+        var useable = containerItem as IUseable;
+        if (useable == null)
+            return false;
+
+        return true;
     }
 
-    public override bool TryMoveItem(ContainerItem containerItem, Vector2Int position)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool IsPossibleToAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
+    public override bool TryMoveItem(ContainerItem containerItem, int slotId)
     {
         throw new System.NotImplementedException();
     }
@@ -37,7 +35,7 @@ public class QuickBar : Container.Container
         throw new System.NotImplementedException();
     }
 
-    public override bool IsPossibleToMoveItem(ContainerItem containerItem, Vector2Int position)
+    public override bool IsPossibleToMoveItem(ContainerItem containerItem, int slotId)
     {
         throw new System.NotImplementedException();
     }
@@ -52,12 +50,12 @@ public class QuickBar : Container.Container
         throw new System.NotImplementedException();
     }
 
-    public override T[] GetSlots<T, G>()
+    public override ContainerSlot<ContainerItem>[] GetSlots()
     {
         throw new System.NotImplementedException();
     }
     
-    protected override bool CheckSlot(ContainerItem item, Vector2Int position)
+    protected override bool CheckSlot(ContainerItem item, int slotId)
     {
         throw new System.NotImplementedException();
     }

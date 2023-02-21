@@ -8,13 +8,8 @@ public class Skill : ContainerItem, IUseable
 {
     [SerializeField] private ActionBase actionBase;
     
-    public void Use(ActionController user)
+    public ActionBase GetActionReference()
     {
-        user.BeginAction(actionBase);
-    }
-
-    public float GetCooldown(ActionController user)
-    {
-        return 0;
+        return actionBase;
     }
 }

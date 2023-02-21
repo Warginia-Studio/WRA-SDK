@@ -1,5 +1,7 @@
+using Character;
 using DependentObjects.Enums;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace DependentObjects.ScriptableObjects
 {
@@ -16,13 +18,13 @@ namespace DependentObjects.ScriptableObjects
             }
             
             
-            switch (GetType())
-            {
-                case var ctg when ctg == typeof(ArmableItem):
-                    return ItemType.armable;
-                case var ctg when ctg == typeof(UseableItem):
-                    return ItemType.useable;
-            }
+            // switch (GetType())
+            // {
+            //     case var ctg when ctg == typeof(ArmableItem):
+            //         return ItemType.armable;
+            //     case var ctg when ctg == typeof(UseableItem):
+            //         return ItemType.useable;
+            // }
 
             return ItemType.defaultItem;
         }

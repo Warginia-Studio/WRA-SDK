@@ -7,19 +7,14 @@ using DependentObjects.ScriptableObjects;
 using UnityEditor.Build;
 using UnityEngine;
 
-public class Inventory : Container.Container
+public class Inventory : Container.Container<InventorySlot, Item>
 {
     [SerializeField] private int xSize;
     [SerializeField] private int ySize;
 
     private List<InventorySlot> slots = new List<InventorySlot>();
     public Vector2Int containerSize => new Vector2Int(xSize, ySize);
-
-    private void Awake()
-    {
-        GetSlots<InventorySlot, Item>();
-    }
-
+    
     public override bool TryAddItem(ContainerItem containerItem)
     {
         var slot = FindEmptyPlace(containerItem);
@@ -42,15 +37,15 @@ public class Inventory : Container.Container
         OnContainerChanged.Invoke();
         return true;
     }
-
-    public override bool TryAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
+    
+    public override bool TryAddItemAtSlot(ContainerItem containerItem, int slotId)
     {
+        var position = ParseToVector2(slotId);
         if (CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
         {
             return false;
         }
-
-
+        
         var item = Instantiate(containerItem);
         slots.Add(new InventorySlot(item as Item, position));
 
@@ -58,40 +53,21 @@ public class Inventory : Container.Container
         return true;
     }
 
-    public override bool TryAddItemAtSlot(ContainerItem containerItem, int position)
+    public override bool TryMoveItem(ContainerItem containerItem, int slotId)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool TryMoveItem(ContainerItem containerItem, Vector2Int position)
-    {
-        if (!IsPossibleToMoveItem(containerItem, position))
+        if (!IsPossibleToMoveItem(containerItem, slotId))
         {
             return false;
         }
-
+        var position = ParseToVector2(slotId);
         slots.Find(ctg => ctg.Item == containerItem).Position = position;
         OnContainerChanged.Invoke();
         return true;
     }
 
-    public override bool IsPossibleToAddItemAtPosition(ContainerItem containerItem, Vector2Int position)
-    {
-        if (CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
-        {
-            return false;
-        }
-
-        return true;
-    }
-
     public override bool IsPossibleToAddItemAtSlot(ContainerItem containerItem, int slotId)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool IsPossibleToMoveItem(ContainerItem containerItem, Vector2Int position)
-    {
+        var position = ParseToVector2(slotId);
         if (CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
         {
             return false;
@@ -100,6 +76,17 @@ public class Inventory : Container.Container
         return true;
     }
 
+    public override bool IsPossibleToMoveItem(ContainerItem containerItem, int slotId)
+    {
+        var position = ParseToVector2(slotId);
+        if (CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
+        {
+            return false;
+        }
+
+        return true;
+    }
+    
     /// <summary>
     /// 
     /// </summary>
@@ -127,9 +114,14 @@ public class Inventory : Container.Container
     //     return slots.ToArray();
     // }
 
-    public override T[] GetSlots<T, G>()
+    public override InventorySlot[] GetSlots()
     {
-        return slots as T[];
+        return slots.ToArray();
+    }
+
+    protected override bool CheckSlot(ContainerItem item, int slotId)
+    {
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -177,7 +169,7 @@ public class Inventory : Container.Container
     /// <param name="position"></param>
     /// <returns>Return true if slot is busy, false if empty</returns>
 
-    protected override bool CheckSlot(ContainerItem item, Vector2Int position)
+    protected bool CheckSlot(ContainerItem item, Vector2Int position)
     {
         for (int i = 0; i < slots.Count; i++)
         {
@@ -186,5 +178,10 @@ public class Inventory : Container.Container
         }
 
         return false;
+    }
+
+    protected Vector2Int ParseToVector2(int slotId)
+    {
+        return new Vector2Int(slotId % xSize, slotId / xSize);
     }
 }

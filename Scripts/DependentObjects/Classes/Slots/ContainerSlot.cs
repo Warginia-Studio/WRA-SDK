@@ -6,7 +6,6 @@ namespace Container
 {
     public abstract class ContainerSlot<T> where T : ContainerItem
     {
-        public int SlotId;
         public int Stack;
         public T Item;
 

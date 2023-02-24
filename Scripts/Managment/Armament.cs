@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Container;
@@ -11,51 +12,67 @@ public class Armament : Container.Container<ArmamentSlot, ArmableItem>
 
     private List<ArmamentSlot> armamentSlots; 
 
-    public override bool TryAddItem(ContainerItem containerItem)
+    public override bool TryAddItem(ArmableItem ArmableItem)
     {
         throw new System.NotImplementedException();
     }
 
 
-    public override bool TryAddItemAtSlot(ContainerItem containerItem, int position)
+    public override bool TryAddItemAtSlot(ArmableItem armable, int position)
     {
-        throw new System.NotImplementedException();
+        if (!CheckSlot(armable, position))
+            return false;
+        
+        OnContainerChanged.Invoke();
+        return true;
     }
 
-    public override bool TryMoveItem(ContainerItem containerItem, int slotId)
-    {
-        throw new System.NotImplementedException();
-    }
-
-
-    public override bool IsPossibleToAddItemAtSlot(ContainerItem containerItem, int slotId)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool IsPossibleToMoveItem(ContainerItem containerItem, int slotId)
+    public override bool TryMoveItem(ArmableItem armable, int slotId)
     {
         throw new System.NotImplementedException();
     }
 
 
-    public override bool TryRemoveItem(ContainerItem containerItem)
+    public override bool IsPossibleToAddItemAtSlot(ArmableItem armable, int slotId)
     {
         throw new System.NotImplementedException();
     }
 
-    public override ContainerItem[] GetItems()
+    public override bool IsPossibleToMoveItem(ArmableItem armable, int slotId)
+    {
+        throw new System.NotImplementedException();
+    }
+
+
+    public override bool TryRemoveItem(ArmableItem armable)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override ArmableItem[] GetItems()
     {
         throw new System.NotImplementedException();
     }
 
     public override ArmamentSlot[] GetSlots()
     {
-        throw new System.NotImplementedException();
+        return armamentSlots.ToArray();
     }
 
-    protected override bool CheckSlot(ContainerItem item, int slotId)
+    protected override bool CheckSlot(ArmableItem armable, int slotId)
     {
-        throw new System.NotImplementedException();
+        if (armable == null)
+            return false;
+        var foundSlot = armamentSlots.Find(ctg => ctg.SlotId == slotId);
+        if (foundSlot != null)
+            return false;
+        if (armamentBindSlots.Count <= slotId)
+            throw new Exception($"Out of range with slot id: {slotId} in class Armament");
+        if (armamentBindSlots[slotId] != armable.ArmamentCategory)
+            return false;
+        
+        armamentSlots.Add(new ArmamentSlot(Instantiate(armable), slotId));
+        
+        return true;
     }
 }

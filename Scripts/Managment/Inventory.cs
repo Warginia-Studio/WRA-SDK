@@ -15,7 +15,7 @@ public class Inventory : Container.Container<InventorySlot, Item>
     private List<InventorySlot> slots = new List<InventorySlot>();
     public Vector2Int containerSize => new Vector2Int(xSize, ySize);
     
-    public override bool TryAddItem(ContainerItem containerItem)
+    public override bool TryAddItem(Item containerItem)
     {
         var slot = FindEmptyPlace(containerItem);
 
@@ -38,7 +38,7 @@ public class Inventory : Container.Container<InventorySlot, Item>
         return true;
     }
     
-    public override bool TryAddItemAtSlot(ContainerItem containerItem, int slotId)
+    public override bool TryAddItemAtSlot(Item containerItem, int slotId)
     {
         var position = ParseToVector2(slotId);
         if (CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
@@ -53,7 +53,7 @@ public class Inventory : Container.Container<InventorySlot, Item>
         return true;
     }
 
-    public override bool TryMoveItem(ContainerItem containerItem, int slotId)
+    public override bool TryMoveItem(Item containerItem, int slotId)
     {
         if (!IsPossibleToMoveItem(containerItem, slotId))
         {
@@ -65,7 +65,7 @@ public class Inventory : Container.Container<InventorySlot, Item>
         return true;
     }
 
-    public override bool IsPossibleToAddItemAtSlot(ContainerItem containerItem, int slotId)
+    public override bool IsPossibleToAddItemAtSlot(Item containerItem, int slotId)
     {
         var position = ParseToVector2(slotId);
         if (CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
@@ -76,7 +76,7 @@ public class Inventory : Container.Container<InventorySlot, Item>
         return true;
     }
 
-    public override bool IsPossibleToMoveItem(ContainerItem containerItem, int slotId)
+    public override bool IsPossibleToMoveItem(Item containerItem, int slotId)
     {
         var position = ParseToVector2(slotId);
         if (CheckSlot(containerItem, position) || IsOutsideOfInventory(containerItem, position))
@@ -93,7 +93,7 @@ public class Inventory : Container.Container<InventorySlot, Item>
     /// <param name="containerItem"></param>
     /// <returns></returns>
 
-    public override bool TryRemoveItem(ContainerItem containerItem)
+    public override bool TryRemoveItem(Item containerItem)
     {
         bool result = slots.Remove(slots.Find(ctg => ctg.Item == containerItem));
 
@@ -101,7 +101,7 @@ public class Inventory : Container.Container<InventorySlot, Item>
         return result;
     }
 
-    public override ContainerItem[] GetItems()
+    public override Item[] GetItems()
     {
         var items = this.slots.Select(ctg => ctg.Item);
         
@@ -119,7 +119,7 @@ public class Inventory : Container.Container<InventorySlot, Item>
         return slots.ToArray();
     }
 
-    protected override bool CheckSlot(ContainerItem item, int slotId)
+    protected override bool CheckSlot(Item item, int slotId)
     {
         throw new NotImplementedException();
     }
@@ -131,7 +131,7 @@ public class Inventory : Container.Container<InventorySlot, Item>
     /// <param name="position"></param>
     /// <returns>If position is outside inventory return true, else return false</returns>
 
-    protected virtual bool IsOutsideOfInventory(ContainerItem item, Vector2Int position)
+    protected virtual bool IsOutsideOfInventory(Item item, Vector2Int position)
     {
         if (position.x < 0 || position.y < 0)
             return true;
@@ -146,7 +146,7 @@ public class Inventory : Container.Container<InventorySlot, Item>
     /// <param name="item"></param>
     /// <returns>Return position if found free slot, return new Vector2Int(-1-1) if not found.</returns>
 
-    protected virtual Vector2Int FindEmptyPlace(ContainerItem item)
+    protected virtual Vector2Int FindEmptyPlace(Item item)
     {
         for (int i = 0; i < containerSize.y; i++)
         {
@@ -169,7 +169,7 @@ public class Inventory : Container.Container<InventorySlot, Item>
     /// <param name="position"></param>
     /// <returns>Return true if slot is busy, false if empty</returns>
 
-    protected bool CheckSlot(ContainerItem item, Vector2Int position)
+    protected bool CheckSlot(Item item, Vector2Int position)
     {
         for (int i = 0; i < slots.Count; i++)
         {

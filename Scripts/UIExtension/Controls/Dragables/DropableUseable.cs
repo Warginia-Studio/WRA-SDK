@@ -7,10 +7,18 @@ using UnityEngine.EventSystems;
 
 public class DropableUseable : BaseDropable<ContainerSlot<ContainerItem>,ContainerItem>
 {
-
+    public override bool IsValid()
+    {
+        return true;
+    }
 
     public override void OnDrop(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        
+    }
+
+    public void InitId()
+    {
+        
     }
 }

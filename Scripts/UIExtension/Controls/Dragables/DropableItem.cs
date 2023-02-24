@@ -18,6 +18,16 @@ public class DropableItem : BaseDropable<InventorySlot, Item>
         
     }
 
+    public void InitId()
+    {
+        
+    }
+
+    public override bool IsValid()
+    {
+        return false;
+    }
+
     public override void OnDrop(PointerEventData eventData)
     {
         throw new System.NotImplementedException();

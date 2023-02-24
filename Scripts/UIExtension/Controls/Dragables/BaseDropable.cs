@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Container;
@@ -10,9 +11,13 @@ public abstract class BaseDropable<T1,T2> : CIHolder<T1, T2> , IDropHandler, IPo
 {
     public UnityEvent OnPointerInDropable = new UnityEvent();
     public UnityEvent OnPointerOutDropable = new UnityEvent();
+
+    protected Type holdingType;
+
+    public abstract bool IsValid();
     
     public abstract void OnDrop(PointerEventData eventData);
-    
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         OnPointerInDropable.Invoke();

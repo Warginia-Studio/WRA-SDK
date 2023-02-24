@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;using Container;
 using DependentObjects.ScriptableObjects;
@@ -8,10 +9,13 @@ public abstract class CIHolder<T1, T2> : MonoBehaviour where T1 : ContainerSlot<
 {
     public T1 HoldingItem { get; protected set; }
     public T2 ParrentContainer { get; protected set; }
+    
+    public Type HoldingType { get; protected set; }
 
     public virtual void SetInfo(T2 container, T1 item = null)
     {
         HoldingItem = item;
         ParrentContainer = container;
+        HoldingType = item?.GetType();
     }
 }

@@ -8,7 +8,7 @@ public class QuickBarCoontainer : Container.Container<ContainerSlot<ContainerIte
 {
     public override bool TryAddItem(ContainerItem containerItem)
     {
-        var checkUseable = containerItem as IUseable;
+        var checkUseable = containerItem as IUseableItem;
         if (checkUseable == null)
             return false;
         
@@ -18,7 +18,7 @@ public class QuickBarCoontainer : Container.Container<ContainerSlot<ContainerIte
 
     public override bool TryAddItemAtSlot(ContainerItem containerItem, int position)
     {
-        var checkUseable = containerItem as IUseable;
+        var checkUseable = containerItem as IUseableItem;
         if (checkUseable == null)
             return false;
         

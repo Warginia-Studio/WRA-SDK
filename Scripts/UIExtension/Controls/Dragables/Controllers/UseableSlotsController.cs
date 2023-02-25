@@ -25,13 +25,13 @@ public class UseableSlotsController : BaseSlotsController<ContainerSlot<Containe
 
     public override void InitSlots()
     {
-        var newDropables = transform.GetComponentsInChildren<DropableUseable>();
-        if (Dropables.Length != newDropables.Length)
-            Dropables = newDropables;
-
-        for (int i = 0; i < Dropables.Length; i++)
-        {
-            (Dropables[i] as DropableUseable).InitId();
-        }
+        // var newDropables = transform.GetComponentsInChildren<DropableUseable>();
+        // if (Dropables.Length != newDropables.Length)
+        //     Dropables = newDropables;
+        //
+        // for (int i = 0; i < Dropables.Length; i++)
+        // {
+        //     (Dropables[i] as DropableUseable).InitId();
+        // }
     }
 }

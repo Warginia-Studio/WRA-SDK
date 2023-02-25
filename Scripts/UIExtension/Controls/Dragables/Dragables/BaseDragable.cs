@@ -8,7 +8,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class BaseDragable : CIHolder<ContainerSlot<ContainerItem> , ContainerItem>, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class BaseDragable<TSlot, TItem> : CIHolder<TSlot, TItem>, IBeginDragHandler, IDragHandler,
+    IEndDragHandler where TSlot : ContainerSlot<TItem> where TItem : ContainerItem
 {
     public Vector3 GrabOffset { get; private set; }
 
@@ -31,7 +32,7 @@ public class BaseDragable : CIHolder<ContainerSlot<ContainerItem> , ContainerIte
         canvasGroup.interactable = false;
         GrabOffset = transform.position - Input.mousePosition;
         grabbed = true;
-        DragDropManager.Instance.BeginDragItem(this);
+        DragDropManager.Instance.BeginDragItem(new DragData(HoldingItem, GrabOffset));
     }
     
     public void OnDrag(PointerEventData eventData)

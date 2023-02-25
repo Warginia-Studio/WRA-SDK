@@ -4,7 +4,7 @@ using Character;
 using DependentObjects.ScriptableObjects;
 using UnityEngine;
 
-public class Skill : ContainerItem, IUseable
+public class Skill : ContainerItem, IUseableItem
 {
     [SerializeField] private ActionBase actionBase;
     

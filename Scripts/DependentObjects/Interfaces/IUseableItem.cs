@@ -4,7 +4,7 @@ using Character;
 using DependentObjects.ScriptableObjects;
 using UnityEngine;
 
-public interface IUseable
+public interface IUseableItem
 {
     ActionBase GetActionReference();
 }

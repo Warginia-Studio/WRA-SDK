@@ -1,37 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
-using Container;
-using DependentObjects.ScriptableObjects;
-using UnityEngine;
+using DependentObjects.Classes.Slots;
+using DependentObjects.ScriptableObjects.Managment;
+using Managment;
 
-public class UseableSlotsController : BaseSlotsController<ContainerSlot<ContainerItem> , ContainerItem>
+namespace UIExtension.Controls.Dragables.Controllers
 {
-    // Start is called before the first frame update
-    void Start()
+    public class UseableSlotsController : BaseSlotsController<ContainerSlot<ContainerItem>, ContainerItem>
     {
+        // Start is called before the first frame update
+        void Start()
+        {
         
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
-    }
+        }
 
-    public override void Open(Container<ContainerSlot<ContainerItem>, ContainerItem> container)
-    {
-        HoldingContainer = container;
-    }
+        public override void Open(Container<ContainerSlot<ContainerItem>, ContainerItem> container)
+        {
+            HoldingContainer = container;
+            container.OnContainerChanged.AddListener(OnContainerChanged);
+        }
 
-    public override void InitSlots()
-    {
-        // var newDropables = transform.GetComponentsInChildren<DropableUseable>();
-        // if (Dropables.Length != newDropables.Length)
-        //     Dropables = newDropables;
-        //
-        // for (int i = 0; i < Dropables.Length; i++)
-        // {
-        //     (Dropables[i] as DropableUseable).InitId();
-        // }
+        public override void Close()
+        {
+            HoldingContainer.OnContainerChanged.RemoveListener(OnContainerChanged);
+        }
+
+        public override void InitSlots()
+        {
+            // var newDropables = transform.GetComponentsInChildren<DropableUseable>();
+            // if (Dropables.Length != newDropables.Length)
+            //     Dropables = newDropables;
+            //
+            // for (int i = 0; i < Dropables.Length; i++)
+            // {
+            //     (Dropables[i] as DropableUseable).InitId();
+            // }
+        }
+
+        protected override void OnContainerChanged()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

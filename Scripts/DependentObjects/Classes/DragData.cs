@@ -1,17 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using DependentObjects.ScriptableObjects;
-using JetBrains.Annotations;
+using DependentObjects.ScriptableObjects.Managment;
 using UnityEngine;
 
-public class DragData
+namespace DependentObjects.Classes
 {
-    public ContainerItem ContainerItem { get; private set; }
-    public Vector3 GrabOffset { get; private set; }
-
-    public DragData(ContainerItem containerItem, Vector3 grabOffset)
+    public class DragData
     {
-        ContainerItem = containerItem;
-        GrabOffset = grabOffset;
+        public ContainerItem ContainerItem { get; private set; }
+        public Vector3 GrabOffset { get; private set; }
+
+        public DragData(ContainerItem containerItem, Vector3 grabOffset)
+        {
+            ContainerItem = containerItem;
+            GrabOffset = grabOffset;
+        }
     }
 }

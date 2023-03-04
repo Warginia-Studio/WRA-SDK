@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using DependentObjects.Structs;
-using UnityEngine;
 
-public interface IStatisticsHolder
+namespace DependentObjects.Interfaces
 {
-    StatisticInfo GetStatisticsInfo();
+    public interface IStatisticsHolder
+    {
+        StatisticInfo GetStatisticsInfo();
+    }
 }

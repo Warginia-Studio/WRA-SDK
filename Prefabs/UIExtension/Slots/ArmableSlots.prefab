@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8722871694112717130}
-  - component: {fileID: 8722871694112717131}
   - component: {fileID: 8722871694112717128}
   m_Layer: 5
   m_Name: ArmableSlots
@@ -44,30 +43,6 @@ RectTransform:
   m_AnchoredPosition: {x: 278.61954, y: 0}
   m_SizeDelta: {x: 434, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8722871694112717131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8722871694112717133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 64, y: 64}
-  m_Spacing: {x: 10, y: 10}
-  m_Constraint: 0
-  m_ConstraintCount: 2
 --- !u!114 &8722871694112717128
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,8 +1,6 @@
-using DependentObjects.ScriptableObjects;
-using UnityEngine;
-using Utility.Math;
+using DependentObjects.ScriptableObjects.Managment;
 
-namespace Container
+namespace DependentObjects.Classes.Slots
 {
     public abstract class ContainerSlot<T> where T : ContainerItem
     {

@@ -37,8 +37,12 @@ namespace DependentObjects.ScriptableObjects
         [SerializeField] private Color busy;
         [SerializeField] private Color wrongType;
         [SerializeField] private CustomStatus[] customStatusConfiguration;
+        [SerializeField] private bool stretchItemInArmamentSlot = false;
+        [SerializeField] private bool stretchItemInUseableSlot = false;
 
         public Vector2Int CellSize => cellSize;
+        public bool StretchItemInArmamentSlot => stretchItemInArmamentSlot;
+        public bool StretchItemInUseableSlot => stretchItemInUseableSlot;
     
         private Dictionary<string, Color> CustomStatuses
         {

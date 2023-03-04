@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using Container;
-using DependentObjects.ScriptableObjects;
-using UnityEngine;
+using DependentObjects.ScriptableObjects.Managment;
 
-public class ArmamentSlot : ContainerSlot<ArmableItem>
+namespace DependentObjects.Classes.Slots
 {
-    public int SlotId => slotId;
-    
-    protected int slotId = -1;
-    public ArmamentSlot(ArmableItem containerItem, int id) : base(containerItem)
+    public class ArmamentSlot : ContainerSlot<ArmableItem>
     {
-        slotId = id;
+        public int SlotId => slotId;
+    
+        protected int slotId = -1;
+        public ArmamentSlot(ArmableItem containerItem, int id) : base(containerItem)
+        {
+            slotId = id;
+        }
     }
 }

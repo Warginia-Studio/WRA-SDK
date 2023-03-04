@@ -8,6 +8,7 @@ namespace DependentObjects.ScriptableObjects
     {
         public string ActionName;
         public string DefaultDescription;
+        [SerializeField]
         public Sprite ActionSprite;
     
         protected ActionController ActionController;

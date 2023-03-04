@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Character;
 using DependentObjects.ScriptableObjects;
-using UnityEngine;
 
-public interface IUseableItem
+namespace DependentObjects.Interfaces
 {
-    ActionBase GetActionReference();
+    public interface IUseableItem
+    {
+        ActionBase GetActionReference();
+    }
 }

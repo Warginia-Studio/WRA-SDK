@@ -1,8 +1,9 @@
-using DependentObjects.ScriptableObjects;
+using DependentObjects.Classes.Slots;
+using DependentObjects.ScriptableObjects.Managment;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Container
+namespace Managment
 {
     public abstract class Container<TSlot, TItem> : MonoBehaviour where TSlot : ContainerSlot<TItem> where TItem : ContainerItem
     {

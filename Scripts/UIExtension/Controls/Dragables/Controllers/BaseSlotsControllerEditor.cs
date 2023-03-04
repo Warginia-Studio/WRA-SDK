@@ -1,26 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using Container;
-using DependentObjects.ScriptableObjects;
+using DependentObjects.Classes.Slots;
+using DependentObjects.ScriptableObjects.Managment;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(BaseSlotsController<ContainerSlot<ContainerItem>,ContainerItem>))]
-public class BaseSlotsControllerEditor<T1,T2> : Editor where T1 : ContainerSlot<T2> where T2 : ContainerItem
+namespace UIExtension.Controls.Dragables.Controllers
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(BaseSlotsController<ContainerSlot<ContainerItem>,ContainerItem>))]
+    public class BaseSlotsControllerEditor<T1,T2> : Editor where T1 : ContainerSlot<T2> where T2 : ContainerItem
     {
-        base.OnInspectorGUI();
-        var armableSlotsController = ((BaseSlotsController<T1,T2>)target);
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            var armableSlotsController = ((BaseSlotsController<T1,T2>)target);
 
-        if (armableSlotsController.Dropables == null || armableSlotsController.Dropables.Length == 0)
-        {
-            EditorGUILayout.HelpBox("No inited slots. Please add slots and init them.", MessageType.Error);
-        }
+            if (armableSlotsController.Dropables == null || armableSlotsController.Dropables.Length == 0)
+            {
+                EditorGUILayout.HelpBox("No inited slots. Please add slots and init them.", MessageType.Error);
+            }
         
-        if (GUILayout.Button("Init"))
-        {
-            armableSlotsController.InitSlots();
+            if (GUILayout.Button("Init"))
+            {
+                armableSlotsController.InitSlots();
+            }
         }
     }
 }

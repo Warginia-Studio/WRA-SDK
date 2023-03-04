@@ -1,3 +1,4 @@
+using MainObjects;
 using UIExtension.Managers;
 using UnityEngine;
 using Utility.Diagnostics;

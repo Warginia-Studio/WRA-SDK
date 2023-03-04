@@ -1,19 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using DependentObjects.ScriptableObjects;
-using UnityEngine;
+using DependentObjects.Classes.Slots;
+using DependentObjects.ScriptableObjects.Managment;
 
-public class ItemDragable : BaseDragable<InventorySlot, Item>
+namespace UIExtension.Controls.Dragables.Dragables
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ItemDragable : BaseDragable<InventorySlot, Item>
     {
+        // Start is called before the first frame update
+        void Start()
+        {
         
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 }

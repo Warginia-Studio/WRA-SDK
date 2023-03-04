@@ -1,35 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
-using Container;
-using DependentObjects.ScriptableObjects;
+using DependentObjects.ScriptableObjects.Managment;
 using UnityEngine;
 using Utility.Math;
 
-public class InventorySlot : ContainerSlot<Item>
+namespace DependentObjects.Classes.Slots
 {
-    public Vector2Int Position;
-
-    public InventorySlot(Item containerItem, Vector2Int position) : base(containerItem)
+    public class InventorySlot : ContainerSlot<Item>
     {
-        this.Position = position;
-    }
+        public Vector2Int Position;
 
-    public bool IsInside(Vector2Int position, ContainerItem item)
-    {
-        if (item == Item)
-            return false;
-        // var corners = BoxMath.GetCorners(position, item.Size);
-            
-        for (int i = 0; i < item.Size.x; i++)
+        public InventorySlot(Item containerItem, Vector2Int position) : base(containerItem)
         {
-            for (int j = 0; j < item.Size.y; j++)
-            {
-                if (BoxMath.InBox(Position, Item.Size, position + new Vector2Int(i, j)))
-                    return true;
-            }
+            this.Position = position;
         }
 
+        public bool IsInside(Vector2Int position, ContainerItem item)
+        {
+            if (item == Item)
+                return false;
+            // var corners = BoxMath.GetCorners(position, item.Size);
+            
+            for (int i = 0; i < item.Size.x; i++)
+            {
+                for (int j = 0; j < item.Size.y; j++)
+                {
+                    if (BoxMath.InBox(Position, Item.Size, position + new Vector2Int(i, j)))
+                        return true;
+                }
+            }
 
-        return false;
+
+            return false;
+        }
     }
 }

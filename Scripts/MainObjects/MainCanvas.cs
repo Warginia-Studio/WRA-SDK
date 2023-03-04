@@ -1,7 +1,6 @@
 using Patterns;
-using UnityEngine;
 
-namespace UIExtension.Managers
+namespace MainObjects
 {
     public class MainCanvas : MonoBehaviourSingletonMustExist<MainCanvas>
     {

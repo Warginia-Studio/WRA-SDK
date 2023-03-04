@@ -1,15 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using Character;
-using DependentObjects.ScriptableObjects;
+using DependentObjects.Interfaces;
 using UnityEngine;
 
-public class Skill : ContainerItem, IUseableItem
+namespace DependentObjects.ScriptableObjects.Managment
 {
-    [SerializeField] private ActionBase actionBase;
-    
-    public ActionBase GetActionReference()
+    public class Skill : ContainerItem, IUseableItem
     {
-        return actionBase;
+        [SerializeField] private ActionBase actionBase;
+    
+        public ActionBase GetActionReference()
+        {
+            return actionBase;
+        }
     }
 }

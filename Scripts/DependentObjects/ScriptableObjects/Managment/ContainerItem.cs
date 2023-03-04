@@ -1,7 +1,6 @@
-using Character;
 using UnityEngine;
 
-namespace DependentObjects.ScriptableObjects
+namespace DependentObjects.ScriptableObjects.Managment
 {
     public abstract class ContainerItem : ScriptableObject
     {

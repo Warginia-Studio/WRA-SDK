@@ -2331,6 +2331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69b93a5b2b2965f43a551e1f58922cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  windowName: WindowWithTabs
   OnPageChanged:
     m_PersistentCalls:
       m_Calls: []

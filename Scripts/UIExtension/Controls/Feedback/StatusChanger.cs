@@ -15,7 +15,7 @@ namespace UIExtension.Controls.Feedback
 
       public virtual void SetStatus(DragDropProfile.Status status, string customStatusName)
       {
-         this.status.color = DragDropManager.Instance.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);
+         // this.status.color = DragDropManager.Instance.DragDropProfile.GetFinalColorOfDropStatus(status, customStatusName);
       }
    }
 }

@@ -7,6 +7,8 @@ namespace DependentObjects.ScriptableObjects
     public abstract class ActionBase : ScriptableObject
     {
         public string ActionName;
+        public string DefaultDescription;
+        [SerializeField]
         public Sprite ActionSprite;
     
         protected ActionController ActionController;

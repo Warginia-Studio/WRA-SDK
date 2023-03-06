@@ -1,3 +1,4 @@
+using MainObjects;
 using UIExtension.Managers;
 using UnityEngine;
 using Utility.Diagnostics;
@@ -25,9 +26,9 @@ namespace Patterns
                     instance = Resources.FindObjectsOfTypeAll<T>()[0];
 
 
-                    if (MainCanvas.TheMainCanvas != null)
+                    if (MainCanvas.Instance != null)
                     {
-                        instance = Instantiate(instance.gameObject, MainCanvas.TheMainCanvas).GetComponent<T>();
+                        instance = Instantiate(instance.gameObject, MainCanvas.Instance.transform).GetComponent<T>();
                     }
                     else
                     {

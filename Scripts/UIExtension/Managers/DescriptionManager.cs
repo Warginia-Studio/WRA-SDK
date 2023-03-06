@@ -1,3 +1,4 @@
+using MainObjects;
 using Patterns;
 using UIExtension.TextControl;
 using UnityEngine;
@@ -27,7 +28,7 @@ namespace UIExtension.Managers
         {
             if (spawnedTextController != null)
                 return;
-            spawnedTextController = Instantiate(window.gameObject, MainCanvas.TheMainCanvas).GetComponent<TextController>();
+            spawnedTextController = Instantiate(window.gameObject, MainCanvas.Instance.transform).GetComponent<TextController>();
         }
     }
 }

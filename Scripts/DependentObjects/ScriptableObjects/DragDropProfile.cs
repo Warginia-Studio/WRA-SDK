@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "Drag Drop Profile", menuName = "thief01/UI Extension/Drag Drop Profile")]
+    [CreateAssetMenu(fileName = "Drag Drop Profile", menuName = "thief01/UI Extension/DDP_Default")]
     public class DragDropProfile : ScriptableSingleton<DragDropProfile>
     {
         public enum Status
@@ -24,7 +24,7 @@ namespace DependentObjects.ScriptableObjects
             [SerializeField] public Color colorStatus;
             [SerializeField] public string statusName;
         }
-
+        
         [SerializeField] private Vector2Int cellSize;
     
         [SerializeField] private Color dragColor;
@@ -37,8 +37,12 @@ namespace DependentObjects.ScriptableObjects
         [SerializeField] private Color busy;
         [SerializeField] private Color wrongType;
         [SerializeField] private CustomStatus[] customStatusConfiguration;
+        [SerializeField] private bool stretchItemInArmamentSlot = false;
+        [SerializeField] private bool stretchItemInUseableSlot = false;
 
         public Vector2Int CellSize => cellSize;
+        public bool StretchItemInArmamentSlot => stretchItemInArmamentSlot;
+        public bool StretchItemInUseableSlot => stretchItemInUseableSlot;
     
         private Dictionary<string, Color> CustomStatuses
         {

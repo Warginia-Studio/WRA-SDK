@@ -1,50 +1,52 @@
+using DependentObjects.Classes;
 using DependentObjects.ScriptableObjects;
 using Patterns;
 using UIExtension.Controls.Dragables;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 namespace UIExtension.Managers
 {
     public class DragDropManager : MonoBehaviourSingletonAutoLoad<DragDropManager>
     {
-        public UnityEvent<bool> OnDragChanged = new UnityEvent<bool>();
-        public DragableContainerItem Dragging => dragging;
-        public bool IsDragging => isDragging;
+    public UnityEvent<bool> OnDragChanged = new UnityEvent<bool>();
+    public DragData Dragging => dragging;
+    public bool IsDragging => isDragging;
 
-        public DragDropProfile DragDropProfile
+    public DragDropProfile DragDropProfile
+    {
+        get
         {
-            get
+            if (dragDropProfile == null)
             {
-                if (dragDropProfile == null)
-                {
-                    dragDropProfile = Resources.Load<DragDropProfile>("DDP_Default");
-                }
-
-                return dragDropProfile;
+                dragDropProfile = Resources.Load<DragDropProfile>("DDP_Default");
             }
+
+            return dragDropProfile;
         }
+    }
 
-        [SerializeField] private DragDropProfile dragDropProfile;
-        
-        // [SerializeField] private 
+    [SerializeField] private DragDropProfile dragDropProfile;
 
-        private DragableContainerItem dragging;
-        private bool isDragging;
+    // [SerializeField] private 
 
-        public void BeginDragItem(DragableContainerItem draggingData)
-        {
-            dragging = draggingData;
-            isDragging = true;
-            OnDragChanged.Invoke(isDragging);
-        }
+    private DragData dragging;
+    private bool isDragging;
 
-        public void EndDragItem()
-        {
-            dragging = null;
-            isDragging = false;
-            StatusManager.Instance.Reset();
-            OnDragChanged.Invoke(isDragging);
-        }
+    public void BeginDragItem(DragData dragData)
+    {
+        dragging = dragData;
+        isDragging = true;
+        OnDragChanged.Invoke(isDragging);
+    }
+
+    public void EndDragItem()
+    {
+        dragging = null;
+        isDragging = false;
+        // StatusManager.Instance.Reset();
+        OnDragChanged.Invoke(isDragging);
+    }
     }
 }

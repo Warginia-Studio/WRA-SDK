@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SceneManagment
+namespace UIExtension
 {
-    public class MainMenuPanelManagment : MonoBehaviour
+    public class PanelChanger : MonoBehaviour
     {
         [SerializeField] private List<GameObject> allPanels = new List<GameObject>();
 

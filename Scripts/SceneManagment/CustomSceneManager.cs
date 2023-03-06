@@ -1,5 +1,6 @@
 using System.Collections;
 using Patterns;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace SceneManagment
@@ -10,6 +11,8 @@ namespace SceneManagment
         public bool SceneIsReady { get; private set; } = false;
 
         private Scene nextScene;
+        private string nextSceneName;
+        private AsyncOperation asyncOperation;
 
         private void Awake()
         {
@@ -21,21 +24,22 @@ namespace SceneManagment
         public void ChangeScene(int buildId)
         {
             SceneIsReady = false;
-            nextScene = SceneManager.GetSceneByBuildIndex(buildId);
+            nextSceneName = SceneManager.GetSceneByBuildIndex(buildId).name;
             StartCoroutine(LoadingSceneOfLoading());
         }
 
         public void ChangeScene(string name)
         {
             SceneIsReady = false;
-            nextScene = SceneManager.GetSceneByName(name);
+            nextSceneName = name;
             StartCoroutine(LoadingSceneOfLoading());
         }
 
         public void SetActiveNextScene()
         {
-            SceneManager.SetActiveScene(nextScene);
-            nextScene = new Scene();
+            // SceneManager.SetActiveScene(SceneManager.GetSceneByName(nextSceneName));
+            asyncOperation.allowSceneActivation = true;
+            nextSceneName = null;
         }
 
         private IEnumerator LoadingSceneOfLoading()
@@ -52,11 +56,15 @@ namespace SceneManagment
 
         private IEnumerator LoadingScene()
         {
-            var operation = SceneManager.LoadSceneAsync(nextScene.name);
-            operation.allowSceneActivation = false;
-            while (!operation.isDone)
+            asyncOperation = SceneManager.LoadSceneAsync(nextSceneName);
+            asyncOperation .allowSceneActivation = false;
+            while (!asyncOperation .isDone)
             {
-                PercentOfLoad = operation.progress;
+                if (!asyncOperation .allowSceneActivation && PercentOfLoad >= 0.85)
+                {
+                    SceneIsReady = true;
+                }
+                PercentOfLoad = asyncOperation .progress;
                 yield return null;
             }
             SceneIsReady = true;

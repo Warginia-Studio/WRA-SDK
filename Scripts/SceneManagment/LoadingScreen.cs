@@ -20,7 +20,11 @@ namespace SceneManagment
 
             if (progressText != null)
             {
-                progressText.text = Mathf.Lerp(0, 100, CustomSceneManager.Instance.PercentOfLoad).ToString("P");
+                progressText.text = CustomSceneManager.Instance.PercentOfLoad.ToString("P");
+                if (CustomSceneManager.Instance.SceneIsReady)
+                {
+                    progressText.text = (1f).ToString("P");
+                }
             }
 
             sceneIsReadText.gameObject.SetActive(CustomSceneManager.Instance.SceneIsReady);

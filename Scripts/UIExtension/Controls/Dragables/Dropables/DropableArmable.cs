@@ -29,5 +29,15 @@ namespace UIExtension.Controls.Dragables.Dropables
             Debug.Log(eventData.pointerDrag);
             Debug.Log(eventData.pointerDrag.name);
         }
+
+        public override void UpdateStatus(bool enter)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override bool IsCorrect()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

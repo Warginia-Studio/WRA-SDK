@@ -19,6 +19,7 @@ namespace UIExtension.Controls.Dragables.Controllers
         {
             HoldingContainer = container;
             container.OnContainerChanged.AddListener(OnContainerChanged);
+            OnContainerChanged();
         }
 
         public override void Close()

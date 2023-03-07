@@ -20,7 +20,7 @@ public class SlotStatusManager : MonoBehaviour
     public void SetStatus(Vector3 position, Vector2 size, DragDropProfile.Status status)
     {
         rectTransform.position = position;
-        rectTransform.sizeDelta = size;
+        rectTransform.sizeDelta = new Vector2(size.y, size.x);
         image.color = DragDropProfile.Instance.GetFinalColorOfDropStatus(status);
     }
 }

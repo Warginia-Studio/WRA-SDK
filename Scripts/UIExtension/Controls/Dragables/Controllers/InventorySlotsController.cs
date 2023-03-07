@@ -60,24 +60,39 @@ namespace UIExtension.Controls.Dragables.Controllers
         {
             var items = HoldingContainer.GetSlots();
 
-            for (int i = 0; i < spawnedDragables.Count; i++)
+            int itemCount = spawnedDragables.Count - items.Length;
+
+            for (int i = 0; i < -itemCount; i++)
             {
-                Destroy(spawnedDragables[i].gameObject);
+                var newGo = Instantiate(baseDragablePrefab.gameObject, dragablesParrent.serializedProperty);
+                var id = newGo.GetComponent<ItemDragable>();
+                spawnedDragables.Add(id);
+            }
+            
+            for (int i = 0; i < itemCount; i++)
+            {
                 spawnedDragables.RemoveAt(i);
                 i--;
             }
 
+            // for (int i = 0; i < spawnedDragables.Count; i++)
+            // {
+            //     Destroy(spawnedDragables[i].gameObject);
+            //     spawnedDragables.RemoveAt(i);
+            //     i--;
+            // }
+
             for (int i = 0; i < items.Length; i++)
             {
-                var newGo = Instantiate(baseDragablePrefab.gameObject, dragablesParrent.serializedProperty);
+                
                 var newPosition = (new Vector2Int(items[i].Position.x, -items[i].Position.y) *
                                    DragDropProfile.Instance.CellSize);
                 // newGo.transform.localPosition = new Vector3(newPosition.x, newPosition.y);
-                var id = newGo.GetComponent<ItemDragable>();
-                id.SetParrents(dragablesParrent.serializedProperty, dragablesParrent.serializedProperty);
-                id.SetInfo(this, items[i].Item);
-                id.SetBasePosition(newPosition);
-                spawnedDragables.Add(id);
+                
+                spawnedDragables[i].SetParrents(dragablesParrent.serializedProperty, dragablesParrent.serializedProperty);
+                spawnedDragables[i].SetInfo(this, items[i].Item);
+                spawnedDragables[i].SetBasePosition(newPosition);
+                
 
             }
         }

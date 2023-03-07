@@ -16,7 +16,7 @@ namespace UIExtension.Controls.Dragables.Dragables
     public class BaseDragable<TSlot, TItem> : CIHolder<TSlot, TItem>, IBeginDragHandler, IDragHandler,
         IEndDragHandler where TSlot : ContainerSlot<TItem> where TItem : ContainerItem
     {
-        public Vector3 GrabOffset { get; private set; }
+        public Vector3 GrabOffset { get; protected set; }
         
         [CustomSerializedField(true)][SerializeField] protected CustomObjectProperty<Image> itemIcon;
 
@@ -55,13 +55,13 @@ namespace UIExtension.Controls.Dragables.Dragables
             this.dragableParrent = dragableParrent;
         }
 
-        public void ResetPosition()
+        public virtual void ResetPosition()
         {
             transform.localPosition  = basePosition;
         }
 
 
-        public void OnBeginDrag(PointerEventData eventData)
+        public virtual void OnBeginDrag(PointerEventData eventData)
         {
             canvasGroup.alpha = 0.4f;
             canvasGroup.blocksRaycasts = false;
@@ -72,12 +72,12 @@ namespace UIExtension.Controls.Dragables.Dragables
             DragDropManager.Instance.BeginDragItem(new DragData(HoldingItem, GrabOffset));
         }
     
-        public void OnDrag(PointerEventData eventData)
+        public virtual void OnDrag(PointerEventData eventData)
         {
             transform.position = Input.mousePosition + GrabOffset;
         }
 
-        public void OnEndDrag(PointerEventData eventData)
+        public virtual void OnEndDrag(PointerEventData eventData)
         {
             canvasGroup.alpha = 1;
             canvasGroup.blocksRaycasts = true;
@@ -85,21 +85,20 @@ namespace UIExtension.Controls.Dragables.Dragables
             grabbed = false;
             transform.parent = dragableParrent;
 
+            StopAllCoroutines();
             StartCoroutine(DelayResetPosition());
-            
         }
-
-        private IEnumerator DelayResetPosition()
+        
+        public virtual void SetBasePosition(Vector2 position)
+        {
+            transform.localPosition = position;
+            basePosition = position;
+        }
+        protected virtual IEnumerator DelayResetPosition()
         {
             yield return null;
             ResetPosition();
             DragDropManager.Instance.EndDragItem();
-        }
-
-        public void SetBasePosition(Vector2 position)
-        {
-            transform.localPosition = position;
-            basePosition = position;
         }
     }
 }

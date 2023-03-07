@@ -29,47 +29,77 @@ namespace UIExtension.Controls.Dragables.Dropables
         {
             var dragging = DragDropManager.Instance.Dragging;
 
-            if (!IsCorrect())
+            var slotStatusManager = ParrentSlotsController.SlotStatusManager;
+
+            var draggingData = DragDropManager.Instance.Dragging;
+            var containerItem = draggingData.ContainerItem as Item;
+            if (containerItem == null)
             {
                 return;
             }
 
-            if (!ParrentSlotsController.HoldingContainer.IsPossibleToAddItemAtSlot(dragging.ContainerItem as Item, id))
+            if (!ParrentSlotsController.HoldingContainer.IsPossibleToAddItemAtSlot(draggingData.ContainerItem as Item, id))
             {
-                // Status background 
                 return;
+            }
+
+            var container = ParrentSlotsController.HoldingContainer;
+            if (container == dragging.InventoryContainer)
+            {
+                container.TryMoveItem(dragging.ContainerItem as Item, id);
+                Debug.Log("Move item");
+                return;
+            }
+
+            if (ParrentSlotsController.HoldingContainer.TryAddItemAtSlot(draggingData.ContainerItem as Item, id))
+            {
+                draggingData.RemoveItemFromPreviousContainer();
             }
         }
 
         public override void UpdateStatus(bool enter)
         {
             var slotStatusManager = ParrentSlotsController.SlotStatusManager;
+            var globalPosition = transform.position;
+            
             if (!DragDropManager.Instance.IsDragging)
             {
                 if (enter)
                 {
-                    slotStatusManager.SetStatus(transform.position, DragDropProfile.Instance.CellSize, DragDropProfile.Status.selected);
+                    slotStatusManager.SetStatus(globalPosition, DragDropProfile.Instance.CellSize, DragDropProfile.Status.selected);
                     return;
                 }
                 slotStatusManager.SetStatus(Vector3.zero, Vector2.zero, DragDropProfile.Status.empty);
                 return;
             }
-
+            
+            // DragDropManager.Instance.EndDragItem();
             var draggingData = DragDropManager.Instance.Dragging;
             var containerItem = draggingData.ContainerItem as Item;
             if (containerItem == null)
             {
-                slotStatusManager.SetStatus(transform.position, draggingData.ContainerItem.Size*DragDropProfile.Instance.CellSize, DragDropProfile.Status.wrongType);
+                slotStatusManager.SetStatus(globalPosition, draggingData.ContainerItem.Size*DragDropProfile.Instance.CellSize, DragDropProfile.Status.wrongType);
+                return;
+            }
+            
+            
+            var container = ParrentSlotsController.HoldingContainer;
+            if (container == draggingData.InventoryContainer)
+            {
+                if(container.IsPossibleToMoveItem(draggingData.ContainerItem as Item, id))
+                    slotStatusManager.SetStatus(globalPosition, draggingData.ContainerItem.Size*DragDropProfile.Instance.CellSize, DragDropProfile.Status.possible);
+                else
+                    slotStatusManager.SetStatus(globalPosition, (draggingData.ContainerItem.Size -container.OutsideInfo)*DragDropProfile.Instance.CellSize, DragDropProfile.Status.busy);
                 return;
             }
 
             if (!ParrentSlotsController.HoldingContainer.IsPossibleToAddItemAtSlot(draggingData.ContainerItem as Item, id))
             {
-                slotStatusManager.SetStatus(transform.position, draggingData.ContainerItem.Size*DragDropProfile.Instance.CellSize, DragDropProfile.Status.busy);
+                slotStatusManager.SetStatus(globalPosition, (draggingData.ContainerItem.Size -container.OutsideInfo)*DragDropProfile.Instance.CellSize, DragDropProfile.Status.busy);
                 return;
             }
             
-            slotStatusManager.SetStatus(transform.position, draggingData.ContainerItem.Size*DragDropProfile.Instance.CellSize, DragDropProfile.Status.possible);
+            slotStatusManager.SetStatus(globalPosition, draggingData.ContainerItem.Size*DragDropProfile.Instance.CellSize, DragDropProfile.Status.possible);
         }
 
         public override bool IsCorrect()

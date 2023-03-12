@@ -1,26 +1,25 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DependentObjects.ScriptableObjects;
-using Patterns;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Image))]
-public class SlotStatusManager : MonoBehaviour
+namespace UIExtension.Controls.Dragables
 {
-    private Image image;
-    private RectTransform rectTransform;
-    private void Awake()
+    [RequireComponent(typeof(Image))]
+    public class SlotStatusManager : MonoBehaviour
     {
-        image = GetComponent<Image>();
-        rectTransform = GetComponent<RectTransform>();
-    }
+        private Image image;
+        private RectTransform rectTransform;
+        private void Awake()
+        {
+            image = GetComponent<Image>();
+            rectTransform = GetComponent<RectTransform>();
+        }
 
-    public void SetStatus(Vector3 position, Vector2 size, DragDropProfile.Status status)
-    {
-        rectTransform.position = position;
-        rectTransform.sizeDelta = new Vector2(size.y, size.x);
-        image.color = DragDropProfile.Instance.GetFinalColorOfDropStatus(status);
+        public void SetStatus(Vector3 position, Vector2 size, DragDropProfile.Status status)
+        {
+            rectTransform.position = position;
+            rectTransform.sizeDelta = new Vector2(size.y, size.x);
+            image.color = DragDropProfile.Instance.GetFinalColorOfDropStatus(status);
+        }
     }
 }

@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum ContainerActionList
+namespace DependentObjects.Enums
 {
-    remove,
-    add,
+    public enum ContainerActionList
+    {
+        remove,
+        add,
     
+    }
 }

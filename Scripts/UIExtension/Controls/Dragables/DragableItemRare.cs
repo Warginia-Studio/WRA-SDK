@@ -1,44 +1,44 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using DependentObjects.ScriptableObjects;
 using UIExtension.Controls.Dragables.Dragables;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility.CustomAttributes.CustomProperty;
 
-public class DragableItemRare : MonoBehaviour
+namespace UIExtension.Controls.Dragables
 {
-    private ItemDragable itemDragable;
-    [SerializeField][CustomSerializedField(true)] private CustomObjectProperty<Image> image;
-    private void Awake()
+    public class DragableItemRare : MonoBehaviour
     {
-        itemDragable = GetComponent<ItemDragable>();
-    }
-
-    private void Start()
-    {
-        if (itemDragable != null && itemDragable.HoldingItem != null)
+        private ItemDragable itemDragable;
+        [SerializeField][CustomSerializedField(true)] private CustomObjectProperty<Image> image;
+        private void Awake()
         {
-            var ddProf = DragDropProfile.Instance;
-            if (ddProf.UseColors)
-            {
-                image.serializedProperty.color = ddProf.GetColorForValueOfItem(itemDragable.HoldingItem.ValueType);
-            }
+            itemDragable = GetComponent<ItemDragable>();
+        }
 
-            if (ddProf.UseSprites)
+        private void Start()
+        {
+            if (itemDragable != null && itemDragable.HoldingItem != null)
             {
-                image.serializedProperty.sprite = ddProf.GetSpriteForValueOfItem(itemDragable.HoldingItem.ValueType);
-            }
+                var ddProf = DragDropProfile.Instance;
+                if (ddProf.UseColors)
+                {
+                    image.serializedProperty.color = ddProf.GetColorForValueOfItem(itemDragable.HoldingItem.ValueType);
+                }
 
-            if (!ddProf.UseSprites && !ddProf.UseColors)
-            {
-                image.serializedProperty.color = Color.clear;
-            }
+                if (ddProf.UseSprites)
+                {
+                    image.serializedProperty.sprite = ddProf.GetSpriteForValueOfItem(itemDragable.HoldingItem.ValueType);
+                }
 
-            if (ddProf.UseSprites && !ddProf.UseColors)
-            {
-                image.serializedProperty.color = Color.white;
+                if (!ddProf.UseSprites && !ddProf.UseColors)
+                {
+                    image.serializedProperty.color = Color.clear;
+                }
+
+                if (ddProf.UseSprites && !ddProf.UseColors)
+                {
+                    image.serializedProperty.color = Color.white;
+                }
             }
         }
     }

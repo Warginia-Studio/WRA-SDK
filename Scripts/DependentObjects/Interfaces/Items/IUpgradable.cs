@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface IUpgradable
+namespace DependentObjects.Interfaces.Items
 {
-    void Upgrade();
+    public interface IUpgradable
+    {
+        void Upgrade();
 
-    (int, int) GetUpgradeLevels();
+        (int, int) GetUpgradeLevels();
 
-    bool IsPossibleToUpgrade();
+        bool IsPossibleToUpgrade();
 
-    string GetUpgradeRequired();
+        string GetUpgradeRequired();
+    }
 }

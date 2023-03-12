@@ -31,6 +31,7 @@ namespace UIExtension.Controls.Dragables.Dropables
 
             var slotStatusManager = ParrentSlotsController.SlotStatusManager;
 
+            // Wrong item
             var draggingData = DragDropManager.Instance.Dragging;
             var containerItem = draggingData.ContainerItem as Item;
             if (containerItem == null)
@@ -38,11 +39,13 @@ namespace UIExtension.Controls.Dragables.Dropables
                 return;
             }
 
+            // Outside inventory or in other item
             if (!ParrentSlotsController.HoldingContainer.IsPossibleToAddItemAtSlot(draggingData.ContainerItem as Item, id))
             {
                 return;
             }
 
+            // Moved item
             var container = ParrentSlotsController.HoldingContainer;
             if (container == dragging.InventoryContainer)
             {
@@ -51,6 +54,7 @@ namespace UIExtension.Controls.Dragables.Dropables
                 return;
             }
 
+            // If in another then remove item
             if (ParrentSlotsController.HoldingContainer.TryAddItemAtSlot(draggingData.ContainerItem as Item, id))
             {
                 draggingData.RemoveItemFromPreviousContainer();
@@ -73,7 +77,7 @@ namespace UIExtension.Controls.Dragables.Dropables
                 return;
             }
             
-            // DragDropManager.Instance.EndDragItem();
+            // Wrong type
             var draggingData = DragDropManager.Instance.Dragging;
             var containerItem = draggingData.ContainerItem as Item;
             if (containerItem == null)
@@ -82,23 +86,27 @@ namespace UIExtension.Controls.Dragables.Dropables
                 return;
             }
             
-            
+            // In the same container
             var container = ParrentSlotsController.HoldingContainer;
             if (container == draggingData.InventoryContainer)
             {
+                // Is ok
                 if(container.IsPossibleToMoveItem(draggingData.ContainerItem as Item, id))
                     slotStatusManager.SetStatus(globalPosition, draggingData.ContainerItem.Size*DragDropProfile.Instance.CellSize, DragDropProfile.Status.possible);
+                // Is out of container
                 else
                     slotStatusManager.SetStatus(globalPosition, (draggingData.ContainerItem.Size -container.OutsideInfo)*DragDropProfile.Instance.CellSize, DragDropProfile.Status.busy);
                 return;
             }
 
+            // Other container
+            // is outside of container
             if (!ParrentSlotsController.HoldingContainer.IsPossibleToAddItemAtSlot(draggingData.ContainerItem as Item, id))
             {
                 slotStatusManager.SetStatus(globalPosition, (draggingData.ContainerItem.Size -container.OutsideInfo)*DragDropProfile.Instance.CellSize, DragDropProfile.Status.busy);
                 return;
             }
-            
+            // Is ok
             slotStatusManager.SetStatus(globalPosition, draggingData.ContainerItem.Size*DragDropProfile.Instance.CellSize, DragDropProfile.Status.possible);
         }
 

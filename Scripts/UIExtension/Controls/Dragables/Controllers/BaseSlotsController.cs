@@ -20,7 +20,7 @@ namespace UIExtension.Controls.Dragables.Controllers
         [SerializeField][CustomSerializedField(true)] protected CustomObjectProperty<Transform> draggingParrent;
         [SerializeField][CustomSerializedField(true)] protected CustomObjectProperty<SlotStatusManager> slotStatusManager;
         
-        [SerializeField] protected BaseDragable<T1, T2> baseDragablePrefab;
+        [SerializeField][CustomSerializedField(true)] protected CustomObjectProperty<BaseDragable<T1, T2>> baseDragablePrefab;
 
         protected List<BaseDragable<T1, T2>> spawnedDragables = new List<BaseDragable<T1, T2>>();
 
@@ -28,14 +28,14 @@ namespace UIExtension.Controls.Dragables.Controllers
         {
             if (draggingParrent != null && baseDragablePrefab != null)
             {
-                baseDragablePrefab.SetParrents(draggingParrent.serializedProperty, draggingParrent.serializedProperty);
+                baseDragablePrefab.serializedProperty.SetParrents(draggingParrent.serializedProperty, draggingParrent.serializedProperty);
             }
         }
 
 
         public abstract void Open(Container<T1, T2> container);
         public abstract void Close();
-        public abstract void InitSlots();
+        public abstract void InitContainer();
 
         protected abstract void OnContainerChanged();
     }

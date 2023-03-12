@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DependentObjects.Classes.Slots;
 using DependentObjects.Enums;
 using DependentObjects.ScriptableObjects.Managment;
@@ -11,7 +12,12 @@ namespace Managment
     {
         [SerializeField] private List<ArmamentCategory> armamentBindSlots;
 
-        private List<ArmamentSlot> armamentSlots; 
+        private List<ArmamentSlot> armamentSlots = new List<ArmamentSlot>();
+
+        private void Awake()
+        {
+            
+        }
 
         public override bool TryAddItem(ArmableItem ArmableItem)
         {
@@ -19,40 +25,68 @@ namespace Managment
         }
 
 
-        public override bool TryAddItemAtSlot(ArmableItem armable, int position)
+        public override bool TryAddItemAtSlot(ArmableItem armable, int slotid)
         {
-            if (!CheckSlot(armable, position))
+            if (CheckSlot(armable, slotid))
+            {
                 return false;
+            }
         
+            var item = Instantiate(armable);
+            armamentSlots.Add(new ArmamentSlot(item, slotid));
+
             OnContainerChanged.Invoke();
             return true;
         }
 
         public override bool TryMoveItem(ArmableItem armable, int slotId)
         {
-            throw new System.NotImplementedException();
+            if (!IsPossibleToMoveItem(armable, slotId))
+            {
+                return false;
+            }
+            
+            armamentSlots.Find(ctg => ctg.Item == armable).SetNewSlotId(slotId);
+            OnContainerChanged.Invoke();
+            return true;
         }
 
 
         public override bool IsPossibleToAddItemAtSlot(ArmableItem armable, int slotId)
         {
-            throw new System.NotImplementedException();
+            if (CheckSlot(armable, slotId))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public override bool IsPossibleToMoveItem(ArmableItem armable, int slotId)
         {
-            throw new System.NotImplementedException();
+            if (CheckSlot(armable, slotId) )
+            {
+                return false;
+            }
+
+            return true;
         }
 
 
         public override bool TryRemoveItem(ArmableItem armable)
         {
-            throw new System.NotImplementedException();
+            bool result = armamentSlots.Remove(armamentSlots.Find(ctg => ctg.Item == armable));
+
+            OnContainerChanged.Invoke();
+            return result;
         }
 
         public override ArmableItem[] GetItems()
         {
-            throw new System.NotImplementedException();
+            var items = this.armamentSlots.Select(ctg => ctg.Item);
+        
+
+            return items.ToArray();
         }
 
         public override ArmamentSlot[] GetSlots()
@@ -63,18 +97,16 @@ namespace Managment
         protected override bool CheckSlot(ArmableItem armable, int slotId)
         {
             if (armable == null)
-                return false;
+                return true;
             var foundSlot = armamentSlots.Find(ctg => ctg.SlotId == slotId);
             if (foundSlot != null)
-                return false;
+                return true;
             if (armamentBindSlots.Count <= slotId)
                 throw new Exception($"Out of range with slot id: {slotId} in class Armament");
             if (armamentBindSlots[slotId] != armable.ArmamentCategory)
-                return false;
-        
-            armamentSlots.Add(new ArmamentSlot(Instantiate(armable), slotId));
-        
-            return true;
+                return true;
+            
+            return false;
         }
     }
 }

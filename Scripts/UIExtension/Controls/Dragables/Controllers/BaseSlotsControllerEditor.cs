@@ -20,7 +20,7 @@ namespace UIExtension.Controls.Dragables.Controllers
         
             if (GUILayout.Button("Init"))
             {
-                armableSlotsController.InitSlots();
+                armableSlotsController.InitContainer();
             }
         }
     }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects.Managment
 {
+    [System.Serializable]
     public abstract class ContainerItem : ScriptableObject
     {
         public int ID;

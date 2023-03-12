@@ -29,7 +29,7 @@ namespace UIExtension.Controls.Dragables.Controllers
             HoldingContainer.OnContainerChanged.RemoveListener(OnContainerChanged);
         }
 
-        public override void InitSlots()
+        public override void InitContainer()
         {
             // var newDropables = transform.GetComponentsInChildren<DropableUseable>();
             // if (Dropables.Length != newDropables.Length)

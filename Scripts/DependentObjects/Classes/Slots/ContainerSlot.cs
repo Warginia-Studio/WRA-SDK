@@ -2,6 +2,7 @@ using DependentObjects.ScriptableObjects.Managment;
 
 namespace DependentObjects.Classes.Slots
 {
+    [System.Serializable]
     public abstract class ContainerSlot<T> where T : ContainerItem
     {
         public int Stack;

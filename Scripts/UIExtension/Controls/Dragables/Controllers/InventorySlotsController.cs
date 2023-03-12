@@ -4,6 +4,7 @@ using DependentObjects.ScriptableObjects.Managment;
 using Managment;
 using UIExtension.Controls.Dragables.Dragables;
 using UIExtension.Controls.Dragables.Dropables;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace UIExtension.Controls.Dragables.Controllers
@@ -31,8 +32,10 @@ namespace UIExtension.Controls.Dragables.Controllers
         {
             HoldingContainer.OnContainerChanged.RemoveListener(OnContainerChanged);
         }
+        
+        #if UNITY_EDITOR
 
-        public override void InitSlots()
+        public override void InitContainer()
         {
             if (rectTransform == null || customGridLayoutGroup == null)
                 GetComponents();
@@ -53,7 +56,36 @@ namespace UIExtension.Controls.Dragables.Controllers
                 (Dropables[i] as DropableItem).InitId(new Vector2Int(x,y), i);
                 Dropables[i].SetInfo(this, null);
             }
+
+            // var myTransform = GetComponent<RectTransform>();
+            // if (dragablesParrent == null || dragablesParrent.serializedProperty)
+            // {
+            //     var v = new GameObject("Dragables Parrent inventory").GetComponent<RectTransform>();
+            //     
+            //     v.parent = transform.parent;
+            //     v.pivot = myTransform.pivot;
+            //     v.anchorMin = myTransform.anchorMin;
+            //     v.anchorMax = myTransform.anchorMax;
+            //     v.position = transform.position;
+            //     v.sizeDelta = myTransform.sizeDelta;
+            // }
+            //
+            // if (draggingParrent == null || draggingParrent.serializedProperty)
+            // {
+            //     var v = new GameObject("Dragging Parrent inventory").GetComponent<RectTransform>();
+            //     
+            //     v.parent = transform.parent;
+            //     v.pivot = myTransform.pivot;
+            //     v.anchorMin = myTransform.anchorMin;
+            //     v.anchorMax = myTransform.anchorMax;
+            //     v.position = transform.position;
+            //     v.sizeDelta = myTransform.sizeDelta;
+            // }
+            //
+            // EditorSceneManager.MarkAllScenesDirty();
         }
+        
+        #endif
         
         // TODO: optimatization
         protected override void OnContainerChanged()
@@ -64,14 +96,18 @@ namespace UIExtension.Controls.Dragables.Controllers
 
             for (int i = 0; i < -itemCount; i++)
             {
-                var newGo = Instantiate(baseDragablePrefab.gameObject, dragablesParrent.serializedProperty);
+                var newGo = Instantiate(baseDragablePrefab.serializedProperty.gameObject, dragablesParrent.serializedProperty);
                 var id = newGo.GetComponent<ItemDragable>();
                 spawnedDragables.Add(id);
             }
+
+            int removedItems = 0;
             
-            for (int i = 0; i < itemCount; i++)
+            for (int i = 0; removedItems < itemCount && spawnedDragables.Count > 0; i++)
             {
+                Destroy(spawnedDragables[i].gameObject);
                 spawnedDragables.RemoveAt(i);
+                removedItems++;
                 i--;
             }
 

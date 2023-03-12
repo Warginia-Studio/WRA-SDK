@@ -21,7 +21,7 @@ MonoBehaviour:
   busy: {r: 0.7176547, g: 0, b: 1, a: 1}
   wrongType: {r: 0, g: 1, b: 0.94065905, a: 1}
   customStatusConfiguration: []
-  stretchItemInArmamentSlot: 0
+  stretchItemInArmamentSlot: 1
   stretchItemInUseableSlot: 0
   useColors: 1
   commonColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 0.7058824}

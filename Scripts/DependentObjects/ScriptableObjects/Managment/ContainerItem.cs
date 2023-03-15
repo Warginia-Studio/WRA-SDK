@@ -8,6 +8,8 @@ namespace DependentObjects.ScriptableObjects.Managment
         public int ID;
         public Vector2Int Size;
         public Sprite Icon;
+        public string ItemName;
+        [TextArea]
         public string Description;
 
         public bool Stacking;

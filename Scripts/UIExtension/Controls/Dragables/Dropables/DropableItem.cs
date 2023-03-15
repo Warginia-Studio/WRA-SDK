@@ -28,12 +28,12 @@ namespace UIExtension.Controls.Dragables.Dropables
         public override void OnDrop(PointerEventData eventData)
         {
             var dragging = DragDropManager.Instance.Dragging;
-
             var slotStatusManager = ParrentSlotsController.SlotStatusManager;
-
+            var globalPosition = transform.position;
             // Wrong item
             var draggingData = DragDropManager.Instance.Dragging;
             var containerItem = draggingData.ContainerItem as Item;
+            
             if (containerItem == null)
             {
                 return;
@@ -59,6 +59,7 @@ namespace UIExtension.Controls.Dragables.Dropables
             {
                 draggingData.RemoveItemFromPreviousContainer();
             }
+            
         }
 
         public override void UpdateStatus(bool enter)

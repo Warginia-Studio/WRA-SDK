@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DependentObjects.Classes;
 using DependentObjects.Classes.Slots;
 using DependentObjects.Enums;
+using DependentObjects.Interfaces;
 using DependentObjects.ScriptableObjects.Managment;
+using DependentObjects.Structs;
 using UnityEngine;
 
 namespace Managment
 {
-    public class Armament : Container<ArmamentSlot, ArmableItem>
+    public class Armament : Container<ArmamentSlot, ArmableItem>, IStatisticsHolder
     {
         [SerializeField] private List<ArmamentCategory> armamentBindSlots;
 
@@ -107,6 +110,18 @@ namespace Managment
                 return true;
             
             return false;
+        }
+
+        public StatisticsHolder GetStatisticsInfo()
+        {
+            StatisticsHolder statisticInfo = new StatisticsHolder();
+
+            for (int i = 0; i < armamentSlots.Count; i++)
+            {
+                statisticInfo += armamentSlots[i].Item.StatisticInfo;
+            }
+
+            return statisticInfo;
         }
     }
 }

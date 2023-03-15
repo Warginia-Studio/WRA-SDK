@@ -12,6 +12,7 @@ namespace UIExtension.Controls.Dragables.Controllers
 {
     public abstract class BaseSlotsController<T1,T2> : MonoBehaviour where T1 : ContainerSlot<T2> where T2 : ContainerItem
     {
+        public Transform ContainerParrent => HoldingContainer.transform;
         public Container<T1, T2> HoldingContainer { get; protected set; }
         public BaseDropable<T1, T2>[] Dropables;
         public SlotStatusManager SlotStatusManager => slotStatusManager.serializedProperty;

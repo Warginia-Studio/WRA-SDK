@@ -14,7 +14,7 @@ namespace DependentObjects.ScriptableObjects.Managment
         public override string GetDescription(Transform parrent)
         {
 
-            return name;
+            return ItemName + Description;
         }
     }
 }

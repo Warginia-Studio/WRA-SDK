@@ -15,6 +15,8 @@ MonoBehaviour:
   ID: 0
   Size: {x: 4, y: 4}
   Icon: {fileID: 0}
+  ItemName: asdsa
+  Description: asd
   Stacking: 0
   MaxStack: 0
   ValueType: 0

@@ -1,6 +1,6 @@
 using DependentObjects.ScriptableObjects;
 
-namespace DependentObjects.Interfaces
+namespace DependentObjects.Interfaces.Items
 {
     public interface IUseableItem
     {

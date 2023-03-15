@@ -133,10 +133,18 @@ namespace Managment
 
         protected virtual bool IsOutsideOfInventory(Item item, Vector2Int position)
         {
+            OutsideInfo = Vector2Int.zero;
+            var outSideTemp = new Vector2Int((position.x + item.Size.x) - containerSize.x ,
+                (position.y + item.Size.y) - containerSize.y);
             if (position.x < 0 || position.y < 0)
                 return true;
-            if (position.x + item.Size.x > containerSize.x || position.y + item.Size.y > containerSize.y)
+            if (outSideTemp.x > 0 || outSideTemp.y > 0)
+            {
+                OutsideInfo = new Vector2Int(
+                    outSideTemp.y > 0 ? outSideTemp.y : 0, outSideTemp.x > 0 ? outSideTemp.x : 0);
                 return true;
+            }
+
             return false;
         }
 

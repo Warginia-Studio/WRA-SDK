@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DependentObjects.Enums;
 using Patterns;
 using UnityEngine;
 
@@ -17,6 +18,9 @@ namespace DependentObjects.ScriptableObjects
             wrongType,
             custom
         }
+
+        public bool UseColors => useColors;
+        public bool UseSprites => useSprites;
     
         [System.Serializable]
         private struct CustomStatus
@@ -40,6 +44,24 @@ namespace DependentObjects.ScriptableObjects
         [SerializeField] private bool stretchItemInArmamentSlot = false;
         [SerializeField] private bool stretchItemInUseableSlot = false;
 
+        [Header("Background Colors value of item")] 
+        [SerializeField] private bool useColors;
+        [SerializeField] private Color commonColor;
+        [SerializeField] private Color uncommonColor;
+        [SerializeField] private Color rareColor;
+        [SerializeField] private Color epicColor;
+        [SerializeField] private Color lengedaryColor;
+        [SerializeField] private Color mythicColor;
+        
+        [Header("Background images value of item")] 
+        [SerializeField] private bool useSprites;
+        [SerializeField] private Sprite commonSprite;
+        [SerializeField] private Sprite uncommonSprite;
+        [SerializeField] private Sprite rareSprite;
+        [SerializeField] private Sprite epicSprite;
+        [SerializeField] private Sprite lengedarySprite;
+        [SerializeField] private Sprite mythicSprite;
+
         public Vector2Int CellSize => cellSize;
         public bool StretchItemInArmamentSlot => stretchItemInArmamentSlot;
         public bool StretchItemInUseableSlot => stretchItemInUseableSlot;
@@ -61,19 +83,51 @@ namespace DependentObjects.ScriptableObjects
             }
         }
 
-        private Color[] Colors
+        private Color[] StatusesColors
         {
             get
             {
-                if (colors == null || colors.Length==0) 
+                if (statusesColors == null || statusesColors.Length==0) 
                 {
-                    colors = new[] { Color.clear, selected, possible, notPossible, busy, wrongType };
+                    statusesColors = new[] { Color.clear, selected, possible, notPossible, busy, wrongType };
                 }
-                return colors;
+                return statusesColors;
             }
         }
 
-        private Color[] colors;
+        private Color[] BackgroundValuesColors
+        {
+            get
+            {
+                if (backgroundValuesColors == null || backgroundValuesColors.Length == 0)
+                {
+                    backgroundValuesColors = new[]
+                        { commonColor, uncommonColor, rareColor, epicColor, lengedaryColor, mythicColor };
+                }
+
+                return backgroundValuesColors;
+            }
+        }
+        
+        private Sprite[] BackgroundValuesSprites
+        {
+            get
+            {
+                if (backgroundValuesSprites == null || backgroundValuesSprites.Length == 0)
+                {
+                    backgroundValuesSprites = new[]
+                        { commonSprite, uncommonSprite, rareSprite, epicSprite, lengedarySprite, mythicSprite };
+                }
+
+                return backgroundValuesSprites;
+            }
+        }
+        
+        
+
+        private Color[] statusesColors;
+        private Color[] backgroundValuesColors;
+        private Sprite[] backgroundValuesSprites;
 
         private Dictionary<string, Color> customStatuses;
     
@@ -84,18 +138,30 @@ namespace DependentObjects.ScriptableObjects
                 case Status.custom:
                     return CustomStatuses[customStatusName];
                 default:
-                    return Colors[(int)status];
+                    return StatusesColors[(int)status];
             }
+        }
+
+        public Color GetColorForValueOfItem(ValueOfItem valueOfItem)
+        {
+            return BackgroundValuesColors[(int)valueOfItem];
+        }
+        
+        public Sprite GetSpriteForValueOfItem(ValueOfItem valueOfItem)
+        {
+            return BackgroundValuesSprites[(int)valueOfItem];
         }
 
         public Color DragableColor(bool dragging)
         {
             return dragging ? dragColor : idlecolor;
         }
+        
+        
 
         public void UpdateColors()
         {
-            colors = new[] { Color.clear, selected, possible, notPossible, busy, wrongType };
+            statusesColors = new[] { Color.clear, selected, possible, notPossible, busy, wrongType };
         }
     }
 }

@@ -2,6 +2,7 @@ using DependentObjects.ScriptableObjects;
 using DependentObjects.ScriptableObjects.Managment;
 using Managment;
 using UIExtension.Controls.Containers;
+using UIExtension.Controls.Dragables.Controllers;
 using UnityEngine;
 
 namespace Tests
@@ -10,8 +11,10 @@ namespace Tests
     {
         [SerializeField] private Inventory inventory1;
         [SerializeField] private Armament inventory2;
+        [SerializeField] private InventorySlotsController inventorySlotsController;
+        [SerializeField] private ArmableSlotsController armableSlotsController;
     
-        [SerializeField] private ContainerItem[] items;
+        [SerializeField] private Item[] items;
 
         private int id;
     
@@ -19,6 +22,8 @@ namespace Tests
         {
             // FindObjectOfType<AdvancedContainerWindowIniter>().InitContainer(inventory1, inventory2);
             // FindObjectOfType<ContainerWindowIniter>().OpenContainer(inventory);
+            inventorySlotsController.Open(inventory1);
+            armableSlotsController.Open(inventory2);
         }
 
         // Update is called once per frame
@@ -44,10 +49,10 @@ namespace Tests
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                // if (inventory1.TryAddItem(items[id]))
-                // {
-                //     Debug.LogError("Added item.");
-                // }
+                if (inventory1.TryAddItem(items[id]))
+                {
+                    Debug.LogError("Added item.");
+                }
             }
         
         }

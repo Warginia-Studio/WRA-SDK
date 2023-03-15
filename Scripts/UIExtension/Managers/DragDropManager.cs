@@ -45,7 +45,6 @@ namespace UIExtension.Managers
     {
         dragging = null;
         isDragging = false;
-        // StatusManager.Instance.Reset();
         OnDragChanged.Invoke(isDragging);
     }
     }

@@ -2,6 +2,7 @@ using DependentObjects.ScriptableObjects.Managment;
 
 namespace DependentObjects.Classes.Slots
 {
+    [System.Serializable]
     public class ArmamentSlot : ContainerSlot<ArmableItem>
     {
         public int SlotId => slotId;
@@ -10,6 +11,11 @@ namespace DependentObjects.Classes.Slots
         public ArmamentSlot(ArmableItem containerItem, int id) : base(containerItem)
         {
             slotId = id;
+        }
+
+        public void SetNewSlotId(int newSlotId)
+        {
+            slotId = newSlotId;
         }
     }
 }

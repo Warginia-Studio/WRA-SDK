@@ -21,3 +21,19 @@ MonoBehaviour:
   busy: {r: 0.7176547, g: 0, b: 1, a: 1}
   wrongType: {r: 0, g: 1, b: 0.94065905, a: 1}
   customStatusConfiguration: []
+  stretchItemInArmamentSlot: 1
+  stretchItemInUseableSlot: 0
+  useColors: 1
+  commonColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 0.7058824}
+  uncommonColor: {r: 0.019607844, g: 0.7058824, b: 0, a: 0.7058824}
+  rareColor: {r: 0, g: 0.2784314, b: 0.6117647, a: 0.7058824}
+  epicColor: {r: 0.7924528, g: 0, b: 0.48203787, a: 0.7058824}
+  lengedaryColor: {r: 0.8679245, g: 0.5159508, b: 0.1514774, a: 0.7058824}
+  mythicColor: {r: 0.7924528, g: 0, b: 0, a: 0.7058824}
+  useSprites: 0
+  commonSprite: {fileID: 0}
+  uncommonSprite: {fileID: 0}
+  rareSprite: {fileID: 0}
+  epicSprite: {fileID: 0}
+  lengedarySprite: {fileID: 0}
+  mythicSprite: {fileID: 0}

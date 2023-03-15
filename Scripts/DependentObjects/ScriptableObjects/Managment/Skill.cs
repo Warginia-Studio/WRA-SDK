@@ -1,4 +1,5 @@
 using DependentObjects.Interfaces;
+using DependentObjects.Interfaces.Items;
 using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects.Managment

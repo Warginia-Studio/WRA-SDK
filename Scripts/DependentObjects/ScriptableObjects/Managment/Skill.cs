@@ -6,6 +6,8 @@ namespace DependentObjects.ScriptableObjects.Managment
 {
     public class Skill : ContainerItem, IUseableItem
     {
+        public ActionBase ActionBase => actionBase;
+        
         [SerializeField] private ActionBase actionBase;
     
         public ActionBase GetActionReference()

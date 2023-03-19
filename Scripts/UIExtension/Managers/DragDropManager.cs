@@ -1,7 +1,7 @@
 using DependentObjects.Classes;
 using DependentObjects.ScriptableObjects;
+using DependentObjects.ScriptableObjects.Profiles;
 using Patterns;
-using UIExtension.Controls.Dragables;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using DependentObjects.ScriptableObjects;
+using DependentObjects.ScriptableObjects.Profiles;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,7 +14,7 @@ namespace Utility.FileManagment
         private static Dictionary<string, string> LoadedLang;
         public static void LoadLang()
         {
-            var path = Application.dataPath + "/Resources/Langs/" + ApplicationConfiguration.Instance.Language + ".xml";
+            var path = Application.dataPath + "/Resources/Configs/Langs/" + ApplicationProfile.Instance.Language + ".xml";
         
             XmlDocument doc = new XmlDocument();
             doc.Load(path);

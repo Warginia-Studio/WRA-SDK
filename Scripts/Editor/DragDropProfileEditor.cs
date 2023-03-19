@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DependentObjects.ScriptableObjects;
+using DependentObjects.ScriptableObjects.Profiles;
 using UnityEditor;
 using UnityEngine;
 

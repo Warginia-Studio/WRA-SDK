@@ -9,9 +9,19 @@ namespace Patterns
         {
             get
             {
+                T[] assets = Resources.LoadAll<T>("");
+                if (valueOfIstances != assets.Length)
+                {
+                    valueOfIstances = assets.Length;
+                    instance = null;
+                }
                 if (instance == null)
                 {
-                    T[] assets = Resources.LoadAll<T>("");
+                    assets = Resources.LoadAll<T>("Resources/CustomProfiles");
+                    if (assets == null || assets.Length == 0)
+                    {
+                        assets = Resources.LoadAll<T>("");
+                    }
                     instance = assets[0];
                     if (instance == null)
                     {
@@ -24,5 +34,6 @@ namespace Patterns
         }
 
         private static T instance;
+        private static int valueOfIstances = 0;
     }
 }

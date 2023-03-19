@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DependentObjects.Classes;
+using DependentObjects.Classes.Statistics;
 using UnityEditor;
 using UnityEngine;
 

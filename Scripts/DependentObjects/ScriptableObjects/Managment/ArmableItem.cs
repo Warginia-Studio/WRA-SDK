@@ -1,4 +1,5 @@
 using DependentObjects.Classes;
+using DependentObjects.Classes.Statistics;
 using DependentObjects.Enums;
 using DependentObjects.Structs;
 using UnityEngine;
@@ -13,8 +14,7 @@ namespace DependentObjects.ScriptableObjects.Managment
 
         public override string GetDescription(Transform parrent)
         {
-
-            return name;
+            return ItemName + Description;
         }
     }
 }

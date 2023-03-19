@@ -1,4 +1,5 @@
 using DependentObjects.Classes;
+using DependentObjects.Classes.Statistics;
 using UnityEngine;
 using UnityEngine.Events;
 

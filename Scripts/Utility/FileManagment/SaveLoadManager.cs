@@ -31,6 +31,16 @@ namespace Utility.FileManagment
             public List<string> SavedData= new List<string>();
         }
 
+        public static void StartListenObject(ISaveable saveable)
+        {
+            
+        }
+
+        public static void StopListenObject(ISaveable saveable)
+        {
+            
+        }
+
         public static void Save()
         {
             ProcessStatus = Status.findingSaveableObjects;

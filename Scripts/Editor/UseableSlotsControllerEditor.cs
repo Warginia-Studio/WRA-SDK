@@ -4,7 +4,7 @@ using System.Linq;
 using DependentObjects.Classes.Slots;
 using DependentObjects.ScriptableObjects;
 using DependentObjects.ScriptableObjects.Managment;
-using UIExtension.Controls.Dragables.Controllers;
+using UIExtension.Controls.DD.Controllers;
 using UnityEditor;
 using UnityEngine;
 

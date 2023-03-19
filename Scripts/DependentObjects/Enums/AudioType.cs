@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum AudioType
+namespace DependentObjects.Enums
 {
-    voices,
-    music,
-    effects,
-    environment,
-    lector
+    public enum AudioType
+    {
+        voices,
+        music,
+        effects,
+        environment,
+        lector
+    }
 }

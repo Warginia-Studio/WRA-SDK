@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using DependentObjects.Classes;
 using DependentObjects.Classes.ResourcesInfos;
+using DependentObjects.Classes.Statistics;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "thief01/Providers/Damage Provider" , fileName = "Damage Provider")]
-public class DamageProvider : ScriptableObject
+namespace DependentObjects.ScriptableObjects.Providers
 {
-    public virtual float CalculateDamage(DamageInfo damageInfo, StatisticsHolder statisticsHolder)
+    [CreateAssetMenu(menuName = "thief01/Providers/Damage Provider" , fileName = "Damage Provider")]
+    public class DamageProvider : ScriptableObject
     {
+        public virtual float CalculateDamage(DamageInfo damageInfo, StatisticsHolder statisticsHolder)
+        {
 
-        return 0;
+            return 0;
+        }
     }
 }

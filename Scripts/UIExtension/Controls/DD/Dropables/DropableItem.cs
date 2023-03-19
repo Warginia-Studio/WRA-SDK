@@ -1,12 +1,11 @@
-using System;
 using DependentObjects.Classes.Slots;
-using DependentObjects.ScriptableObjects;
 using DependentObjects.ScriptableObjects.Managment;
+using DependentObjects.ScriptableObjects.Profiles;
 using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UIExtension.Controls.Dragables.Dropables
+namespace UIExtension.Controls.DD.Dropables
 {
     public class DropableItem : BaseDropable<InventorySlot, Item>
     {

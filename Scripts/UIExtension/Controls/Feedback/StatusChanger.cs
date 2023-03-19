@@ -1,4 +1,5 @@
 using DependentObjects.ScriptableObjects;
+using DependentObjects.ScriptableObjects.Profiles;
 using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.UI;

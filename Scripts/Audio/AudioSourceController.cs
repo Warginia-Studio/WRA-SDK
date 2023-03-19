@@ -1,16 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using AudioType = DependentObjects.Enums.AudioType;
 
-[RequireComponent(typeof(AudioSource))]
-public class AudioSourceController : MonoBehaviour
+namespace Audio
 {
-    [SerializeField] private AudioType audioTypeController;
-
-    private AudioSource audioSource;
-    private void Awake()
+    [RequireComponent(typeof(AudioSource))]
+    public class AudioSourceController : MonoBehaviour
     {
-        audioSource = GetComponent<AudioSource>();
+        [SerializeField] private AudioType audioTypeController;
+
+        private AudioSource audioSource;
+        private void Awake()
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 }

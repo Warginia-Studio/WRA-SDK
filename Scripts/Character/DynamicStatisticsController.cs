@@ -1,21 +1,23 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using DependentObjects.Classes.Statistics;
 using UnityEngine;
 
-public class DynamicStatisticsController : MonoBehaviour
+namespace Character
 {
-    [SerializeField] private List<DynamicStatisticValue> baseStatistics;
+    public class DynamicStatisticsController : MonoBehaviour
+    {
+        [SerializeField] private List<DynamicStatisticValue> baseStatistics;
     
-    // Start is called before the first frame update
-    void Start()
-    {
+        // Start is called before the first frame update
+        void Start()
+        {
         
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
+        }
     }
 }

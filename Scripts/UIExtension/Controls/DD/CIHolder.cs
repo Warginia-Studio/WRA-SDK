@@ -1,13 +1,12 @@
 using System;
 using DependentObjects.Classes.Slots;
-using DependentObjects.ScriptableObjects;
 using DependentObjects.ScriptableObjects.Managment;
-using Managment;
-using UIExtension.Controls.Dragables.Controllers;
+using DependentObjects.ScriptableObjects.Profiles;
+using UIExtension.Controls.DD.Controllers;
 using Unity.Collections;
 using UnityEngine;
 
-namespace UIExtension.Controls.Dragables
+namespace UIExtension.Controls.DD
 {
     [RequireComponent(typeof(RectTransform))]
     public abstract class CIHolder<TSlot, TItem> : MonoBehaviour where TSlot : ContainerSlot<TItem> where TItem : ContainerItem

@@ -3,7 +3,7 @@ using DependentObjects.ScriptableObjects.Managment;
 using UnityEditor;
 using UnityEngine;
 
-namespace UIExtension.Controls.Dragables.Controllers
+namespace UIExtension.Controls.DD.Controllers
 {
     [CustomEditor(typeof(BaseSlotsController<ContainerSlot<ContainerItem>,ContainerItem>))]
     public class BaseSlotsControllerEditor<T1,T2> : Editor where T1 : ContainerSlot<T2> where T2 : ContainerItem

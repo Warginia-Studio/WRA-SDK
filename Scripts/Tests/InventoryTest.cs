@@ -2,7 +2,7 @@ using DependentObjects.ScriptableObjects;
 using DependentObjects.ScriptableObjects.Managment;
 using Managment;
 using UIExtension.Controls.Containers;
-using UIExtension.Controls.Dragables.Controllers;
+using UIExtension.Controls.DD.Controllers;
 using UnityEngine;
 
 namespace Tests

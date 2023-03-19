@@ -1,13 +1,12 @@
 using DependentObjects.Classes.Slots;
-using DependentObjects.ScriptableObjects;
 using DependentObjects.ScriptableObjects.Managment;
+using DependentObjects.ScriptableObjects.Profiles;
 using Managment;
-using UIExtension.Controls.Dragables.Dragables;
-using UIExtension.Controls.Dragables.Dropables;
-using UnityEditor.SceneManagement;
+using UIExtension.Controls.DD.Dragables;
+using UIExtension.Controls.DD.Dropables;
 using UnityEngine;
 
-namespace UIExtension.Controls.Dragables.Controllers
+namespace UIExtension.Controls.DD.Controllers
 {
     public class InventorySlotsController : BaseSlotsController<InventorySlot, Item>
     {

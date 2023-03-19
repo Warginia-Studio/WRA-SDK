@@ -1,13 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
+using DependentObjects.ScriptableObjects.Providers;
 using Patterns;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "thief01/Profiles/Character Profile", fileName = "Character Profile")]
-public class CharacterProfile : ScriptableSingleton<CharacterProfile>
+namespace DependentObjects.ScriptableObjects.Profiles
 {
-   public DamageProvider DamageProvider;
-   public List<string> statisticsNames = new List<string>();
+   [CreateAssetMenu(menuName = "thief01/Profiles/Character Profile", fileName = "Character Profile")]
+   public class CharacterProfile : ScriptableSingleton<CharacterProfile>
+   {
+      public DamageProvider DamageProvider;
+      public List<string> statisticsNames = new List<string>();
 
+   }
 }

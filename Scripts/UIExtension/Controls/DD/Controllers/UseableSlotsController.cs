@@ -2,7 +2,7 @@ using DependentObjects.Classes.Slots;
 using DependentObjects.ScriptableObjects.Managment;
 using Managment;
 
-namespace UIExtension.Controls.Dragables.Controllers
+namespace UIExtension.Controls.DD.Controllers
 {
     public class UseableSlotsController : BaseSlotsController<ContainerSlot<ContainerItem>, ContainerItem>
     {

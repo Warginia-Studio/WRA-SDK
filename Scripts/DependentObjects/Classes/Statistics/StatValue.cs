@@ -1,7 +1,6 @@
-using DependentObjects.Structs;
 using UnityEngine;
 
-namespace DependentObjects.Classes
+namespace DependentObjects.Classes.Statistics
 {
     [System.Serializable]
     public struct StatValue

@@ -1,4 +1,5 @@
 using DependentObjects.Classes;
+using DependentObjects.Classes.Statistics;
 using DependentObjects.Enums;
 using DependentObjects.Structs;
 using UnityEngine;

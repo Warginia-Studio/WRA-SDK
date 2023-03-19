@@ -1,4 +1,3 @@
-using System;
 using DependentObjects.Classes;
 using DependentObjects.Classes.Slots;
 using DependentObjects.ScriptableObjects.Managment;
@@ -7,7 +6,7 @@ using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UIExtension.Controls.Dragables.Dragables
+namespace UIExtension.Controls.DD.Dragables
 {
     public class ItemDragable : BaseDragable<InventorySlot, Item>
     {

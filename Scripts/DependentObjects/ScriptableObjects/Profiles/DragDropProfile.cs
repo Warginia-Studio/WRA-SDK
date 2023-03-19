@@ -3,7 +3,7 @@ using DependentObjects.Enums;
 using Patterns;
 using UnityEngine;
 
-namespace DependentObjects.ScriptableObjects
+namespace DependentObjects.ScriptableObjects.Profiles
 {
     [CreateAssetMenu(fileName = "Drag Drop Profile", menuName = "thief01/Profiles/DDP_Default")]
     public class DragDropProfile : ScriptableSingleton<DragDropProfile>

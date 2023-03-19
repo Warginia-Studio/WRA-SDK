@@ -1,17 +1,16 @@
-using System;
 using System.Collections;
 using DependentObjects.Classes;
 using DependentObjects.Classes.Slots;
 using DependentObjects.Interfaces;
 using DependentObjects.ScriptableObjects.Managment;
-using UIExtension.Controls.Dragables.Controllers;
+using UIExtension.Controls.DD.Controllers;
 using UIExtension.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Utility.CustomAttributes.CustomProperty;
 
-namespace UIExtension.Controls.Dragables.Dragables
+namespace UIExtension.Controls.DD.Dragables
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class BaseDragable<TSlot, TItem> : CIHolder<TSlot, TItem>, IBeginDragHandler, IDragHandler,

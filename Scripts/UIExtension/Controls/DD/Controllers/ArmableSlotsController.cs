@@ -1,13 +1,11 @@
-using System;
 using System.Linq;
 using DependentObjects.Classes.Slots;
-using DependentObjects.ScriptableObjects;
 using DependentObjects.ScriptableObjects.Managment;
 using Managment;
-using UIExtension.Controls.Dragables.Dropables;
-using UnityEngine;
+using UIExtension.Controls.DD.Dragables;
+using UIExtension.Controls.DD.Dropables;
 
-namespace UIExtension.Controls.Dragables.Controllers
+namespace UIExtension.Controls.DD.Controllers
 {
     public class ArmableSlotsController : BaseSlotsController<ArmamentSlot, ArmableItem>
     {

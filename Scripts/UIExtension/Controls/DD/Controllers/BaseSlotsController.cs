@@ -1,14 +1,13 @@
-using System;
 using System.Collections.Generic;
 using DependentObjects.Classes.Slots;
 using DependentObjects.ScriptableObjects.Managment;
 using Managment;
-using UIExtension.Controls.Dragables.Dragables;
-using UIExtension.Controls.Dragables.Dropables;
+using UIExtension.Controls.DD.Dragables;
+using UIExtension.Controls.DD.Dropables;
 using UnityEngine;
 using Utility.CustomAttributes.CustomProperty;
 
-namespace UIExtension.Controls.Dragables.Controllers
+namespace UIExtension.Controls.DD.Controllers
 {
     public abstract class BaseSlotsController<T1,T2> : MonoBehaviour where T1 : ContainerSlot<T2> where T2 : ContainerItem
     {

@@ -1,8 +1,8 @@
-using DependentObjects.ScriptableObjects;
+using DependentObjects.ScriptableObjects.Profiles;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UIExtension.Controls.Dragables
+namespace UIExtension.Controls.DD
 {
     [RequireComponent(typeof(Image))]
     public class SlotStatusManager : MonoBehaviour

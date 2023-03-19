@@ -1,11 +1,10 @@
 using System;
 using DependentObjects.Classes.Slots;
-using DependentObjects.ScriptableObjects;
 using DependentObjects.ScriptableObjects.Managment;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-namespace UIExtension.Controls.Dragables.Dropables
+namespace UIExtension.Controls.DD.Dropables
 {
     public abstract class BaseDropable<T1,T2> : CIHolder<T1, T2> , IDropHandler, IPointerEnterHandler, IPointerExitHandler where T1 : ContainerSlot<T2> where T2 : ContainerItem
     {

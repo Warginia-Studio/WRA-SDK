@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DependentObjects.Enums;
 using DependentObjects.Interfaces;
 using Patterns;
 

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace DependentObjects.Classes
+namespace DependentObjects.Classes.Statistics
 {
     [System.Serializable]
     public class StatisticsHolder

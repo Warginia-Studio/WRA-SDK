@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DependentObjects.Classes;
 using DependentObjects.Classes.Slots;
+using DependentObjects.Classes.Statistics;
 using DependentObjects.Enums;
 using DependentObjects.Interfaces;
 using DependentObjects.ScriptableObjects.Managment;

@@ -1,10 +1,10 @@
-using DependentObjects.ScriptableObjects;
-using UIExtension.Controls.Dragables.Dragables;
+using DependentObjects.ScriptableObjects.Profiles;
+using UIExtension.Controls.DD.Dragables;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility.CustomAttributes.CustomProperty;
 
-namespace UIExtension.Controls.Dragables
+namespace UIExtension.Controls.DD
 {
     public class DragableItemRare : MonoBehaviour
     {

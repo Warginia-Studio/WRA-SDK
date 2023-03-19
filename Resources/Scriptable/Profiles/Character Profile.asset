@@ -13,7 +13,16 @@ MonoBehaviour:
   m_Name: Character Profile
   m_EditorClassIdentifier: 
   DamageProvider: {fileID: 11400000, guid: dea66c717bc15064ab098d110aa47eca, type: 2}
-  statisticsNames:
-  - health
-  - mana
-  - energy
+  StatisticInfos:
+  - StatisticName: Health
+    BoldText: 0
+    ColorText: {r: 0.23358655, g: 1, b: 0, a: 1}
+    Formating: 
+  - StatisticName: Mana
+    BoldText: 1
+    ColorText: {r: 0, g: 0.116532326, b: 1, a: 1}
+    Formating: 
+  - StatisticName: XD
+    BoldText: 1
+    ColorText: {r: 0.23529412, g: 1, b: 0, a: 1}
+    Formating: 

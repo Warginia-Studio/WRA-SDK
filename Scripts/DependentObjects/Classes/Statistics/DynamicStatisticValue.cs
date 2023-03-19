@@ -1,3 +1,6 @@
+using DependentObjects.ScriptableObjects.Profiles;
+using Utility.FileManagment;
+
 namespace DependentObjects.Classes.Statistics
 {
     [System.Serializable]
@@ -5,6 +8,21 @@ namespace DependentObjects.Classes.Statistics
     {
         public DynamicStatisticEnum Statistic;
         public float Value;
+        
+        public string GetStatisticInString()
+        {
+            return CharacterProfile.Instance.StatisticInfos[Statistic.Id].GetStringForStatistic(Value);
+        }
+
+        public string GetStatisticTranslation()
+        {
+            return LanguageManager.GetTransation("Statistic_" + CharacterProfile.Instance.StatisticInfos[Statistic.Id].StatisticName);
+        }
+
+        public string GetFullText()
+        {
+            return GetStatisticTranslation() + ": " + GetStatisticInString();
+        }
 
         #region DynamicStaticValue_Operators_Modificators
     

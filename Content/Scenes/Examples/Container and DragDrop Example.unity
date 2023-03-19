@@ -575,6 +575,12 @@ MonoBehaviour:
   - Statistic:
       id: 0
     Value: 0
+  - Statistic:
+      id: 1
+    Value: 0
+  - Statistic:
+      id: 2
+    Value: 0
 --- !u!1 &953474830
 GameObject:
   m_ObjectHideFlags: 0

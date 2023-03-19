@@ -8,6 +8,6 @@ using UnityEngine;
 public class CharacterProfile : ScriptableSingleton<CharacterProfile>
 {
    public DamageProvider DamageProvider;
-   
-   
+   public List<string> statisticsNames = new List<string>();
+
 }

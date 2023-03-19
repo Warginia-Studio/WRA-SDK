@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: Character Profile
   m_EditorClassIdentifier: 
   DamageProvider: {fileID: 11400000, guid: dea66c717bc15064ab098d110aa47eca, type: 2}
+  statisticsNames:
+  - health
+  - mana
+  - energy

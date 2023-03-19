@@ -7,10 +7,13 @@ namespace Character
     public class ActionController : MonoBehaviour
     {
         private List<ActionBase> activeActions = new List<ActionBase>();
-    
+        private List<Coroutine> coroutines = new List<Coroutine>();
+
         public void BeginAction(ActionBase actionBase)
         {
-            StartCoroutine(actionBase.ActionEngine(this));
+            var cor = StartCoroutine(actionBase.ActionEngine(this));
+            activeActions.Add(actionBase);
+            coroutines.Add(cor);
         }
 
         public void BreakAction(ActionBase actionBase)

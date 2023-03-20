@@ -26,7 +26,7 @@ namespace UIExtension
 
         protected void Update()
         {
-            if (DragDropProfile.Instance != null && cellSize != DragDropProfile.Instance.CellSize)
+            if (DragDropProfile.Instance != null && (cellSize != DragDropProfile.Instance.CellSize || spacing!= DragDropProfile.Instance.Spacing))
             {
                 cellSize = DragDropProfile.Instance.CellSize;
                 spacing = DragDropProfile.Instance.Spacing;

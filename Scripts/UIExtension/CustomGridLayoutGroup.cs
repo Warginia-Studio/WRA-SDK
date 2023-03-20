@@ -11,11 +11,15 @@ namespace UIExtension
         private int xd;
         protected void Awake()
         {
-            if(DragDropProfile.Instance!=null)
+            if (DragDropProfile.Instance != null)
+            {
                 cellSize = DragDropProfile.Instance.CellSize;
+                spacing = DragDropProfile.Instance.Spacing;
+            }
             else
             {
                 cellSize = new Vector2(32, 32);
+                spacing = new Vector2(0, 0);
             }
             base.Awake();
         }
@@ -25,6 +29,7 @@ namespace UIExtension
             if (DragDropProfile.Instance != null && cellSize != DragDropProfile.Instance.CellSize)
             {
                 cellSize = DragDropProfile.Instance.CellSize;
+                spacing = DragDropProfile.Instance.Spacing;
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using DependentObjects.Enums;
 using Patterns;
@@ -30,6 +31,7 @@ namespace DependentObjects.ScriptableObjects.Profiles
         }
         
         [SerializeField] private Vector2Int cellSize;
+        [SerializeField] private Vector2 spacing;
     
         [SerializeField] private Color dragColor;
         [SerializeField] private Color idlecolor;
@@ -63,6 +65,7 @@ namespace DependentObjects.ScriptableObjects.Profiles
         [SerializeField] private Sprite mythicSprite;
 
         public Vector2Int CellSize => cellSize;
+        public Vector2 Spacing => spacing;
         public bool StretchItemInArmamentSlot => stretchItemInArmamentSlot;
         public bool StretchItemInUseableSlot => stretchItemInUseableSlot;
     

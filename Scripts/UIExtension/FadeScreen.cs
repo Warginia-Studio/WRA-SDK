@@ -5,9 +5,23 @@ using UnityEngine.UI;
 
 namespace UIExtension
 {
+    [RequireComponent(typeof(Image))]
     public class FadeScreen : MonoBehaviourSingletonAutoLoadUI<FadeScreen>
     {
         public bool IsFadding { get; private set; }
+
+        private Image Image
+        {
+            get
+            {
+                if (image == null)
+                {
+                    image = GetComponent<Image>();
+                }
+
+                return image;
+            }
+        }
         private Image image;
         private RectTransform rectTransform;
         private Color fadeColor = Color.black;
@@ -18,7 +32,7 @@ namespace UIExtension
             GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
         }
 
-        public void FadeIn(float time=1, bool forceTo = false, bool force = false)
+        public void FadeIn(float time = 1, bool forceTo = false, bool force = false)
         {
             if (ResetFading(force))
             {
@@ -65,7 +79,7 @@ namespace UIExtension
             {
                 delta += Time.deltaTime * time;
                 yield return null;
-                image.color = GetColorWithAlpha(Mathf.Lerp(from, to, delta));
+                Image.color = GetColorWithAlpha(Mathf.Lerp(from, to, delta));
             }
             IsFadding = false;
         }
@@ -79,7 +93,7 @@ namespace UIExtension
             {
                 delta += Time.deltaTime * time;
                 yield return null;
-                image.color = GetColorWithAlpha(Mathf.Lerp(from, to, delta));
+                Image.color = GetColorWithAlpha(Mathf.Lerp(from, to, delta));
             }
             IsFadding = false;
         }

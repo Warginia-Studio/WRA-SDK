@@ -1,15 +1,18 @@
+using System;
+
 namespace Patterns
 {
-    public class Singleton<T>
+    public class Singleton<T> where T : new()
     {
         public static T Instance
         {
             get
             {
-                if(instance==null)
+                if (instance == null)
                 {
-                    instance = default(T);
+                    instance = new T();
                 }
+
                 return instance;
             }
         }

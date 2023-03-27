@@ -74,7 +74,7 @@ namespace UIExtension
         {
             IsFadding = true;
             float delta = 0;
-            float from = image.color.a;
+            float from = Image.color.a;
             while (delta<1)
             {
                 delta += Time.deltaTime * time;

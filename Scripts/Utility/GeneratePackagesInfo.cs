@@ -15,7 +15,7 @@ public class GeneratePackagesInfo
     {
         if (PlayerSettings.productName != "WRA-SDK")
         {
-            WraDiagnostics.Log("Project didn't generated packages info because it isn't SDK project.", Color.yellow);
+            WraDiagnostics.Log("Project didn't generate packages info because it isn't SDK project.", Color.yellow);
             return;
         }
         

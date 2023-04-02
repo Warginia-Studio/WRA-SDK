@@ -33,7 +33,7 @@ namespace Character
 
         [SerializeField] private bool useFixedValue = false;
 
-        private ClampedValue sourceValue;
+        private ClampedValue sourceValue = new ClampedValue(0, 100);
 
         protected virtual void Awake()
         {
@@ -58,15 +58,11 @@ namespace Character
 
         protected void Init(float min, float  max)
         {
-            if (sourceValue == null)
-                sourceValue = new ClampedValue(min, max);
             sourceValue.SetNewValues(min, max);
         }
 
         protected void InitAndRegen(float min, float max)
         {
-            if (sourceValue == null)
-                sourceValue = new ClampedValue(min, max);
             sourceValue.SetNewValues(min, max);
             sourceValue.Value = max;
         }

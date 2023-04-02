@@ -37,6 +37,7 @@ namespace Character
                                  MaxValue * healInfo.PercentHealValueOfMaxHealth;
             AddValue(healInfo);
             OnHealed.Invoke(healInfo);
+            
         }
         
         /*
@@ -48,6 +49,8 @@ namespace Character
             OnBeforeDamage.Invoke(damageInfo);
             RemoveValue(damageInfo);
             OnDamaged.Invoke(damageInfo);
+            if(CurrentValue <= 0)
+                Kill(new KillInfo(damageInfo.Owner));
         }
 
         public virtual void Kill(KillInfo killInfo)

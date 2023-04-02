@@ -61,17 +61,7 @@ namespace Utility
             x.CheckChange();
             return x;
         }
-    
-        public static bool operator==(ClampedValue x, ClampedValue y)
-        {
-            return x.value == y.value;
-        }
-    
-        public static bool operator!=(ClampedValue x, ClampedValue y)
-        {
-            return x.value != y.value;
-        }
-    
+        
         public static bool operator<=(ClampedValue x, ClampedValue y)
         {
             return x.value <= y.value;

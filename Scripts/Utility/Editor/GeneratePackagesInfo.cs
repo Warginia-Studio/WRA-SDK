@@ -10,7 +10,7 @@ using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 public class GeneratePackagesInfo
 {
-    [InitializeOnLoadMethod]
+    [MenuItem(itemName: "thief01/Generate packages list")]
     public static void RunGeneratePackagesInfo()
     {
         if (PlayerSettings.productName != "WRA-SDK")
@@ -24,6 +24,7 @@ public class GeneratePackagesInfo
         var path = Application.dataPath;
         if (!File.Exists(path + "/PackagesInfo.txt"))
         {
+            
             File.Create(path + "/PackagesInfo.txt");
         }
 
@@ -32,9 +33,12 @@ public class GeneratePackagesInfo
         {
             packagesList += packages[i].name +"\n";
         }
-        
-        File.WriteAllText(path + "/PackagesInfo.txt", packagesList);
+
+        var writer = File.CreateText(path + "/PackagesInfo.txt");
+        writer.Write(packagesList);
+        writer.Close();
 
         WraDiagnostics.Log("Project succesfully generated packages info");
+        AssetDatabase.Refresh();
     }
 }

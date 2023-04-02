@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +16,7 @@ public class GeneratePackagesInfo
     {
         if (PlayerSettings.productName != "WRA-SDK")
         {
-            WraDiagnostics.Log("Project didn't generated packages info because it isn't SDK project.", Color.yellow);
+            WraDiagnostics.Log("Project didn't generate packages info because it isn't SDK project.", Color.yellow);
             return;
         }
         
@@ -28,7 +29,7 @@ public class GeneratePackagesInfo
             File.Create(path + "/PackagesInfo.txt");
         }
 
-        string packagesList = "";
+        string packagesList = $"Generated: {DateTime.Now} Packages using in WRA-SDK PROJECT: \n";
         for (int i = 0; i < packages.Length; i++)
         {
             packagesList += packages[i].name +"\n";

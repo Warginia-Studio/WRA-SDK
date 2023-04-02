@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -28,7 +29,7 @@ public class GeneratePackagesInfo
             File.Create(path + "/PackagesInfo.txt");
         }
 
-        string packagesList = "Packages using in WRA-SDK PROJECT: \n";
+        string packagesList = $"Generated: {DateTime.Now} Packages using in WRA-SDK PROJECT: \n";
         for (int i = 0; i < packages.Length; i++)
         {
             packagesList += packages[i].name +"\n";

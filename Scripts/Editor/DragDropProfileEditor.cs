@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using DependentObjects.ScriptableObjects;
 using DependentObjects.ScriptableObjects.Profiles;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(DragDropProfile))]
-public class DragDropProfileEditor : Editor
+namespace Editor
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(DragDropProfile))]
+    public class DragDropProfileEditor : UnityEditor.Editor
     {
-        base.OnInspectorGUI();
-        EditorGUILayout.HelpBox( "If you changed values from HEADER=Statuses, press update button.", MessageType.Warning);
-        if (GUILayout.Button("Update colors"))
+        public override void OnInspectorGUI()
         {
-            ((DragDropProfile)target).UpdateColors();
+            base.OnInspectorGUI();
+            EditorGUILayout.HelpBox( "If you changed values from HEADER=Statuses, press update button.", MessageType.Warning);
+            if (GUILayout.Button("Update colors"))
+            {
+                ((DragDropProfile)target).UpdateColors();
+            }
         }
     }
 }

@@ -1,21 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using DependentObjects.Classes.Statistics;
 using DependentObjects.ScriptableObjects.Profiles;
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(DynamicStatisticEnum))]
-public class DynamicStatisticEnumEditor : PropertyDrawer
+namespace Editor
 {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    [CustomPropertyDrawer(typeof(DynamicStatisticEnum))]
+    public class DynamicStatisticEnumEditor : PropertyDrawer
     {
-        var prop = property.FindPropertyRelative("id");
-        var statisticsNames = CharacterProfile.Instance.statisticsNames;
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            var prop = property.FindPropertyRelative("id");
+            var statisticsNames = CharacterProfile.Instance.statisticsNames;
 
 
-        prop.intValue = EditorGUI.Popup(position, property.name, prop.intValue,
-            CharacterProfile.Instance.statisticsNames.ToArray());
+            prop.intValue = EditorGUI.Popup(position, property.name, prop.intValue,
+                CharacterProfile.Instance.statisticsNames.ToArray());
+        }
     }
 }

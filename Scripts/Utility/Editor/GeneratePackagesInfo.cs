@@ -28,7 +28,7 @@ public class GeneratePackagesInfo
             File.Create(path + "/PackagesInfo.txt");
         }
 
-        string packagesList = "";
+        string packagesList = "Packages using in WRA-SDK PROJECT: \n";
         for (int i = 0; i < packages.Length; i++)
         {
             packagesList += packages[i].name +"\n";

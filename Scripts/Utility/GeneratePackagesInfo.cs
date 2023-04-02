@@ -20,11 +20,11 @@ public class GeneratePackagesInfo
         }
         
         var packages = PackageInfo.GetAllRegisteredPackages();
-
+        
         var path = Application.dataPath;
-        if (!File.Exists(path + "/PackagesInfo.info"))
+        if (!File.Exists(path + "/PackagesInfo.txt"))
         {
-            File.Create(path + "/PackagesInfo.info");
+            File.Create(path + "/PackagesInfo.txt");
         }
 
         string packagesList = "";
@@ -33,8 +33,8 @@ public class GeneratePackagesInfo
             packagesList += packages[i].name +"\n";
         }
         
-        File.WriteAllText(path + "PackagesInfo.info", packagesList);
-        
+        File.WriteAllText(path + "/PackagesInfo.txt", packagesList);
+
         WraDiagnostics.Log("Project succesfully generated packages info");
     }
 }

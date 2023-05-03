@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects.Managment
 {
-    [CreateAssetMenu(menuName = "thief01/Inventory/Armable")]
+    [CreateAssetMenu(menuName = "thief01/WRA-SDK/Inventory/Armable")]
     public class ArmableItem : Item
     {
         public ArmamentCategory ArmamentCategory;

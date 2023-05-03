@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects.Managment
 {
-    [CreateAssetMenu(fileName ="Item", menuName = "thief01/Inventory/Item")]
+    [CreateAssetMenu(fileName ="Item", menuName = "thief01/WRA-SDK/Inventory/Item")]
     public class Item : ContainerItem
     {
         public ValueOfItem ValueType;

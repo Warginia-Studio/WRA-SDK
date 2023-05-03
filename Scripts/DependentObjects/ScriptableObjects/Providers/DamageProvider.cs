@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects.Providers
 {
-    [CreateAssetMenu(menuName = "thief01/Providers/Damage Provider" , fileName = "Damage Provider")]
+    [CreateAssetMenu(menuName = "thief01/WRA-SDK/Providers/Damage Provider" , fileName = "Damage Provider")]
     public class DamageProvider : ScriptableObject
     {
         public virtual float CalculateDamage(DamageInfo damageInfo, StatisticsHolder statisticsHolder)

@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects.Profiles
 {
-   [CreateAssetMenu(menuName = "thief01/Profiles/Character Profile", fileName = "Character Profile")]
+   [CreateAssetMenu(menuName = "thief01/WRA-SDK/Profiles/Character Profile", fileName = "Character Profile")]
    public class CharacterProfile : ScriptableSingleton<CharacterProfile>
    {
       public float InteractionRange = 5;

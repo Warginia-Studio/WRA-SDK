@@ -13,8 +13,9 @@ namespace DependentObjects.ScriptableObjects
     
         protected ActionController ActionController;
     
-        public abstract string GetDescription(ActionController owner);
+        public abstract string GetDescription(ActionData owner);
     
-        public abstract IEnumerator ActionEngine(ActionController owner);
+        public abstract IEnumerator ActionEngine(ActionData owner);
+        
     }
 }

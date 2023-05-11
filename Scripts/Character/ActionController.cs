@@ -9,9 +9,11 @@ namespace Character
         private List<ActionBase> activeActions = new List<ActionBase>();
         private List<Coroutine> coroutines = new List<Coroutine>();
 
+        private ActionData actionData;
+
         public void BeginAction(ActionBase actionBase)
         {
-            var cor = StartCoroutine(actionBase.ActionEngine(this));
+            var cor = StartCoroutine(actionBase.ActionEngine(actionData));
             activeActions.Add(actionBase);
             coroutines.Add(cor);
         }

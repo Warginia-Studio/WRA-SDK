@@ -18,7 +18,7 @@ namespace UIExtension.Controls.DD.Dragables
     {
         public Vector3 GrabOffset { get; protected set; }
         
-        [CustomSerializedField(true)][SerializeField] protected CustomObjectProperty<Image> itemIcon;
+        [CSerializedField(true)][SerializeField] protected COP<Image> itemIcon;
 
         protected Vector3 basePosition;
 

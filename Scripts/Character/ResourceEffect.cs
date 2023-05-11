@@ -8,8 +8,8 @@ using Object = UnityEngine.Object;
 
 public class ResourceEffect : MonoBehaviour
 {
-    [SerializeField] [CustomSerializedField(true)]
-    private CustomObjectProperty<ResourceController> targetResource;
+    [SerializeField] [CSerializedField(true)]
+    private COP<ResourceController> targetResource;
     
     [SerializeField] public EffectBehaviourBase onIncreasedEffect;
     [SerializeField] public EffectBehaviourBase onDecreaseEffect;

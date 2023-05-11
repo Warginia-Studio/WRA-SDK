@@ -16,11 +16,11 @@ namespace UIExtension.Controls.DD.Controllers
         public BaseDropable<T1, T2>[] Dropables;
         public SlotStatusManager SlotStatusManager => slotStatusManager.serializedProperty;
 
-        [SerializeField][CustomSerializedField(true)] protected CustomObjectProperty<Transform> dragablesParrent;
-        [SerializeField][CustomSerializedField(true)] protected CustomObjectProperty<Transform> draggingParrent;
-        [SerializeField][CustomSerializedField(true)] protected CustomObjectProperty<SlotStatusManager> slotStatusManager;
+        [SerializeField][CSerializedField(true)] protected COP<Transform> dragablesParrent;
+        [SerializeField][CSerializedField(true)] protected COP<Transform> draggingParrent;
+        [SerializeField][CSerializedField(true)] protected COP<SlotStatusManager> slotStatusManager;
         
-        [SerializeField][CustomSerializedField(true)] protected CustomObjectProperty<BaseDragable<T1, T2>> baseDragablePrefab;
+        [SerializeField][CSerializedField(true)] protected COP<BaseDragable<T1, T2>> baseDragablePrefab;
 
         protected List<BaseDragable<T1, T2>> spawnedDragables = new List<BaseDragable<T1, T2>>();
 

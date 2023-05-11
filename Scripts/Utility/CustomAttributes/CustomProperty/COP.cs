@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 namespace Utility.CustomAttributes.CustomProperty
 {
     [Serializable]
-    public class CustomObjectProperty<T> where T : Object
+    public class COP<T> where T : Object
     {
         public T serializedProperty;
     }

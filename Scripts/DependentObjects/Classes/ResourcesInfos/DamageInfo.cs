@@ -9,5 +9,6 @@ namespace DependentObjects.Classes.ResourcesInfos
         public bool CanBeReflected;
         
         public float DealtDamage = 0;
+        public float ScalingDamage = 1;
     }
 }

@@ -26,6 +26,7 @@ namespace Utility.FileManagment
             }
 
             LoadedLang = d;
+            LanguageChanged.Invoke();
         }
 
         public static string GetTransation(string keyWord)

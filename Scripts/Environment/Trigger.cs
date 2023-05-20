@@ -23,7 +23,7 @@ namespace Environment
 
         public string GetInteractionDescription()
         {
-            return LanguageManager.GetTransation(textTranslation);
+            return LanguageManager.GetTranslation(textTranslation);
         }
     }
 }

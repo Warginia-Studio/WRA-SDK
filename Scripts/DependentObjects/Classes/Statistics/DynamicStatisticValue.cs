@@ -16,7 +16,7 @@ namespace DependentObjects.Classes.Statistics
 
         public string GetStatisticTranslation()
         {
-            return LanguageManager.GetTransation("Statistic_" + CharacterProfile.Instance.StatisticInfos[Statistic.Id].StatisticName);
+            return LanguageManager.GetTranslation("Statistic_" + CharacterProfile.Instance.StatisticInfos[Statistic.Id].StatisticName);
         }
 
         public string GetFullText()

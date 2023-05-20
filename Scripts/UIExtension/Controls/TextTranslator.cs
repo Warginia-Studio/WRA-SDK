@@ -29,12 +29,12 @@ namespace UIExtension.Controls
             textMeshProUGUI = GetComponent<TextMeshProUGUI>();
             if (text != null)
             {
-                text.text = LanguageManager.GetTransation(keyText);
+                text.text = LanguageManager.GetTranslation(keyText);
             }
 
             if (textMeshProUGUI != null)
             {
-                textMeshProUGUI.text = LanguageManager.GetTransation(keyText);
+                textMeshProUGUI.text = LanguageManager.GetTranslation(keyText);
             }
         }
     }

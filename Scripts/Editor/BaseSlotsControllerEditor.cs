@@ -1,12 +1,13 @@
 using DependentObjects.Classes.Slots;
 using DependentObjects.ScriptableObjects.Managment;
+using UIExtension.Controls.DD.Controllers;
 using UnityEditor;
 using UnityEngine;
 
-namespace UIExtension.Controls.DD.Controllers
+namespace Editor
 {
     [CustomEditor(typeof(BaseSlotsController<ContainerSlot<ContainerItem>,ContainerItem>))]
-    public class BaseSlotsControllerEditor<T1,T2> : Editor where T1 : ContainerSlot<T2> where T2 : ContainerItem
+    public class BaseSlotsControllerEditor<T1,T2> : UnityEditor.Editor where T1 : ContainerSlot<T2> where T2 : ContainerItem
     {
         public override void OnInspectorGUI()
         {

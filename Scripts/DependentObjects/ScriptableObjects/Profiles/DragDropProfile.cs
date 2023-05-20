@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects.Profiles
 {
-    [CreateAssetMenu(fileName = "Drag Drop Profile", menuName = "thief01/Profiles/DDP_Default")]
+    [CreateAssetMenu(fileName = "Drag Drop Profile", menuName = "thief01/WRA-SDK/Profiles/DDP_Default")]
     public class DragDropProfile : ScriptableSingleton<DragDropProfile>
     {
         public enum Status

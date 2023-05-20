@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Utility.CustomAttributes.CustomProperty
 {
-    [CustomPropertyDrawer(typeof(CustomObjectProperty<>))]
+    [CustomPropertyDrawer(typeof(COP<>))]
     public class CustomObjectPropertyPD : PropertyDrawer
     {
         private const float FOLDOUT_HEIGHT = 16f;
@@ -18,7 +18,7 @@ namespace Utility.CustomAttributes.CustomProperty
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
-            var attributes = fieldInfo.GetCustomAttributes(typeof(CustomSerializedField), true) as CustomSerializedField[];
+            var attributes = fieldInfo.GetCustomAttributes(typeof(CSerializedField), true) as CSerializedField[];
             Color color = new Color(255, 255, 255, 0);
             if (attributes != null && attributes.Length > 0)
             {

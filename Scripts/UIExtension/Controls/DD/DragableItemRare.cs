@@ -9,7 +9,7 @@ namespace UIExtension.Controls.DD
     public class DragableItemRare : MonoBehaviour
     {
         private ItemDragable itemDragable;
-        [SerializeField][CustomSerializedField(true)] private CustomObjectProperty<Image> image;
+        [SerializeField][CSerializedField(true)] private COP<Image> image;
         private void Awake()
         {
             itemDragable = GetComponent<ItemDragable>();

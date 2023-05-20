@@ -2,10 +2,10 @@ using System;
 
 namespace Utility.CustomAttributes.CustomProperty
 {
-    public class CustomSerializedField : Attribute
+    public class CSerializedField : Attribute
     {
         public bool Reguired { get; private set; }
-        public CustomSerializedField(bool reuired = false)
+        public CSerializedField(bool reuired = false)
         {
             this.Reguired = reuired;
         }

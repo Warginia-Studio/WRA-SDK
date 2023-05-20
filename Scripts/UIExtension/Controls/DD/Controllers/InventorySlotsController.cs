@@ -32,7 +32,7 @@ namespace UIExtension.Controls.DD.Controllers
             HoldingContainer.OnContainerChanged.RemoveListener(OnContainerChanged);
         }
         
-        #if UNITY_EDITOR
+
 
         public override void InitContainer()
         {
@@ -84,7 +84,7 @@ namespace UIExtension.Controls.DD.Controllers
             // EditorSceneManager.MarkAllScenesDirty();
         }
         
-        #endif
+
         
         // TODO: optimatization
         protected override void OnContainerChanged()
@@ -131,6 +131,7 @@ namespace UIExtension.Controls.DD.Controllers
 
             }
         }
+
 
         private void GetComponents()
         {

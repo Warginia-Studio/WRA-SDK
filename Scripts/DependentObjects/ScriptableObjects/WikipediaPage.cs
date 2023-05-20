@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects
 {
-    [CreateAssetMenu(menuName = "thief01/Wikipedia/Page", fileName = "New WikipediaPage")]
+    [CreateAssetMenu(menuName = "thief01/WRA-SDK/Wikipedia/Page", fileName = "New WikipediaPage")]
     public class WikipediaPage : ScriptableObject
     {
         public string PageTitle;

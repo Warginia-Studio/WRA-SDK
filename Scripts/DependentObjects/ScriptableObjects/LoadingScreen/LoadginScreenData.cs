@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects.LoadingScreen
 {
-    [CreateAssetMenu(menuName = "thief01/Loading Screen Data")]
+    [CreateAssetMenu(menuName = "thief01/WRA-SDK/Loading Screen Data")]
     public class LoadginScreenData : ScriptableObject
     {
         public Sprite Image;

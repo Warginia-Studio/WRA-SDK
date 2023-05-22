@@ -62,6 +62,16 @@ namespace Utility.Diagnostics
             // need upgrade for game
             Debug.LogError($"<color={str}>{finalMessage}</color>");
         }
+
+        public static string GetColoredText(object message, Color color)
+        {
+            int r = (int)(color.r*255);
+            int g = (int)(color.g*255);
+            int b = (int)(color.b*255);
+            int a = (int)(color.a*255);
+            string str = "#" + r.ToString("x2") + g.ToString("x2") + b.ToString("x2") + a.ToString("x2");
+            return $"<color={str}>{message}</color>";
+        }
     
 
 

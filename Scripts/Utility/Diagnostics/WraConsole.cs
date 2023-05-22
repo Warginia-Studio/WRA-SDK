@@ -8,6 +8,8 @@ using UnityEditor;
 using UnityEngine;
 using Utility.Diagnostics;
 
+#if UNITY_EDITOR
+
 public class WraConsole : MonoBehaviourSingletonAutoLoad<WraConsole>
 {
     [SerializeField] private Transform content;
@@ -35,3 +37,6 @@ public class WraConsole : MonoBehaviourSingletonAutoLoad<WraConsole>
         tmp.text = logString + "\n" + stackTrace;
     }
 }
+
+#endif
+

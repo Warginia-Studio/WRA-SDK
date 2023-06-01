@@ -1,158 +1,159 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEditor;
 using UnityEngine;
 using Utility.FileManagment;
 
-public class LanguageEditor : EditorWindow
+namespace Editor
 {
-    private string[] langs;
-    private List<Dictionary<string, string>> allLangs = new List<Dictionary<string, string>>();
-
-    private Dictionary<string, string> missingTranslations = new Dictionary<string, string>();
-
-    private int choicedLang = 0;
-    private Vector2 scrollView;
-    [MenuItem("thief01/Language Editor")]
-    private static void OpenWindow()
+    public class LanguageEditor : EditorWindow
     {
-        LanguageEditor window = (LanguageEditor)EditorWindow.GetWindow(typeof(LanguageEditor));
-        window.Show();
-    }
+        private string[] langs;
+        private List<Dictionary<string, string>> allLangs = new List<Dictionary<string, string>>();
 
-    private void OnGUI()
-    {
-        if (langs != null)
+        private Dictionary<string, string> missingTranslations = new Dictionary<string, string>();
+
+        private int choicedLang = 0;
+        private Vector2 scrollView;
+        [MenuItem("thief01/Language Editor")]
+        private static void OpenWindow()
         {
-            if (GUILayout.Button("Save language"))
-            {
-                SaveLanguages();
-                return;
-            }
-            var tempChoice = EditorGUILayout.Popup(choicedLang, langs);
-
-            if (choicedLang != tempChoice)
-            {
-                missingTranslations.Clear();
-                choicedLang = tempChoice;
-                RefreshList();
-            }
-            
-            DrawLangView();
-
-            
+            LanguageEditor window = (LanguageEditor)EditorWindow.GetWindow(typeof(LanguageEditor));
+            window.Show();
         }
-        else
+
+        private void OnGUI()
         {
-            if (GUILayout.Button("GET LANGS"))
+            if (langs != null)
             {
-                scrollView = Vector2.zero;
-                langs = LanguageManager.GetLanguagesList();
-                var str = "";
-                for (int i = 0; i < langs.Length; i++)
+                if (GUILayout.Button("Save language"))
                 {
-                    str += langs[i] + " ";
-                    allLangs.Add(LanguageManager.GetLanguage(langs[i].Replace(".xml", "")));
+                    SaveLanguages();
+                    return;
                 }
-                RefreshList();
+                var tempChoice = EditorGUILayout.Popup(choicedLang, langs);
+
+                if (choicedLang != tempChoice)
+                {
+                    missingTranslations.Clear();
+                    choicedLang = tempChoice;
+                    RefreshList();
+                }
+            
+                DrawLangView();
+
+            
+            }
+            else
+            {
+                if (GUILayout.Button("GET LANGS"))
+                {
+                    scrollView = Vector2.zero;
+                    langs = LanguageManager.GetLanguagesList();
+                    var str = "";
+                    for (int i = 0; i < langs.Length; i++)
+                    {
+                        str += langs[i] + " ";
+                        allLangs.Add(LanguageManager.GetLanguage(langs[i].Replace(".xml", "")));
+                    }
+                    RefreshList();
+                }
             }
         }
-    }
 
-    private void DrawLangView()
-    {
-        scrollView = GUILayout.BeginScrollView(scrollView);
-        Dictionary<string, string> tempDictionary = new Dictionary<string, string>();
-        
-        EditorGUILayout.HelpBox("Translations", MessageType.Info);
-        
-        foreach (var VARIABLE in allLangs[choicedLang])
+        private void DrawLangView()
         {
-            var tempStr = EditorGUILayout.TextField(VARIABLE.Key, VARIABLE.Value);
-            tempDictionary.Add(VARIABLE.Key, tempStr);
-        }
-
-        foreach (var VARIABLE in tempDictionary)
-        {
-            allLangs[choicedLang][VARIABLE.Key] = VARIABLE.Value;
-        }
+            scrollView = GUILayout.BeginScrollView(scrollView);
+            Dictionary<string, string> tempDictionary = new Dictionary<string, string>();
         
-        tempDictionary.Clear();
+            EditorGUILayout.HelpBox("Translations", MessageType.Info);
         
-        EditorGUILayout.HelpBox("Missing translations", MessageType.Info);
-        
-        foreach (var VARIABLE in missingTranslations)
-        {
-            var tempStr = EditorGUILayout.TextField(VARIABLE.Key, VARIABLE.Value);
-            tempDictionary.Add(VARIABLE.Key, tempStr);
-        }
-
-        foreach (var VARIABLE in tempDictionary)
-        {
-            missingTranslations[VARIABLE.Key] = VARIABLE.Value;
-        }
-        
-        
-        
-        GUILayout.EndScrollView();
-    }
-
-    private void RefreshList()
-    {
-        for (int i = 0; i < allLangs.Count; i++)
-        {
-            if(i == choicedLang)
-                continue;
-            foreach (var VARIABLE in allLangs[i])
+            foreach (var VARIABLE in allLangs[choicedLang])
             {
-                if(missingTranslations.ContainsKey(VARIABLE.Key))
+                var tempStr = EditorGUILayout.TextField(VARIABLE.Key, VARIABLE.Value);
+                tempDictionary.Add(VARIABLE.Key, tempStr);
+            }
+
+            foreach (var VARIABLE in tempDictionary)
+            {
+                allLangs[choicedLang][VARIABLE.Key] = VARIABLE.Value;
+            }
+        
+            tempDictionary.Clear();
+        
+            EditorGUILayout.HelpBox("Missing translations", MessageType.Info);
+        
+            foreach (var VARIABLE in missingTranslations)
+            {
+                var tempStr = EditorGUILayout.TextField(VARIABLE.Key, VARIABLE.Value);
+                tempDictionary.Add(VARIABLE.Key, tempStr);
+            }
+
+            foreach (var VARIABLE in tempDictionary)
+            {
+                missingTranslations[VARIABLE.Key] = VARIABLE.Value;
+            }
+        
+        
+        
+            GUILayout.EndScrollView();
+        }
+
+        private void RefreshList()
+        {
+            for (int i = 0; i < allLangs.Count; i++)
+            {
+                if(i == choicedLang)
                     continue;
-                if (!allLangs[choicedLang].ContainsKey(VARIABLE.Key))
+                foreach (var VARIABLE in allLangs[i])
                 {
-                    missingTranslations.Add(VARIABLE.Key, VARIABLE.Value);
+                    if(missingTranslations.ContainsKey(VARIABLE.Key))
+                        continue;
+                    if (!allLangs[choicedLang].ContainsKey(VARIABLE.Key))
+                    {
+                        missingTranslations.Add(VARIABLE.Key, VARIABLE.Value);
+                    }
                 }
             }
         }
-    }
 
-    private void SaveLanguages()
-    {
-        foreach (var VARIABLE in missingTranslations)
+        private void SaveLanguages()
         {
-            allLangs[choicedLang].Add(VARIABLE.Key, VARIABLE.Value);
+            foreach (var VARIABLE in missingTranslations)
+            {
+                allLangs[choicedLang].Add(VARIABLE.Key, VARIABLE.Value);
+            }
+        
+            XmlDocument xmlDoc = new XmlDocument();
+
+            // Utwórz korzeń XML
+            XmlElement rootElement = xmlDoc.CreateElement("data");
+            xmlDoc.AppendChild(rootElement);
+        
+        
+
+            // Przejdź przez elementy słownika i dodaj je do dokumentu XML
+            foreach (KeyValuePair<string, string> pair in allLangs[choicedLang])
+            {
+                // Utwórz nowy element dla każdej pary klucz-wartość
+                XmlElement element = xmlDoc.CreateElement(pair.Key);
+                element.InnerText = pair.Value;
+
+                // // Ustaw atrybuty klucza i wartości
+                // element.SetAttribute("Key", pair.Key);
+                // element.SetAttribute("Value", pair.Value);
+
+                // Dodaj element do korzenia
+                rootElement.AppendChild(element);
+            }
+
+            // Zapisz dokument XML do pliku
+            xmlDoc.Save(LanguageManager.LANG_PATH + "temp.xml");
+
+            langs = null;
+            choicedLang = 0;
+            allLangs.Clear();
+            missingTranslations.Clear();
         }
-        
-        XmlDocument xmlDoc = new XmlDocument();
-
-        // Utwórz korzeń XML
-        XmlElement rootElement = xmlDoc.CreateElement("data");
-        xmlDoc.AppendChild(rootElement);
-        
-        
-
-        // Przejdź przez elementy słownika i dodaj je do dokumentu XML
-        foreach (KeyValuePair<string, string> pair in allLangs[choicedLang])
-        {
-            // Utwórz nowy element dla każdej pary klucz-wartość
-            XmlElement element = xmlDoc.CreateElement(pair.Key);
-            element.InnerText = pair.Value;
-
-            // // Ustaw atrybuty klucza i wartości
-            // element.SetAttribute("Key", pair.Key);
-            // element.SetAttribute("Value", pair.Value);
-
-            // Dodaj element do korzenia
-            rootElement.AppendChild(element);
-        }
-
-        // Zapisz dokument XML do pliku
-        xmlDoc.Save(LanguageManager.LANG_PATH + "temp.xml");
-
-        langs = null;
-        choicedLang = 0;
-        allLangs.Clear();
-        missingTranslations.Clear();
     }
 }

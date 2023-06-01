@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using Character;
 using DependentObjects.Classes.ResourcesInfos;
 using DependentObjects.Interfaces;
 using UnityEngine;
 using Utility.CustomAttributes.CustomProperty;
 
-public class DamageListener : MonoBehaviour, IDamageable
+namespace Character
 {
-    [SerializeField][CSerializedField(true)] private COP<HealthController> healthController;
-    [SerializeField] private float scalingDamage = 1;
-    public void DealDamage(DamageInfo damageInfo)
+    public class DamageListener : MonoBehaviour, IDamageable
     {
-        damageInfo.ScalingDamage = scalingDamage;
-        healthController.serializedProperty.DealDamage(damageInfo);
+        [SerializeField][CSerializedField(true)] private COP<HealthController> healthController;
+        [SerializeField] private float scalingDamage = 1;
+        public void DealDamage(DamageInfo damageInfo)
+        {
+            damageInfo.ScalingDamage = scalingDamage;
+            healthController.serializedProperty.DealDamage(damageInfo);
+        }
     }
 }

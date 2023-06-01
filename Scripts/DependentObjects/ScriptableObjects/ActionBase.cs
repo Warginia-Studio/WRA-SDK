@@ -1,5 +1,6 @@
 using System.Collections;
 using Character;
+using DependentObjects.Classes;
 using UnityEngine;
 
 namespace DependentObjects.ScriptableObjects

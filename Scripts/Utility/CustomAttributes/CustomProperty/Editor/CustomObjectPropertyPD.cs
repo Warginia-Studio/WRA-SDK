@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Utility.CustomAttributes.CustomProperty
+namespace Utility.CustomAttributes.CustomProperty.Editor
 {
     [CustomPropertyDrawer(typeof(COP<>))]
     public class CustomObjectPropertyPD : PropertyDrawer

@@ -1,12 +1,13 @@
-using System;
 using UnityEngine;
 using AudioType = DependentObjects.Enums.AudioType;
 
-namespace Audio
+namespace WAudio
 {
     [RequireComponent(typeof(AudioSource))]
     public class AudioSourceController : MonoBehaviour
     {
+        public AudioSource AudioSource => audioSource;
+        
         [SerializeField] private AudioType audioTypeController;
 
         private AudioSource audioSource;

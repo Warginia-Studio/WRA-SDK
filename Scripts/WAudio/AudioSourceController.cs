@@ -7,7 +7,6 @@ namespace WAudio
     public class AudioSourceController : MonoBehaviour
     {
         public AudioSource AudioSource => audioSource;
-        
         [SerializeField] private AudioType audioTypeController;
 
         private AudioSource audioSource;

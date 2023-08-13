@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DependentObjects.Classes;
 using DependentObjects.ScriptableObjects;
 using UnityEngine;
 

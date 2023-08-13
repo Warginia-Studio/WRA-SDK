@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SceneManagment
+namespace UIExtension.Controls.Buttons
 {
+    [RequireComponent(typeof(Button))]
     public class ExitButton : MonoBehaviour
     {
         private void Awake()

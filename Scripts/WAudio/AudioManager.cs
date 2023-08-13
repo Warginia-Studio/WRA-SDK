@@ -3,7 +3,7 @@ using DependentObjects.Enums;
 using DependentObjects.Interfaces;
 using Patterns;
 
-namespace Audio
+namespace WAudio
 {
     public class AudioManager : MonoBehaviourSingletonAutoCreate<AudioManager>, ISaveable
     {

@@ -5,8 +5,6 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
-
 namespace Utility.Diagnostics
 {
     public class WraConsole : MonoBehaviourSingletonAutoLoad<WraConsole>
@@ -22,11 +20,11 @@ namespace Utility.Diagnostics
             Application.logMessageReceived += WraConsole.Instance.LogReceived;
         }
 
-        public void ExecuteCommand()
+        public void ExecuteCommand(params string[] command)
         {
             WraDiagnostics.LogError($"Commands are not designed, tried to execute: {inputField.text}");
         }
-
+        
         private void LogReceived(string logString, string stackTrace, LogType type)
         {
             GameObject g = new GameObject($"Log{DateTime.Now}");
@@ -37,6 +35,4 @@ namespace Utility.Diagnostics
         }
     }
 }
-
-#endif
 

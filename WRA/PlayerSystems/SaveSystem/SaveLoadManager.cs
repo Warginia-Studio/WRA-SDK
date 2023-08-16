@@ -22,7 +22,9 @@ namespace WRA.PlayerSystems.SaveSystem
         }
 
         public static Status ProcessStatus;
-        
+
+        private static List<SLObserver> saveloadObservers = new List<SLObserver>();
+
         private class GlobalSaveData
         {
             public string SceneName;
@@ -30,14 +32,14 @@ namespace WRA.PlayerSystems.SaveSystem
             public List<string> SavedData= new List<string>();
         }
 
-        public static void StartListenObject(ISaveable saveable)
+        public static void AddSLObserver(SLObserver observer)
         {
-            
+            saveloadObservers.Add(observer);
         }
 
-        public static void StopListenObject(ISaveable saveable)
+        public static void RemoveSLObserver(SLObserver observer)
         {
-            
+            saveloadObservers.Remove(observer);
         }
 
         public static void Save()

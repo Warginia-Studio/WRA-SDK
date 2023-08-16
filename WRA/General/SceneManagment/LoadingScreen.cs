@@ -9,7 +9,6 @@ namespace WRA.General.SceneManagment
         [SerializeField] private Image progressBar;
         [SerializeField] private TextMeshProUGUI progressText;
         [SerializeField] private TextMeshProUGUI sceneIsReadText;
-    
 
         private void Update()
         {
@@ -38,7 +37,5 @@ namespace WRA.General.SceneManagment
         {
             CustomSceneManager.Instance.SetActiveNextScene();
         }
-    
-    
     }
 }

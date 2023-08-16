@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace WRA.PlayerSystems.NavigationSystem
@@ -6,7 +8,7 @@ namespace WRA.PlayerSystems.NavigationSystem
     {
         public bool IsEnabled => gameObject.activeInHierarchy;
     
-        private string[] tags;
+        private List<string> tags;
         private void Awake()
         {
             NavigationManager.Instance.AddNavigationObserver(this);
@@ -19,12 +21,22 @@ namespace WRA.PlayerSystems.NavigationSystem
 
         public void SetTags(params string[] tags)
         {
-            this.tags = tags;
+            this.tags = tags.ToList();
         }
 
-        public string[] GetTags()
+        public void AddTag(string tag)
         {
-            return tags;
+            tags.Add(tag);
+        }
+
+        public void RemoveTag(string tag)
+        {
+            tags.Remove(tag);
+        }
+
+        public bool ContainsTag(string tag)
+        {
+            return tags.Contains(tag);
         }
     }
 }

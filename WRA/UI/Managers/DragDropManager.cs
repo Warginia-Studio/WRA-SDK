@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 using WRA.CharacterSystems.InventorySystem;
-using WRA.General.Classes;
 using WRA.General.Patterns;
 
 namespace WRA.UI.Managers

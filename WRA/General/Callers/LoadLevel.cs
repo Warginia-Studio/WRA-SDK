@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using WRA.General.SceneManagment;
 
-namespace WRA.General.ApplicationCallers
+namespace WRA.General.Callers
 {
     public class LoadLevel : MonoBehaviour
     {

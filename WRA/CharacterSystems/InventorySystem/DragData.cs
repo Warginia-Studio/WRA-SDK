@@ -1,9 +1,8 @@
 using UnityEngine;
-using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Managment;
 using WRA.CharacterSystems.InventorySystem.Slots;
 
-namespace WRA.General.Classes
+namespace WRA.CharacterSystems.InventorySystem
 {
     public class DragData
     {

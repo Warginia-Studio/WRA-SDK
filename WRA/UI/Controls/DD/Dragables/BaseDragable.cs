@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Slots;
-using WRA.General.Classes;
 using WRA.General.Interfaces;
 using WRA.UI.Controls.DD.Controllers;
 using WRA.UI.Managers;

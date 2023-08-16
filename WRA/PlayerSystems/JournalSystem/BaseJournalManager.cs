@@ -11,5 +11,10 @@ namespace WRA.PlayerSystems.JournalSystem
         {
             entries.Add(entry);
         }
+
+        public List<T> GetEntries()
+        {
+            return entries;
+        }
     }
 }

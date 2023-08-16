@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace WRA.PlayerSystems.JournalSystem.WikipediaEntries
 {
-    [CreateAssetMenu(menuName = Definitions.SCRIPTALBES_PATH+"Journal System/Enemy Entry")]
+    [CreateAssetMenu(menuName = Definitions.SCRIPTALBES_PATH+"Journal System/Wikipedia/Enemy Entry")]
     public class EnemyEntry : WikipediaEntry
     {
         public string enemyName;

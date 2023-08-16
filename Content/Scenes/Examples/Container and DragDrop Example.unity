@@ -227,17 +227,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8605982711104537388, guid: 9928f3015243a4d4a89552d394423b65, type: 3}
   m_PrefabInstance: {fileID: 199492165}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &309227152 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 162935148450072815, guid: 589b257736fefee4e8cbdca0244abff8, type: 3}
-  m_PrefabInstance: {fileID: 162935147145976041}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf2cb47257d8b494cbb949b0877f1e89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &309346038
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,17 +428,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 162935147366476004, guid: 589b257736fefee4e8cbdca0244abff8, type: 3}
   m_PrefabInstance: {fileID: 162935147145976041}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &425064134 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 162935146493656915, guid: 589b257736fefee4e8cbdca0244abff8, type: 3}
-  m_PrefabInstance: {fileID: 162935147145976041}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d19d72f312db714fa3b6106aec12619, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &451512488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,7 +1202,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863d062b778053a48875d9bb3c8aa115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  windowName: testingWindow
 --- !u!4 &1610101103
 Transform:
   m_ObjectHideFlags: 0
@@ -2115,7 +2092,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2023959537}
-  - component: {fileID: 2023959536}
   m_Layer: 0
   m_Name: InventoryTest
   m_TagString: Untagged
@@ -2123,29 +2099,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2023959536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2023959535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 659545315d67009499f546b47fde7eb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory1: {fileID: 1473344904}
-  inventory2: {fileID: 1384993416}
-  inventorySlotsController: {fileID: 425064134}
-  armableSlotsController: {fileID: 309227152}
-  items:
-  - {fileID: 11400000, guid: 34dd147f1d8b89f47952c5ec93189a7b, type: 2}
-  - {fileID: 11400000, guid: 5b7ecf152ba0b4944ab09aba2891f4ce, type: 2}
-  - {fileID: 11400000, guid: a1b5e6e499cd23c489637780528fe10b, type: 2}
-  - {fileID: 11400000, guid: 5ab5098bb2d5aa94989b64ee043bd96f, type: 2}
-  - {fileID: 11400000, guid: 208d2f511cdb9344abcf50d963fb2f1d, type: 2}
-  - {fileID: 11400000, guid: 7cce7efe6d80c4246acb37d514067f71, type: 2}
 --- !u!4 &2023959537
 Transform:
   m_ObjectHideFlags: 0

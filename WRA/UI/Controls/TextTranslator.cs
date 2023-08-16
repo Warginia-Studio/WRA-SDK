@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using WRA.Utility.FileManagment;
+using WRA.PlayerSystems.LanguageSystem;
 
 namespace WRA.UI.Controls
 {

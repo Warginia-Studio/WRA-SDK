@@ -1,9 +1,8 @@
 using UnityEditor;
 using UnityEngine;
-using WRA.CharacterSystems.StatisticsSystem;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
-namespace WRA.Editor
+namespace WRA.CharacterSystems.StatisticsSystem.Editor
 {
     [CustomPropertyDrawer(typeof(DynamicStatisticEnum))]
     public class DynamicStatisticEnumEditor : PropertyDrawer

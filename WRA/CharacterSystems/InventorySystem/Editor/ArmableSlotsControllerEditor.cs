@@ -1,13 +1,13 @@
 using UnityEditor;
-using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Slots;
 using WRA.UI.Controls.DD.Controllers;
 
-namespace WRA.Editor
+namespace WRA.CharacterSystems.InventorySystem.Editor
 {
-    [CustomEditor(typeof(InventorySlotsController))]
-    public class InventorySlotsControllerEditor : BaseSlotsControllerEditor<InventorySlot, Item>
+    [CustomEditor(typeof(ArmableSlotsController))]
+    public class ArmableSlotsControllerEditor : BaseSlotsControllerEditor<ArmamentSlot, ArmableItem>
     {
+    
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();

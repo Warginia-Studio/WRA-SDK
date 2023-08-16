@@ -1,4 +1,4 @@
-namespace WRA.General.Interfaces
+namespace WRA.PlayerSystems.SaveSystem
 {
     public interface ISaveable
     {

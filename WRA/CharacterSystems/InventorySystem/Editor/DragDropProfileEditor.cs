@@ -1,8 +1,7 @@
 using UnityEditor;
 using UnityEngine;
-using WRA.CharacterSystems.InventorySystem;
 
-namespace WRA.Editor
+namespace WRA.CharacterSystems.InventorySystem.Editor
 {
     [CustomEditor(typeof(DragDropProfile))]
     public class DragDropProfileEditor : UnityEditor.Editor

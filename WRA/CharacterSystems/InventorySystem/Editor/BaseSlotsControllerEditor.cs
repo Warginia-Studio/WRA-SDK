@@ -1,10 +1,9 @@
 using UnityEditor;
 using UnityEngine;
-using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Slots;
 using WRA.UI.Controls.DD.Controllers;
 
-namespace WRA.Editor
+namespace WRA.CharacterSystems.InventorySystem.Editor
 {
     [CustomEditor(typeof(BaseSlotsController<ContainerSlot<ContainerItem>,ContainerItem>))]
     public class BaseSlotsControllerEditor<T1,T2> : UnityEditor.Editor where T1 : ContainerSlot<T2> where T2 : ContainerItem

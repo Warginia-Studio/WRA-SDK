@@ -2,7 +2,7 @@ using UnityEditor;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.UI;
 
-namespace WRA.Editor
+namespace WRA.General.Editor
 {
     [CustomEditor(typeof(CustomGridLayoutGroup))]
     public class CustomGridLayoutGroupEditor : UnityEditor.Editor

@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using System.Xml;
 using UnityEditor;
 using UnityEngine;
-using WRA.Utility.FileManagment;
 
-namespace WRA.Editor
+namespace WRA.PlayerSystems.LanguageSystem.Editor
 {
     public class LanguageEditor : EditorWindow
     {

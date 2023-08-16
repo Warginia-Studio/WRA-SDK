@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using WRA.General;
 
-namespace WRA.Utility.FileManagment
+namespace WRA.PlayerSystems.LanguageSystem
 {
     public class LanguageManager
     {

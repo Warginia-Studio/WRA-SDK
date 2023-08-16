@@ -1,4 +1,4 @@
-using WRA.Utility.FileManagment;
+using WRA.PlayerSystems.LanguageSystem;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Statistics
 {

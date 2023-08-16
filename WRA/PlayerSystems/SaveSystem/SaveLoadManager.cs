@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using WRA.General.Interfaces;
 
-namespace WRA.Utility.FileManagment
+namespace WRA.PlayerSystems.SaveSystem
 {
     public class SaveLoadManager : MonoBehaviour
     {

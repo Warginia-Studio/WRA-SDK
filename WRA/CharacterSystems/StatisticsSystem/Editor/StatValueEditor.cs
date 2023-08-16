@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
-namespace WRA.Editor
+namespace WRA.CharacterSystems.StatisticsSystem.Editor
 {
     [CustomPropertyDrawer(typeof(StatValue))]
     public class StatisticsHolderEditor : PropertyDrawer

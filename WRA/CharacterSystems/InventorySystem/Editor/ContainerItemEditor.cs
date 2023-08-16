@@ -1,7 +1,6 @@
 using UnityEditor;
-using WRA.CharacterSystems.InventorySystem;
 
-namespace WRA.Editor
+namespace WRA.CharacterSystems.InventorySystem.Editor
 {
     [CustomEditor(typeof(ContainerItem))]
     public class ContainerItemEditor : UnityEditor.Editor

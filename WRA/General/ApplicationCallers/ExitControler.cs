@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.General
+namespace WRA.General.ApplicationCallers
 {
     public class ExitControler : MonoBehaviour
     {

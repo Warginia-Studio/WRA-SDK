@@ -1,25 +1,27 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using WRA.General.SceneManagment;
 
-namespace WRA.General.SceneManagment
+namespace WRA.General.ApplicationCallers
 {
-    [RequireComponent(typeof(Button))]
-    public class StartLevelButton : MonoBehaviour
+    public class LoadLevel : MonoBehaviour
     {
-
         [SerializeField] private string levelName;
         [SerializeField] private bool useLoaderScene;
 
-        private void Awake()
+        public void Startlevel()
         {
-            var button = GetComponent<Button>();
-        
-            button.onClick.AddListener(Startlevel);
-            // button.onClick.AddListener(Startlevel);
+            if (useLoaderScene)
+            {
+                CustomSceneManager.Instance.ChangeScene(levelName);
+            }
+            else
+            {
+                SceneManager.LoadSceneAsync(levelName);
+            }
         }
-
-        private void Startlevel()
+        
+        public void StartLevel(string levelName)
         {
             if (useLoaderScene)
             {

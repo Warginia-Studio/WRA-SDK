@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using WRA.General.ScriptableObjects.LoadingScreen;
 using Random = UnityEngine.Random;
 
 namespace WRA.General.SceneManagment

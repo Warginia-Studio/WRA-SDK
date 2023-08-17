@@ -25,7 +25,5 @@ namespace WRA.CharacterSystems.StatisticsSystem
             if(onChangedEffect!=null)
                 targetResource.serializedProperty.OnIncreaseValue.AddListener((ctg) => onChangedEffect.PlayEffect(transform));
         }
-
-    
     }
 }

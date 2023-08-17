@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace WRA.CharacterSystems.StatisticsSystem.ResourcesInfos
 {
     public class DamageInfo : ResourcesChangedBase
@@ -10,5 +12,23 @@ namespace WRA.CharacterSystems.StatisticsSystem.ResourcesInfos
         
         public float DealtDamage = 0;
         public float ScalingDamage = 1;
+
+        public bool containsHitPosition;
+
+        public Vector3 HitedPosition
+        {
+            get
+            {
+                return hitedPosition;
+            }
+
+            set
+            {
+                hitedPosition = value;
+                containsHitPosition = true;
+            }
+        }
+
+        private Vector3 hitedPosition;
     }
 }

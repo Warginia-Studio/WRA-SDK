@@ -4,7 +4,7 @@ namespace WRA.CharacterSystems.StatisticsSystem
 {
     public interface IResourceEffect
     {
-        void PlayEffect(Transform target);
+        void PlayEffect(Vector3 target);
     
     }
 }

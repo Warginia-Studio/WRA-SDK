@@ -6,7 +6,7 @@ using WRA.General.Patterns;
 namespace WRA.UI
 {
     [RequireComponent(typeof(Image))]
-    public class FadeSystem : MonoBehaviourSingletonAutoLoadUI<FadeSystem>
+    public class FadeManager : MonoBehaviourSingletonAutoLoadUI<FadeManager>
     {
         public bool IsFadding { get; private set; }
 

@@ -9,21 +9,21 @@ namespace WRA.CharacterSystems.StatisticsSystem
         [SerializeField] [CSerializedField(true)]
         private COP<ResourceController> targetResource;
     
-        [SerializeField] public EffectBehaviourBase onIncreasedEffect;
-        [SerializeField] public EffectBehaviourBase onDecreaseEffect;
-        [SerializeField] public EffectBehaviourBase onChangedEffect;
+        [SerializeField] protected EffectBehaviourBase onIncreasedEffect;
+        [SerializeField] protected EffectBehaviourBase onDecreaseEffect;
+        [SerializeField] protected EffectBehaviourBase onChangedEffect;
     
-        private void Awake()
+        protected virtual void Awake()
         {
             if (targetResource == null)
                 return;
         
             if (onDecreaseEffect!=null)
-                targetResource.serializedProperty.OnDecreaseValue.AddListener((ctg) => onDecreaseEffect.PlayEffect(transform));
+                targetResource.serializedProperty.OnDecreaseValue.AddListener((ctg) => onDecreaseEffect.PlayEffect(transform.position));
             if(onIncreasedEffect !=null)
-                targetResource.serializedProperty.OnIncreaseValue.AddListener((ctg) => onIncreasedEffect.PlayEffect(transform));
+                targetResource.serializedProperty.OnIncreaseValue.AddListener((ctg) => onIncreasedEffect.PlayEffect(transform.position));
             if(onChangedEffect!=null)
-                targetResource.serializedProperty.OnIncreaseValue.AddListener((ctg) => onChangedEffect.PlayEffect(transform));
+                targetResource.serializedProperty.OnValueChanged.AddListener((ctg) => onChangedEffect.PlayEffect(transform.position));
         }
     }
 }

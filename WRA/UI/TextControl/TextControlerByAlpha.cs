@@ -4,7 +4,7 @@ using UnityEngine;
 namespace WRA.UI.TextControl
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class TextControllerByAlpha : TextController
+    public class TextControlerByAlpha : TextControler
     {
         [SerializeField] private float alphaInSpeed = 1;
         [SerializeField] private float alphaOutSpeed = 1;
@@ -21,13 +21,13 @@ namespace WRA.UI.TextControl
         {
             tmpText.text = text;
             ResetCorotines();
-            StartCoroutine(ShowText());
+            StartCoroutine(AnimateCanvasGroup(1, alphaInSpeed));
         }
 
         public override void CloseText()
         {
             ResetCorotines();
-            StartCoroutine(HideText());
+            StartCoroutine(AnimateCanvasGroup(0, alphaOutSpeed));
         }
 
         private void ResetCorotines()
@@ -35,28 +35,19 @@ namespace WRA.UI.TextControl
             StopAllCoroutines();   
         }
 
-        private IEnumerator ShowText()
+        private IEnumerator AnimateCanvasGroup(float targetValue, float speed)
         {
-            float delta = 0;
-        
-            while (delta<1)
-            {
-                yield return null;
-                delta += Time.deltaTime * alphaInSpeed;
-                canvasGroup.alpha = delta;
-            }
-        }
-
-        private IEnumerator HideText()
-        {
+            isWorking = true;
             float delta = 0;
 
-            while (delta<1)
+            while (delta<= 1 && canvasGroup.alpha != targetValue)
             {
                 yield return null;
-                delta += Time.deltaTime * alphaOutSpeed;
-                canvasGroup.alpha = 1-delta;
+                delta += speed * Time.deltaTime;
+                canvasGroup.alpha += Mathf.MoveTowards(canvasGroup.alpha, targetValue, speed * Time.deltaTime);
             }
+
+            isWorking = false;
         }
     }
 }

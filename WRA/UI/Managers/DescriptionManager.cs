@@ -7,28 +7,28 @@ namespace WRA.UI.Managers
 {
     public class DescriptionManager : MonoBehaviourSingletonAutoLoadUI<DescriptionManager>
     {
-        [SerializeField] private TextController window;
+        [SerializeField] private TextControler window;
 
-        private TextController spawnedTextController;
+        private TextControler spawnedTextControler;
         
         public void ShowDescription(string description)
         {
             CheckThatIsSpawned();
-            spawnedTextController.ShowText(description);
+            spawnedTextControler.ShowText(description);
             
         }
 
         public void HideDescription()
         {
             CheckThatIsSpawned();
-            spawnedTextController.CloseText();
+            spawnedTextControler.CloseText();
         }
 
         private void CheckThatIsSpawned()
         {
-            if (spawnedTextController != null)
+            if (spawnedTextControler != null)
                 return;
-            spawnedTextController = Instantiate(window.gameObject, MainCanvas.Instance.transform).GetComponent<TextController>();
+            spawnedTextControler = Instantiate(window.gameObject, MainCanvas.Instance.transform).GetComponent<TextControler>();
         }
     }
 }

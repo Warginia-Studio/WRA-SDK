@@ -4,10 +4,15 @@ using UnityEngine;
 
 namespace WRA.UI.TextControl
 {
-    public abstract class TextController : MonoBehaviour
+    public abstract class TextControler : MonoBehaviour
     {
+        public bool IsActive => isActive;
+        public bool IsWorking => isWorking;
+        
         [SerializeField] protected TMP_Text tmpText;
+        
         protected bool isActive = false;
+        protected bool isWorking = false;
         protected List<string> waitingTexts = new List<string>();
 
         protected virtual void Awake()

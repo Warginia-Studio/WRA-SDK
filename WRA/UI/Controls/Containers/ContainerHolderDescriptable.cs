@@ -22,7 +22,7 @@ namespace WRA.UI.Controls.Containers
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            DescriptionManager.Instance.HideDescription();
+            // DescriptionManager.Instance.HideDescription();
         }
     }
 }

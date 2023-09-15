@@ -8,12 +8,12 @@ namespace WRA.UI.Controls
     {
         public void OnPointerEnter(PointerEventData eventData)
         {
-            DescriptionManager.Instance.ShowDescription(GetDescription());
+            // DescriptionManager.Instance.ShowDescription(GetDescription());
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            DescriptionManager.Instance.HideDescription();
+            // DescriptionManager.Instance.HideDescription();
         }
 
         protected abstract string GetDescription();

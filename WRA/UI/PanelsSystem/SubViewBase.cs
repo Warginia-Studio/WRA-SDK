@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SubPanelViewBase : MonoBehaviour
+public abstract class SubViewBase : MonoBehaviour
 {
     public abstract void OnShow(object data);
 

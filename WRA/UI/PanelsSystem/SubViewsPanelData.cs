@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SubPanelData : PanelData
+public class SubViewsPanelData : PanelDataBase
 {
     public int StartPanelId { get; set; }
     public string StartPanelName { get; set; }

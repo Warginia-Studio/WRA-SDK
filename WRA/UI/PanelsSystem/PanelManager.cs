@@ -23,7 +23,7 @@ public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
     
     private List<PanelBase> openedPanels = new List<PanelBase>();
 
-    public PanelBase OpenPanel<T, TData>(TData data, bool startAsHide = false) where T : PanelBase where TData : PanelData
+    public PanelBase OpenPanel<T, TData>(TData data, bool startAsHide = false) where T : PanelBase where TData : PanelDataBase
     {
         var panel = GetPanel<T>();
         if (panel != null)
@@ -45,7 +45,7 @@ public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
         return panel;
     }
 
-    public PanelBase ShowPanel<T, TData>(TData data, bool openIfIsOff = false) where T : PanelBase where TData : PanelData
+    public PanelBase ShowPanel<T, TData>(TData data, bool openIfIsOff = false) where T : PanelBase where TData : PanelDataBase
     {
         var checkData = IsPanelOpened<T>();
 
@@ -63,7 +63,7 @@ public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
         return checkData.panel;
     }
 
-    public PanelBase HidePanel<T, TData>(TData data) where T : PanelBase where TData : PanelData
+    public PanelBase HidePanel<T, TData>(TData data) where T : PanelBase where TData : PanelDataBase
     {
         var checkData = IsPanelOpened<T>();
 
@@ -87,7 +87,7 @@ public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
         return openedPanels.Find(ctg => ctg is T);
     }
 
-    public void ClosePanel<T, TData>(TData data) where T : PanelBase where TData : PanelData
+    public void ClosePanel<T, TData>(TData data) where T : PanelBase where TData : PanelDataBase
     {
         var checkData = IsPanelOpened<T>();
 
@@ -135,9 +135,9 @@ public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
         return createdPanel;
     }
 
-    private void DestroyPanel(PanelBase panelBase, PanelData data)
+    private void DestroyPanel(PanelBase panelBase, PanelDataBase dataBase)
     {
-        panelBase.Close(data);
+        panelBase.Close(dataBase);
         openedPanels.Remove(panelBase);
         Destroy(panelBase.gameObject);
     }

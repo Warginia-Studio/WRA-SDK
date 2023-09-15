@@ -15,7 +15,7 @@ public abstract class PanelBase : MonoBehaviour
     
     public abstract void OnHide(object data);
     
-    protected virtual T TryParseData<T>(object data) where T : PanelData
+    protected virtual T TryParseData<T>(object data) where T : PanelDataBase
     {
         if (data != null && data is not T)
         {

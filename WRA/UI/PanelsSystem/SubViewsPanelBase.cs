@@ -7,9 +7,9 @@ using WRA.Utility.Diagnostics;
 
 namespace WRA.UI
 {
-    public class SubPanelControler : PanelBase
+    public class SubViewsPanelBase : PanelBase
     {
-        [SerializeField] private List<SubPanelViewBase> allViews = new List<SubPanelViewBase>();
+        [SerializeField] private List<SubViewBase> allViews = new List<SubViewBase>();
 
         [SerializeField] private string startPanelName = "";
         
@@ -27,7 +27,7 @@ namespace WRA.UI
 
         public override void Open(object data)
         {
-            var myData = TryParseData<SubPanelData>(data);
+            var myData = TryParseData<SubViewsPanelData>(data);
             
             if (myData != null)
             {
@@ -55,7 +55,7 @@ namespace WRA.UI
 
         public override void Close(object data)
         {
-            var myData = TryParseData<SubPanelData>(data);
+            var myData = TryParseData<SubViewsPanelData>(data);
             if (myData != null)
             {
                 
@@ -77,20 +77,20 @@ namespace WRA.UI
             if (allViews != null && allViews.Count > 0)
                 return;
 
-            allViews = GetComponentsInChildren<SubPanelViewBase>().ToList();
+            allViews = GetComponentsInChildren<SubViewBase>().ToList();
         }
 
-        private void OpenSubPanel(SubPanelViewBase subPanelViewBase, object data)
+        private void OpenSubPanel(SubViewBase subViewBase, object data)
         {
             for (int i = 0; i < allViews.Count; i++)
             {
-                if (allViews[i] != subPanelViewBase)
+                if (allViews[i] != subViewBase)
                 {
                     allViews[i].OnHide();
                     allViews[i].gameObject.SetActive(false);
                 }
             }
-            subPanelViewBase.OnShow(data);
+            subViewBase.OnShow(data);
         }
     }
 }

@@ -3,7 +3,7 @@ using WRA.Utility.Diagnostics;
 
 namespace WRA.General.Patterns
 {
-    public class MonoBehaviourSingletonAutoLoad<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class MonoBehaviourSingletonAutoLoad<T> : MonoBehaviour where T : MonoBehaviourSingletonAutoLoad<T>
     {
         public static T Instance
         {
@@ -24,11 +24,14 @@ namespace WRA.General.Patterns
                     }
 
                     instance = Instantiate(objects[0].gameObject).GetComponent<T>();
+                    instance.OnLoad();
                 }
                 return instance;
             }
         }
 
         private static T instance;
+
+        protected abstract void OnLoad();
     }
 }

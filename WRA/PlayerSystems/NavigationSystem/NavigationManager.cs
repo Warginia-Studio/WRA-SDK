@@ -21,5 +21,10 @@ namespace WRA.PlayerSystems.NavigationSystem
         {
             return navigationObservers.ToArray();
         }
+
+        protected override void OnCreate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

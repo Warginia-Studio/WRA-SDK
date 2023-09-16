@@ -3,21 +3,21 @@ using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
 namespace WRA.CharacterSystems.StatisticsSystem
 {
-    public class ManaController : ResourceController, IManaable
+    public class ManaControler : ResourceControler, IManaable
     {
         public UnityEvent<ManaInfo> OnManaUse = new UnityEvent<ManaInfo>();
         public UnityEvent<ManaInfo> OnManaRegen = new UnityEvent<ManaInfo>();
         public UnityEvent OnNotEnoughMana = new UnityEvent();
     
         public override float PercentValue => CurrentValue / MaxValue;
-        public override float MaxValue => statisticsController.GetStatistics().Mana.Value;
+        public override float MaxValue => statisticsControler.GetStatistics().Mana.Value;
         
-        private StatisticsController statisticsController;
+        private StatisticsControler statisticsControler;
 
         protected override void Awake()
         {
-            statisticsController = GetComponent<StatisticsController>();
-            statisticsController.OnStatisticsChanged.AddListener(InitMana);
+            statisticsControler = GetComponent<StatisticsControler>();
+            statisticsControler.OnStatisticsChanged.AddListener(InitMana);
             InitMana();
         }
 
@@ -42,7 +42,7 @@ namespace WRA.CharacterSystems.StatisticsSystem
 
         private void InitMana()
         {
-            InitAndRegen(0, statisticsController.GetStatistics().Mana.Value);
+            InitAndRegen(0, statisticsControler.GetStatistics().Mana.Value);
         }
     
     }

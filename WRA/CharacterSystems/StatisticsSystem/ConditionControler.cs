@@ -3,21 +3,21 @@ using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
 namespace WRA.CharacterSystems.StatisticsSystem
 {
-    public class ConditionController : ResourceController, IConitionable
+    public class ConditionControler : ResourceControler, IConitionable
     {
         public UnityEvent<ConditionInfo> OnStaminaUse = new UnityEvent<ConditionInfo>();
         public UnityEvent<ConditionInfo> OnStaminaRegen = new UnityEvent<ConditionInfo>();
         public UnityEvent OnNotEnoughStamina = new UnityEvent();
     
         public override float PercentValue => CurrentValue / MaxValue;
-        public override float MaxValue => statisticsController.GetStatistics().Condition.Value;
+        public override float MaxValue => statisticsControler.GetStatistics().Condition.Value;
         
-        private StatisticsController statisticsController;
+        private StatisticsControler statisticsControler;
 
         protected override void Awake()
         {
-            statisticsController = GetComponent<StatisticsController>();
-            statisticsController.OnStatisticsChanged.AddListener(InitStamina);
+            statisticsControler = GetComponent<StatisticsControler>();
+            statisticsControler.OnStatisticsChanged.AddListener(InitStamina);
             InitStamina();
         }
 
@@ -41,7 +41,7 @@ namespace WRA.CharacterSystems.StatisticsSystem
 
         private void InitStamina()
         {
-            InitAndRegen(0, statisticsController.GetStatistics().Condition.Value);
+            InitAndRegen(0, statisticsControler.GetStatistics().Condition.Value);
         }
 
     

@@ -4,8 +4,8 @@ using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
 namespace WRA.CharacterSystems.StatisticsSystem
 {
-    [RequireComponent(typeof(StatisticsController))]
-    public class HealthController : ResourceController, IHealable, IDamageable
+    [RequireComponent(typeof(StatisticsControler))]
+    public class HealthControler : ResourceControler, IHealable, IDamageable
     {
         public UnityEvent<HealInfo> OnBeforeHeal = new UnityEvent<HealInfo>();
         public UnityEvent<HealInfo> OnHealed = new UnityEvent<HealInfo>();
@@ -17,14 +17,14 @@ namespace WRA.CharacterSystems.StatisticsSystem
         public UnityEvent<KillInfo> OnKilled = new UnityEvent<KillInfo>();
 
         public override float PercentValue => CurrentValue / MaxValue;
-        public override float MaxValue => statisticsController.GetStatistics().Health.Value;
+        public override float MaxValue => statisticsControler.GetStatistics().Health.Value;
         
-        private StatisticsController statisticsController;
+        private StatisticsControler statisticsControler;
 
         protected override void Awake()
         {
-            statisticsController = GetComponent<StatisticsController>();
-            statisticsController.OnStatisticsChanged.AddListener(InitHealth);
+            statisticsControler = GetComponent<StatisticsControler>();
+            statisticsControler.OnStatisticsChanged.AddListener(InitHealth);
             InitHealth();
         }
         
@@ -61,7 +61,7 @@ namespace WRA.CharacterSystems.StatisticsSystem
 
         private void InitHealth()
         {
-            InitAndRegen(0, statisticsController.GetStatistics().Health.Value);
+            InitAndRegen(0, statisticsControler.GetStatistics().Health.Value);
         }
     }
 }

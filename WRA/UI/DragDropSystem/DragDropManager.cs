@@ -44,5 +44,10 @@ namespace WRA.UI.Managers
         isDragging = false;
         OnDragChanged.Invoke(isDragging);
     }
+
+    protected override void OnLoad()
+    {
+        throw new System.NotImplementedException();
+    }
     }
 }

@@ -51,4 +51,9 @@ public class CinematicCameraManager : MonoBehaviourSingletonAutoLoad<CinematicCa
             yield return null;
         }
     }
+
+    protected override void OnLoad()
+    {
+        throw new NotImplementedException();
+    }
 }

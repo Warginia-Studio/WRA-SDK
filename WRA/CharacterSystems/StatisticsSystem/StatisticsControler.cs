@@ -4,7 +4,7 @@ using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA.CharacterSystems.StatisticsSystem
 {
-    public class StatisticsController : MonoBehaviour
+    public class StatisticsControler : MonoBehaviour
     {
         public UnityEvent OnStatisticsChanged = new UnityEvent();
     

@@ -7,7 +7,7 @@ namespace WRA.CharacterSystems.StatisticsSystem
     public class ResourceEffect : MonoBehaviour
     {
         [SerializeField] [CSerializedField(true)]
-        private COP<ResourceController> targetResource;
+        private COP<ResourceControler> targetResource;
     
         [SerializeField] protected EffectBehaviourBase onIncreasedEffect;
         [SerializeField] protected EffectBehaviourBase onDecreaseEffect;

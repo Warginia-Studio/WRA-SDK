@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1911359e3279c8142b15d989cb3d4caf, type: 3}
   m_Name: Character Profile
   m_EditorClassIdentifier: 
+  InteractionRange: 5
   DamageProvider: {fileID: 11400000, guid: dea66c717bc15064ab098d110aa47eca, type: 2}
   StatisticInfos:
   - StatisticName: Health
@@ -21,8 +22,4 @@ MonoBehaviour:
   - StatisticName: Mana
     BoldText: 1
     ColorText: {r: 0, g: 0.116532326, b: 1, a: 1}
-    Formating: 
-  - StatisticName: XD
-    BoldText: 1
-    ColorText: {r: 0.23529412, g: 1, b: 0, a: 1}
     Formating: 

@@ -6,7 +6,7 @@ namespace WRA.CharacterSystems.StatisticsSystem
 {
     public class DamageListener : MonoBehaviour, IDamageable
     {
-        [SerializeField][CSerializedField(true)] private COP<HealthController> healthController;
+        [SerializeField][CSerializedField(true)] private COP<HealthControler> healthController;
         [SerializeField] private float scalingDamage = 1;
         public void DealDamage(DamageInfo damageInfo)
         {

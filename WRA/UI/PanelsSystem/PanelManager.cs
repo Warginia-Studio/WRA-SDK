@@ -23,29 +23,33 @@ public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
     
     private List<PanelBase> openedPanels = new List<PanelBase>();
 
-    public PanelBase OpenPanel<T, TData>(TData data, bool startAsHide = false) where T : PanelBase where TData : PanelDataBase
+    public T OpenPanel<T>(bool startAsHide = false) where T : PanelBase
     {
-        var panel = GetPanel<T>();
+        return OpenPanel<T, PanelDataBase>(null, startAsHide);
+    }
+    public T OpenPanel<T, TData>(TData data, bool startAsHide = false)
+        where T : PanelBase where TData : PanelDataBase
+    {
+        var panel = GetPanel<T>() as T;
         if (panel != null)
         {
             WraDiagnostics.LogWarning($"Panel {typeof(T).FullName} is opened.");
+            return panel;
         }
-        else
-        {
-            panel = LoadPanelFromResources<T>();
-            panel.Open(data);
 
-            if (startAsHide)
-            {
-                HidePanel<T, TData>(data);
-            }
+        panel = LoadPanelFromResources<T>() as T;
+        panel.Open(data);
+
+        if (startAsHide)
+        {
+            HidePanel<T, TData>(data);
         }
-        
+
         OnPanelOpen.Invoke(panel);
         return panel;
     }
 
-    public PanelBase ShowPanel<T, TData>(TData data, bool openIfIsOff = false) where T : PanelBase where TData : PanelDataBase
+    public T ShowPanel<T, TData>(TData data, bool openIfIsOff = false) where T : PanelBase where TData : PanelDataBase
     {
         var checkData = IsPanelOpened<T>();
 
@@ -63,7 +67,7 @@ public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
         return checkData.panel;
     }
 
-    public PanelBase HidePanel<T, TData>(TData data) where T : PanelBase where TData : PanelDataBase
+    public T HidePanel<T, TData>(TData data) where T : PanelBase where TData : PanelDataBase
     {
         var checkData = IsPanelOpened<T>();
 
@@ -77,14 +81,9 @@ public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
         return checkData.panel;
     }
 
-    public PanelBase GetPanel<T>() where T : PanelBase
+    public T GetPanel<T>() where T : PanelBase
     {
-        if (openedPanels == null)
-        {
-            return null;
-        }
-        
-        return openedPanels.Find(ctg => ctg is T);
+        return openedPanels.Find(ctg => ctg is T) as T;
     }
 
     public void ClosePanel<T, TData>(TData data) where T : PanelBase where TData : PanelDataBase
@@ -98,9 +97,9 @@ public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
         }
     }
 
-    private (bool opened, PanelBase panel) IsPanelOpened<T>([CallerMemberName]string callerMemberName = "") where T : PanelBase
+    private (bool opened, T panel) IsPanelOpened<T>([CallerMemberName]string callerMemberName = "") where T : PanelBase
     {
-        var panel = GetPanel<T>();
+        var panel = GetPanel<T>() as T;
 
         if (panel == null)
         {

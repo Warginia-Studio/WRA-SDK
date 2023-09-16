@@ -28,12 +28,17 @@ namespace WRA.AudioSystem
 
         public string GetSaveData()
         {
-            throw new System.NotImplementedException();
+            return "";
         }
 
         public void LoadFromData(string data)
         {
-            throw new System.NotImplementedException();
+            
+        }
+
+        protected override void OnCreate()
+        {
+            
         }
     }
 }

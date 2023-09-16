@@ -70,5 +70,9 @@ namespace WRA.General.SceneManagment
             SceneIsReady = true;
         }
 
+        protected override void OnCreate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using WRA.General.Patterns;
 
@@ -14,9 +15,23 @@ namespace WRA.AudioSystem
             { AudioType.voices , 1},
         };
 
+        private void Awake()
+        {
+            OnCreate();
+        }
+
         protected override void OnCreate()
         {
-            
+            var volumesSettings = UnityFileManagment.LoadObject<Dictionary<AudioType, float>>("/Configs/AudioConfig.cfg");
+            if (volumesSettings == null)
+                return;
+
+            volumes = volumesSettings;
+        }
+
+        private void OnDestroy()
+        {
+            UnityFileManagment.SaveObject<Dictionary<AudioType, float>>("/Configs/AudioConfig.cfg", volumes);
         }
 
         public void SetVolumeForAudioType(AudioType audioType, float volume)
@@ -27,16 +42,6 @@ namespace WRA.AudioSystem
         public float GetVolumeForAudioType(AudioType audioType)
         {
             return volumes[audioType];
-        }
-
-        public string GetSaveData()
-        {
-            return "";
-        }
-
-        public void LoadFromData(string data)
-        {
-            
         }
     }
 }

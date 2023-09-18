@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WRA.General.Patterns;
+using WRA.General.SceneManagment;
 using WRA.Utility.Diagnostics;
 using JsonConvert = Unity.Plastic.Newtonsoft.Json.JsonConvert;
 
@@ -17,25 +18,14 @@ public class SaveManager : Singleton<SaveManager>
 
     public void Load(string saveName)
     {
-        FileStream fileStream = new FileStream(Application.dataPath + "/Saves/" + saveName, FileMode.OpenOrCreate);
-        StreamReader streamReader = new StreamReader(fileStream);
-
-        var text = streamReader.ReadToEnd();
-
-        gameState = JsonConvert.DeserializeObject<SaveData>(text);
-        fileStream.Close();
+        gameState = UnityFileManagment.LoadObject<SaveData>("/Saves/" + saveName);
     }
 
     public void Save(string saveName)
     {
         gameState.SceneName = SceneManager.GetActiveScene().name;
         
-        FileStream fileStream = new FileStream(Application.dataPath + "/Saves/" + saveName, FileMode.OpenOrCreate);
-        StreamWriter streamWriter = new StreamWriter(fileStream);
-
-        var text = JsonConvert.SerializeObject(gameState);
-        streamWriter.Write(text);
-        fileStream.Close();
+        UnityFileManagment.SaveObject("/Saves/" + saveName, gameState);
     }
 
     public void RegisterObjectToSave(object saveableObject)

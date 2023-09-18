@@ -13,7 +13,7 @@ namespace WRA.UI.Controls.DD.Dropables
 
         protected Type holdingType;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
             holdingType = typeof(T2);
         }

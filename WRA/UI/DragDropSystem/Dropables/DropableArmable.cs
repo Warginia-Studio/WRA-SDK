@@ -9,8 +9,8 @@ namespace WRA.UI.Controls.DD.Dropables
     public class DropableArmable : BaseDropable<ArmamentSlot, ArmableItem>
     {
         public int SlotID = -1;
-        protected RectTransform rectTransform;
-        private void Awake()
+        protected new RectTransform rectTransform;
+        protected override void Awake()
         {
             holdingType = typeof(ArmableItem);
             rectTransform = GetComponent<RectTransform>();

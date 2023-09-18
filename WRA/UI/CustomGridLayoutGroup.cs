@@ -8,7 +8,7 @@ namespace WRA.UI
     {
         [Header("If you want change CellSize you need do it in DDP_Profile")]
         private int xd;
-        protected void Awake()
+        protected override void Awake()
         {
             if (DragDropProfile.Instance != null)
             {

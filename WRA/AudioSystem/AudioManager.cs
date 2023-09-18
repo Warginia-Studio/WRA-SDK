@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using WRA.General.Patterns;
-using WRA.PlayerSystems.SaveSystem;
 
 namespace WRA.AudioSystem
 {
-    public class AudioManager : MonoBehaviourSingletonAutoCreate<AudioManager>, ISaveable
+    public class AudioManager : MonoBehaviourSingletonAutoCreate<AudioManager>
     {
         private Dictionary<AudioType, float> volumes =new Dictionary<AudioType, float>()
         {
@@ -15,6 +14,10 @@ namespace WRA.AudioSystem
             { AudioType.voices , 1},
         };
 
+        protected override void OnCreate()
+        {
+            
+        }
 
         public void SetVolumeForAudioType(AudioType audioType, float volume)
         {
@@ -32,11 +35,6 @@ namespace WRA.AudioSystem
         }
 
         public void LoadFromData(string data)
-        {
-            
-        }
-
-        protected override void OnCreate()
         {
             
         }

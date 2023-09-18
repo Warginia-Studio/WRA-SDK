@@ -12,7 +12,7 @@ namespace WRA.UI.Controls.DD.Controllers
         private RectTransform rectTransform;
         private CustomGridLayoutGroup customGridLayoutGroup;
 
-        protected void Awake()
+        protected override void Awake()
         {
             base.Awake();
             GetComponents();

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace WRA.UI.Controls.DD.Dragables
+namespace WRA.UI.DragDropSystem.Dragables
 {
     public class DragableWindow : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {

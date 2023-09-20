@@ -3,8 +3,9 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Slots;
+using WRA.UI.Controls.DD;
 
-namespace WRA.UI.Controls.DD.Dropables
+namespace WRA.UI.DragDropSystem.Dropables
 {
     public abstract class BaseDropable<T1,T2> : CIHolder<T1, T2> , IDropHandler, IPointerEnterHandler, IPointerExitHandler where T1 : ContainerSlot<T2> where T2 : ContainerItem
     {

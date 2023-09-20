@@ -3,9 +3,8 @@ using UnityEngine.EventSystems;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Managment;
 using WRA.CharacterSystems.InventorySystem.Slots;
-using WRA.UI.Managers;
 
-namespace WRA.UI.Controls.DD.Dragables
+namespace WRA.UI.DragDropSystem.Dragables
 {
     public class ArmableDragable : BaseDragable<ArmamentSlot, ArmableItem>
     {

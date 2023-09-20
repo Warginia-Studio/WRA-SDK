@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SubViewBase : MonoBehaviour
+namespace WRA.UI.PanelsSystem.SubPanels
 {
-    public abstract void OnShow(object data);
+    public abstract class SubViewBase : MonoBehaviour
+    {
+        public abstract void OnShow(object data);
 
-    public abstract void OnHide();
+        public abstract void OnHide();
+    }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using WRA.CharacterSystems.InventorySystem;
-using WRA.UI.Controls.DD.Dragables;
+using WRA.UI.DragDropSystem.Dragables;
 using WRA.Utility.CustomAttributes.CustomProperty;
 
 namespace WRA.UI.Controls.DD

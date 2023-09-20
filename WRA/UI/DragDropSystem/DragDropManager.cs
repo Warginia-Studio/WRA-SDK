@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.General.Patterns;
 
-namespace WRA.UI.Managers
+namespace WRA.UI.DragDropSystem
 {
     public class DragDropManager : MonoBehaviourSingletonAutoLoad<DragDropManager>
     {

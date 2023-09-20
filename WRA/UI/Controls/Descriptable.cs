@@ -1,5 +1,4 @@
 using UnityEngine;
-using WRA.General.Interfaces;
 
 namespace WRA.UI.Controls
 {

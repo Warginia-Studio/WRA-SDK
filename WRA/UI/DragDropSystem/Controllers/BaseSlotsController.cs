@@ -3,11 +3,12 @@ using UnityEngine;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Managment;
 using WRA.CharacterSystems.InventorySystem.Slots;
-using WRA.UI.Controls.DD.Dragables;
-using WRA.UI.Controls.DD.Dropables;
+using WRA.UI.Controls.DD;
+using WRA.UI.DragDropSystem.Dragables;
+using WRA.UI.DragDropSystem.Dropables;
 using WRA.Utility.CustomAttributes.CustomProperty;
 
-namespace WRA.UI.Controls.DD.Controllers
+namespace WRA.UI.DragDropSystem.Controllers
 {
     public abstract class BaseSlotsController<T1,T2> : MonoBehaviour where T1 : ContainerSlot<T2> where T2 : ContainerItem
     {

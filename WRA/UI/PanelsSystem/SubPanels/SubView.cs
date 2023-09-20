@@ -1,16 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class SubView : SubViewBase
+namespace WRA.UI.PanelsSystem.SubPanels
 {
-    public override void OnShow(object data)
+    public class SubView : SubViewBase
     {
+        public override void OnShow(object data)
+        {
         
-    }
+        }
 
-    public override void OnHide()
-    {
+        public override void OnHide()
+        {
         
+        }
     }
 }

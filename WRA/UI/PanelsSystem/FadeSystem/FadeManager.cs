@@ -3,9 +3,8 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using WRA.General.Patterns;
 
-namespace WRA.UI
+namespace WRA.UI.PanelsSystem.FadeSystem
 {
     [RequireComponent(typeof(Image), typeof(CanvasGroup))]
     public class FadeManager : PanelBase

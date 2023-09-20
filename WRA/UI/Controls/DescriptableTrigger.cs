@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using WRA.General.Interfaces;
-using WRA.UI.Managers;
 
 namespace WRA.UI.Controls
 {

@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
-using WRA.Utility.Diagnostics;
 
-namespace WRA.UI
+namespace WRA.UI.PanelsSystem.SubPanels
 {
     public class SubViewsPanelBase : PanelBase
     {

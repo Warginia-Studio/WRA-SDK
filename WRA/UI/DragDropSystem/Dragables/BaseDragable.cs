@@ -4,12 +4,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Slots;
-using WRA.General.Interfaces;
-using WRA.UI.Controls.DD.Controllers;
-using WRA.UI.Managers;
+using WRA.UI.Controls;
+using WRA.UI.Controls.DD;
+using WRA.UI.DragDropSystem.Controllers;
 using WRA.Utility.CustomAttributes.CustomProperty;
 
-namespace WRA.UI.Controls.DD.Dragables
+namespace WRA.UI.DragDropSystem.Dragables
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class BaseDragable<TSlot, TItem> : CIHolder<TSlot, TItem>, IBeginDragHandler, IDragHandler,

@@ -3,7 +3,7 @@ using Unity.Collections;
 using UnityEngine;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Slots;
-using WRA.UI.Controls.DD.Controllers;
+using WRA.UI.DragDropSystem.Controllers;
 
 namespace WRA.UI.Controls.DD
 {

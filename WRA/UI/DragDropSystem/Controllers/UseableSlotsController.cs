@@ -2,7 +2,7 @@ using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Managment;
 using WRA.CharacterSystems.InventorySystem.Slots;
 
-namespace WRA.UI.Controls.DD.Controllers
+namespace WRA.UI.DragDropSystem.Controllers
 {
     public class UseableSlotsController : BaseSlotsController<ContainerSlot<ContainerItem>, ContainerItem>
     {

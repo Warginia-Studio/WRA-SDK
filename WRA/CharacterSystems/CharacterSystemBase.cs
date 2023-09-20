@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSystemBase : MonoBehaviour
+namespace WRA.CharacterSystems
 {
-    public CharacterSystemsProvider CharacterSystemsProvider { get; private set; }
-
-    public void InitCharacterSystemsProvider(CharacterSystemsProvider characterSystemsProvider)
+    public class CharacterSystemBase : MonoBehaviour
     {
-        CharacterSystemsProvider = characterSystemsProvider;
+        public CharacterSystemsProvider CharacterSystemsProvider { get; private set; }
+
+        public void InitCharacterSystemsProvider(CharacterSystemsProvider characterSystemsProvider)
+        {
+            CharacterSystemsProvider = characterSystemsProvider;
+        }
     }
 }

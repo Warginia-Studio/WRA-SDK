@@ -1,59 +1,55 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WRA.General.Patterns;
-using WRA.General.SceneManagment;
 using WRA.Utility.Diagnostics;
-using JsonConvert = Unity.Plastic.Newtonsoft.Json.JsonConvert;
 
-public class SaveManager : Singleton<SaveManager>
+namespace WRA.General.SaveLoadSystem
 {
-    public SaveData GameState => gameState;
+    public class SaveManager : Singleton<SaveManager>
+    {
+        public SaveData GameState => gameState;
     
-    private SaveData gameState;
+        private SaveData gameState;
 
-    public void Load(string saveName)
-    {
-        gameState = UnityFileManagment.LoadObject<SaveData>("/Saves/" + saveName);
-    }
-
-    public void Save(string saveName)
-    {
-        gameState.SceneName = SceneManager.GetActiveScene().name;
-        
-        UnityFileManagment.SaveObject("/Saves/" + saveName, gameState);
-    }
-
-    public void RegisterObjectToSave(object saveableObject)
-    {
-        var obj = gameState.AllObjects.Find(ctg => ctg.ObjectData == saveableObject);
-        if (obj != null)
+        public void Load(string saveName)
         {
-            WraDiagnostics.LogError($"Objects is registered as saveable {saveableObject.GetType().Name}", Color.red);
-            return;
+            gameState = UnityFileManagment.LoadObject<SaveData>("/Saves/" + saveName);
         }
 
-        gameState.AllObjects.Add(new SimpleObject() { ObjectData = saveableObject, Type = saveableObject.GetType()});
-    }
+        public void Save(string saveName)
+        {
+            gameState.SceneName = SceneManager.GetActiveScene().name;
+        
+            UnityFileManagment.SaveObject("/Saves/" + saveName, gameState);
+        }
 
-    public void UnRegisterObjectToSave(object saveableObject)
-    {
-        var obj = gameState.AllObjects.FindIndex(ctg => ctg.ObjectData == saveableObject);
+        public void RegisterObjectToSave(object saveableObject)
+        {
+            var obj = gameState.AllObjects.Find(ctg => ctg.ObjectData == saveableObject);
+            if (obj != null)
+            {
+                WraDiagnostics.LogError($"Objects is registered as saveable {saveableObject.GetType().Name}", Color.red);
+                return;
+            }
 
-        if (obj == -1)
-            return;
+            gameState.AllObjects.Add(new SimpleObject() { ObjectData = saveableObject, Type = saveableObject.GetType()});
+        }
 
-        gameState.AllObjects.RemoveAt(obj);
-    }
+        public void UnRegisterObjectToSave(object saveableObject)
+        {
+            var obj = gameState.AllObjects.FindIndex(ctg => ctg.ObjectData == saveableObject);
 
-    public T GetSaveData<T>() where T : class
-    {
-        var obj = gameState.AllObjects.Find(ctg => ctg.Type is T);
+            if (obj == -1)
+                return;
 
-        return obj.ObjectData as T;
+            gameState.AllObjects.RemoveAt(obj);
+        }
+
+        public T GetSaveData<T>() where T : class
+        {
+            var obj = gameState.AllObjects.Find(ctg => ctg.Type is T);
+
+            return obj.ObjectData as T;
+        }
     }
 }

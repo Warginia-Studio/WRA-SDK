@@ -1,59 +1,61 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using WRA.General.Patterns;
 
-public class CinematicCameraManager : MonoBehaviourSingletonAutoLoad<CinematicCameraManager>
+namespace WRA.UI
 {
-    [System.Serializable]
-    private struct Curtain
+    public class CinematicCameraManager : MonoBehaviourSingletonAutoLoad<CinematicCameraManager>
     {
-        public RectTransform curtain;
-        public Vector3 showPosition;
-        public Vector3 hidePosition;
-
-        public void UpdatePositionByDelta(float delta)
+        [System.Serializable]
+        private struct Curtain
         {
-            curtain.anchoredPosition = Vector3.Lerp(hidePosition, showPosition, delta);
-        }
-    }
+            public RectTransform curtain;
+            public Vector3 showPosition;
+            public Vector3 hidePosition;
 
-    [SerializeField] private Curtain[] curtains;
-
-
-    private float currentDelta = 0;
-    
-    public void ShowCurtains()
-    {
-        StopAllCoroutines();
-        StartCoroutine(Animation( 1));
-    }
-
-    public void HideCurtains()
-    {
-        StopAllCoroutines();
-        StartCoroutine(Animation( 0));
-    }
-    
-    private IEnumerator Animation(float to)
-    {
-        float localDelta = 0;
-        
-        while (localDelta<1 && currentDelta!=to)
-        {
-            localDelta += Time.deltaTime;
-            currentDelta = Mathf.MoveTowards(currentDelta, to, 1 * Time.deltaTime);
-            for (int i = 0; i < curtains.Length; i++)
+            public void UpdatePositionByDelta(float delta)
             {
-                curtains[i].UpdatePositionByDelta(currentDelta);
+                curtain.anchoredPosition = Vector3.Lerp(hidePosition, showPosition, delta);
             }
-            yield return null;
         }
-    }
 
-    protected override void OnLoad()
-    {
-        throw new NotImplementedException();
+        [SerializeField] private Curtain[] curtains;
+
+
+        private float currentDelta = 0;
+    
+        public void ShowCurtains()
+        {
+            StopAllCoroutines();
+            StartCoroutine(Animation( 1));
+        }
+
+        public void HideCurtains()
+        {
+            StopAllCoroutines();
+            StartCoroutine(Animation( 0));
+        }
+    
+        private IEnumerator Animation(float to)
+        {
+            float localDelta = 0;
+        
+            while (localDelta<1 && currentDelta!=to)
+            {
+                localDelta += Time.deltaTime;
+                currentDelta = Mathf.MoveTowards(currentDelta, to, 1 * Time.deltaTime);
+                for (int i = 0; i < curtains.Length; i++)
+                {
+                    curtains[i].UpdatePositionByDelta(currentDelta);
+                }
+                yield return null;
+            }
+        }
+
+        protected override void OnLoad()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -2,9 +2,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Slots;
-using WRA.UI.Managers;
 
-namespace WRA.UI.Controls.DD.Dropables
+namespace WRA.UI.DragDropSystem.Dropables
 {
     public class DropableArmable : BaseDropable<ArmamentSlot, ArmableItem>
     {

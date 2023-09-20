@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 
-public class LayersChecker 
+namespace WRA.Tools.Editor
 {
-    [MenuItem("thief01/Tests/Tag Manager test")]
-    public static void TagManagerTest()
+    public class LayersChecker 
     {
-        WraDiagnostics.LogError("Test isn't added yet.", Color.red);
+        [MenuItem("thief01/Tests/Tag Manager test")]
+        public static void TagManagerTest()
+        {
+            WraDiagnostics.LogError("Test isn't added yet.", Color.red);
+        }
     }
 }

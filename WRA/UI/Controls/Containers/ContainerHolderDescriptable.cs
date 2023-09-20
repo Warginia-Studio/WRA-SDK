@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using WRA.CharacterSystems.InventorySystem;
-using WRA.UI.Managers;
 
 namespace WRA.UI.Controls.Containers
 {

@@ -1,29 +1,29 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 
-public abstract class PanelBase : MonoBehaviour
+namespace WRA.UI.PanelsSystem
 {
-    public abstract void Open(object data);
-
-    public abstract void Close(object data);
-
-    public abstract void OnShow(object data);
-    
-    public abstract void OnHide(object data);
-    
-    protected virtual T TryParseData<T>(object data) where T : PanelDataBase
+    public abstract class PanelBase : MonoBehaviour
     {
-        if (data != null && data is not T)
-        {
-            WraDiagnostics.LogError($"Data data is type: {data.GetType().FullName} expected {typeof(T).FullName} \n" + System.Environment.StackTrace, Color.red);
-            throw(new Exception($"Data data is type: {data.GetType().FullName} expected {typeof(T).FullName}"));
-        }
-        
-        return (T)data;
-    }
+        public abstract void Open(object data);
+
+        public abstract void Close(object data);
+
+        public abstract void OnShow(object data);
     
+        public abstract void OnHide(object data);
+    
+        protected virtual T TryParseData<T>(object data) where T : PanelDataBase
+        {
+            if (data != null && data is not T)
+            {
+                WraDiagnostics.LogError($"Data data is type: {data.GetType().FullName} expected {typeof(T).FullName} \n" + System.Environment.StackTrace, Color.red);
+                throw(new Exception($"Data data is type: {data.GetType().FullName} expected {typeof(T).FullName}"));
+            }
+        
+            return (T)data;
+        }
+    
+    }
 }

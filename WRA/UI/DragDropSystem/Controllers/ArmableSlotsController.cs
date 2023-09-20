@@ -2,10 +2,10 @@ using System.Linq;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Managment;
 using WRA.CharacterSystems.InventorySystem.Slots;
-using WRA.UI.Controls.DD.Dragables;
-using WRA.UI.Controls.DD.Dropables;
+using WRA.UI.DragDropSystem.Dragables;
+using WRA.UI.DragDropSystem.Dropables;
 
-namespace WRA.UI.Controls.DD.Controllers
+namespace WRA.UI.DragDropSystem.Controllers
 {
     public class ArmableSlotsController : BaseSlotsController<ArmamentSlot, ArmableItem>
     {

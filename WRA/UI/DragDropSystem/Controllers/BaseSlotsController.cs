@@ -6,7 +6,6 @@ using WRA.CharacterSystems.InventorySystem.Slots;
 using WRA.UI.Controls.Containers;
 using WRA.UI.DragDropSystem.Dragables;
 using WRA.UI.DragDropSystem.Dropables;
-using WRA.Utility.CustomAttributes.CustomProperty;
 
 namespace WRA.UI.DragDropSystem.Controllers
 {
@@ -15,13 +14,13 @@ namespace WRA.UI.DragDropSystem.Controllers
         public Transform ContainerParrent => HoldingContainer.transform;
         public Container<T1, T2> HoldingContainer { get; protected set; }
         public BaseDropable<T1, T2>[] Dropables;
-        public SlotStatusManager SlotStatusManager => slotStatusManager.serializedProperty;
+        public SlotStatusManager SlotStatusManager => slotStatusManager;
 
-        [SerializeField][CSerializedField(true)] protected COP<Transform> dragablesParrent;
-        [SerializeField][CSerializedField(true)] protected COP<Transform> draggingParrent;
-        [SerializeField][CSerializedField(true)] protected COP<SlotStatusManager> slotStatusManager;
+        [SerializeField] protected Transform dragablesParrent;
+        [SerializeField] protected Transform draggingParrent;
+        [SerializeField] protected SlotStatusManager slotStatusManager;
         
-        [SerializeField][CSerializedField(true)] protected COP<BaseDragable<T1, T2>> baseDragablePrefab;
+        [SerializeField] protected BaseDragable<T1, T2> baseDragablePrefab;
 
         protected List<BaseDragable<T1, T2>> spawnedDragables = new List<BaseDragable<T1, T2>>();
 
@@ -29,7 +28,7 @@ namespace WRA.UI.DragDropSystem.Controllers
         {
             if (draggingParrent != null && baseDragablePrefab != null)
             {
-                baseDragablePrefab.serializedProperty.SetParrents(draggingParrent.serializedProperty, draggingParrent.serializedProperty);
+                baseDragablePrefab.SetParrents(draggingParrent, draggingParrent);
             }
         }
 

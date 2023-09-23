@@ -94,7 +94,7 @@ namespace WRA.UI.DragDropSystem.Controllers
 
             for (int i = 0; i < -itemCount; i++)
             {
-                var newGo = Instantiate(baseDragablePrefab.serializedProperty.gameObject, dragablesParrent.serializedProperty);
+                var newGo = Instantiate(baseDragablePrefab.gameObject, dragablesParrent);
                 var id = newGo.GetComponent<ItemDragable>();
                 spawnedDragables.Add(id);
             }
@@ -123,7 +123,7 @@ namespace WRA.UI.DragDropSystem.Controllers
                                    DragDropProfile.Instance.CellSize);
                 // newGo.transform.localPosition = new Vector3(newPosition.x, newPosition.y);
                 
-                spawnedDragables[i].SetParrents(dragablesParrent.serializedProperty, dragablesParrent.serializedProperty);
+                spawnedDragables[i].SetParrents(dragablesParrent, dragablesParrent);
                 spawnedDragables[i].SetInfo(this, items[i].Item);
                 spawnedDragables[i].SetBasePosition(newPosition);
                 

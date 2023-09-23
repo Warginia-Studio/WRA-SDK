@@ -7,7 +7,6 @@ using WRA.CharacterSystems.InventorySystem.Slots;
 using WRA.UI.Controls;
 using WRA.UI.Controls.Containers;
 using WRA.UI.DragDropSystem.Controllers;
-using WRA.Utility.CustomAttributes.CustomProperty;
 
 namespace WRA.UI.DragDropSystem.Dragables
 {
@@ -17,7 +16,7 @@ namespace WRA.UI.DragDropSystem.Dragables
     {
         public Vector3 GrabOffset { get; protected set; }
         
-        [CSerializedField(true)][SerializeField] protected COP<Image> itemIcon;
+        [SerializeField] protected Image itemIcon;
 
         protected Vector3 basePosition;
 
@@ -45,7 +44,7 @@ namespace WRA.UI.DragDropSystem.Dragables
         {
             base.SetInfo(container, item);
 
-            itemIcon.serializedProperty.sprite = item.Icon;
+            itemIcon.sprite = item.Icon;
         }
 
         public void SetParrents(Transform draggingParrent, Transform dragableParrent)

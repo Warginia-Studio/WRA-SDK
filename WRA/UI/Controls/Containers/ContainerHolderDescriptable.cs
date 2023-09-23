@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using WRA.CharacterSystems.InventorySystem;
-using WRA.UI.Managers;
 
 namespace WRA.UI.Controls.Containers
 {
@@ -22,7 +21,7 @@ namespace WRA.UI.Controls.Containers
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            DescriptionManager.Instance.HideDescription();
+            // DescriptionManager.Instance.HideDescription();
         }
     }
 }

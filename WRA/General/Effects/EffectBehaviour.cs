@@ -7,6 +7,6 @@ namespace WRA.General.Effects
     public abstract class EffectBehaviourBase : ScriptableObject, IResourceEffect
     {
 
-        public abstract void PlayEffect(Transform target);
+        public abstract void PlayEffect(Vector3 position);
     }
 }

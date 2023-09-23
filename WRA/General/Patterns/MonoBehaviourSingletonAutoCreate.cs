@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace WRA.General.Patterns
 {
-    public class MonoBehaviourSingletonAutoCreate<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class MonoBehaviourSingletonAutoCreate<T> : MonoBehaviour where T : MonoBehaviourSingletonAutoCreate<T>
     {
         public static T Instance
         {
@@ -14,13 +14,16 @@ namespace WRA.General.Patterns
                     if (instance == null)
                     {
                         instance = new GameObject().AddComponent<T>();
+                        instance.OnCreate();
                     }
                 }
                 return instance;
             }
         }
-
+        
         private static T instance;
+        
+        protected abstract void OnCreate();
     }
 }
 

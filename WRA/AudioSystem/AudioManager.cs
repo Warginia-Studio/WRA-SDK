@@ -1,11 +1,11 @@
+using System;
 using System.Collections.Generic;
-using WRA.General.Interfaces;
 using WRA.General.Patterns;
-using WRA.PlayerSystems.SaveSystem;
+using WRA.General.SaveLoadSystem;
 
 namespace WRA.AudioSystem
 {
-    public class AudioManager : MonoBehaviourSingletonAutoCreate<AudioManager>, ISaveable
+    public class AudioManager : MonoBehaviourSingletonAutoCreate<AudioManager>
     {
         private Dictionary<AudioType, float> volumes =new Dictionary<AudioType, float>()
         {
@@ -16,6 +16,24 @@ namespace WRA.AudioSystem
             { AudioType.voices , 1},
         };
 
+        private void Awake()
+        {
+            OnCreate();
+        }
+
+        protected override void OnCreate()
+        {
+            var volumesSettings = UnityFileManagment.LoadObject<Dictionary<AudioType, float>>("/Configs/AudioConfig.cfg");
+            if (volumesSettings == null)
+                return;
+
+            volumes = volumesSettings;
+        }
+
+        private void OnDestroy()
+        {
+            UnityFileManagment.SaveObject<Dictionary<AudioType, float>>("/Configs/AudioConfig.cfg", volumes);
+        }
 
         public void SetVolumeForAudioType(AudioType audioType, float volume)
         {
@@ -25,16 +43,6 @@ namespace WRA.AudioSystem
         public float GetVolumeForAudioType(AudioType audioType)
         {
             return volumes[audioType];
-        }
-
-        public string GetSaveData()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void LoadFromData(string data)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

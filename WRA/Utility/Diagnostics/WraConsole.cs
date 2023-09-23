@@ -33,6 +33,11 @@ namespace WRA.Utility.Diagnostics
 
             tmp.text = logString + "\n" + stackTrace;
         }
+
+        protected override void OnLoad()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

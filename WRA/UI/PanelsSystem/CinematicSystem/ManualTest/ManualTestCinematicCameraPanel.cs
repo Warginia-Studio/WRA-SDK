@@ -1,26 +1,24 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using WRA.UI;
-using WRA.UI.PanelsSystem;
 
-public class ManualTestCinematicCameraPanel : MonoBehaviour
+namespace WRA.UI.PanelsSystem.CinematicSystem.ManualTest
 {
-    private void Awake()
+    public class ManualTestCinematicCameraPanel : MonoBehaviour
     {
-        PanelManager.Instance.OpenPanel<CinematicCameraPanel, CinematicCameraData>(new CinematicCameraData() { StartAsShow = true});
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
+        private void Awake()
         {
-            PanelManager.Instance.GetPanel<CinematicCameraPanel>().ShowCurtains();
+            PanelManager.Instance.OpenPanel<CinematicCameraPanel, CinematicCameraData>(new CinematicCameraData() { StartAsShow = true});
         }
-        if (Input.GetKeyDown(KeyCode.H))
+
+        private void Update()
         {
-            PanelManager.Instance.GetPanel<CinematicCameraPanel>().HideCurtains();
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                PanelManager.Instance.GetPanel<CinematicCameraPanel>().ShowCurtains();
+            }
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                PanelManager.Instance.GetPanel<CinematicCameraPanel>().HideCurtains();
+            }
         }
     }
 }

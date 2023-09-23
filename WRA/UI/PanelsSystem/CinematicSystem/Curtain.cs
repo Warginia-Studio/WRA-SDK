@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct Curtain
+namespace WRA.UI.PanelsSystem.CinematicSystem
 {
-    public RectTransform curtain;
-    public Vector3 showPosition;
-    public Vector3 hidePosition;
-
-    public void UpdatePositionByDelta(float delta)
+    [System.Serializable]
+    public struct Curtain
     {
-        curtain.anchoredPosition = Vector3.Lerp(hidePosition, showPosition, delta);
+        public RectTransform curtain;
+        public Vector3 showPosition;
+        public Vector3 hidePosition;
+
+        public void UpdatePositionByDelta(float delta)
+        {
+            curtain.anchoredPosition = Vector3.Lerp(hidePosition, showPosition, delta);
+        }
     }
 }

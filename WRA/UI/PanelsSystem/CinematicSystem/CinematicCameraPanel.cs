@@ -1,13 +1,9 @@
-using System;
-using System.Collections;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using UnityEngine;
-using WRA.General.Patterns;
-using WRA.UI.PanelsSystem;
 
-namespace WRA.UI
+namespace WRA.UI.PanelsSystem.CinematicSystem
 {
     public class CinematicCameraPanel : PanelBase
     {

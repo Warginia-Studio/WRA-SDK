@@ -37,13 +37,17 @@ namespace WRA.UI.PanelsSystem
 
             panel = LoadPanelFromResources<T>() as T;
             panel.Open(data);
+            OnPanelOpen.Invoke(panel);
 
             if (startAsHide)
             {
                 HidePanel<T, TData>(data);
             }
-
-            OnPanelOpen.Invoke(panel);
+            else
+            {
+                ShowPanel<T, TData>(data);
+            }
+            
             return panel;
         }
 
@@ -53,7 +57,6 @@ namespace WRA.UI.PanelsSystem
 
             if (checkData.opened)
             {
-                checkData.panel.gameObject.SetActive(true);
                 checkData.panel.OnShow(data);
             }
             else if (openIfIsOff)
@@ -71,7 +74,6 @@ namespace WRA.UI.PanelsSystem
 
             if (checkData.opened)
             {
-                checkData.panel.gameObject.SetActive(false);
                 checkData.panel.OnHide(data);
             }
         

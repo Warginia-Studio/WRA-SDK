@@ -3,7 +3,7 @@ using UnityEngine;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Managment;
 using WRA.CharacterSystems.InventorySystem.Slots;
-using WRA.UI.Controls.DD;
+using WRA.UI.Controls.Containers;
 using WRA.UI.DragDropSystem.Dragables;
 using WRA.UI.DragDropSystem.Dropables;
 using WRA.Utility.CustomAttributes.CustomProperty;

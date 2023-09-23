@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Slots;
-using WRA.UI.Controls.DD;
+using WRA.UI.Controls.Containers;
 
 namespace WRA.UI.DragDropSystem.Dropables
 {

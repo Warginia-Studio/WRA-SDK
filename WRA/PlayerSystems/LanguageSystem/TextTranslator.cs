@@ -1,9 +1,7 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using WRA.PlayerSystems.LanguageSystem;
 
-namespace WRA.UI.Controls
+namespace WRA.PlayerSystems.LanguageSystem
 {
     [RequireComponent(typeof(TMP_Text))]
     public class TextTranslator : MonoBehaviour

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WRA.CharacterSystems.InventorySystem;
 
-namespace WRA.UI.Controls.DD
+namespace WRA.UI.Controls.Containers
 {
     [RequireComponent(typeof(Image))]
     public class SlotStatusManager : MonoBehaviour

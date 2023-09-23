@@ -5,7 +5,7 @@ using WRA.CharacterSystems.InventorySystem;
 using WRA.CharacterSystems.InventorySystem.Slots;
 using WRA.UI.DragDropSystem.Controllers;
 
-namespace WRA.UI.Controls.DD
+namespace WRA.UI.Controls.Containers
 {
     [RequireComponent(typeof(RectTransform))]
     public abstract class CIHolder<TSlot, TItem> : MonoBehaviour where TSlot : ContainerSlot<TItem> where TItem : ContainerItem

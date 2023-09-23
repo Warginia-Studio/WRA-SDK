@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using WRA.CharacterSystems.InventorySystem;
 
-namespace WRA.UI.Controls.Feedback
+namespace WRA.UI.Controls.Containers
 {
    public class StatusChanger : MonoBehaviour
    {

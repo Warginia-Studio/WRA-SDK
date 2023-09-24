@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,7 +16,16 @@ namespace WRA.Utility.Diagnostics
     public static class WraDiagnostics
     {
         public static List<WraLogData> WraLogDatas = new List<WraLogData>();
-        public static UnityEvent<WraLogData> OnLog;
+        public static UnityEvent<WraLogData> OnLog = new UnityEvent<WraLogData>();
+
+#if UNITY_EDITOR
+        [InitializeOnLoadMethod]
+        public static void ClearLogs()
+        {
+            WraLogDatas.Clear();
+        }
+#endif
+        
 
         public static void Log(object message)
         {

@@ -1,55 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using WRA.UI.PanelsSystem;
 
-public class PanelManagerEditor
+namespace WRA.UI.PanelsSystem.Editor
 {
-    [MenuItem("GameObject/thief01-SDK/PanelManager")]
-    public static void CreatePanelManager()
+    public class PanelManagerEditor
     {
-        Canvas canvas = MonoBehaviour.FindObjectOfType<Canvas>();
-
-        
-        // Jeśli nie ma Canvasa, tworzymy go
-        if (canvas == null)
+        [MenuItem("GameObject/thief01-SDK/PanelManager")]
+        public static void CreatePanelManager()
         {
-            GameObject canvasObject = new GameObject("Canvas");
-            canvas = canvasObject.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvasObject.AddComponent<CanvasScaler>();
-            canvasObject.AddComponent<GraphicRaycaster>();
-        }
-
-        EventSystem eventSystem = MonoBehaviour.FindObjectOfType<EventSystem>();
-
-        if (eventSystem == null)
-        {
-            eventSystem = new GameObject("Event System").AddComponent<EventSystem>();
-            eventSystem.GameObject().AddComponent<StandaloneInputModule>();
-        }
+            Canvas canvas = MonoBehaviour.FindObjectOfType<Canvas>();
 
         
-        GameObject g = new GameObject("Panel Manager");
-        var rectTransform = g.AddComponent<RectTransform>();
-        g.AddComponent<PanelManager>();
-        g.transform.SetParent(canvas.transform);
+            // Jeśli nie ma Canvasa, tworzymy go
+            if (canvas == null)
+            {
+                GameObject canvasObject = new GameObject("Canvas");
+                canvas = canvasObject.AddComponent<Canvas>();
+                canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+                canvasObject.AddComponent<CanvasScaler>();
+                canvasObject.AddComponent<GraphicRaycaster>();
+            }
+
+            EventSystem eventSystem = MonoBehaviour.FindObjectOfType<EventSystem>();
+
+            if (eventSystem == null)
+            {
+                eventSystem = new GameObject("Event System").AddComponent<EventSystem>();
+                eventSystem.GameObject().AddComponent<StandaloneInputModule>();
+            }
+
+        
+            GameObject g = new GameObject("Panel Manager");
+            var rectTransform = g.AddComponent<RectTransform>();
+            g.AddComponent<PanelManager>();
+            g.transform.SetParent(canvas.transform);
         
 
-        rectTransform.anchorMax = new Vector2(1, 1);
-        rectTransform.anchorMin = new Vector2(0, 0);
-        var canvasSize = canvas.GetComponent<RectTransform>().sizeDelta;
-        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, canvasSize.x);
-        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, canvasSize.y);
-        rectTransform.anchoredPosition = Vector2.zero;
+            rectTransform.anchorMax = new Vector2(1, 1);
+            rectTransform.anchorMin = new Vector2(0, 0);
+            var canvasSize = canvas.GetComponent<RectTransform>().sizeDelta;
+            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, canvasSize.x);
+            rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, canvasSize.y);
+            rectTransform.anchoredPosition = Vector2.zero;
 
 
-        Selection.activeGameObject = g;
-        Undo.RegisterCreatedObjectUndo(eventSystem.gameObject, "Create Event system");
-        Undo.RegisterCreatedObjectUndo(canvas.gameObject, "Create Canvas");
+            Selection.activeGameObject = g;
+            Undo.RegisterCreatedObjectUndo(eventSystem.gameObject, "Create Event system");
+            Undo.RegisterCreatedObjectUndo(canvas.gameObject, "Create Canvas");
+        }
     }
 }

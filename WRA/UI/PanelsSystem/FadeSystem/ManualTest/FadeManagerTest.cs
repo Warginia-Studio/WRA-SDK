@@ -1,28 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using WRA.UI.PanelsSystem;
-using WRA.UI.PanelsSystem.FadeSystem;
 
-public class FadeManagerTest : MonoBehaviour
+namespace WRA.UI.PanelsSystem.FadeSystem.ManualTest
 {
-    private FadeManager fadeManager;
-    private void Awake()
+    public class FadeManagerTest : MonoBehaviour
     {
-        fadeManager = PanelManager.Instance.OpenPanel<FadeManager>();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
+        private FadeManager fadeManager;
+        private void Awake()
         {
-            fadeManager.FadeIn();
+            fadeManager = PanelManager.Instance.OpenPanel<FadeManager>();
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
+        private void Update()
         {
-            fadeManager.FadeOut();
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                fadeManager.FadeIn();
+            }
+
+            if (Input.GetKeyDown(KeyCode.H))
+            {
+                fadeManager.FadeOut();
+            }
         }
     }
 }

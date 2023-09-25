@@ -1,26 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using WRA.Utility;
 
-public class ColorHelper
+namespace WRA.Utility.Math
 {
-    public static string ColorToHex(Color color)
+    public class ColorHelper
     {
-        int r = (int)(color.r * 255);
-        int g = (int)(color.g * 255);
-        int b = (int)(color.b * 255);
-        int a = (int)(color.a * 255);
-        string str = "#" + r.ToString("x2") + g.ToString("x2") + b.ToString("x2") + a.ToString("x2");
+        public static string ColorToHex(Color color)
+        {
+            int r = (int)(color.r * 255);
+            int g = (int)(color.g * 255);
+            int b = (int)(color.b * 255);
+            int a = (int)(color.a * 255);
+            string str = "#" + r.ToString("x2") + g.ToString("x2") + b.ToString("x2") + a.ToString("x2");
 
-        return str;
-    }
+            return str;
+        }
 
-    public static string GetTextInColor(string message, Color color)
-    {
-        var hexColor= ColorToHex(color);
+        public static string GetTextInColor(string message, Color color)
+        {
+            var hexColor= ColorToHex(color);
         
-        return $"<color={hexColor}>{message}</color>";
-    }
+            return $"<color={hexColor}>{message}</color>";
+        }
 
+    }
 }

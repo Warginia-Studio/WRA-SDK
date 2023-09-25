@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum WraLogType 
+namespace WRA.Utility.Diagnostics
 {
-    log,
-    error,
-    warning
+    public enum WraLogType 
+    {
+        log,
+        error,
+        warning
+    }
 }

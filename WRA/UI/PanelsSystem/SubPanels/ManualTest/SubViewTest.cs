@@ -1,14 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using WRA.UI.PanelsSystem;
-using WRA.UI.PanelsSystem.SubPanels;
 
-public class SubViewTest : MonoBehaviour
+namespace WRA.UI.PanelsSystem.SubPanels.ManualTest
 {
-    private void Awake()
+    public class SubViewTest : MonoBehaviour
     {
-        PanelManager.Instance.OpenPanel<SubViewsPanelBase>();
+        private void Awake()
+        {
+            PanelManager.Instance.OpenPanel<SubViewsPanelBase>();
+        }
     }
 }

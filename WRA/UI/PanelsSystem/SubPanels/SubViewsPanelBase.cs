@@ -12,6 +12,17 @@ namespace WRA.UI.PanelsSystem.SubPanels
         [SerializeField] private List<SubViewBase> allViews = new List<SubViewBase>();
 
         [SerializeField] private string startPanelName = "";
+        [SerializeField] private bool loopIndex = false;
+
+        public void Next()
+        {
+            SwitchPanel(CurrentViewId+1);
+        }
+
+        public void Previous()
+        {
+            SwitchPanel(CurrentViewId-1);   
+        }
 
         public void SwitchPanel(string panelName)
         {
@@ -30,6 +41,7 @@ namespace WRA.UI.PanelsSystem.SubPanels
 
         public void SwitchPanel(int id, object data)
         {
+            id = CheckIndex(id);
             var correctSubPanel = allViews[id];
             OpenSubPanel(correctSubPanel, data);
         }
@@ -79,6 +91,21 @@ namespace WRA.UI.PanelsSystem.SubPanels
         public override void OnHide(object data)
         {
             
+        }
+
+        private int CheckIndex(int id)
+        {
+            if (id > allViews.Count)
+            {
+                id = loopIndex ? 0 : allViews.Count - 1;
+            }
+
+            if (id < 0)
+            {
+                id = loopIndex ? allViews.Count - 1 : 0;
+            }
+
+            return id;
         }
         
         private void TryGetViews()

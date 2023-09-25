@@ -24,10 +24,5 @@ public class FadeManagerTest : MonoBehaviour
         {
             fadeManager.FadeOut();
         }
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            fadeManager.FadeInOut();
-        }
     }
 }

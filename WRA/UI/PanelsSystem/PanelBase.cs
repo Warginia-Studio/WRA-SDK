@@ -13,7 +13,7 @@ namespace WRA.UI.PanelsSystem
         public abstract void OnShow(object data);
     
         public abstract void OnHide(object data);
-    
+        
         protected virtual T TryParseData<T>(object data) where T : PanelDataBase
         {
             if (data != null && data is not T)
@@ -24,6 +24,5 @@ namespace WRA.UI.PanelsSystem
         
             return (T)data;
         }
-    
     }
 }

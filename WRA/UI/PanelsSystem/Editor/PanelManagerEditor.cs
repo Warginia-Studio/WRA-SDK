@@ -35,9 +35,17 @@ public class PanelManagerEditor
 
         
         GameObject g = new GameObject("Panel Manager");
-        g.AddComponent<RectTransform>();
+        var rectTransform = g.AddComponent<RectTransform>();
         g.AddComponent<PanelManager>();
         g.transform.SetParent(canvas.transform);
+        
+
+        rectTransform.anchorMax = new Vector2(1, 1);
+        rectTransform.anchorMin = new Vector2(0, 0);
+        var canvasSize = canvas.GetComponent<RectTransform>().sizeDelta;
+        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, canvasSize.x);
+        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, canvasSize.y);
+        rectTransform.anchoredPosition = Vector2.zero;
 
 
         Selection.activeGameObject = g;

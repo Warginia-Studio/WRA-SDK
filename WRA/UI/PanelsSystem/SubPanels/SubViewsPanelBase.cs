@@ -6,10 +6,22 @@ namespace WRA.UI.PanelsSystem.SubPanels
 {
     public class SubViewsPanelBase : PanelBase
     {
+        public int CurrentViewId { get; private set; }
+        public SubViewBase CurrentViewData { get; private set; }
+        
         [SerializeField] private List<SubViewBase> allViews = new List<SubViewBase>();
 
         [SerializeField] private string startPanelName = "";
-        
+
+        public void SwitchPanel(string panelName)
+        {
+            SwitchPanel(panelName, null);
+        }
+
+        public void SwitchPanel(int id)
+        {
+            SwitchPanel(id, null);
+        }
         public void SwitchPanel(string panelName, object data)
         {
             var correctSubPanel = allViews.Find(ctg => ctg.name == panelName);
@@ -68,7 +80,7 @@ namespace WRA.UI.PanelsSystem.SubPanels
         {
             
         }
-
+        
         private void TryGetViews()
         {
             if (allViews != null && allViews.Count > 0)
@@ -86,8 +98,16 @@ namespace WRA.UI.PanelsSystem.SubPanels
                     allViews[i].OnHide();
                     allViews[i].gameObject.SetActive(false);
                 }
+                else
+                {
+                    CurrentViewId = i;
+                }
             }
+            
             subViewBase.OnShow(data);
+            subViewBase.gameObject.SetActive(true);
+            
+            CurrentViewData = subViewBase;
         }
     }
 }

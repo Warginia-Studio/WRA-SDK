@@ -112,7 +112,12 @@ namespace WRA.UI.PanelsSystem
 
         private T LoadPanelFromResources<T>() where T : PanelBase
         {
-            var panel = TryInitialize<T>($"SDK/Panels/{typeof(T).Name}");
+            var panel = TryInitialize<T>($"Common/Panels/{typeof(T).Name}");
+            
+            if (panel == null)
+            {
+                panel = TryInitialize<T>($"SDK/Panels/{typeof(T).Name}");
+            }
         
             openedPanels.Add(panel);
             return panel;

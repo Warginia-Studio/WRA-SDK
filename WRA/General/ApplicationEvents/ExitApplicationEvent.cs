@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace WRA.General.Callers
 {
-    public class ExitControler : MonoBehaviour
+    public class ExitApplicationEvent : MonoBehaviour
     {
         public void Exit()
         {

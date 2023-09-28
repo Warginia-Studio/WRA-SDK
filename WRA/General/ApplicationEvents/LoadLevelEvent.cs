@@ -4,7 +4,7 @@ using WRA.General.SceneManagment;
 
 namespace WRA.General.Callers
 {
-    public class LoadLevel : MonoBehaviour
+    public class LoadLevelEvent : MonoBehaviour
     {
         [SerializeField] private string levelName;
         [SerializeField] private bool useLoaderScene;
@@ -13,7 +13,7 @@ namespace WRA.General.Callers
         {
             if (useLoaderScene)
             {
-                CustomSceneManager.Instance.ChangeScene(levelName);
+                CustomSceneManager.ChangeScene(levelName);
             }
             else
             {
@@ -25,7 +25,7 @@ namespace WRA.General.Callers
         {
             if (useLoaderScene)
             {
-                CustomSceneManager.Instance.ChangeScene(levelName);
+                CustomSceneManager.ChangeScene(levelName);
             }
             else
             {

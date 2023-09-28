@@ -8,12 +8,13 @@ namespace WRA.General.Callers
     {
         [SerializeField] private string levelName;
         [SerializeField] private bool useLoaderScene;
+        [SerializeField] private bool autoStartScene;
 
         public void Startlevel()
         {
             if (useLoaderScene)
             {
-                CustomSceneManager.ChangeScene(levelName);
+                CustomSceneManager.ChangeScene(levelName, autoStartScene);
             }
             else
             {
@@ -25,12 +26,17 @@ namespace WRA.General.Callers
         {
             if (useLoaderScene)
             {
-                CustomSceneManager.ChangeScene(levelName);
+                CustomSceneManager.ChangeScene(levelName, autoStartScene);
             }
             else
             {
                 SceneManager.LoadSceneAsync(levelName);
             }
+        }
+
+        public void StartLevel(int id)
+        {
+            CustomSceneManager.ChangeScene(id, autoStartScene);
         }
     }
 }

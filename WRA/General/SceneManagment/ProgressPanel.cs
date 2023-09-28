@@ -1,6 +1,9 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using WRA.PlayerSystems.LanguageSystem;
 using WRA.UI.PanelsSystem;
 
 namespace WRA.General.SceneManagment
@@ -9,7 +12,13 @@ namespace WRA.General.SceneManagment
     {
         [SerializeField] private Image progressBar;
         [SerializeField] private TextMeshProUGUI progressText;
-        [SerializeField] private TextMeshProUGUI sceneIsReadText;
+        [SerializeField] private TextTranslator sceneIsReadyText;
+        [SerializeField] private KeyCode continueKey;
+
+        private void Awake()
+        {
+            sceneIsReadyText.SetTextsToFormat(continueKey.ToString());
+        }
 
         private void Update()
         {
@@ -21,14 +30,10 @@ namespace WRA.General.SceneManagment
             if (progressText != null)
             {
                 progressText.text = CustomSceneManager.PercentOfLoad.ToString("P");
-                if (CustomSceneManager.SceneIsReady)
-                {
-                    progressText.text = (1f).ToString("P");
-                }
             }
 
-            sceneIsReadText.gameObject.SetActive(CustomSceneManager.SceneIsReady);
-            if (CustomSceneManager.SceneIsReady && Input.GetKeyDown(KeyCode.Space))
+            sceneIsReadyText.gameObject.SetActive(CustomSceneManager.SceneIsReady);
+            if (CustomSceneManager.SceneIsReady && Input.GetKeyDown(continueKey))
             {
                 CustomSceneManager.SetActiveNextScene();
             }

@@ -2,13 +2,14 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WRA.General.Patterns;
+using WRA.UI.PanelsSystem;
 
 namespace WRA.General.SceneManagment
 {
     public static class CustomSceneManager
     {
-        public static float PercentOfLoad => asyncOperation?.progress ?? 0;
-        public static bool SceneIsReady => asyncOperation?.isDone ?? false;
+        public static float PercentOfLoad => asyncOperation?.progress / 0.9f ?? 0;
+        public static bool SceneIsReady => asyncOperation?.progress >= 0.9f;
 
         private static Scene nextScene;
         private static string nextSceneName;
@@ -17,13 +18,14 @@ namespace WRA.General.SceneManagment
         public static void ChangeScene(int buildId, bool autoChangeScene = false)
         {
             nextSceneName = SceneManager.GetSceneByBuildIndex(buildId).name;
-            CreateLoadingProcess();
+            CreateLoadingProcess(autoChangeScene);
         }
 
         public static void ChangeScene(string name, bool autoChangeScene = false)
         {
+            PanelManager.Instance.ShowPanel<ProgressPanel, PanelDataBase>(null, true);
             nextSceneName = name;
-            CreateLoadingProcess();
+            CreateLoadingProcess(autoChangeScene);
         }
 
         public static void SetActiveNextScene()

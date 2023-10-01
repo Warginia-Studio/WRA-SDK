@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace WRA.CharacterSystems.InteractionsSystem
 {
-    public class InteractionController3D : InteractionControllerBase
+    public class InteractionControler3D : InteractionControlerBase
     {
         private void OnTriggerEnter(Collider other)
         {

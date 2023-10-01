@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using WRA.Utility;
+using WRA.Utility.Math;
 
 namespace WRA.CharacterSystems.StatisticsSystem
 {
@@ -18,7 +19,7 @@ namespace WRA.CharacterSystems.StatisticsSystem
         public string GetStringForStatistic(float value)
         {
             var str = "";
-            str = String.Format(COLOR_BASE, ColorToHex.GetHexColor(ColorText), value.ToString(Formating));
+            str = ColorHelper.GetTextInColor(value.ToString(Formating), ColorText);
             return String.Format(BOLD_BASE, str);
         }
     }

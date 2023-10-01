@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace WRA.Utility
 {
-    public class ClampedValue
+    public class RangedValueFloat
     {
         public float Value
         {
@@ -12,15 +12,12 @@ namespace WRA.Utility
                 this.value = Mathf.Clamp(value, min, max);
             }
         }
-
-        public float LastChangedFixed { get; private set; }
-        private float lastRemerValue = 0;
-
+        
         private float value;
         private float min;
         private float max;
 
-        public ClampedValue(float min, float max)
+        public RangedValueFloat(float min, float max)
         {
             this.min = min;
             this.max = max;
@@ -34,40 +31,36 @@ namespace WRA.Utility
         
         #region Self_Operators
 
-        public static ClampedValue operator +(ClampedValue x, ClampedValue y)
+        public static RangedValueFloat operator +(RangedValueFloat x, RangedValueFloat y)
         {
             x.value += y.value;
-            x.CheckChange();
             return x;
         }
     
-        public static ClampedValue operator -(ClampedValue x, ClampedValue y)
+        public static RangedValueFloat operator -(RangedValueFloat x, RangedValueFloat y)
         {
             x.value -= y.value;
-            x.CheckChange();
             return x;
         }
     
-        public static ClampedValue operator /(ClampedValue x, ClampedValue y)
+        public static RangedValueFloat operator /(RangedValueFloat x, RangedValueFloat y)
         {
             x.value /= y.value;
-            x.CheckChange();
             return x;
         }
     
-        public static ClampedValue operator *(ClampedValue x, ClampedValue y)
+        public static RangedValueFloat operator *(RangedValueFloat x, RangedValueFloat y)
         {
             x.value *= y.value;
-            x.CheckChange();
             return x;
         }
         
-        public static bool operator<=(ClampedValue x, ClampedValue y)
+        public static bool operator<=(RangedValueFloat x, RangedValueFloat y)
         {
             return x.value <= y.value;
         }
     
-        public static bool operator>=(ClampedValue x, ClampedValue y)
+        public static bool operator>=(RangedValueFloat x, RangedValueFloat y)
         {
             return x.value >= y.value;
         }
@@ -75,60 +68,50 @@ namespace WRA.Utility
 
         #region Float_Operators
         
-        public static ClampedValue operator +(ClampedValue x, float y)
+        public static RangedValueFloat operator +(RangedValueFloat x, float y)
         {
             x.value += y;
-            x.CheckChange();
             return x;
         }
     
-        public static ClampedValue operator -(ClampedValue x, float y)
+        public static RangedValueFloat operator -(RangedValueFloat x, float y)
         {
             x.value -= y;
-            x.CheckChange();
             return x;
         }
     
-        public static ClampedValue operator /(ClampedValue x, float y)
+        public static RangedValueFloat operator /(RangedValueFloat x, float y)
         {
             x.value /= y;
-            x.CheckChange();
             return x;
         }
     
-        public static ClampedValue operator *(ClampedValue x, float y)
+        public static RangedValueFloat operator *(RangedValueFloat x, float y)
         {
             x.value *= y;
-            x.CheckChange();
             return x;
         }
     
-        public static bool operator==(ClampedValue x, float y)
+        public static bool operator==(RangedValueFloat x, float y)
         {
             return x.value == y;
         }
     
-        public static bool operator!=(ClampedValue x, float y)
+        public static bool operator!=(RangedValueFloat x, float y)
         {
             return x.value != y;
         }
     
-        public static bool operator<=(ClampedValue x, float y)
+        public static bool operator<=(RangedValueFloat x, float y)
         {
             return x.value <= y;
         }
     
-        public static bool operator>=(ClampedValue x, float y)
+        public static bool operator>=(RangedValueFloat x, float y)
         {
             return x.value >= y;
         }
 
         #endregion
-
-        private void CheckChange()
-        {
-            LastChangedFixed = lastRemerValue - value;
-            lastRemerValue = value;
-        }
     }
 }

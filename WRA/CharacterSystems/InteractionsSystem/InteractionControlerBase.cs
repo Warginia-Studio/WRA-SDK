@@ -5,7 +5,7 @@ using WRA.Environment;
 
 namespace WRA.CharacterSystems.InteractionsSystem
 {
-    public class InteractionControllerBase : CharacterSystemBase
+    public class InteractionControlerBase : CharacterSystemBase
     {
         [SerializeField] protected MapLabel mapLabel;
         protected List<IInteractable> interactables;

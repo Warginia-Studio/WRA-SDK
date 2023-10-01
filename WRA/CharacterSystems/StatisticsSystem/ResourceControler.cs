@@ -16,23 +16,21 @@ namespace WRA.CharacterSystems.StatisticsSystem
         {
             get
             {
-                if (sourceValue == null)
+                if (sourceValueFloat == null)
                 {
                     WraDiagnostics.LogError($"Source value is null in: { GetType()}. You have to call Init(min, max) method. Value returned will be 0.");
                     return 0;
                 }
 
-                return sourceValue.Value;
+                return sourceValueFloat.Value;
             }
         }
 
         public abstract float PercentValue { get; }
         
         public abstract float MaxValue { get; }
-
-        [SerializeField] private bool useFixedValue = false;
-
-        private ClampedValue sourceValue = new ClampedValue(0, 100);
+        
+        private RangedValueFloat sourceValueFloat = new RangedValueFloat(0, 100);
 
         protected virtual void Awake()
         {
@@ -41,29 +39,38 @@ namespace WRA.CharacterSystems.StatisticsSystem
 
         public virtual void AddValue(ResourcesChangedBase value)
         {
-            sourceValue += value.CalculatedValueChanged;
-            value.RelValueChanged = useFixedValue ? sourceValue.LastChangedFixed : value.CalculatedValueChanged;
+            value.RelValueChanged = value.CalculatedValueChanged;
+            sourceValueFloat += value.CalculatedValueChanged;
             OnValueChanged.Invoke(value.RelValueChanged);
             OnIncreaseValue.Invoke(value.RelValueChanged);
         }
         
         public virtual void RemoveValue(ResourcesChangedBase value)
         {
-            sourceValue -= value.CalculatedValueChanged;
-            value.RelValueChanged = useFixedValue ? sourceValue.LastChangedFixed : value.CalculatedValueChanged;
+            value.RelValueChanged = CalculateRealValueChanged(value.CalculatedValueChanged);
+            sourceValueFloat -= value.CalculatedValueChanged;
+            value.RelValueChanged = value.CalculatedValueChanged;
             OnValueChanged.Invoke(value.RelValueChanged);
             OnDecreaseValue.Invoke(value.RelValueChanged);
         }
 
+        protected float CalculateRealValueChanged(float change)
+        {
+            float previousValue = sourceValueFloat.Value;
+            float currentValue = Mathf.Clamp(sourceValueFloat.Value - change, 0, MaxValue);
+
+            return Mathf.Abs(previousValue - currentValue);
+        }
+
         protected void Init(float min, float  max)
         {
-            sourceValue.SetNewValues(min, max);
+            sourceValueFloat.SetNewValues(min, max);
         }
 
         protected void InitAndRegen(float min, float max)
         {
-            sourceValue.SetNewValues(min, max);
-            sourceValue.Value = max;
+            sourceValueFloat.SetNewValues(min, max);
+            sourceValueFloat.Value = max;
         }
     
     }

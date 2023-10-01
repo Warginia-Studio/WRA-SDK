@@ -10,11 +10,11 @@ namespace WRA.CharacterSystems
     {
         public Inventory Inventory { get; }
         public StatisticsControler StatisticsControler { get; }
-        public InteractionControllerBase InteractionControllerBase { get; }
+        public InteractionControlerBase InteractionControlerBase { get; }
 
         [SerializeField] private Inventory inventory;
-        [FormerlySerializedAs("statisticsController")] [SerializeField] private StatisticsControler statisticsControler;
-        [SerializeField] private InteractionControllerBase interactionControllerBase;
+        [SerializeField] private StatisticsControler statisticsControler;
+        [SerializeField] private InteractionControlerBase interactionControlerBase;
     
         private void Awake()
         {

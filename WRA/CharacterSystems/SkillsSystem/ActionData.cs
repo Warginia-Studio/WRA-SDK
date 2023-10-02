@@ -11,6 +11,5 @@ namespace WRA.CharacterSystems.SkillsSystem
         {
             CharacterObject = characterObject;
         }
-    
     }
 }

@@ -10,12 +10,12 @@ namespace WRA.CharacterSystems.StatisticsSystem.Statistics
         
         public string GetStatisticInString()
         {
-            return CharacterProfile.Instance.StatisticInfos[Statistic.Id].GetStringForStatistic(Value);
+            return StatisticsProfile.Instance.StatisticInfos[Statistic.Id].GetStringForStatistic(Value);
         }
 
         public string GetStatisticTranslation()
         {
-            return LanguageManager.GetTranslation("Statistic_" + CharacterProfile.Instance.StatisticInfos[Statistic.Id].StatisticName);
+            return LanguageManager.GetTranslation("Statistic_" + StatisticsProfile.Instance.StatisticInfos[Statistic.Id].StatisticName);
         }
 
         public string GetFullText()

@@ -1,14 +1,18 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using WRA.CharacterSystems.InteractionsSystem;
+using WRA.CharacterSystems.SkillsSystem;
+using WRA.CharacterSystems.StatisticsSystem;
+using WRA.Utility.Diagnostics;
 
-namespace WRA.CharacterSystems
+[RequireComponent(typeof(CharacterObject))]
+public class CharacterSystemBase : MonoBehaviour
 {
-    public class CharacterSystemBase : MonoBehaviour
+    protected CharacterObject characterObject;
+    public void SetCharacterObject(CharacterObject characterObject)
     {
-        public CharacterSystemsProvider CharacterSystemsProvider { get; private set; }
-
-        public void InitCharacterSystemsProvider(CharacterSystemsProvider characterSystemsProvider)
-        {
-            CharacterSystemsProvider = characterSystemsProvider;
-        }
+        this.characterObject = characterObject;
     }
 }

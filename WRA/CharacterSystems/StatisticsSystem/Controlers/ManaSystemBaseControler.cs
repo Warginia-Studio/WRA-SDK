@@ -3,7 +3,7 @@ using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
 namespace WRA.CharacterSystems.StatisticsSystem
 {
-    public class ManaControler : ResourceControler, IManaable
+    public class ManaSystemBaseControler : ResourceSystemBaseControler, IManaable
     {
         public UnityEvent<ManaInfo> OnManaUse = new UnityEvent<ManaInfo>();
         public UnityEvent<ManaInfo> OnManaRegen = new UnityEvent<ManaInfo>();

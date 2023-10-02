@@ -6,7 +6,7 @@ using WRA.Utility.Diagnostics;
 
 namespace WRA.CharacterSystems.StatisticsSystem
 {
-    public abstract class ResourceControler : CharacterSystemBase
+    public abstract class ResourceSystemBaseControler : CharacterSystemBase
     {
         public UnityEvent<float> OnValueChanged = new UnityEvent<float>();
         public UnityEvent<float> OnIncreaseValue = new UnityEvent<float>();

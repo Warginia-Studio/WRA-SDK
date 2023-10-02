@@ -9,7 +9,7 @@ namespace WRA.CharacterSystems.SkillsSystem
         [TextArea] public string DefaultDescription;
         public Sprite ActionSprite;
     
-        protected ActionController ActionController;
+        protected ActionControler ActionControler;
     
         public abstract string GetDescription(ActionData owner);
     

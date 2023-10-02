@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using WRA.General.Effects;
 
 namespace WRA.CharacterSystems.StatisticsSystem
 {
     public class ResourceEffect : MonoBehaviour
     {
-        [SerializeField] private ResourceControler targetResource;
+        [FormerlySerializedAs("targetResourceBase")] [FormerlySerializedAs("targetResource")] [SerializeField] private ResourceSystemBaseControler targetResourceSystemBase;
     
         [SerializeField] protected EffectBehaviourBase onIncreasedEffect;
         [SerializeField] protected EffectBehaviourBase onDecreaseEffect;
@@ -13,15 +14,15 @@ namespace WRA.CharacterSystems.StatisticsSystem
     
         protected virtual void Awake()
         {
-            if (targetResource == null)
+            if (targetResourceSystemBase == null)
                 return;
         
             if (onDecreaseEffect!=null)
-                targetResource.OnDecreaseValue.AddListener((ctg) => onDecreaseEffect.PlayEffect(transform.position));
+                targetResourceSystemBase.OnDecreaseValue.AddListener((ctg) => onDecreaseEffect.PlayEffect(transform.position));
             if(onIncreasedEffect !=null)
-                targetResource.OnIncreaseValue.AddListener((ctg) => onIncreasedEffect.PlayEffect(transform.position));
+                targetResourceSystemBase.OnIncreaseValue.AddListener((ctg) => onIncreasedEffect.PlayEffect(transform.position));
             if(onChangedEffect!=null)
-                targetResource.OnValueChanged.AddListener((ctg) => onChangedEffect.PlayEffect(transform.position));
+                targetResourceSystemBase.OnValueChanged.AddListener((ctg) => onChangedEffect.PlayEffect(transform.position));
         }
     }
 }

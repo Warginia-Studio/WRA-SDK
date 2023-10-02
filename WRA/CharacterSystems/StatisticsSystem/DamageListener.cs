@@ -8,17 +8,17 @@ namespace WRA.CharacterSystems.StatisticsSystem
     {
         [SerializeField] private float scalingDamage = 1;
         
-        private HealthControler healthController;
+        private HealthSystemBaseControler healthSystemBaseController;
 
         private void Awake()
         {
-            healthController = GetComponentInParent<HealthControler>();
+            healthSystemBaseController = GetComponentInParent<HealthSystemBaseControler>();
         }
 
         public void DealDamage(DamageInfo damageInfo)
         {
             damageInfo.ScalingDamage = scalingDamage;
-            healthController.DealDamage(damageInfo);
+            healthSystemBaseController.DealDamage(damageInfo);
         }
     }
 }

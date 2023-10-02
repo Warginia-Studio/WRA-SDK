@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WRA.CharacterSystems.SkillsSystem
 {
-    public class ActionController : MonoBehaviour
+    public class ActionControler : CharacterSystemBase
     {
         private List<ActionBase> activeActions = new List<ActionBase>();
         private List<Coroutine> coroutines = new List<Coroutine>();

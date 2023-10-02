@@ -5,7 +5,7 @@ using WRA.Environment;
 
 namespace WRA.CharacterSystems.InteractionsSystem
 {
-    public class InteractionControlerBase : CharacterSystemBase
+    public class InteractionControlerSystemBase : CharacterSystemBase
     {
         [SerializeField] protected MapLabel mapLabel;
         protected List<IInteractable> interactables;
@@ -14,7 +14,7 @@ namespace WRA.CharacterSystems.InteractionsSystem
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, CharacterProfile.Instance.InteractionRange);
+            Gizmos.DrawWireSphere(transform.position, StatisticsProfile.Instance.InteractionRange);
         }
         
         public void Interract()

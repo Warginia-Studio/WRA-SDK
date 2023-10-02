@@ -5,7 +5,7 @@ using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 namespace WRA.CharacterSystems.StatisticsSystem
 {
     [RequireComponent(typeof(StatisticsControler))]
-    public class HealthControler : ResourceControler, IHealable, IDamageable
+    public class HealthSystemBaseControler : ResourceSystemBaseControler, IHealable, IDamageable
     {
         public UnityEvent<HealInfo> OnBeforeHeal = new UnityEvent<HealInfo>();
         public UnityEvent<HealInfo> OnHealed = new UnityEvent<HealInfo>();

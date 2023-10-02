@@ -2,16 +2,16 @@ using UnityEngine;
 
 namespace WRA.CharacterSystems.InteractionsSystem
 {
-    public class InteractionControler3D : InteractionControlerBase
+    public class InteractionControlerSystem2D : InteractionControlerSystemBase
     {
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            if (other.gameObject.layer != LayerMask.NameToLayer("Interaction"))
+            if (col.gameObject.layer != LayerMask.NameToLayer("Interaction"))
                 return;
-            interactables.Add(other.GetComponent<IInteractable>());
+            interactables.Add(col.GetComponent<IInteractable>());
         }
 
-        private void OnTriggerExit(Collider other)
+        private void OnTriggerExit2D(Collider2D other)
         {
             if (other.gameObject.layer != LayerMask.NameToLayer("Interaction"))
                 return;

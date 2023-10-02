@@ -5,13 +5,11 @@ namespace WRA.CharacterSystems.SkillsSystem
     [System.Serializable]
     public class ActionData
     {
-        public ActionController ActionController { get; set; }
-        public Transform Transform { get; private set; }
+        public CharacterObject CharacterObject { get; set; }
 
-        public ActionData(ActionController actionController)
+        public ActionData(CharacterObject characterObject)
         {
-            ActionController = actionController;
-            Transform = actionController.transform;
+            CharacterObject = characterObject;
         }
     
     }

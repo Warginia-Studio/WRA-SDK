@@ -8,7 +8,7 @@ namespace WRA.AudioSystem
 {
     public class AudioManager : MonoBehaviourSingletonAutoCreate<AudioManager>
     {
-        public UnityEvent<AudioType, float> OnVolumeChanged;
+        public UnityEvent<AudioType, float> OnVolumeChanged = new UnityEvent<AudioType, float>();
         private Dictionary<AudioType, float> volumes =new Dictionary<AudioType, float>()
         {
             { AudioType.effects , 1},
@@ -26,10 +26,10 @@ namespace WRA.AudioSystem
         protected override void OnCreate()
         {
             var volumesSettings = UnityFileManagment.LoadObject<Dictionary<AudioType, float>>("/Configs/AudioConfig.cfg");
-            if (volumesSettings == null)
-                return;
-
-            volumes = volumesSettings;
+            if (volumesSettings != null)
+            {
+                volumes = volumesSettings;
+            }
         }
 
         private void OnDestroy()

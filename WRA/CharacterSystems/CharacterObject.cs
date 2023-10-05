@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterObject : MonoBehaviour
 {
+    public UnityEvent OnSystemsRegistered;
+    public bool SystemsRegistered { get; private set; }
     private List<CharacterSystemBase> characterSystemBases;
 
     private bool registeredSystems = false;
@@ -28,5 +31,8 @@ public class CharacterObject : MonoBehaviour
         registeredSystems = true;
         characterSystemBases = GetComponents<CharacterSystemBase>().ToList();
         characterSystemBases.ForEach(ctg=> ctg.SetCharacterObject(this));
+        
+        OnSystemsRegistered.Invoke();
+        SystemsRegistered = true;
     }
 }

@@ -11,9 +11,9 @@ namespace WRA.CharacterSystems.SkillsSystem
     
         protected ActionControler ActionControler;
     
-        public abstract string GetDescription(ActionData owner);
+        public abstract string GetDescription(object owner);
     
-        public abstract IEnumerator ActionEngine(ActionData actionBase);
+        public abstract IEnumerator ActionEngine(object actionBase);
         
     }
 }

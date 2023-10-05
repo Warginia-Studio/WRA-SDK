@@ -13,7 +13,7 @@ namespace WRA.General.Patterns
                     instance = FindObjectOfType<T>();
                     if (instance == null)
                     {
-                        instance = new GameObject().AddComponent<T>();
+                        instance = new GameObject(typeof(T).Name).AddComponent<T>();
                         instance.OnCreate();
                     }
                 }

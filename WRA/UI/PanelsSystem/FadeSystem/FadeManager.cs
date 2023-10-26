@@ -69,17 +69,17 @@ namespace WRA.UI.PanelsSystem.FadeSystem
             this.fadeOptions = fadeOptions;
         }
 
-        public void FadeIn(UnityEvent onEnd = null)
+        public void FadeIn(Action onEnd = null)
         {
             FadeCore(onEnd, 1, fadeOptions.FadeInTime);
         }
 
-        public void FadeOut(UnityEvent onEnd = null)
+        public void FadeOut(Action onEnd = null)
         {
             FadeCore(onEnd, 0, fadeOptions.FadeOutTime);
         }
 
-        private void FadeCore(UnityEvent onEnd, float endValue, float fadeTime)
+        private void FadeCore(Action onEnd, float endValue, float fadeTime)
         {
             if (fadeOptions.Force)
             {

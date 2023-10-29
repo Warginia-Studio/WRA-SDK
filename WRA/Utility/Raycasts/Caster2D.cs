@@ -51,7 +51,7 @@ public abstract class Caster2D : CasterBase<RaycastHit2D>
     {
         Gizmos.color = usingColor;
         Gizmos.DrawLine(Origin, Origin + point);
-        if (!drawHitPoints && raycastHit2D.collider != null)
+        if (!drawHitPoints && raycastHit2D.collider == null)
             return;
         Gizmos.color = OBJECT_HIT_POINT;
         Gizmos.DrawSphere(raycastHit2D.point, OBJECT_HIT_POINT_SIZE);

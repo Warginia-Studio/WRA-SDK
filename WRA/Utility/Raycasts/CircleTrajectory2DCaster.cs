@@ -60,6 +60,7 @@ namespace WRA.Utility
 #if UNITY_EDITOR
         public void Debug()
         {
+            Gizmos.color = Color.magenta;
             for (int i = 0; i < Trajectory.Count; i++)
             {
                 Gizmos.DrawSphere(Rigidbody2D.transform.position + Trajectory[i], radius);

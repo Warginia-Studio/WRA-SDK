@@ -12,10 +12,10 @@ namespace WRA.Utility
             return CalculaceTrajctory(rigidbody2D, rigidbody2D.velocity, frames, layers);
         }
 
-        public static Vector3[] CalculaceTrajctory(Rigidbody2D rigidbody2D, Vector2 startVelocity, int frames, int layers)
+        public static Vector3[] CalculaceTrajctory(Rigidbody2D rigidbody2D, Vector2 startCustomVelocity, int frames, int layers)
         {
             List<Vector3> points = new List<Vector3>();
-            Vector2 velocity = startVelocity;
+            Vector2 velocity = startCustomVelocity;
             Vector2 currentPosition = Vector3.zero;
             points.Add(currentPosition);
             

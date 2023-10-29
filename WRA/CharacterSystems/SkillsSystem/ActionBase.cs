@@ -10,10 +10,15 @@ namespace WRA.CharacterSystems.SkillsSystem
         public Sprite ActionSprite;
     
         protected ActionControler ActionControler;
+
+        public void BeginAction<T>(T actionBaseData) where T : ActionData
+        {
+            actionBaseData.CharacterObject.StartCoroutine(ActionEngine(actionBaseData));
+        }
     
-        public abstract string GetDescription(object owner);
+        public abstract string GetDescription<T>(T owner) where T : ActionData;
     
-        public abstract IEnumerator ActionEngine(object actionBase);
+        public abstract IEnumerator ActionEngine<T>(T actionBase) where T : ActionData;
         
     }
 }

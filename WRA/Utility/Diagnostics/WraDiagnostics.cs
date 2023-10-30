@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
+using WRA.Utility.Math;
 
 /**********************************************************************
  * Upgrades TODO:
@@ -9,71 +13,64 @@ using UnityEngine;
 
 namespace WRA.Utility.Diagnostics
 {
-    
+
     public static class WraDiagnostics
     {
+        public static List<WraLogData> WraLogDatas = new List<WraLogData>();
+        public static UnityEvent<WraLogData> OnLog = new UnityEvent<WraLogData>();
+
+#if UNITY_EDITOR
+        [InitializeOnLoadMethod]
+        public static void ClearLogs()
+        {
+            WraLogDatas.Clear();
+        }
+#endif
+        
+
         public static void Log(object message)
         {
-            Log(message, Color.white);
+            Log(message, Color.gray);
         }
-    
-        public static void Log(object message, Color color)
-        {
-            int r = (int)(color.r*255);
-            int g = (int)(color.g*255);
-            int b = (int)(color.b*255);
-            int a = (int)(color.a*255);
-            string str = "#" + r.ToString("x2") + g.ToString("x2") + b.ToString("x2") + a.ToString("x2");
-            string finalMessage = "WRA-SDK LOG: " + message;
-            // need upgrade for game
-            Debug.Log($"<color={str}>{finalMessage}</color>");
-        }
-    
+
         public static void LogWarning(object message)
         {
-            LogWarning(message, Color.white);
+            LogWarning(message, Color.yellow);
         }
-    
-        public static void LogWarning(object message, Color color)
-        {
-            int r = (int)(color.r*255);
-            int g = (int)(color.g*255);
-            int b = (int)(color.b*255);
-            int a = (int)(color.a*255);
-            string str = "#" + r.ToString("x2") + g.ToString("x2") + b.ToString("x2") + a.ToString("x2");
-            string finalMessage = "WRA-SDK LOG: " + message;
-            // need upgrade for game
-            Debug.LogWarning($"<color={str}>{finalMessage}</color>");
-        }
-    
+
         public static void LogError(object message)
         {
-            LogError(message, Color.white);
+            LogError(message, Color.red);
         }
-    
+
+        public static void Log(object message, Color color)
+        {
+            string finalMessage = ColorHelper.GetTextInColor("WRA-SDK LOG: " + message, color);
+            Debug.Log(finalMessage);
+
+            var logData = new WraLogData() { Message = finalMessage, LogType = WraLogType.log };
+            WraLogDatas.Add(logData);
+            OnLog.Invoke(logData);
+        }
+
+        public static void LogWarning(object message, Color color)
+        {
+            string finalMessage = ColorHelper.GetTextInColor("WRA-SDK LOG: " + message, color);
+            Debug.LogWarning(finalMessage);
+
+            var logData = new WraLogData() { Message = finalMessage, LogType = WraLogType.warning };
+            WraLogDatas.Add(logData);
+            OnLog.Invoke(logData);
+        }
+
         public static void LogError(object message, Color color)
         {
-            int r = (int)(color.r*255);
-            int g = (int)(color.g*255);
-            int b = (int)(color.b*255);
-            int a = (int)(color.a*255);
-            string str = "#" + r.ToString("x2") + g.ToString("x2") + b.ToString("x2") + a.ToString("x2");
-            string finalMessage = "WRA-SDK LOG: " + message;
-            // need upgrade for game
-            Debug.LogError($"<color={str}>{finalMessage}</color>");
+            string finalMessage = ColorHelper.GetTextInColor("WRA-SDK LOG: " + message, color);
+            Debug.LogError(finalMessage);
+
+            var logData = new WraLogData() { Message = finalMessage, LogType = WraLogType.error };
+            WraLogDatas.Add(logData);
+            OnLog.Invoke(logData);
         }
-
-        public static string GetColoredText(object message, Color color)
-        {
-            int r = (int)(color.r*255);
-            int g = (int)(color.g*255);
-            int b = (int)(color.b*255);
-            int a = (int)(color.a*255);
-            string str = "#" + r.ToString("x2") + g.ToString("x2") + b.ToString("x2") + a.ToString("x2");
-            return $"<color={str}>{message}</color>";
-        }
-    
-
-
     }
 }

@@ -16,5 +16,10 @@ namespace WRA.PlayerSystems.JournalSystem
         {
             return entries;
         }
+
+        protected override void OnCreate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

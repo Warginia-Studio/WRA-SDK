@@ -10,7 +10,7 @@ namespace WRA.UI.TextControl
         fromTop,
         fromBot
     }
-    public class TextScrolling : TextController
+    public class TextScrolling : TextControler
     {
         private readonly Vector3[] START_PIVOTS = new[] { new Vector3(1, 0.5f), new Vector3(0, 0.5f), new Vector3(0.5f, 0), new Vector3(0.5f, 1) };
         private readonly Vector3[] START_ANCHORS = new[] { new Vector3(0, 0.5f), new Vector3(1, 0.5f), new Vector3(0.5f, 1), new Vector3(0.5f, 0) };

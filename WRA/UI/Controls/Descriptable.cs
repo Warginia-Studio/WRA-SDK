@@ -1,9 +1,8 @@
 using UnityEngine;
-using WRA.General.Interfaces;
 
 namespace WRA.UI.Controls
 {
-    public class Descriptable : DescriptableBase
+    public class Descriptable : DescriptableTrigger
     {
         [SerializeField][TextArea(15,20)] private string description;
 

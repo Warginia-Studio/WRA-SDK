@@ -1,0 +1,67 @@
+using TMPro;
+using UnityEngine;
+
+namespace WRA.PlayerSystems.LanguageSystem
+{
+    [RequireComponent(typeof(TMP_Text))]
+    public class TextTranslator : MonoBehaviour
+    {
+        public TMP_Text TMPText
+        {
+            get
+            {
+                if (tmpText == null)
+                {
+                    tmpText = GetComponent<TMP_Text>();
+                }
+
+                return tmpText;
+            }
+        }
+        [SerializeField] private string textKey;
+        
+        
+        
+        private TMP_Text tmpText;
+        private string[] formatingTexts;
+
+        private void Awake()
+        {
+            RegisterEvents();
+            UpdateLang();
+        }
+
+        private void OnDestroy()
+        {
+            UnRegisterEvents();
+        }
+        
+        private void RegisterEvents()
+        {
+            LanguageManager.LanguageChanged.AddListener(UpdateLang); 
+        }
+
+        private void UnRegisterEvents()
+        {
+            LanguageManager.LanguageChanged.RemoveListener(UpdateLang);
+        }
+
+        public void SetTextsToFormat(params string[] texts)
+        {
+            this.formatingTexts = texts;
+            UpdateLang();
+        }
+
+        public void SetTextKey(string textKey)
+        {
+            this.textKey = textKey;
+            UpdateLang();
+        }
+
+        protected virtual void UpdateLang()
+        {
+            var text= LanguageManager.GetTranslation(textKey);
+            TMPText.text = string.Format(text, formatingTexts);
+        }
+    }
+}

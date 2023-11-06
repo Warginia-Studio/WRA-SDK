@@ -14,6 +14,8 @@ public abstract class CasterBase<T>
     public Vector3 Origin { get; set; }
     public Vector3 Direction { get; set; }
     
+    public Transform ObjectOrigin { get; set; }
+    
     public LayerMask Masks
     {
         get => masks;

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class Caster2D : CasterBase<RaycastHit2D>
 {
-
-    
     public float MinDepth
     {
         get => minDepth;
@@ -17,7 +15,7 @@ public abstract class Caster2D : CasterBase<RaycastHit2D>
         get => maxDepth;
         set => maxDepth = value;
     }
-    
+
     [SerializeField] protected float minDepth;
     [SerializeField] protected float maxDepth;
 

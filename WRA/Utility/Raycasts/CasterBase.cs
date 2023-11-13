@@ -36,6 +36,8 @@ public abstract class CasterBase<T>
     [SerializeField] protected bool drawDebug;
     [Tooltip("Debug hitted point.")]
     [SerializeField] protected bool drawHitPoints;
+
+    [SerializeField] private bool drawOnlyLastInstance = true;
 #endif
     
     [Header("Raycast settings")]
@@ -62,6 +64,13 @@ public abstract class CasterBase<T>
 
     protected void UpdateRaycastAliveTimes()
     {
+        if (hitInfoLife > 0 && drawOnlyLastInstance)
+        {
+            for (int i = 0; i < raycastHitInfos.Count-1; i++)
+            {
+                raycastHitInfos[i].AliveTime = hitInfoLife + 1;
+            }
+        }
         
         for (int i = 0; i < raycastHitInfos.Count; i++)
         {

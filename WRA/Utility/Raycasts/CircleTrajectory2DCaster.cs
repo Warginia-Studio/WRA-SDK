@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace WRA.Utility
+namespace WRA.Utility.Raycasts
 {
     [System.Serializable]
     public class CircleTrajectory2DCaster

@@ -1,4 +1,5 @@
 using UnityEngine;
+using WRA.CharacterSystems.StatisticsSystem.Controlers;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Effects.SourceEffects
 {

@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 using WRA.General.Patterns;
+using WRA.General.Patterns.Singletons;
 using WRA.Utility.Diagnostics;
 
 namespace WRA.UI.PanelsSystem

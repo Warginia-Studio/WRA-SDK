@@ -1,5 +1,6 @@
 using UnityEngine;
 using WRA.General.Patterns;
+using WRA.General.Patterns.Singletons;
 using WRA.UI.TextControl;
 
 namespace WRA.UI.PanelsSystem.FadeSystem

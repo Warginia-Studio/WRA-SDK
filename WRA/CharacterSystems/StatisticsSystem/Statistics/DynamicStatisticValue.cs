@@ -1,3 +1,4 @@
+using WRA.CharacterSystems.StatisticsSystem.Data;
 using WRA.PlayerSystems.LanguageSystem;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Statistics

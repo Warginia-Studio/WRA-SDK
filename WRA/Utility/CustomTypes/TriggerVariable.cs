@@ -1,4 +1,4 @@
-namespace WRA.Utility
+namespace WRA.Utility.CustomTypes
 {
     public class TriggerVariable
     {

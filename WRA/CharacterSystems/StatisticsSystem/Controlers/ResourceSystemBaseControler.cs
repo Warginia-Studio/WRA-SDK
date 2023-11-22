@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
-using WRA.Utility;
+using WRA.Utility.CustomTypes;
 using WRA.Utility.Diagnostics;
 
-namespace WRA.CharacterSystems.StatisticsSystem
+namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {
     public abstract class ResourceSystemBaseControler : CharacterSystemBase
     {

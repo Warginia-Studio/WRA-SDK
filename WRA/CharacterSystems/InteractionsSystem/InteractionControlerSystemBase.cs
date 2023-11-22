@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WRA.CharacterSystems.StatisticsSystem;
+using WRA.CharacterSystems.StatisticsSystem.Data;
 using WRA.Environment;
 
 namespace WRA.CharacterSystems.InteractionsSystem

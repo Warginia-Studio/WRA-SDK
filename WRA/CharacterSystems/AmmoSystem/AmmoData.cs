@@ -1,11 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-[Serializable]
-public class AmmoData
+namespace WRA.CharacterSystems.AmmoSystem
 {
-    public string AmmoName;
-    public int AmmoCont;
+    [Serializable]
+    public class AmmoData
+    {
+        public string AmmoName;
+        public int AmmoCont;
+    }
 }

@@ -1,4 +1,4 @@
-namespace WRA.General.Patterns
+namespace WRA.General.Patterns.Singletons
 {
     public class Singleton<T> where T : new()
     {

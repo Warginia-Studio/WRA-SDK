@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 
-namespace WRA.General.Patterns
+namespace WRA.General.Patterns.Pool
 {
     public class PoolBase<TObject> where TObject : PoolObjectBase 
     {

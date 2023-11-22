@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
+using WRA.CharacterSystems.StatisticsSystem.Interfaces;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
-namespace WRA.CharacterSystems.StatisticsSystem
+namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {
     [RequireComponent(typeof(StatisticsControler))]
     public class HealthSystemBaseControler : ResourceSystemBaseControler, IHealable, IDamageable

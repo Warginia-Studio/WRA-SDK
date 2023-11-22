@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using WRA.General.SceneManagment;
 
-namespace WRA.General.Callers
+namespace WRA.General.ApplicationEvents
 {
     public class LoadLevelEvent : MonoBehaviour
     {

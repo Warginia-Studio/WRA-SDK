@@ -1,7 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace WRA.CharacterSystems.StatisticsSystem
+namespace WRA.CharacterSystems.StatisticsSystem.Data
 {
     [System.Serializable]
     public struct StatisticInfo

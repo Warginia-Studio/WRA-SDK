@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using WRA.General.Patterns;
+using WRA.General.Patterns.Singletons;
 
-namespace WRA.CharacterSystems.StatisticsSystem
+namespace WRA.CharacterSystems.StatisticsSystem.Data
 {
    [CreateAssetMenu(menuName = "thief01/WRA-SDK/Profiles/Statistics Profile", fileName = "Statistics Profile")]
    public class StatisticsProfile : ScriptableSingleton<StatisticsProfile>

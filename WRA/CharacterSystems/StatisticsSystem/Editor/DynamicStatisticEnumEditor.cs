@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using WRA.CharacterSystems.StatisticsSystem.Data;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Editor

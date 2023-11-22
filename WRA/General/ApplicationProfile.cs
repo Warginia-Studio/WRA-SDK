@@ -9,5 +9,7 @@ namespace WRA.General
         public string Language = "pl";
         public bool CustomConsole = false;
 
+        public CursorData CursorData;
+
     }
 }

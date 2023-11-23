@@ -6,7 +6,7 @@ namespace WRA.CharacterSystems.AmmoSystem
 {
     public class AmmoControler : CharacterSystemBase
     {
-        public UnityEvent OnAmmoChange;
+        [HideInInspector] public UnityEvent OnAmmoChange;
     
         [SerializeField] private List<AmmoData> AmmoDatas;
 

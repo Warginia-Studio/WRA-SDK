@@ -7,7 +7,7 @@ namespace WRA.CharacterSystems
 {
     public class CharacterObject : MonoBehaviour
     {
-        public UnityEvent OnSystemsRegistered;
+        [HideInInspector] public UnityEvent OnSystemsRegistered;
         public bool SystemsRegistered { get; private set; }
         private List<CharacterSystemBase> characterSystemBases;
 

@@ -10,7 +10,7 @@ namespace WRA.UI.PanelsSystem
 {
     public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
     {
-        public UnityEvent<PanelBase> OnPanelOpen, OnPanelShow, OnPanelHide, OnPanelClose;
+        [HideInInspector] public UnityEvent<PanelBase> OnPanelOpen, OnPanelShow, OnPanelHide, OnPanelClose;
     
         // TODO: Do logs as const
         private const string FIRST_LOG = "";

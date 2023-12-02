@@ -36,6 +36,7 @@ namespace WRA.AudioSystem
         private void OnDestroy()
         {
             UnityFileManagment.SaveObject<Dictionary<AudioType, float>>("/Configs/AudioConfig.cfg", volumes);
+            OnVolumeChanged.RemoveAllListeners();
         }
 
         public void SetVolumeForAudioType(AudioType audioType, float volume)

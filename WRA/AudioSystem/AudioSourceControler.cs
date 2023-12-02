@@ -14,11 +14,6 @@ namespace WRA.AudioSystem
             AudioSource = GetComponent<AudioSource>();
             RegisterEvenets();
         }
-
-        private void OnDestroy()
-        {
-            UnRegisterEvenets();
-        }
         
         public void Play(AudioClip audioClip)
         {
@@ -29,12 +24,7 @@ namespace WRA.AudioSystem
         {
             AudioManager.Instance.OnVolumeChanged.AddListener(UpdateVolume);
         }
-
-        private void UnRegisterEvenets()
-        {
-            AudioManager.Instance.OnVolumeChanged.RemoveListener(UpdateVolume);
-        }
-
+        
         private void UpdateVolume(AudioType audioType, float volume)
         {
             if (audioTypeController != audioType)

@@ -28,6 +28,8 @@ namespace WRA.Utility.Raycasts
             get => masks;
             set => masks = value;
         }
+        
+        public bool IsDebugOn => debug;
 
         public float Radius => radius;
         

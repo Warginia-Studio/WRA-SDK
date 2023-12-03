@@ -1,6 +1,6 @@
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
-namespace WRA.CharacterSystems.StatisticsSystem
+namespace WRA.CharacterSystems.StatisticsSystem.Interfaces
 {
     public interface IStatisticsHolder
     {

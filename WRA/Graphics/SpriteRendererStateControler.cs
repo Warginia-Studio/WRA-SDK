@@ -1,59 +1,58 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using WRA.Utility;
+using WRA.Utility.CustomTypes;
 
-public class SpriteRendererStateControler : MonoBehaviour
+namespace WRA.Graphics
 {
-    [SerializeField] private int startId = 0;
-    [SerializeField] private Sprite[] sprites;
-
-    private RangedValueInt Id
+    public class SpriteRendererStateControler : MonoBehaviour
     {
-        get
+        [SerializeField] private int startId = 0;
+        [SerializeField] private Sprite[] sprites;
+
+        private RangedValueInt Id
         {
-            if (id == null)
+            get
             {
-                Awake();
+                if (id == null)
+                {
+                    Awake();
+                }
+
+                return id;
             }
-
-            return id;
         }
-    }
     
-    private SpriteRenderer spriteRenderer;
-    private RangedValueInt id;
+        private SpriteRenderer spriteRenderer;
+        private RangedValueInt id;
 
-    private void Awake()
-    {
-        id = new RangedValueInt(0, sprites.Length - 1);
-    }
+        private void Awake()
+        {
+            id = new RangedValueInt(0, sprites.Length - 1);
+        }
     
-    void Update()
-    {
-        UpdateTexture();
-    }
+        void Update()
+        {
+            UpdateTexture();
+        }
 
-    public void Next()
-    {
-        Id.Next();
-    }
+        public void Next()
+        {
+            Id.Next();
+        }
 
-    public void Previous()
-    {
-        Id.Previous();
+        public void Previous()
+        {
+            Id.Previous();
         
-    }
+        }
 
-    public void SetSpriteId(int id)
-    {
-        Id.Value = id;
-    }
+        public void SetSpriteId(int id)
+        {
+            Id.Value = id;
+        }
     
-    private void UpdateTexture()
-    {
-        spriteRenderer.sprite = sprites[Id.Value];
+        private void UpdateTexture()
+        {
+            spriteRenderer.sprite = sprites[Id.Value];
+        }
     }
 }

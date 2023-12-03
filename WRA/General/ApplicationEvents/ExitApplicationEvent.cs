@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.General.Callers
+namespace WRA.General.ApplicationEvents
 {
     public class ExitApplicationEvent : MonoBehaviour
     {

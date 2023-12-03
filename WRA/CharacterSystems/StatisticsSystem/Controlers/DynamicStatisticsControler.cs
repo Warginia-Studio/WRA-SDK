@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
-namespace WRA.CharacterSystems.StatisticsSystem
+namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {
     public class DynamicStatisticsControler : MonoBehaviour
     {

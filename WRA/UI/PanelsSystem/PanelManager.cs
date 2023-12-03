@@ -3,13 +3,14 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 using WRA.General.Patterns;
+using WRA.General.Patterns.Singletons;
 using WRA.Utility.Diagnostics;
 
 namespace WRA.UI.PanelsSystem
 {
     public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
     {
-        public UnityEvent<PanelBase> OnPanelOpen, OnPanelShow, OnPanelHide, OnPanelClose;
+        [HideInInspector] public UnityEvent<PanelBase> OnPanelOpen, OnPanelShow, OnPanelHide, OnPanelClose;
     
         // TODO: Do logs as const
         private const string FIRST_LOG = "";

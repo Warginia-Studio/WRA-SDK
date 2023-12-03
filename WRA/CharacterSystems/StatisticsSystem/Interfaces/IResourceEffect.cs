@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.CharacterSystems.StatisticsSystem
+namespace WRA.CharacterSystems.StatisticsSystem.Interfaces
 {
     public interface IResourceEffect
     {

@@ -1,38 +1,39 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CharacterObject : MonoBehaviour
+namespace WRA.CharacterSystems
 {
-    public UnityEvent OnSystemsRegistered;
-    public bool SystemsRegistered { get; private set; }
-    private List<CharacterSystemBase> characterSystemBases;
-
-    private bool registeredSystems = false;
-    private void Awake()
+    public class CharacterObject : MonoBehaviour
     {
-       RegisterAllSystems();
-    }
+        [HideInInspector] public UnityEvent OnSystemsRegistered;
+        public bool SystemsRegistered { get; private set; }
+        private List<CharacterSystemBase> characterSystemBases;
 
-    public T GetCharacterSystem<T>() where T : CharacterSystemBase
-    {
-        if(!registeredSystems)
+        private bool registeredSystems = false;
+        private void Awake()
+        {
             RegisterAllSystems();
-        return characterSystemBases.Find(ctg => ctg is T) as T;
-    }
+        }
 
-    private void RegisterAllSystems()
-    {
-        if (characterSystemBases != null)
-            return;
-        registeredSystems = true;
-        characterSystemBases = GetComponents<CharacterSystemBase>().ToList();
-        characterSystemBases.ForEach(ctg=> ctg.SetCharacterObject(this));
+        public T GetCharacterSystem<T>() where T : CharacterSystemBase
+        {
+            if(!registeredSystems)
+                RegisterAllSystems();
+            return characterSystemBases.Find(ctg => ctg is T) as T;
+        }
+
+        private void RegisterAllSystems()
+        {
+            if (characterSystemBases != null)
+                return;
+            registeredSystems = true;
+            characterSystemBases = GetComponents<CharacterSystemBase>().ToList();
+            characterSystemBases.ForEach(ctg=> ctg.SetCharacterObject(this));
         
-        OnSystemsRegistered.Invoke();
-        SystemsRegistered = true;
+            OnSystemsRegistered.Invoke();
+            SystemsRegistered = true;
+        }
     }
 }

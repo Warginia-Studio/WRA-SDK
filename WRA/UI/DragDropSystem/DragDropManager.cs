@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.General.Patterns;
+using WRA.General.Patterns.Singletons;
 
 namespace WRA.UI.DragDropSystem
 {

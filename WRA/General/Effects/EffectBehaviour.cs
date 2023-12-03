@@ -1,5 +1,6 @@
 using UnityEngine;
 using WRA.CharacterSystems.StatisticsSystem;
+using WRA.CharacterSystems.StatisticsSystem.Interfaces;
 
 namespace WRA.General.Effects
 {

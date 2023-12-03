@@ -27,6 +27,7 @@ namespace WRA.PlayerSystems.LanguageSystem
 
         private void Awake()
         {
+            tmpText = GetComponent<TMP_Text>();
             RegisterEvents();
             UpdateLang();
         }
@@ -61,7 +62,12 @@ namespace WRA.PlayerSystems.LanguageSystem
         protected virtual void UpdateLang()
         {
             var text= LanguageManager.GetTranslation(textKey);
-            TMPText.text = string.Format(text, formatingTexts);
+            if (formatingTexts != null)
+            {
+                TMPText.text = string.Format(text, formatingTexts);
+                return;
+            }
+            TMPText.text = text;
         }
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 
-namespace WRA.General.Patterns
+namespace WRA.General.Patterns.Singletons
 {
     public abstract class MonoBehaviourSingletonAutoLoad<T> : MonoBehaviour where T : MonoBehaviourSingletonAutoLoad<T>
     {

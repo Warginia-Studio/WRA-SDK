@@ -1,20 +1,21 @@
 using UnityEngine;
 using UnityEngine.Events;
+using WRA.CharacterSystems.StatisticsSystem.Interfaces;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
-namespace WRA.CharacterSystems.StatisticsSystem
+namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {
     [RequireComponent(typeof(StatisticsControler))]
     public class HealthSystemBaseControler : ResourceSystemBaseControler, IHealable, IDamageable
     {
-        public UnityEvent<HealInfo> OnBeforeHeal = new UnityEvent<HealInfo>();
-        public UnityEvent<HealInfo> OnHealed = new UnityEvent<HealInfo>();
+        [HideInInspector] public UnityEvent<HealInfo> OnBeforeHeal = new UnityEvent<HealInfo>();
+        [HideInInspector] public UnityEvent<HealInfo> OnHealed = new UnityEvent<HealInfo>();
 
-        public UnityEvent<DamageInfo> OnBeforeDamage = new UnityEvent<DamageInfo>();
-        public UnityEvent<DamageInfo> OnDamaged = new UnityEvent<DamageInfo>();
+        [HideInInspector] public UnityEvent<DamageInfo> OnBeforeDamage = new UnityEvent<DamageInfo>();
+        [HideInInspector] public UnityEvent<DamageInfo> OnDamaged = new UnityEvent<DamageInfo>();
 
-        public UnityEvent<KillInfo> OnBeforeKill = new UnityEvent<KillInfo>();
-        public UnityEvent<KillInfo> OnKilled = new UnityEvent<KillInfo>();
+        [HideInInspector] public UnityEvent<KillInfo> OnBeforeKill = new UnityEvent<KillInfo>();
+        [HideInInspector] public UnityEvent<KillInfo> OnKilled = new UnityEvent<KillInfo>();
 
         public override float PercentValue => CurrentValue / MaxValue;
         public override float MaxValue => statisticsControler.GetStatistics().Health.Value;

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using WRA.CharacterSystems.StatisticsSystem.Data;
 using WRA.General.Patterns;
+using WRA.General.Patterns.Singletons;
 
 namespace WRA.CharacterSystems.StatisticsSystem
 {

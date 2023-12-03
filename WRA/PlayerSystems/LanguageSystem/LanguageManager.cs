@@ -1,9 +1,12 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.Events;
 using WRA.General;
+using WRA.Utility.Diagnostics;
+using WRA.Utility.Math;
 
 namespace WRA.PlayerSystems.LanguageSystem
 {
@@ -67,7 +70,21 @@ namespace WRA.PlayerSystems.LanguageSystem
         {
             if(LoadedLang==null)
                 LoadLanguage();
-            return LoadedLang[keyWord];
+            if (string.IsNullOrEmpty(keyWord))
+                return ColorHelper.GetTextInColor("IS NULL OR EMPTY", Color.red);
+
+            string word = "";
+            try
+            {
+                word = LoadedLang[keyWord];
+            }
+            catch (Exception e)
+            {
+                WraDiagnostics.LogError("Not found key word: " + keyWord + " in language: " + ApplicationProfile.Instance.Language);
+                word = ColorHelper.GetTextInColor(keyWord + "NOT FOUND", Color.red);
+            }
+
+            return word;
         }
     }
 }

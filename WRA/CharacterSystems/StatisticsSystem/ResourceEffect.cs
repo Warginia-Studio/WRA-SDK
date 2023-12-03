@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Serialization;
+using WRA.CharacterSystems.StatisticsSystem.Controlers;
 using WRA.General.Effects;
 
 namespace WRA.CharacterSystems.StatisticsSystem

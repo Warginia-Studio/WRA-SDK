@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.General.Patterns
+namespace WRA.General.Patterns.Singletons
 {
     public abstract class MonoBehaviourSingletonAutoCreate<T> : MonoBehaviour where T : MonoBehaviourSingletonAutoCreate<T>
     {

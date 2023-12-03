@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WRA.General.Patterns;
+using WRA.General.Patterns.Singletons;
 
 namespace WRA.CharacterSystems.InventorySystem
 {

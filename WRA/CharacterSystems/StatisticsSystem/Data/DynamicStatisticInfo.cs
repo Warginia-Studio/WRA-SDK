@@ -1,9 +1,8 @@
 using System;
 using UnityEngine;
-using WRA.Utility;
 using WRA.Utility.Math;
 
-namespace WRA.CharacterSystems.StatisticsSystem
+namespace WRA.CharacterSystems.StatisticsSystem.Data
 {
     [System.Serializable]
     public class DynamicStatisticInfo

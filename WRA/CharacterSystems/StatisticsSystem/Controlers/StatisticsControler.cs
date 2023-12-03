@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
-namespace WRA.CharacterSystems.StatisticsSystem
+namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {
     public class StatisticsControler : CharacterSystemBase
     {

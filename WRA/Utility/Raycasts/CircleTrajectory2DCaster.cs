@@ -1,11 +1,19 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace WRA.Utility.Raycasts
 {
     [System.Serializable]
     public class CircleTrajectory2DCaster
     {
+        public struct PredictedData
+        {
+            public Vector3 realPosition;
+            public Vector3 offset;
+            public Vector3 velocity;
+            public Collider2D collider;
+        }
         private const float TIME_STEP = 1f / 60f;
         public Rigidbody2D Rigidbody2D { get; set; }
 
@@ -21,50 +29,80 @@ namespace WRA.Utility.Raycasts
             set => masks = value;
         }
 
-        public List<Vector3> Trajectory { get; set; } = new List<Vector3>();
+        public float Radius => radius;
+        
+        public List<PredictedData> PredictedDatas { get; private set; } = new List<PredictedData>();
 
         [SerializeField] private float radius = 1;
         [SerializeField] private int frames = 10;
         [SerializeField] private LayerMask masks;
+        
+        [Header("Debug")]
+        [SerializeField] private bool debug = false;
+        [SerializeField] private bool drawVelocity = false;
 
-        public List<Vector3> CalculateTracjetory()
+        public List<PredictedData> CalculateTracjetory()
         {
             return CalculateTracjetory(Rigidbody2D.position, Rigidbody2D.velocity, Rigidbody2D.drag);
         }
 
-        public List<Vector3> CalculateTracjetory(Vector2 startPosition, Vector2 startVelocity, float drag)
+        public List<PredictedData> CalculateTracjetory(Vector2 startPosition, Vector2 startVelocity, float drag)
         {
-            List<Vector3> points = new List<Vector3>();
+            List<PredictedData>predictedDatas = new List<PredictedData>();
+            
             Vector2 velocity = startVelocity;
             Vector2 currentPosition = Vector3.zero;
-            points.Add(currentPosition);
-            
+
             for (int i = 0; i < Frames; i++)
             {
-                currentPosition += velocity * TIME_STEP;
-                points.Add(currentPosition);    
-                velocity += Physics2D.gravity * TIME_STEP;
-                velocity -= velocity * drag;
-                if (Physics2D.OverlapCircle(startPosition + currentPosition, radius, Masks) != null)
+                var collider = Physics2D.OverlapCircle(startPosition + currentPosition, radius, Masks);
+                
+                predictedDatas.Add(new PredictedData()
+                {
+                    realPosition = startPosition + currentPosition,
+                    offset = currentPosition,
+                    velocity = velocity,
+                    collider = collider
+                });
+                
+                if (collider != null)
                 {
                     break;
                 }
+                
+                currentPosition += velocity * TIME_STEP;
+                velocity += Physics2D.gravity * TIME_STEP;
+                velocity -= velocity * drag;
             }
 
-            Trajectory = points;
+            PredictedDatas = predictedDatas;
             
-            return points;
+            return predictedDatas;
         }
         
 #if UNITY_EDITOR
         public void Debug()
         {
-            Gizmos.color = Color.magenta;
-            for (int i = 0; i < Trajectory.Count; i++)
+            for (int i = 0; i < PredictedDatas.Count; i++)
             {
-                Gizmos.DrawSphere(Rigidbody2D.transform.position + Trajectory[i], radius);
+                if(debug)
+                    DrawPosition(PredictedDatas[i]);
+                if(drawVelocity)
+                    DrawVelocity(PredictedDatas[i]);
             }
             
+        }
+        
+        private void DrawPosition(PredictedData data)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawSphere(data.realPosition, radius);
+        }
+
+        private void DrawVelocity(PredictedData data)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(data.realPosition, data.realPosition + data.velocity.normalized);
         }
 #endif
     }

@@ -27,6 +27,7 @@ namespace WRA.PlayerSystems.LanguageSystem
 
         private void Awake()
         {
+            tmpText = GetComponent<TMP_Text>();
             RegisterEvents();
             UpdateLang();
         }

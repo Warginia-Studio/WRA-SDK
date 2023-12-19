@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.Utility.Diagnostics
+namespace WRA.Utility.Diagnostics.Logs
 {
     public class WraLogData : MonoBehaviour
     {

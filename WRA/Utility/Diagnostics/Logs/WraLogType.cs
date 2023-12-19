@@ -1,4 +1,4 @@
-namespace WRA.Utility.Diagnostics
+namespace WRA.Utility.Diagnostics.Logs
 {
     public enum WraLogType 
     {

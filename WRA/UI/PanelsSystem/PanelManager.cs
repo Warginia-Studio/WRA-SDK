@@ -56,6 +56,7 @@ namespace WRA.UI.PanelsSystem
             }
 
             panel = LoadPanelFromResources<T>() as T;
+            panel.InitBase();
             panel.OnOpen(data);
             if (panel == null)
                 return null;

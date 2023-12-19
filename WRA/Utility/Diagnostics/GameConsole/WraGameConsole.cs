@@ -22,14 +22,12 @@ namespace WRA.Utility.Diagnostics.GameConsole
         private List<string> executedCommands = new List<string>();
 
         private TweenerCore<float, float, FloatOptions> lastTween;
-        private CanvasGroup canvasGroup;
         private int currentTagIndex = 0;
 
         private string lastText = "";
 
         private void Awake()
         {
-            canvasGroup = GetComponent<CanvasGroup>();
             RegisterEvenets();
         }
 

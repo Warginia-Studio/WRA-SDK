@@ -12,11 +12,6 @@ namespace WRA.UI.PanelsSystem
         
         private CanvasGroup canvasGroup;
         
-        protected virtual void Awake()
-        {
-            canvasGroup = GetComponent<CanvasGroup>();
-        }
-        
         #region LAZLY_FUNC
         /// <summary>
         /// These functionsare used to open, close, show, hide panels, from buttons, or other panels.
@@ -51,6 +46,11 @@ namespace WRA.UI.PanelsSystem
         }
         
         #endregion
+
+        public void InitBase()
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+        }
         
         public virtual void OnOpen(object data) {}
 

@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using WRA.General.Patterns;
 using WRA.General.Patterns.Singletons;
 using WRA.Utility.Diagnostics;
+using WRA.Utility.Diagnostics.Logs;
 
 namespace WRA.UI.PanelsSystem
 {

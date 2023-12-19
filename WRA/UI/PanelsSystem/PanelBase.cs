@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
+using WRA.Utility.Diagnostics.Logs;
 
 namespace WRA.UI.PanelsSystem
 {

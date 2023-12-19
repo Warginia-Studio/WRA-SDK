@@ -1,76 +1,77 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using WRA.UI.PanelsSystem;
 using WRA.Utility.Math;
 
-public class WraDiagnosticsPanel : PanelBase
+namespace WRA.Utility.Diagnostics.DiagnosticsPanel
 {
-    public class ValueRecord
+    public class WraDiagnosticsPanel : PanelBase
     {
-        public object value;
-        public Color color;
-    }
-    private TMP_Text text;
-
-    private string message = "";
-    private Dictionary<string, ValueRecord> values = new Dictionary<string, ValueRecord>();
-
-    private void Awake()
-    {
-        text = GetComponentInChildren<TMP_Text>();
-    }
-
-    private void Update()
-    {
-        UpdateMessage();
-    }
-
-    public override void OnOpen(object data)
-    {
-        message = "NO DATA";
-    }
-    
-    public void AddNewValue(string name, object newValue)
-    {
-        AddNewValue(name, newValue, Color.gray);
-    }
-    
-    public void AddNewValue(string name, object newValue, Color color)
-    {
-        values.Add(name, new ValueRecord(){value = newValue, color = color});
-    }
-
-    public void UpdateValue(string name, object newValue)
-    {
-        if(!values.ContainsKey(name))
-            AddNewValue(name, newValue);
-        values[name].value = newValue;
-    }
-    
-    public void UpdateColor(string name, Color color)
-    {
-        if(!values.ContainsKey(name))
-            return;
-        values[name].color = color;
-    }
-    
-    public void RemoveValue(string name)
-    {
-        values.Remove(name);
-    }
-
-    private void UpdateMessage()
-    {
-        if(values.Count == 0)
-            return;
-        message = "";
-        foreach (var value in values)
+        public class ValueRecord
         {
-            message += ColorHelper.GetTextInColor($"{value.Key}: {value.Value.value}\n", value.Value.color);
+            public object value;
+            public Color color;
         }
-        text.text = message;
+        private TMP_Text text;
+
+        private string message = "";
+        private Dictionary<string, ValueRecord> values = new Dictionary<string, ValueRecord>();
+
+        private void Awake()
+        {
+            text = GetComponentInChildren<TMP_Text>();
+        }
+
+        private void Update()
+        {
+            UpdateMessage();
+        }
+
+        public override void OnOpen(object data)
+        {
+            message = "NO DATA";
+        }
+    
+        public void AddNewValue(string name, object newValue)
+        {
+            AddNewValue(name, newValue, Color.gray);
+        }
+    
+        public void AddNewValue(string name, object newValue, Color color)
+        {
+            values.Add(name, new ValueRecord(){value = newValue, color = color});
+        }
+
+        public void UpdateValue(string name, object newValue)
+        {
+            if(!values.ContainsKey(name))
+                AddNewValue(name, newValue);
+            values[name].value = newValue;
+        }
+    
+        public void UpdateColor(string name, Color color)
+        {
+            if(!values.ContainsKey(name))
+                return;
+            values[name].color = color;
+        }
+    
+        public void RemoveValue(string name)
+        {
+            values.Remove(name);
+        }
+
+        private void UpdateMessage()
+        {
+            if(values.Count == 0)
+                return;
+            message = "";
+            foreach (var value in values)
+            {
+                message += ColorHelper.GetTextInColor($"{value.Key}: {value.Value.value}\n", value.Value.color);
+            }
+            text.text = message;
+        }
     }
 }

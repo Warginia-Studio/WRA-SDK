@@ -1,29 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "thief01/WRA-SDK/Profiles/Cursor Data", fileName = "Cursor Data")]
-public class CursorData : ScriptableObject
+namespace WRA.General.Cursor
 {
-    [SerializeField] private SimpleCursor defaultCursor;
-    [SerializeField] private SimpleCursor overCursor;
-    [SerializeField] private SimpleCursor moveCursor;
-    [SerializeField] private SimpleCursor selectCursor;
-    
-    public SimpleCursor GetCursor(CursorType cursorType)
+    [CreateAssetMenu(menuName = "thief01/WRA-SDK/Profiles/Cursor Data", fileName = "Cursor Data")]
+    public class CursorData : ScriptableObject
     {
-        switch (cursorType)
+        [SerializeField] private SimpleCursor defaultCursor;
+        [SerializeField] private SimpleCursor overCursor;
+        [SerializeField] private SimpleCursor moveCursor;
+        [SerializeField] private SimpleCursor selectCursor;
+    
+        public SimpleCursor GetCursor(CursorType cursorType)
         {
-            case CursorType.defaultCursor:
-                return defaultCursor;
-            case CursorType.overCursor:
-                return overCursor;
-            case CursorType.moveCursor:
-                return moveCursor;
-            case CursorType.selectCursor:
-                return selectCursor;
-            default:
-                return defaultCursor;
+            switch (cursorType)
+            {
+                case CursorType.defaultCursor:
+                    return defaultCursor;
+                case CursorType.overCursor:
+                    return overCursor;
+                case CursorType.moveCursor:
+                    return moveCursor;
+                case CursorType.selectCursor:
+                    return selectCursor;
+                default:
+                    return defaultCursor;
+            }
         }
     }
 }

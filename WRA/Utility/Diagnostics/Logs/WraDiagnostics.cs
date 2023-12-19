@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,7 +12,7 @@ using WRA.Utility.Math;
  * Add better log file
  **********************************************************************/
 
-namespace WRA.Utility.Diagnostics
+namespace WRA.Utility.Diagnostics.Logs
 {
 
     public static class WraDiagnostics

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using WRA.General;
 using WRA.Utility.Diagnostics;
+using WRA.Utility.Diagnostics.Logs;
 using WRA.Utility.Math;
 
 namespace WRA.PlayerSystems.LanguageSystem

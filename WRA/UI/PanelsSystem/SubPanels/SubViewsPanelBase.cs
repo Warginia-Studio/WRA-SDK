@@ -46,7 +46,7 @@ namespace WRA.UI.PanelsSystem.SubPanels
             OpenSubPanel(correctSubPanel, data);
         }
 
-        public override void Open(object data)
+        public override void OnOpen(object data)
         {
             var myData = TryParseData<SubViewsPanelData>(data);
             
@@ -74,23 +74,13 @@ namespace WRA.UI.PanelsSystem.SubPanels
             }
         }
 
-        public override void Close(object data)
+        public override void OnClose(object data)
         {
             var myData = TryParseData<SubViewsPanelData>(data);
             if (myData != null)
             {
                 
             }
-        }
-
-        public override void OnShow(object data)
-        {
-            
-        }
-
-        public override void OnHide(object data)
-        {
-            
         }
 
         private int CheckIndex(int id)

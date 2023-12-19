@@ -38,26 +38,6 @@ namespace WRA.UI.PanelsSystem.FadeSystem
             canvasGroup = GetComponent<CanvasGroup>();
             GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
         }
-        
-        public override void Open(object data)
-        {
-           
-        }
-
-        public override void Close(object data)
-        {
-            
-        }
-
-        public override void OnShow(object data)
-        {
-            
-        }
-
-        public override void OnHide(object data)
-        {
-            
-        }
 
         public void SetFadeAlpha(float alpha)
         {

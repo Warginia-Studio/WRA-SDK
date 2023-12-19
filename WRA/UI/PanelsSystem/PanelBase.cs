@@ -4,15 +4,70 @@ using WRA.Utility.Diagnostics;
 
 namespace WRA.UI.PanelsSystem
 {
+    [RequireComponent(typeof(CanvasGroup))]
     public abstract class PanelBase : MonoBehaviour
     {
-        public abstract void Open(object data);
+        public bool IsShow { get; private set; }
+        
+        private CanvasGroup canvasGroup;
+        
+        private void Awake()
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+        }
+        
+        #region LAZLY_FUNC
+        /// <summary>
+        /// These functionsare used to open, close, show, hide panels, from buttons, or other panels.
+        /// </summary>
+        public virtual void CloseThisPanel()
+        {
+            PanelManager.Instance.LazlyClose(this);
+        }
+        
+        public virtual void ShowThisPanel()
+        {
+            IsShow = true;
+            PanelManager.Instance.LazlyShow(this);
+        }
 
-        public abstract void Close(object data);
+        public virtual void HideThisPanel()
+        {
+            IsShow = false;
+            PanelManager.Instance.LazlyHide(this);
+        }
+        
+        public void SwitchHideThisPanel()
+        {
+            if (IsShow)
+            {
+                HideThisPanel();
+            }
+            else
+            {
+                ShowThisPanel();
+            }
+        }
+        
+        #endregion
+        
+        public virtual void OnOpen(object data) {}
 
-        public abstract void OnShow(object data);
-    
-        public abstract void OnHide(object data);
+        public virtual void OnClose(object data) {}
+
+        public virtual void OnShow(object data)
+        {
+            canvasGroup.alpha = 1;
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
+        }
+
+        public virtual void OnHide(object data)
+        {
+            canvasGroup.alpha = 0;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+        }
         
         protected virtual T TryParseData<T>(object data) where T : PanelDataBase
         {

@@ -38,26 +38,6 @@ namespace WRA.General.SceneManagment
                 CustomSceneManager.SetActiveNextScene();
             }
         }
-        
-        public override void Open(object data)
-        {
-            
-        }
-
-        public override void Close(object data)
-        {
-            
-        }
-
-        public override void OnShow(object data)
-        {
-            
-        }
-
-        public override void OnHide(object data)
-        {
-            
-        }
 
         public void SetActiveNextScene()
         {

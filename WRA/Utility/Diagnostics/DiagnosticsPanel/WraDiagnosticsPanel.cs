@@ -28,24 +28,9 @@ public class WraDiagnosticsPanel : PanelBase
         UpdateMessage();
     }
 
-    public override void Open(object data)
+    public override void OnOpen(object data)
     {
         message = "NO DATA";
-    }
-
-    public override void Close(object data)
-    {
-        
-    }
-
-    public override void OnShow(object data)
-    {
-        
-    }
-
-    public override void OnHide(object data)
-    {
-        
     }
     
     public void AddNewValue(string name, object newValue)

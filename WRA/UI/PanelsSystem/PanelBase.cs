@@ -10,7 +10,7 @@ namespace WRA.UI.PanelsSystem
     {
         public bool IsShow { get; private set; }
         
-        private CanvasGroup canvasGroup;
+        protected CanvasGroup canvasGroup;
         
         #region LAZLY_FUNC
         /// <summary>

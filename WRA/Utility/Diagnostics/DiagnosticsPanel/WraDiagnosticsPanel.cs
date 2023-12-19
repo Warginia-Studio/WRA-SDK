@@ -32,7 +32,12 @@ namespace WRA.Utility.Diagnostics.DiagnosticsPanel
         {
             message = "NO DATA";
         }
-    
+
+        public override void OnShow(object data)
+        {
+            canvasGroup.alpha = 1;
+        }
+
         public void AddNewValue(string name, object newValue)
         {
             AddNewValue(name, newValue, Color.gray);

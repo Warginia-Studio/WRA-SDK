@@ -11,7 +11,7 @@ namespace WRA.UI.PanelsSystem
         
         private CanvasGroup canvasGroup;
         
-        private void Awake()
+        protected virtual void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
         }

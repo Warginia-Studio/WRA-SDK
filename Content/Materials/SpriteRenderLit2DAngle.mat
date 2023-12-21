@@ -55,6 +55,6 @@ Material:
     m_Ints: []
     m_Floats:
     - _offsetAngle: 0
-    - _showAngle: 360
+    - _showAngle: 204.5
     m_Colors: []
   m_BuildTextureStacks: []

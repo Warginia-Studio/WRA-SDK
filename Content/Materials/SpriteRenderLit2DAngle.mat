@@ -54,7 +54,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _OriginSize: 0.02
     - _offsetAngle: 0
-    - _showAngle: 204.5
-    m_Colors: []
+    - _showAngle: 360
+    m_Colors:
+    - _FieldColor: {r: 1, g: 0, b: 0, a: 0.19215687}
+    - _OriginColor: {r: 1, g: 0, b: 0.009498596, a: 1}
   m_BuildTextureStacks: []

@@ -13,6 +13,7 @@
 /[Pp]lugins/*
 /[Pp]lugins
 /[Tt]extMesh Pro
+/[Aa]ssets/CoreProjectOnly/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta

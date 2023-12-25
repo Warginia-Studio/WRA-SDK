@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace WRA.UI.PanelsSystem.FadeSystem
@@ -11,8 +14,7 @@ namespace WRA.UI.PanelsSystem.FadeSystem
     {
         public bool IsFadding { get; private set; }
         
-        [SerializeField]
-        private FadeOptions fadeOptions = new FadeOptions();
+        [SerializeField] private FadeOptions fadeOptions = new FadeOptions();
         
         private CanvasGroup CanvasGroup
         {
@@ -28,31 +30,13 @@ namespace WRA.UI.PanelsSystem.FadeSystem
         }
         private CanvasGroup canvasGroup;
         private RectTransform rectTransform;
+        private TweenerCore<float, float, FloatOptions> tweeningCoreFade;
+        private float delta;
         
         private void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
             GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height);
-        }
-        
-        public override void Open(object data)
-        {
-           
-        }
-
-        public override void Close(object data)
-        {
-            
-        }
-
-        public override void OnShow(object data)
-        {
-            
-        }
-
-        public override void OnHide(object data)
-        {
-            
         }
 
         public void SetFadeAlpha(float alpha)
@@ -67,26 +51,36 @@ namespace WRA.UI.PanelsSystem.FadeSystem
 
         public void FadeIn(Action onEnd = null)
         {
-            if (ResetFading())
-            {
-                StartCoroutine(Fader(1, fadeOptions.FadeInTime, onEnd));
-            }
+            FadeCore(onEnd, 1, fadeOptions.FadeInTime);
         }
 
         public void FadeOut(Action onEnd = null)
         {
-            if (ResetFading())
-            {
-                StartCoroutine(Fader(0, fadeOptions.FadeInTime, onEnd));
-            }
+            FadeCore(onEnd, 0, fadeOptions.FadeOutTime);
         }
 
-        public void FadeInOut(Action onIn = null, Action onEnd = null)
+        private void FadeCore(Action onEnd, float endValue, float fadeTime)
         {
-            if (ResetFading())
+            if (fadeOptions.Force)
             {
-                StartCoroutine(FaderInOut(onIn, onEnd));
+                IsFadding = false;
+                tweeningCoreFade?.Kill();
             }
+
+            if (IsFadding)
+            {
+                return;
+            }
+
+            tweeningCoreFade = DOTween.To(() => delta, timer => delta = timer, endValue, fadeTime);
+            if (onEnd != null)
+                tweeningCoreFade.onComplete += onEnd.Invoke;
+            tweeningCoreFade.onUpdate += UpdateFadescreen;
+        }
+
+        private void UpdateFadescreen()
+        {
+            CanvasGroup.alpha = delta;
         }
         
         private bool ResetFading()
@@ -96,33 +90,6 @@ namespace WRA.UI.PanelsSystem.FadeSystem
             StopAllCoroutines();
             IsFadding = false;
             return true;
-        }
-
-        private IEnumerator Fader(float to, float time, Action onEnd)
-        {
-            float test = 5;
-            DOTween.To(() => test, kek => test = kek, 10, 1);
-            IsFadding = true;
-            float delta = 0;
-            float from = CanvasGroup.alpha;
-            while (delta<1)
-            {
-                delta += Time.deltaTime * time;
-                yield return null;
-                CanvasGroup.alpha = Mathf.Lerp(from, to, delta);
-            }
-            IsFadding = false;
-            onEnd?.Invoke();
-        }
-        
-        private IEnumerator FaderInOut(Action onIn, Action onEnd)
-        {
-            IsFadding = true;
-            yield return Fader(1, fadeOptions.FadeInTime, onIn);
-            yield return new WaitForSeconds(fadeOptions.FadeInOutWaitTime);
-            IsFadding = true;
-            yield return Fader(0, fadeOptions.FadeOutTime, onEnd);
-            IsFadding = false;
         }
     }
 }

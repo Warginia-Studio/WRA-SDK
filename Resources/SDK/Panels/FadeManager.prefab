@@ -93,7 +93,6 @@ MonoBehaviour:
   fadeOptions:
     FadeInTime: 1
     FadeOutTime: 1
-    FadeInOutWaitTime: 2
     Force: 0
 --- !u!225 &4781388730967464917
 CanvasGroup:
@@ -104,6 +103,6 @@ CanvasGroup:
   m_GameObject: {fileID: 4455912130307896866}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

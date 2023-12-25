@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using WRA.CharacterSystems.InventorySystem.Slots;
 using WRA.CharacterSystems.StatisticsSystem;
+using WRA.CharacterSystems.StatisticsSystem.Interfaces;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA.CharacterSystems.InventorySystem.Managment

@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using WRA.CharacterSystems.StatisticsSystem.Data;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Editor
@@ -10,11 +11,11 @@ namespace WRA.CharacterSystems.StatisticsSystem.Editor
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var prop = property.FindPropertyRelative("id");
-            var statisticsNames = CharacterProfile.Instance.statisticsNames;
+            var statisticsNames = StatisticsProfile.Instance.statisticsNames;
 
 
             prop.intValue = EditorGUI.Popup(position, property.name, prop.intValue,
-                CharacterProfile.Instance.statisticsNames.ToArray());
+                StatisticsProfile.Instance.statisticsNames.ToArray());
         }
     }
 }

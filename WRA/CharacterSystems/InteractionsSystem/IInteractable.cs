@@ -2,7 +2,7 @@ namespace WRA.CharacterSystems.InteractionsSystem
 {
     public interface IInteractable
     {
-        void Interract(InteractionControllerBase who);
+        void Interract(InteractionControlerSystemBase who);
 
         string GetInteractionDescription();
     }

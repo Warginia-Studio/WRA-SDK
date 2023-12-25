@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WRA.General.Patterns;
+using WRA.General.Patterns.Singletons;
 using WRA.Utility.Diagnostics;
+using WRA.Utility.Diagnostics.Logs;
 
 namespace WRA.General.SaveLoadSystem
 {

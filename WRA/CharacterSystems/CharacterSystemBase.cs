@@ -2,13 +2,30 @@ using UnityEngine;
 
 namespace WRA.CharacterSystems
 {
+    [RequireComponent(typeof(CharacterObject))]
     public class CharacterSystemBase : MonoBehaviour
     {
-        public CharacterSystemsProvider CharacterSystemsProvider { get; private set; }
-
-        public void InitCharacterSystemsProvider(CharacterSystemsProvider characterSystemsProvider)
+        public CharacterObject CharacterObject
         {
-            CharacterSystemsProvider = characterSystemsProvider;
+            get
+            {
+                if (characterObject == null)
+                {
+                    characterObject = GetComponent<CharacterObject>();
+                }
+
+                return characterObject;
+            }
+        }
+        private CharacterObject characterObject;
+        public void SetCharacterObject(CharacterObject characterObject)
+        {
+            this.characterObject = characterObject;
+        }
+    
+        public T GetCharacterSystem<T>() where T : CharacterSystemBase
+        {
+            return characterObject.GetCharacterSystem<T>();
         }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using WRA.CharacterSystems.StatisticsSystem.Controlers;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Effects.SourceEffects
 {
@@ -9,7 +10,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Effects.SourceEffects
         [SerializeField] protected SourceType sourceType;
         private void Awake()
         {
-            var v = GetComponent(SOURCE_CLASS_NAMES[(int)sourceType]) as ResourceControler;
+            var v = GetComponent(SOURCE_CLASS_NAMES[(int)sourceType]) as ResourceSystemBaseControler;
             if (v == null)
                 return;
             v.OnValueChanged.AddListener(PlayEffect);

@@ -1,16 +1,26 @@
+using System;
 using UnityEngine;
+using WRA.CharacterSystems.StatisticsSystem.Controlers;
+using WRA.CharacterSystems.StatisticsSystem.Interfaces;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
 namespace WRA.CharacterSystems.StatisticsSystem
 {
     public class DamageListener : MonoBehaviour, IDamageable
     {
-        [SerializeField] private HealthControler healthController;
         [SerializeField] private float scalingDamage = 1;
+        
+        private HealthSystemBaseControler healthSystemBaseController;
+
+        private void Awake()
+        {
+            healthSystemBaseController = GetComponentInParent<HealthSystemBaseControler>();
+        }
+
         public void DealDamage(DamageInfo damageInfo)
         {
             damageInfo.ScalingDamage = scalingDamage;
-            healthController.DealDamage(damageInfo);
+            healthSystemBaseController.DealDamage(damageInfo);
         }
     }
 }

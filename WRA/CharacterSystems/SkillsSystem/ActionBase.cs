@@ -9,11 +9,16 @@ namespace WRA.CharacterSystems.SkillsSystem
         [TextArea] public string DefaultDescription;
         public Sprite ActionSprite;
     
-        protected ActionController ActionController;
+        protected ActionControler ActionControler;
+
+        public void BeginAction<T>(T actionBaseData) where T : ActionData
+        {
+            actionBaseData.CharacterObject.StartCoroutine(ActionEngine(actionBaseData));
+        }
     
-        public abstract string GetDescription(ActionData owner);
+        public abstract string GetDescription<T>(T owner) where T : ActionData;
     
-        public abstract IEnumerator ActionEngine(ActionData actionBase);
+        public abstract IEnumerator ActionEngine<T>(T actionBase) where T : ActionData;
         
     }
 }

@@ -6,10 +6,33 @@ namespace WRA.UI.PanelsSystem.SubPanels
 {
     public class SubViewsPanelBase : PanelBase
     {
+        public int CurrentViewId { get; private set; }
+        public SubViewBase CurrentViewData { get; private set; }
+        
         [SerializeField] private List<SubViewBase> allViews = new List<SubViewBase>();
 
         [SerializeField] private string startPanelName = "";
-        
+        [SerializeField] private bool loopIndex = false;
+
+        public void Next()
+        {
+            SwitchPanel(CurrentViewId+1);
+        }
+
+        public void Previous()
+        {
+            SwitchPanel(CurrentViewId-1);   
+        }
+
+        public void SwitchPanel(string panelName)
+        {
+            SwitchPanel(panelName, null);
+        }
+
+        public void SwitchPanel(int id)
+        {
+            SwitchPanel(id, null);
+        }
         public void SwitchPanel(string panelName, object data)
         {
             var correctSubPanel = allViews.Find(ctg => ctg.name == panelName);
@@ -18,11 +41,12 @@ namespace WRA.UI.PanelsSystem.SubPanels
 
         public void SwitchPanel(int id, object data)
         {
+            id = CheckIndex(id);
             var correctSubPanel = allViews[id];
             OpenSubPanel(correctSubPanel, data);
         }
 
-        public override void Open(object data)
+        public override void OnOpen(object data)
         {
             var myData = TryParseData<SubViewsPanelData>(data);
             
@@ -50,7 +74,7 @@ namespace WRA.UI.PanelsSystem.SubPanels
             }
         }
 
-        public override void Close(object data)
+        public override void OnClose(object data)
         {
             var myData = TryParseData<SubViewsPanelData>(data);
             if (myData != null)
@@ -59,16 +83,21 @@ namespace WRA.UI.PanelsSystem.SubPanels
             }
         }
 
-        public override void OnShow(object data)
+        private int CheckIndex(int id)
         {
-            
-        }
+            if (id > allViews.Count)
+            {
+                id = loopIndex ? 0 : allViews.Count - 1;
+            }
 
-        public override void OnHide(object data)
-        {
-            
-        }
+            if (id < 0)
+            {
+                id = loopIndex ? allViews.Count - 1 : 0;
+            }
 
+            return id;
+        }
+        
         private void TryGetViews()
         {
             if (allViews != null && allViews.Count > 0)
@@ -86,8 +115,16 @@ namespace WRA.UI.PanelsSystem.SubPanels
                     allViews[i].OnHide();
                     allViews[i].gameObject.SetActive(false);
                 }
+                else
+                {
+                    CurrentViewId = i;
+                }
             }
+            
             subViewBase.OnShow(data);
+            subViewBase.gameObject.SetActive(true);
+            
+            CurrentViewData = subViewBase;
         }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace WRA.CharacterSystems.SkillsSystem
 {
-    public class ActionControler : CharacterSystemBase
+    public class ActionController : CharacterSystemBase
     {
         private List<ActionBase> activeActions = new List<ActionBase>();
         private List<Coroutine> coroutines = new List<Coroutine>();

@@ -9,7 +9,7 @@ namespace WRA.CharacterSystems.SkillsSystem
         [TextArea] public string DefaultDescription;
         public Sprite ActionSprite;
     
-        protected ActionControler ActionControler;
+        protected ActionController ActionController;
 
         public void BeginAction<T>(T actionBaseData) where T : ActionData
         {

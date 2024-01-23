@@ -1,6 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
+using WRA.Utility.Diagnostics.Logs;
 
 namespace WRA.Tools.Editor
 {
@@ -26,7 +27,7 @@ namespace WRA.Tools.Editor
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, false, true);
         
 
-            var messages = WraDiagnostics.WraLogDatas;
+            var messages = WraDiagnostics.GetLogsWithTag();
             var msg = "";
         
             for (int i = 0; i < messages.Count; i++)

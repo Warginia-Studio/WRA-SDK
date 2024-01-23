@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 using WRA.General.Patterns.Singletons;
 
-namespace WRA.General
+namespace WRA.General.Cursor
 {
     public class CursorManager : MonoBehaviourSingletonAutoCreate<CursorManager>
     {
@@ -10,14 +9,14 @@ namespace WRA.General
         
         protected override void OnCreate()
         {
-            Cursor.visible = false;
+            UnityEngine.Cursor.visible = false;
             cursorData = ApplicationProfile.Instance.CursorData;
             SetCursor(CursorType.defaultCursor);
         }
         
         public void SetCursor(CursorType cursorType)
         {
-            Cursor.SetCursor(cursorData.GetCursor(cursorType).Texture, cursorData.GetCursor(cursorType).HotSpot, CursorMode.Auto);
+            UnityEngine.Cursor.SetCursor(cursorData.GetCursor(cursorType).Texture, cursorData.GetCursor(cursorType).HotSpot, CursorMode.Auto);
         }
 
     }

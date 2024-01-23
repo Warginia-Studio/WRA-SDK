@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
+using WRA.Utility.Diagnostics.Logs;
 
 namespace WRA.General.Patterns.Pool
 {

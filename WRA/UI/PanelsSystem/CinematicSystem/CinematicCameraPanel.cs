@@ -12,7 +12,7 @@ namespace WRA.UI.PanelsSystem.CinematicSystem
         private float currentDelta = 0;
         private TweenerCore<float, float, FloatOptions> currentTween;
 
-        public override void Open(object data)
+        public override void OnOpen(object data)
         {
             var cinematicCameraData = TryParseData<CinematicCameraData>(data);
 
@@ -23,12 +23,7 @@ namespace WRA.UI.PanelsSystem.CinematicSystem
             
             UpdateCurtains();
         }
-
-        public override void Close(object data)
-        {
-
-        }
-
+        
         public override void OnShow(object data)
         {
             ShowCurtains();

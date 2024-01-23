@@ -5,11 +5,13 @@ using UnityEngine.Events;
 using WRA.General.Patterns;
 using WRA.General.Patterns.Singletons;
 using WRA.Utility.Diagnostics;
+using WRA.Utility.Diagnostics.Logs;
 
 namespace WRA.UI.PanelsSystem
 {
     public class PanelManager : MonoBehaviourSingletonMustExist<PanelManager>
     {
+        private const string LOG_TAG = "PanelManager";
         [HideInInspector] public UnityEvent<PanelBase> OnPanelOpen, OnPanelShow, OnPanelHide, OnPanelClose;
     
         // TODO: Do logs as const
@@ -22,22 +24,45 @@ namespace WRA.UI.PanelsSystem
     
         private List<PanelBase> openedPanels = new List<PanelBase>();
 
+        public void LazlyClose(PanelBase panelBase)
+        {
+            DestroyPanel(panelBase, null);
+        }
+        
+        public void LazlyShow(PanelBase panelBase)
+        {
+            OnPanelShow.Invoke(panelBase);
+            panelBase.OnShow(null);
+        }
+        
+        public void LazlyHide(PanelBase panelBase)
+        {
+            OnPanelHide.Invoke(panelBase);
+            panelBase.OnHide(null);
+        }
+        
         public T OpenPanel<T>(bool startAsHide = false) where T : PanelBase
         {
             return OpenPanel<T, PanelDataBase>(null, startAsHide);
         }
-        public T OpenPanel<T, TData>(TData data, bool startAsHide = false)
+        public T OpenPanel<T, TData>(TData data = null, bool startAsHide = false, PanelBase parrentPanel = null)
             where T : PanelBase where TData : PanelDataBase
         {
             var panel = GetPanel<T>() as T;
             if (panel != null)
             {
-                WraDiagnostics.LogWarning($"Panel {typeof(T).FullName} is opened.");
+                WraDiagnostics.LogWarning($"Panel {typeof(T).FullName} is opened.", LOG_TAG);
                 return panel;
             }
 
             panel = LoadPanelFromResources<T>() as T;
-            panel.Open(data);
+            panel.InitBase();
+            panel.OnOpen(data);
+            if (panel == null)
+                return null;
+            
+            if(parrentPanel!=null)
+                panel.transform.SetParent(parrentPanel.transform);
             OnPanelOpen.Invoke(panel);
 
             if (startAsHide)
@@ -97,20 +122,20 @@ namespace WRA.UI.PanelsSystem
                 DestroyPanel(checkData.panel, data);
             }
         }
-
+        
         private (bool opened, T panel) IsPanelOpened<T>([CallerMemberName]string callerMemberName = "") where T : PanelBase
         {
             var panel = GetPanel<T>() as T;
 
             if (panel == null)
             {
-                WraDiagnostics.LogError($"Panel {typeof(T).FullName} isn't opened. Can't do action {callerMemberName}.", Color.yellow);
+                WraDiagnostics.LogError($"Panel {typeof(T).FullName} isn't opened. Can't do action {callerMemberName}.", Color.yellow, LOG_TAG);
                 return (false, panel);
             }
 
             return (true, panel);
         }
-
+        
         private T LoadPanelFromResources<T>() where T : PanelBase
         {
             var panel = TryInitialize<T>($"Common/Panels/{typeof(T).Name}");
@@ -129,20 +154,20 @@ namespace WRA.UI.PanelsSystem
             var loadedPanel = Resources.Load<T>(path);
             if (loadedPanel == null)
             {
-                WraDiagnostics.LogError($"Not found panel at path: {path}", Color.red);
+                WraDiagnostics.LogError($"Not found panel at path: {path}", Color.red, LOG_TAG);
                 return null;
             }
 
             var createdPanel = Instantiate(loadedPanel, transform);
         
-            WraDiagnostics.LogError($"Spawned panel from: {path}", Color.green);
+            WraDiagnostics.LogError($"Spawned panel from: {path}", Color.green, LOG_TAG);
 
             return createdPanel;
         }
 
         private void DestroyPanel(PanelBase panelBase, PanelDataBase dataBase)
         {
-            panelBase.Close(dataBase);
+            panelBase.OnClose(dataBase);
             openedPanels.Remove(panelBase);
             Destroy(panelBase.gameObject);
         }

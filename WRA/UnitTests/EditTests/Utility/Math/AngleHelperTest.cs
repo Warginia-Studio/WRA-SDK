@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using WRA.Utility.Math;
 
-namespace WRA.UnitTests.EditTests.Utility.Math
+namespace WRA_SDK.WRA.UnitTests.EditTests.Utility.Math
 {
     public class AngleHelperTest
     {

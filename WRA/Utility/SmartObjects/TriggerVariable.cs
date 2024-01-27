@@ -1,4 +1,4 @@
-namespace WRA.Utility.CustomTypes
+namespace WRA.Utility.SmartObjects
 {
     public class TriggerVariable
     {

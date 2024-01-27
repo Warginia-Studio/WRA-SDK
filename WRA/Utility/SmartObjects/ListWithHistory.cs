@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Object = UnityEngine.Object;
 
-namespace WRA.Utility
+namespace WRA.Utility.SmartObjects
 {
     public class ListWithHistory<T> where T : Object
     {

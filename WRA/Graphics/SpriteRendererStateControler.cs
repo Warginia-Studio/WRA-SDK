@@ -1,6 +1,6 @@
 using UnityEditor.VersionControl;
 using UnityEngine;
-using WRA.Utility.CustomTypes;
+using WRA.Utility.SmartObjects;
 
 namespace WRA.Graphics
 {

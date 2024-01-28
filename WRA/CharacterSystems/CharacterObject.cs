@@ -10,6 +10,7 @@ namespace WRA.CharacterSystems
         [HideInInspector] public UnityEvent OnSystemsRegistered;
         public bool SystemsRegistered { get; private set; }
         private List<CharacterSystemBase> characterSystemBases;
+        private List<ICharacterChildren> characterChildrens = new List<ICharacterChildren>();
 
         private bool registeredSystems = false;
         private void Awake()
@@ -34,6 +35,12 @@ namespace WRA.CharacterSystems
         
             OnSystemsRegistered.Invoke();
             SystemsRegistered = true;
+        }
+        
+        public void RegisterChildren(ICharacterChildren characterChildren)
+        {
+            characterChildren.OnInit(GetCharacterSystem<CharacterSystemBase>());
+            characterChildrens.Add(characterChildren);
         }
     }
 }

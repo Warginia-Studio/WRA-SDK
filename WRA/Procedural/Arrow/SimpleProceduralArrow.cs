@@ -6,25 +6,30 @@ namespace WRA.Procedural.Arrow
     {
         [SerializeField] private float arrrowHeadLenght = 0.1f;
         [SerializeField] private float arrrowHeadWidth = 0.1f;
+        [Range(0,1)]
+        [SerializeField] private float arrowOffset = 0.5f;
     
         private float lastArrrowHeadLenght = 0;
         private float lastArrrowHeadWidth = 0;
+        private float lastArrowOffset = 0;
     
         protected override bool ShouldUpdate()
         {
             if (base.ShouldUpdate())
                 return true;
-            if (lastArrrowHeadLenght == arrrowHeadLenght && lastArrrowHeadWidth == arrrowHeadWidth)
+            if (lastArrrowHeadLenght == arrrowHeadLenght && lastArrrowHeadWidth == arrrowHeadWidth && lastArrowOffset == arrowOffset)
                 return false;
             lastArrrowHeadLenght = arrrowHeadLenght;
             lastArrrowHeadWidth = arrrowHeadWidth;
+            lastArrowOffset = arrowOffset;
             GenerateObject();
             return true;
         }
     
         protected override void GenerateObject()
         {
-            meshFilter.mesh = GenereteArrow();
+            // meshFilter.mesh = GenereteArrow();
+            meshFilter.mesh = MeshFactory.GenerateArrow(lenght, lineWidth, arrrowHeadLenght, arrrowHeadWidth, arrowOffset);
         }
     
         protected Mesh GenereteArrow()

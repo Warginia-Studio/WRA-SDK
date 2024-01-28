@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.Utility.CustomTypes
+namespace WRA.Utility.SmartObjects
 {
     public class RangedValueFloat
     {

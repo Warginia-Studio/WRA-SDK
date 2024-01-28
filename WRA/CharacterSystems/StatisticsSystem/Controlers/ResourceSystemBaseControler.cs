@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.Events;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
-using WRA.Utility.CustomTypes;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using WRA.Utility.SmartObjects;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {

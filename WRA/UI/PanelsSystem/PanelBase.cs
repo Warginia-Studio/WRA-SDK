@@ -55,6 +55,7 @@ namespace WRA.UI.PanelsSystem
         {
             SetData(data);
             InitNeededComponents();
+            InitFragments();
         }
         
         public void SetData(object data)
@@ -113,7 +114,11 @@ namespace WRA.UI.PanelsSystem
         {
             // TODO: It can't be like this because it can get fragments from other panel
             // fragments = new List<PanelFragment>(GetComponentsInChildren<PanelFragment>());
-            fragments.ForEach(ctg => ctg.OnPanelInit(this));
+            fragments.ForEach(ctg =>
+            {
+                ctg.SetPanel(this);
+                ctg.OnPanelInit();
+            });
         }
     }
 }

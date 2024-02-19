@@ -20,18 +20,18 @@ namespace WRA.UI.PanelsSystem
         /// <summary>
         /// These functionsare used to open, close, show, hide panels, from buttons, or other panels.
         /// </summary>
-        public virtual void CloseThisPanel()
+        public void CloseThisPanel()
         {
             PanelManager.Instance.LazlyClose(this);
         }
         
-        public virtual void ShowThisPanel()
+        public void ShowThisPanel()
         {
             IsShow = true;
             PanelManager.Instance.LazlyShow(this);
         }
 
-        public virtual void HideThisPanel()
+        public void HideThisPanel()
         {
             IsShow = false;
             PanelManager.Instance.LazlyHide(this);
@@ -51,6 +51,8 @@ namespace WRA.UI.PanelsSystem
         
         #endregion
 
+        #region FUNCS_CALLED_FROM_PANEL_MANAGER
+        
         public void InitPanelBase(object data = null)
         {
             SetData(data);
@@ -72,6 +74,7 @@ namespace WRA.UI.PanelsSystem
             }
         }
 
+
         
         public virtual void OnOpen() {}
 
@@ -90,6 +93,8 @@ namespace WRA.UI.PanelsSystem
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
         }
+        
+        #endregion
         
         protected virtual T GetDataAsType<T>() where T : PanelDataBase
         {

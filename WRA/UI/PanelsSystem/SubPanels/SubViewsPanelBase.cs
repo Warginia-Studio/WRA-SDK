@@ -46,9 +46,9 @@ namespace WRA.UI.PanelsSystem.SubPanels
             OpenSubPanel(correctSubPanel, data);
         }
 
-        public override void OnOpen(object data)
+        public override void OnOpen()
         {
-            var myData = TryParseData<SubViewsPanelData>(data);
+            var myData = GetDataAsType<SubViewsPanelData>();
             
             if (myData != null)
             {
@@ -74,9 +74,9 @@ namespace WRA.UI.PanelsSystem.SubPanels
             }
         }
 
-        public override void OnClose(object data)
+        public override void OnClose()
         {
-            var myData = TryParseData<SubViewsPanelData>(data);
+            var myData = GetDataAsType<SubViewsPanelData>();
             if (myData != null)
             {
                 

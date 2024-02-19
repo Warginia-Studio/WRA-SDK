@@ -56,7 +56,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
         //     lastText = inputField.text;
         // }
     
-        public override void OnClose(object data)
+        public override void OnClose()
         {
             PanelManager.Instance.ClosePanel<WraGameConsole, PanelDataBase>(null);
         }

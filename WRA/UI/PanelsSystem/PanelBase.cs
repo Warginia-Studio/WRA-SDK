@@ -11,6 +11,7 @@ namespace WRA.UI.PanelsSystem
         public bool IsShow { get; private set; }
         
         protected CanvasGroup canvasGroup;
+        protected object data;
         
         #region LAZLY_FUNC
         /// <summary>
@@ -47,30 +48,46 @@ namespace WRA.UI.PanelsSystem
         
         #endregion
 
-        public void InitBase()
+        public void InitPanelBase(object data = null)
         {
-            canvasGroup = GetComponent<CanvasGroup>();
+            SetData(data);
+            InitNeededComponents();
         }
         
-        public virtual void OnOpen(object data) {}
+        public void SetData(object data)
+        {
+            if (data!= null && data is PanelDataBase)
+            {
+                this.data = data;   
+            }
+            else
+            {
+                WraDiagnostics.LogError(
+                    $"Data data is type: {data.GetType().FullName} expected {typeof(PanelDataBase).FullName} \n" +
+                    System.Environment.StackTrace, Color.red);
+            }
+        }
 
-        public virtual void OnClose(object data) {}
+        
+        public virtual void OnOpen() {}
 
-        public virtual void OnShow(object data)
+        public virtual void OnClose() {}
+
+        public virtual void OnShow()
         {
             canvasGroup.alpha = 1;
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
         }
 
-        public virtual void OnHide(object data)
+        public virtual void OnHide()
         {
             canvasGroup.alpha = 0;
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
         }
         
-        protected virtual T TryParseData<T>(object data) where T : PanelDataBase
+        protected virtual T GetDataAsType<T>() where T : PanelDataBase
         {
             if (data != null && data is not T)
             {
@@ -79,6 +96,14 @@ namespace WRA.UI.PanelsSystem
             }
         
             return (T)data;
+        }
+        
+        private void InitNeededComponents()
+        {
+            if (canvasGroup == null)
+            {
+                canvasGroup = GetComponent<CanvasGroup>();
+            }
         }
     }
 }

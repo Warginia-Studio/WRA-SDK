@@ -32,13 +32,13 @@ namespace WRA.UI.PanelsSystem
         public void LazlyShow(PanelBase panelBase)
         {
             OnPanelShow.Invoke(panelBase);
-            panelBase.OnShow(null);
+            panelBase.OnShow();
         }
         
         public void LazlyHide(PanelBase panelBase)
         {
             OnPanelHide.Invoke(panelBase);
-            panelBase.OnHide(null);
+            panelBase.OnHide();
         }
         
         public T OpenPanel<T>(bool startAsHide = false) where T : PanelBase
@@ -56,8 +56,8 @@ namespace WRA.UI.PanelsSystem
             }
 
             panel = LoadPanelFromResources<T>() as T;
-            panel.InitBase();
-            panel.OnOpen(data);
+            panel.InitPanelBase(data);
+            panel.OnOpen();
             if (panel == null)
                 return null;
             
@@ -83,7 +83,8 @@ namespace WRA.UI.PanelsSystem
 
             if (checkData.opened)
             {
-                checkData.panel.OnShow(data);
+                checkData.panel.SetData(data);
+                checkData.panel.OnShow();
             }
             else if (openIfIsOff)
             {
@@ -100,7 +101,8 @@ namespace WRA.UI.PanelsSystem
 
             if (checkData.opened)
             {
-                checkData.panel.OnHide(data);
+                checkData.panel.SetData(data);
+                checkData.panel.OnHide();
             }
         
             OnPanelHide.Invoke(checkData.panel);
@@ -167,7 +169,8 @@ namespace WRA.UI.PanelsSystem
 
         private void DestroyPanel(PanelBase panelBase, PanelDataBase dataBase)
         {
-            panelBase.OnClose(dataBase);
+            panelBase.SetData(dataBase);
+            panelBase.OnClose();
             openedPanels.Remove(panelBase);
             Destroy(panelBase.gameObject);
         }

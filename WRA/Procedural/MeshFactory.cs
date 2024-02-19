@@ -6,7 +6,7 @@ namespace WRA.Procedural
     [BurstCompile(CompileSynchronously = true)]
     public static class MeshFactory
     {
-        public static Mesh GenereteLine(float lenght, float height)
+        public static Mesh GenereteLine(float lenght, float height, float offsetX = 0)
         {
             Mesh mesh = new Mesh();
         
@@ -14,10 +14,10 @@ namespace WRA.Procedural
             Vector2[] uv = new Vector2[4];
             int[] triangles = new int[6];
         
-            vertices[0] = new Vector3(0, -height / 2, 0);
-            vertices[1] = new Vector3(lenght, -height / 2, 0);
-            vertices[2] = new Vector3(0, height / 2, 0);
-            vertices[3] = new Vector3(lenght, height / 2, 0);
+            vertices[0] = new Vector3(-offsetX, -height / 2, 0); // left bottom
+            vertices[1] = new Vector3(-offsetX + lenght, -height / 2, 0); // right bottom
+            vertices[2] = new Vector3(-offsetX, height / 2, 0); // left top
+            vertices[3] = new Vector3(-offsetX + lenght, height / 2, 0); // right top
         
             uv[0] = new Vector2(0, 0);
             uv[1] = new Vector2(lenght, 0);
@@ -62,18 +62,60 @@ namespace WRA.Procedural
         
             return mesh;
         }
-    
-        public static Mesh MeshCombine(Mesh mesh1, Mesh mesh2)
+        
+        public static Mesh GenerateArrow(float lineLenght, float lineHeight, float arrrowHeadLenght, float arrowHeadHeight, float offsetX= 0.5f)
         {
-            CombineInstance[] combine = new CombineInstance[2];
-            combine[0].mesh = mesh1;
-            combine[0].transform = Matrix4x4.identity;
-            combine[1].mesh = mesh2;
-            combine[1].transform = Matrix4x4.identity;
+            offsetX = Mathf.Clamp(offsetX, 0, 1);
+            var offsetValue = (lineLenght + arrrowHeadLenght) * offsetX;
+            
+            var line = GenereteLine(lineLenght, lineHeight, offsetValue);
+            var triangleVerticies = GetTriangleVertices(arrowHeadHeight, arrrowHeadLenght, 0);
+            for (int i = 0; i < triangleVerticies.Length; i++)
+            {
+                triangleVerticies[i] += new Vector3(lineLenght - offsetValue, 0, 0);
+            }
+            var triangle = GenerateTriangle(triangleVerticies);
+            
+            var mesh = new Mesh();
+            mesh = MeshCombine(line, triangle);
+            mesh.name = "ProceduralArrow";
+            return mesh;
+        }
+    
+        public static Mesh MeshCombine(params Mesh[] meshes)
+        {
+            CombineInstance[] combine = new CombineInstance[meshes.Length];
+            for (int i = 0; i < meshes.Length; i++)
+            {
+                combine[i].mesh = meshes[i];
+                combine[i].transform = Matrix4x4.identity;
+            }
         
             Mesh mesh = new Mesh();
             mesh.CombineMeshes(combine);
             return mesh;
+        }
+        
+        /// <summary>
+        /// If offset equals to 0 then triangle will be at the beginning of the line
+        /// If offset equals to 0.5 then triangle will be in the middle of the line
+        /// If offset equals to 1 then triangle will be at the end of the line
+        /// </summary>
+        /// <param name="baseSize"></param>
+        /// <param name="lenght"></param>
+        /// <param name="offsetX"></param>
+        /// <returns></returns>
+        public static Vector3[] GetTriangleVertices(float baseSize, float lenght, float offsetX = 0)
+        {
+            offsetX = Mathf.Clamp(offsetX, 0, 1);
+            float offsetValue= lenght * offsetX;
+            
+            return new[]
+            {
+                new Vector3(-offsetValue, -baseSize / 2, 0),
+                new Vector3( lenght - offsetValue, 0, 0),
+                new Vector3(-offsetValue, baseSize / 2, 0)
+            };
         }
     }
 }

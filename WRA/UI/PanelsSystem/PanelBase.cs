@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
@@ -10,24 +11,27 @@ namespace WRA.UI.PanelsSystem
     {
         public bool IsShow { get; private set; }
         
+        [SerializeField] protected List<PanelFragment> fragments = new List<PanelFragment>();
+        
         protected CanvasGroup canvasGroup;
+        protected object data;
         
         #region LAZLY_FUNC
         /// <summary>
         /// These functionsare used to open, close, show, hide panels, from buttons, or other panels.
         /// </summary>
-        public virtual void CloseThisPanel()
+        public void CloseThisPanel()
         {
             PanelManager.Instance.LazlyClose(this);
         }
         
-        public virtual void ShowThisPanel()
+        public void ShowThisPanel()
         {
             IsShow = true;
             PanelManager.Instance.LazlyShow(this);
         }
 
-        public virtual void HideThisPanel()
+        public void HideThisPanel()
         {
             IsShow = false;
             PanelManager.Instance.LazlyHide(this);
@@ -47,30 +51,52 @@ namespace WRA.UI.PanelsSystem
         
         #endregion
 
-        public void InitBase()
+        #region FUNCS_CALLED_FROM_PANEL_MANAGER
+        
+        public void InitPanelBase(object data = null)
         {
-            canvasGroup = GetComponent<CanvasGroup>();
+            SetData(data);
+            InitNeededComponents();
+            InitFragments();
         }
         
-        public virtual void OnOpen(object data) {}
+        public void SetData(object data)
+        {
+            if (data!= null && data is PanelDataBase)
+            {
+                this.data = data;   
+            }
+            else
+            {
+                WraDiagnostics.LogError(
+                    $"Data data is type: {data.GetType().FullName} expected {typeof(PanelDataBase).FullName} \n" +
+                    System.Environment.StackTrace, Color.red);
+            }
+        }
 
-        public virtual void OnClose(object data) {}
 
-        public virtual void OnShow(object data)
+        
+        public virtual void OnOpen() {}
+
+        public virtual void OnClose() {}
+
+        public virtual void OnShow()
         {
             canvasGroup.alpha = 1;
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
         }
 
-        public virtual void OnHide(object data)
+        public virtual void OnHide()
         {
             canvasGroup.alpha = 0;
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
         }
         
-        protected virtual T TryParseData<T>(object data) where T : PanelDataBase
+        #endregion
+        
+        protected virtual T GetDataAsType<T>() where T : PanelDataBase
         {
             if (data != null && data is not T)
             {
@@ -79,6 +105,25 @@ namespace WRA.UI.PanelsSystem
             }
         
             return (T)data;
+        }
+        
+        private void InitNeededComponents()
+        {
+            if (canvasGroup == null)
+            {
+                canvasGroup = GetComponent<CanvasGroup>();
+            }
+        }
+
+        private void InitFragments()
+        {
+            // TODO: It can't be like this because it can get fragments from other panel
+            // fragments = new List<PanelFragment>(GetComponentsInChildren<PanelFragment>());
+            fragments.ForEach(ctg =>
+            {
+                ctg.SetPanel(this);
+                ctg.OnPanelInit();
+            });
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using WRA.General.Cursor;
 using WRA.General.Patterns.Singletons;
@@ -11,6 +12,5 @@ namespace WRA.General
         public bool CustomConsole = false;
 
         public CursorData CursorData;
-
     }
 }

@@ -28,12 +28,12 @@ namespace WRA.Utility.Diagnostics.DiagnosticsPanel
             UpdateMessage();
         }
 
-        public override void OnOpen(object data)
+        public override void OnOpen()
         {
             message = "NO DATA";
         }
 
-        public override void OnShow(object data)
+        public override void OnShow()
         {
             canvasGroup.alpha = 1;
         }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
@@ -9,6 +10,8 @@ namespace WRA.UI.PanelsSystem
     public abstract class PanelBase : MonoBehaviour
     {
         public bool IsShow { get; private set; }
+        
+        [SerializeField] protected List<PanelFragment> fragments = new List<PanelFragment>();
         
         protected CanvasGroup canvasGroup;
         protected object data;
@@ -104,6 +107,13 @@ namespace WRA.UI.PanelsSystem
             {
                 canvasGroup = GetComponent<CanvasGroup>();
             }
+        }
+
+        private void InitFragments()
+        {
+            // TODO: It can't be like this because it can get fragments from other panel
+            // fragments = new List<PanelFragment>(GetComponentsInChildren<PanelFragment>());
+            fragments.ForEach(ctg => ctg.OnPanelInit(this));
         }
     }
 }

@@ -62,16 +62,21 @@ namespace WRA.UI.PanelsSystem
         
         public void SetData(object data)
         {
-            if (data!= null && data is PanelDataBase)
+            if (data == null)
             {
-                this.data = data;   
+                WraDiagnostics.LogWarning("Data is null", Color.yellow);
+                return;
             }
-            else
+
+            if (data is not PanelDataBase)
             {
                 WraDiagnostics.LogError(
                     $"Data data is type: {data.GetType().FullName} expected {typeof(PanelDataBase).FullName} \n" +
                     System.Environment.StackTrace, Color.red);
+                return;
             }
+
+            this.data = data;
         }
 
 

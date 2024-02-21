@@ -35,6 +35,7 @@ namespace WRA.General.Patterns.Pool
             for (int i = 0; i < count; i++)
             {
                 pool.Add(Object.Instantiate(prefab));
+                pool[i].gameObject.name += "_Pooled_ID=" + i;
                 pool[i].OnInit();
                 pool[i].SetActive(false);
             }

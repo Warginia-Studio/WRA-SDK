@@ -101,7 +101,7 @@ namespace WRA.UI.PanelsSystem
         
         #endregion
         
-        protected virtual T GetDataAsType<T>() where T : PanelDataBase
+        public virtual T GetDataAsType<T>() where T : PanelDataBase
         {
             if (data != null && data is not T)
             {

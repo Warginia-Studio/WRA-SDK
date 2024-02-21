@@ -1,7 +1,9 @@
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.Xml;
 using UnityEditor;
 using UnityEngine;
+
 
 namespace WRA.PlayerSystems.LanguageSystem.Editor
 {
@@ -156,3 +158,4 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
         }
     }
 }
+#endif

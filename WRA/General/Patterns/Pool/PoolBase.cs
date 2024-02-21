@@ -7,7 +7,7 @@ namespace WRA.General.Patterns.Pool
 {
     public class PoolBase<TObject> where TObject : PoolObjectBase 
     {
-        public PoolBase<TObject> Instance
+        public static PoolBase<TObject> Instance
         {
             get
             {
@@ -20,14 +20,14 @@ namespace WRA.General.Patterns.Pool
             }
         }
 
-        private PoolBase<TObject> instance;
-        private TObject prefab;
+        private static PoolBase<TObject> instance;
+        protected TObject prefab;
         
-        private List<TObject> pool = new List<TObject>();
+        protected List<TObject> pool = new List<TObject>();
 
-        PoolBase()
+        protected PoolBase()
         {
-            prefab = Resources.Load<TObject>($"PooledObjects/{typeof(TObject).Name}");
+            LoadPrefab();       
         }
 
         public void FillPool(int count)
@@ -69,6 +69,11 @@ namespace WRA.General.Patterns.Pool
 
             obj.OnSpawn();
             return obj;
+        }
+
+        protected virtual void LoadPrefab()
+        {
+            prefab = Resources.Load<TObject>($"PooledObjects/{typeof(TObject).Name}");
         }
     }
 }

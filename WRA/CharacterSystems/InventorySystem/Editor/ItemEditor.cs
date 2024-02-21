@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 
 namespace WRA.CharacterSystems.InventorySystem.Editor
@@ -8,3 +10,5 @@ namespace WRA.CharacterSystems.InventorySystem.Editor
     
     }
 }
+
+#endif

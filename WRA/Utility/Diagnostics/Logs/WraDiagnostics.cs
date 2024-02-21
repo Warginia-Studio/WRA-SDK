@@ -21,9 +21,13 @@ namespace WRA.Utility.Diagnostics.Logs
         private static List<string> tags = new List<string>() { "all" , "logs", "warnings", "errors", "character" };
         public static UnityEvent<WraLogData> OnLog = new UnityEvent<WraLogData>();
         public static UnityEvent<string> OnTagAdded = new UnityEvent<string>();
+
+#if UNITY_EDITOR
         
         [InitializeOnLoadMethod]
         [InitializeOnEnterPlayMode]
+        
+#endif
         public static void ClearLogs()
         {
             WraLogDatas.Clear();

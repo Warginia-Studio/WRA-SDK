@@ -34,8 +34,8 @@ namespace WRA.PlayerSystems.LanguageSystem
             }
             else
             {
-                var str = Encoding.ASCII.GetString(ApplicationProfile.Instance.Langs
-                    .Find(ctg => ctg.name.Contains(ApplicationProfile.Instance.Language)).bytes);
+                var str = ApplicationProfile.Instance.Langs
+                    .Find(ctg => ctg.name.Contains(ApplicationProfile.Instance.Language)).text;
                 doc.LoadXml(str);
             }
         

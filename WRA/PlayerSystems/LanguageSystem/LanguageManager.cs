@@ -88,7 +88,6 @@ namespace WRA.PlayerSystems.LanguageSystem
             string word = "";
             try
             {
-                Debug.Log(keyWord);
                 word = LoadedLang[keyWord];
             }
             catch (Exception e)

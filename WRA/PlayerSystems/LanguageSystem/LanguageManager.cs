@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,10 +26,18 @@ namespace WRA.PlayerSystems.LanguageSystem
         private static Dictionary<string, string> LoadedLang;
         public static void LoadLanguage()
         {
-            var path = LANG_PATH + ApplicationProfile.Instance.Language + ".xml";
-        
             XmlDocument doc = new XmlDocument();
-            doc.Load(path);
+            if(ApplicationProfile.Instance.Langs == null || ApplicationProfile.Instance.Langs.Count == 0)
+            {
+                var path = LANG_PATH + ApplicationProfile.Instance.Language + ".xml";
+                doc.Load(path);
+            }
+            else
+            {
+                var str = Encoding.ASCII.GetString(ApplicationProfile.Instance.Langs
+                    .Find(ctg => ctg.name.Contains(ApplicationProfile.Instance.Language)).bytes);
+                doc.LoadXml(str);
+            }
         
             Dictionary<string, string> d = new Dictionary<string, string>();
             foreach (XmlNode n in doc.SelectNodes("/data/*"))
@@ -69,6 +78,8 @@ namespace WRA.PlayerSystems.LanguageSystem
 
         public static string GetTranslation(string keyWord)
         {
+// #if UNITY_EDITOR
+            
             if(LoadedLang==null)
                 LoadLanguage();
             if (string.IsNullOrEmpty(keyWord))
@@ -77,6 +88,7 @@ namespace WRA.PlayerSystems.LanguageSystem
             string word = "";
             try
             {
+                Debug.Log(keyWord);
                 word = LoadedLang[keyWord];
             }
             catch (Exception e)
@@ -86,6 +98,9 @@ namespace WRA.PlayerSystems.LanguageSystem
             }
 
             return word;
+// #elif UNITY_ANDROID
+//             return keyWord;
+// #endif
         }
     }
 }

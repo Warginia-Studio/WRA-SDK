@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PanelAnimationMove : PanelAnimationBase
 {
+    // Todo: Add handle EASE type
+    
     [SerializeField] private Vector2 showPosition;
     [SerializeField] private Vector2 hidePosition;
     [SerializeField] private float showSpeed;

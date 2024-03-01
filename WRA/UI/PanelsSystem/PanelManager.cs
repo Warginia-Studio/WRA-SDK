@@ -41,11 +41,11 @@ namespace WRA.UI.PanelsSystem
             panelBase.OnHide();
         }
         
-        public T OpenPanel<T>(bool startAsHide = false) where T : PanelBase
+        public T OpenPanel<T>() where T : PanelBase
         {
-            return OpenPanel<T, PanelDataBase>(null, startAsHide);
+            return OpenPanel<T, PanelDataBase>(new PanelDataBase());
         }
-        public T OpenPanel<T, TData>(TData data = null, bool startAsHide = false, PanelBase parrentPanel = null)
+        public T OpenPanel<T, TData>(TData data = null, PanelBase parrentPanel = null)
             where T : PanelBase where TData : PanelDataBase
         {
             var panel = GetPanel<T>() as T;
@@ -64,15 +64,6 @@ namespace WRA.UI.PanelsSystem
             if(parrentPanel!=null)
                 panel.transform.SetParent(parrentPanel.transform);
             OnPanelOpen.Invoke(panel);
-
-            if (startAsHide)
-            {
-                HidePanel<T, TData>(data);
-            }
-            else
-            {
-                ShowPanel<T, TData>(data);
-            }
             
             return panel;
         }

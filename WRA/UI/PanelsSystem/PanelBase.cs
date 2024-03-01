@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
@@ -12,6 +13,12 @@ namespace WRA.UI.PanelsSystem
         public bool IsShow { get; private set; }
         
         [SerializeField] protected List<PanelFragment> fragments = new List<PanelFragment>();
+        
+        [Header("Move Animation")]
+        [SerializeField] private bool useMoveAnimation;
+        [SerializeField] private float moveAnimationDuration;
+        [SerializeField] private Vector3 hidePosition;
+        [SerializeField] private Vector3 showPosition;
         
         protected CanvasGroup canvasGroup;
         protected object data;
@@ -87,6 +94,11 @@ namespace WRA.UI.PanelsSystem
 
         public virtual void OnShow()
         {
+            if (useMoveAnimation)
+            {
+                StartCoroutine(MoveAnimation(showPosition));
+                return;
+            }
             canvasGroup.alpha = 1;
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
@@ -94,6 +106,11 @@ namespace WRA.UI.PanelsSystem
 
         public virtual void OnHide()
         {
+            if (useMoveAnimation)
+            {
+                StartCoroutine(MoveAnimation(hidePosition));
+                return;
+            }
             canvasGroup.alpha = 0;
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
@@ -110,6 +127,20 @@ namespace WRA.UI.PanelsSystem
             }
         
             return (T)data;
+        }
+
+        protected void SetActive(bool active)
+        {
+            if (useMoveAnimation)
+            {
+                var rectTransform = transform as RectTransform;
+                rectTransform.anchoredPosition = active ? showPosition : hidePosition;
+                return;
+            }
+            
+            canvasGroup.alpha = active ? 1 : 0;
+            canvasGroup.interactable = active;
+            canvasGroup.blocksRaycasts = active;
         }
         
         private void InitNeededComponents()
@@ -129,6 +160,20 @@ namespace WRA.UI.PanelsSystem
                 ctg.SetPanel(this);
                 ctg.OnPanelInit();
             });
+        }
+        
+        private IEnumerator MoveAnimation(Vector3 end)
+        {
+            float delta = 0;
+            var rectTransform = transform as RectTransform;
+            var start = rectTransform.anchoredPosition;
+            
+            while (delta < 1)
+            {
+                delta += Time.deltaTime / moveAnimationDuration;
+                rectTransform.anchoredPosition = Vector3.Lerp(start, end, delta);
+                yield return null;
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 
@@ -9,10 +11,20 @@ namespace WRA.UI.PanelsSystem
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class PanelBase : MonoBehaviour
     {
+        public UnityEvent OnOpenEvent;
+        public UnityEvent OnCloseEvent;
+        public UnityEvent OnShowEvent;
+        public UnityEvent OnHideEvent;
+        
         public bool IsShow { get; private set; }
         
-        [SerializeField] protected List<PanelFragment> fragments = new List<PanelFragment>();
+        public List<PanelFragmentBase> Fragments => fragments;
+        public List<PanelAnimationBase> Animations => animations;
         
+        [SerializeField] private List<PanelFragmentBase> fragments = new List<PanelFragmentBase>();
+        [SerializeField] private List<PanelAnimationBase> animations = new List<PanelAnimationBase>();
+        
+        [Obsolete("Use for animation use PanelAnimationBase instead")]
         protected CanvasGroup canvasGroup;
         protected object data;
         
@@ -57,21 +69,26 @@ namespace WRA.UI.PanelsSystem
         {
             SetData(data);
             InitNeededComponents();
-            InitFragments();
+            InitFragmentsAndAnimations();
         }
         
         public void SetData(object data)
         {
-            if (data!= null && data is PanelDataBase)
+            if (data == null)
             {
-                this.data = data;   
+                WraDiagnostics.LogWarning("Data is null", Color.yellow);
+                return;
             }
-            else
+
+            if (data is not PanelDataBase)
             {
                 WraDiagnostics.LogError(
                     $"Data data is type: {data.GetType().FullName} expected {typeof(PanelDataBase).FullName} \n" +
                     System.Environment.StackTrace, Color.red);
+                return;
             }
+
+            this.data = data;
         }
 
 
@@ -82,21 +99,17 @@ namespace WRA.UI.PanelsSystem
 
         public virtual void OnShow()
         {
-            canvasGroup.alpha = 1;
-            canvasGroup.interactable = true;
-            canvasGroup.blocksRaycasts = true;
+            Animations.ForEach(ctg => ctg.ShowAnimation(null));
         }
 
         public virtual void OnHide()
         {
-            canvasGroup.alpha = 0;
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
+            Animations.ForEach(ctg => ctg.HideAnimation(null));
         }
         
         #endregion
         
-        protected virtual T GetDataAsType<T>() where T : PanelDataBase
+        public virtual T GetDataAsType<T>() where T : PanelDataBase
         {
             if (data != null && data is not T)
             {
@@ -105,6 +118,11 @@ namespace WRA.UI.PanelsSystem
             }
         
             return (T)data;
+        }
+
+        protected void SetActive(bool active)
+        {
+            Animations.ForEach(ctg=>ctg.SetVisible(active));
         }
         
         private void InitNeededComponents()
@@ -115,11 +133,17 @@ namespace WRA.UI.PanelsSystem
             }
         }
 
-        private void InitFragments()
+        private void InitFragmentsAndAnimations()
         {
             // TODO: It can't be like this because it can get fragments from other panel
             // fragments = new List<PanelFragment>(GetComponentsInChildren<PanelFragment>());
             fragments.ForEach(ctg =>
+            {
+                ctg.SetPanel(this);
+                ctg.OnPanelInit();
+            });
+            
+            animations.ForEach(ctg =>
             {
                 ctg.SetPanel(this);
                 ctg.OnPanelInit();

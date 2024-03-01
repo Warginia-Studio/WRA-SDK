@@ -61,7 +61,7 @@ namespace WRA.Utility.Raycasts
         /// </summary>
         public abstract void Debug();
 #endif
-
+#if UNITY_EDITOR
         protected void UpdateRaycastAliveTimes()
         {
             if (hitInfoLife > 0 && drawOnlyLastInstance)
@@ -84,5 +84,6 @@ namespace WRA.Utility.Raycasts
                 raycastHitInfos[i].AliveTime += Time.deltaTime;
             }
         }
+#endif
     }
 }

@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEngine;
 using WRA.CharacterSystems.InventorySystem.Slots;
@@ -25,3 +27,5 @@ namespace WRA.CharacterSystems.InventorySystem.Editor
         }
     }
 }
+
+#endif

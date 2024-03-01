@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using WRA.CharacterSystems.InventorySystem;
 using WRA.UI;
@@ -23,3 +25,5 @@ namespace WRA.General.Editor
         }
     }
 }
+
+#endif

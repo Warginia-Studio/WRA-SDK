@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using WRA.General.Cursor;
 using WRA.General.Patterns.Singletons;
@@ -9,6 +10,7 @@ namespace WRA.General
     public class ApplicationProfile : ScriptableSingleton<ApplicationProfile>
     {
         public string Language = "pl";
+        public List<TextAsset> Langs;
         public bool CustomConsole = false;
 
         public CursorData CursorData;

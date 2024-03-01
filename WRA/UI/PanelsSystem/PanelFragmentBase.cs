@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WRA.UI.PanelsSystem;
 
-public abstract class PanelFragment : MonoBehaviour
+public abstract class PanelFragmentBase : MonoBehaviour
 {
     public PanelBase ParentPanel { get; set; }
 
@@ -12,5 +12,5 @@ public abstract class PanelFragment : MonoBehaviour
         ParentPanel = panelBase;
     }
 
-    public abstract void OnPanelInit();
+    public virtual void OnPanelInit() { }
 }

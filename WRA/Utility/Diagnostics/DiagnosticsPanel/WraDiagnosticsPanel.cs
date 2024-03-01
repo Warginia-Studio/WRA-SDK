@@ -47,6 +47,11 @@ namespace WRA.Utility.Diagnostics.DiagnosticsPanel
         {
             values.Add(name, new ValueRecord(){value = newValue, color = color});
         }
+        
+        public void AddNewValue(string name, ValueRecord valueRecord)
+        {
+            values.Add(name, valueRecord);
+        }
 
         public void UpdateValue(string name, object newValue)
         {

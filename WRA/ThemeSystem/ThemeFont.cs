@@ -17,11 +17,10 @@ public class ThemeFont : MonoBehaviour
         {
             text.font = fontData.defaultFont;
         }
-        var tmp = GetComponent<TextMeshPro>();
+        var tmp = GetComponent<TMP_Text>();
         if (tmp != null)
         {
             tmp.font = fontData.tmpFont;
         }
-        
     }
 }

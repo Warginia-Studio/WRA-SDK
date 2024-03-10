@@ -139,12 +139,16 @@ namespace WRA.UI.PanelsSystem
             // fragments = new List<PanelFragment>(GetComponentsInChildren<PanelFragment>());
             fragments.ForEach(ctg =>
             {
+                if(ctg == null)
+                    return;
                 ctg.SetPanel(this);
                 ctg.OnPanelInit();
             });
             
             animations.ForEach(ctg =>
             {
+                if (ctg == null)
+                    return;
                 ctg.SetPanel(this);
                 ctg.OnPanelInit();
             });

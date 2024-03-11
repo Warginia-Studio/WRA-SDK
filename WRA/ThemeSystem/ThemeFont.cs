@@ -8,7 +8,7 @@ using WRA.General;
 
 public class ThemeFont : MonoBehaviour
 {
-    [SerializeField] private string fontCategory;
+    [SerializeField] private string fontCategory = "default";
     private void Awake()
     {
         var fontData = ApplicationProfile.Instance.fonts.Find(ctg => fontCategory == ctg.name);

@@ -10,8 +10,8 @@ public class PanelAnimationMove : PanelAnimationBase
     
     [SerializeField] private Vector2 showPosition;
     [SerializeField] private Vector2 hidePosition;
-    [SerializeField] private float showSpeed;
-    [SerializeField] private float hideSpeed;
+    [SerializeField] private float showSpeed = 1;
+    [SerializeField] private float hideSpeed = 1;
     
     private RectTransform rectTransform;
 

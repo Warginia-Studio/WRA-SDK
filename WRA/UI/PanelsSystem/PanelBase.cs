@@ -99,12 +99,22 @@ namespace WRA.UI.PanelsSystem
 
         public virtual void OnShow()
         {
-            Animations.ForEach(ctg => ctg.ShowAnimation(null));
+            Animations.ForEach(ctg =>
+            {
+                if (ctg == null)
+                    return;
+                ctg.ShowAnimation(null);
+            });
         }
 
         public virtual void OnHide()
         {
-            Animations.ForEach(ctg => ctg.HideAnimation(null));
+            Animations.ForEach(ctg =>
+            {
+                if (ctg == null)
+                    return;
+                ctg.HideAnimation(null);
+            });
         }
         
         #endregion

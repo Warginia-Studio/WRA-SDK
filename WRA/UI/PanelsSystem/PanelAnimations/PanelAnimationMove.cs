@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PanelAnimationMove : PanelAnimationBase
 {
@@ -22,22 +23,40 @@ public class PanelAnimationMove : PanelAnimationBase
 
     public override void ShowAnimation(Action onComplete)
     {
+        OnStatusChangedEvent(PanelAnimationStatus.ShowingAnimation);
         var pos = rectTransform.anchoredPosition;
         var tweenerCore = DOTween.To(() => pos, x => pos = x, showPosition, showSpeed);
         tweenerCore.onUpdate += () => rectTransform.anchoredPosition = pos;
-        tweenerCore.onComplete += () => onComplete?.Invoke();
+        tweenerCore.onComplete += () =>
+        {
+            OnStatusChangedEvent(PanelAnimationStatus.Show);
+            onComplete.Invoke();
+        };
     }
 
     public override void HideAnimation(Action onComplete)
     {
+        OnStatusChangedEvent(PanelAnimationStatus.HidingAnimation);
         var pos = rectTransform.anchoredPosition;
         var tweenerCore = DOTween.To(() => pos, x => pos = x, hidePosition, hideSpeed);
         tweenerCore.onUpdate += () => rectTransform.anchoredPosition = pos;
-        tweenerCore.onComplete += () => onComplete?.Invoke();
+        tweenerCore.onComplete += () =>
+        {
+            OnStatusChangedEvent(PanelAnimationStatus.Hide);
+            onComplete.Invoke();
+        };
     }
     
     public override void SetVisible(bool visible)
     {
         rectTransform.anchoredPosition = visible ? showPosition : hidePosition;
+        if(visible)
+        {
+            OnShow?.Invoke();
+        }
+        else
+        {
+            OnHide?.Invoke();
+        }
     }
 }

@@ -1,10 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using WRA.UI.PanelsSystem;
 
 public abstract class PanelAnimationBase : MonoBehaviour
 {
+    public UnityEvent OnShow;
+    public UnityEvent OnHide;
+    public UnityEvent<PanelAnimationStatus> OnStatusChanged;
+    public PanelAnimationStatus Status { get; protected set; }
     public PanelBase ParentPanel { get; set; }
 
     public void SetPanel(PanelBase panelBase)
@@ -16,18 +22,35 @@ public abstract class PanelAnimationBase : MonoBehaviour
     {
     }
 
-    public virtual void ShowAnimation(System.Action onComplete)
+    public virtual void ShowAnimation(Action onComplete)
     {
-        onComplete?.Invoke();
+        OnStatusChangedEvent(PanelAnimationStatus.Show);
+        onComplete.Invoke();
     }
 
-    public virtual void HideAnimation(System.Action onComplete)
+    public virtual void HideAnimation(Action onComplete)
     {
-        onComplete?.Invoke();
+        OnStatusChangedEvent(PanelAnimationStatus.Hide);
+        onComplete.Invoke();
     }
     
     public virtual void SetVisible(bool visible)
     {
         
+    }
+    
+    protected void OnStatusChangedEvent(PanelAnimationStatus newStatus)
+    {
+        Status = newStatus;
+        OnStatusChanged?.Invoke(newStatus);
+        switch (newStatus)
+        {
+            case PanelAnimationStatus.Show:
+                OnShow?.Invoke();
+                break;
+            case PanelAnimationStatus.Hide:
+                OnHide?.Invoke();
+                break;
+        }
     }
 }

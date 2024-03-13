@@ -24,7 +24,6 @@ namespace WRA.UI.PanelsSystem
         [SerializeField] private List<PanelFragmentBase> fragments = new List<PanelFragmentBase>();
         [SerializeField] private List<PanelAnimationBase> animations = new List<PanelAnimationBase>();
         
-        [Obsolete("Use for animation use PanelAnimationBase instead")]
         protected CanvasGroup canvasGroup;
         protected object data;
         
@@ -99,6 +98,8 @@ namespace WRA.UI.PanelsSystem
 
         public virtual void OnShow()
         {
+            canvasGroup.interactable = true;
+            canvasGroup.blocksRaycasts = true;
             Animations.ForEach(ctg =>
             {
                 if (ctg == null)
@@ -109,6 +110,8 @@ namespace WRA.UI.PanelsSystem
 
         public virtual void OnHide()
         {
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
             Animations.ForEach(ctg =>
             {
                 if (ctg == null)

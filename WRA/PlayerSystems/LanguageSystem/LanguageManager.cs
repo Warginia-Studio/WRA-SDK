@@ -78,12 +78,12 @@ namespace WRA.PlayerSystems.LanguageSystem
 
         public static string GetTranslation(string keyWord)
         {
-// #if UNITY_EDITOR
-            
             if(LoadedLang==null)
                 LoadLanguage();
             if (string.IsNullOrEmpty(keyWord))
-                return ColorHelper.GetTextInColor("IS NULL OR EMPTY", Color.red);
+            {
+                return ColorHelper.GetTextInColor("KEYWORD IS NULL OR EMPTY", Color.red);
+            }
 
             string word = "";
             try
@@ -97,9 +97,6 @@ namespace WRA.PlayerSystems.LanguageSystem
             }
 
             return word;
-// #elif UNITY_ANDROID
-//             return keyWord;
-// #endif
         }
     }
 }

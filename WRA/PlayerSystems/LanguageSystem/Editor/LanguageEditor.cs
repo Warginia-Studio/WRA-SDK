@@ -25,7 +25,7 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
 
         private void OnGUI()
         {
-            if (langs != null)
+            if (langs != null && langs.Length > 0 && allLangs != null && allLangs.Count > 0 && allLangs[choicedLang] != null)
             {
                 if (GUILayout.Button("Save language"))
                 {
@@ -42,8 +42,6 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
                 }
             
                 DrawLangView();
-
-            
             }
             else
             {

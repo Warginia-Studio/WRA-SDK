@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEditor;
@@ -23,41 +24,46 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
             window.Show();
         }
 
+        private void OnValidate()
+        {
+            InitLangs();
+        }
+
+        private void OnEnable()
+        {
+            InitLangs();
+        }
+        
+        private void InitLangs()
+        {
+            langs = LanguageManager.GetLanguagesList();
+            var str = "";
+            for (int i = 0; i < langs.Length; i++)
+            {
+                str += langs[i] + " ";
+                allLangs.Add(LanguageManager.GetLanguage(langs[i].Replace(".xml", "")));
+            }
+            RefreshList();
+        }
+
         private void OnGUI()
         {
-            if (langs != null && langs.Length > 0 && allLangs != null && allLangs.Count > 0 && allLangs[choicedLang] != null)
+            if (GUILayout.Button("Save language"))
             {
-                if (GUILayout.Button("Save language"))
-                {
-                    SaveLanguages();
-                    return;
-                }
-                var tempChoice = EditorGUILayout.Popup(choicedLang, langs);
+                SaveLanguages();
+                return;
+            }
 
-                if (choicedLang != tempChoice)
-                {
-                    missingTranslations.Clear();
-                    choicedLang = tempChoice;
-                    RefreshList();
-                }
-            
-                DrawLangView();
-            }
-            else
+            var tempChoice = EditorGUILayout.Popup(choicedLang, langs);
+
+            if (choicedLang != tempChoice)
             {
-                if (GUILayout.Button("GET LANGS"))
-                {
-                    scrollView = Vector2.zero;
-                    langs = LanguageManager.GetLanguagesList();
-                    var str = "";
-                    for (int i = 0; i < langs.Length; i++)
-                    {
-                        str += langs[i] + " ";
-                        allLangs.Add(LanguageManager.GetLanguage(langs[i].Replace(".xml", "")));
-                    }
-                    RefreshList();
-                }
+                missingTranslations.Clear();
+                choicedLang = tempChoice;
+                RefreshList();
             }
+
+            DrawLangView();
         }
 
         private void DrawLangView()
@@ -92,9 +98,7 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
             {
                 missingTranslations[VARIABLE.Key] = VARIABLE.Value;
             }
-        
-        
-        
+            
             GUILayout.EndScrollView();
         }
 
@@ -128,9 +132,7 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
             // Utwórz korzeń XML
             XmlElement rootElement = xmlDoc.CreateElement("data");
             xmlDoc.AppendChild(rootElement);
-        
-        
-
+            
             // Przejdź przez elementy słownika i dodaj je do dokumentu XML
             foreach (KeyValuePair<string, string> pair in allLangs[choicedLang])
             {

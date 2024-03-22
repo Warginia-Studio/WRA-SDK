@@ -93,14 +93,14 @@ namespace WRA.Utility.Diagnostics.Logs
         {
             return tags;
         }
-        
+
         private static void AddTag(string tag)
         {
-            if (!tags.Contains(tag))
-            {
-                tags.Add(tag);
-                OnTagAdded.Invoke(tag);
-            }
+            if (tags.Contains(tag))
+                return;
+
+            tags.Add(tag);
+            OnTagAdded.Invoke(tag);
         }
     }
 }

@@ -18,9 +18,8 @@ namespace WRA.PlayerSystems.LanguageSystem
                 return tmpText;
             }
         }
+        
         [SerializeField] private string textKey;
-        
-        
         
         private TMP_Text tmpText;
         private string[] formatingTexts;

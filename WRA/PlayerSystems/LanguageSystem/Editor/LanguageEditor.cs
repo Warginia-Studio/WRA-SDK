@@ -16,7 +16,7 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
 
         private int choicedLang = 0;
         private Vector2 scrollView;
-        [MenuItem("thief01/Systems/Language Editor")]
+        [MenuItem("thief01/Tools/Language Editor")]
         private static void OpenWindow()
         {
             LanguageEditor window = (LanguageEditor)EditorWindow.GetWindow(typeof(LanguageEditor));

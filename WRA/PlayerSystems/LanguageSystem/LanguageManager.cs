@@ -92,11 +92,18 @@ namespace WRA.PlayerSystems.LanguageSystem
             }
             catch (Exception e)
             {
+#if UNITY_EDITOR || UNITY_STANDLONE_WIN
+                LanguageMissingTranslationsLogger.AddMissingTranslations(keyWord);
+                LanguageMissingTranslationsLogger.SaveMissingTranslations();
+#endif
                 WraDiagnostics.LogError("Not found key word: " + keyWord + " in language: " + ApplicationProfile.Instance.Language);
                 word = ColorHelper.GetTextInColor(keyWord + "NOT FOUND", Color.red);
             }
 
             return word;
         }
+
+
+
     }
 }

@@ -11,11 +11,14 @@ public class Language
     public string ShortLanguageName { get; set; }
     public string LanguageName { get; set; }
     public Dictionary<string, LanguageItem> LanguageItems { get; }
+    
+    public List<string> Categories { get; set; }
 
     public Language(string languageData)
     {
         LanguageItems = new Dictionary<string, LanguageItem>();
         ParseLanguageData(languageData);
+        CreateCategories();
     }
 
     public string GetTranslation(string key)
@@ -25,9 +28,28 @@ public class Language
             return LanguageItems[key].Translation;
         }
 
-        LanguageMissingTranslationsLogger.AddMissingTranslations(key);
-        LanguageMissingTranslationsLogger.SaveMissingTranslations();
+#if UNITY_EDITOR
+        if (Application.isPlaying)
+        {
+            LanguageMissingTranslationsLogger.AddMissingTranslations(key);
+            LanguageMissingTranslationsLogger.SaveMissingTranslations();
+        }
+#endif
         return key;
+    }
+    
+    public Dictionary<string, LanguageItem> GetTranslationsByCategory(string category)
+    {
+        Dictionary<string, LanguageItem> translations = new Dictionary<string, LanguageItem>();
+        foreach (var item in LanguageItems)
+        {
+            if (item.Value.Category == category)
+            {
+                translations.Add(item.Key, item.Value);
+            }
+        }
+
+        return translations;
     }
 
 #if UNITY_EDITOR
@@ -61,6 +83,9 @@ public class Language
     public void AddTranslation(string key, LanguageItem languageItem)
     {
         LanguageItems.Add(key, languageItem);
+        if (Categories.Contains(languageItem.Category))
+            return;
+        Categories.Add(languageItem.Category);
     }
 #endif
     private void ParseLanguageData(string languageData)
@@ -90,6 +115,17 @@ public class Language
             {
                 AddTranslation(item.Name, "ND", item.InnerText);
             }
+        }
+    }
+    
+    private void CreateCategories()
+    {
+        Categories = new List<string>();
+        foreach (var item in LanguageItems)
+        {
+            if (Categories.Contains(item.Value.Category))
+                continue;
+            Categories.Add(item.Value.Category);
         }
     }
     

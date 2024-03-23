@@ -100,15 +100,4 @@ public class Language
         languageItem.Translation = translation;
         LanguageItems.Add(key, languageItem);
     }
-
-    [MenuItem("thiief01/test")]
-    public static void Load()
-    {
-        Language language = new Language(ApplicationProfile.Instance.Langs[0].text);
-        var xml = language.GetLanguageAsXml();
-        Debug.Log(xml);
-        StreamWriter sw = new StreamWriter("Assets/Language.xml");
-        sw.Write(xml);
-        sw.Close();
-    }
 }

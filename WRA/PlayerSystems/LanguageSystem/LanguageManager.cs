@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using UnityEngine;
@@ -14,18 +15,14 @@ namespace WRA.PlayerSystems.LanguageSystem
 {
     public class LanguageManager
     {
-        public static string LANG_PATH
-        {
-            get
-            {
-                return Application.dataPath + "/Resources/Configs/Langs/";
-            }
-        }
+        public static string LANG_PATH => Application.dataPath + "/Resources/Configs/Langs/";
+
         public static UnityEvent LanguageChanged = new UnityEvent();
         
         private static Dictionary<string, string> LoadedLang;
         public static void LoadLanguage()
         {
+            
             XmlDocument doc = new XmlDocument();
             if(ApplicationProfile.Instance.Langs == null || ApplicationProfile.Instance.Langs.Count == 0)
             {
@@ -65,12 +62,12 @@ namespace WRA.PlayerSystems.LanguageSystem
             return d;
         }
 
-        public static string[] GetLanguagesList()
+        public static List<string> GetLanguagesList()
         {
-            var langs =Directory.GetFiles(LANG_PATH, "*.xml");
-            for (int i = 0; i < langs.Length; i++)
+            var langs =Directory.GetFiles(LANG_PATH, "*.xml").ToList();
+            for (int i = 0; i < langs.Count; i++)
             {
-                langs[i] = Path.GetFileName(langs[i]);
+                langs[i] = Path.GetFileName(langs[i].Replace(".xml", "").ToUpper());
             }
 
             return langs;
@@ -92,15 +89,22 @@ namespace WRA.PlayerSystems.LanguageSystem
             }
             catch (Exception e)
             {
-#if UNITY_EDITOR || UNITY_STANDLONE_WIN
-                LanguageMissingTranslationsLogger.AddMissingTranslations(keyWord);
-                LanguageMissingTranslationsLogger.SaveMissingTranslations();
-#endif
+                AddMissingTranslation(keyWord);
                 WraDiagnostics.LogError("Not found key word: " + keyWord + " in language: " + ApplicationProfile.Instance.Language);
-                word = ColorHelper.GetTextInColor(keyWord + "NOT FOUND", Color.red);
+                word = ColorHelper.GetTextInColor(keyWord + "_NF", Color.red);
             }
 
             return word;
+        }
+
+        private static void AddMissingTranslation(string keyWord)
+        {
+#if UNITY_EDITOR || UNITY_STANDLONE_WIN
+            if (!Application.isPlaying)
+                return;
+            LanguageMissingTranslationsLogger.AddMissingTranslations(keyWord);
+            LanguageMissingTranslationsLogger.SaveMissingTranslations();
+#endif
         }
     }
 }

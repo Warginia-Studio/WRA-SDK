@@ -10,7 +10,7 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
 {
     public class LanguageEditor : EditorWindow
     {
-        private string[] langs;
+        private List<string> langs;
         private List<Dictionary<string, string>> allLangs = new List<Dictionary<string, string>>();
 
         private Dictionary<string, string> missingTranslations = new Dictionary<string, string>();
@@ -38,7 +38,7 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
         {
             langs = LanguageManager.GetLanguagesList();
             var str = "";
-            for (int i = 0; i < langs.Length; i++)
+            for (int i = 0; i < langs.Count; i++)
             {
                 str += langs[i] + " ";
                 allLangs.Add(LanguageManager.GetLanguage(langs[i].Replace(".xml", "")));
@@ -54,7 +54,9 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
                 return;
             }
 
-            var tempChoice = EditorGUILayout.Popup(choicedLang, langs);
+            GUILayout.BeginHorizontal();
+            var tempChoice = EditorGUILayout.Popup(choicedLang, langs.ToArray());
+            GUILayout.EndHorizontal();
 
             if (choicedLang != tempChoice)
             {

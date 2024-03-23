@@ -87,6 +87,22 @@ public class Language
             return;
         Categories.Add(languageItem.Category);
     }
+    
+    public void RemoveTranslation(string key)
+    {
+        LanguageItems.Remove(key);
+    }
+    
+    public void RemoveCategory(string category)
+    {
+        var translations = GetTranslationsByCategory(category);
+        
+        foreach (var translation in translations)
+        {
+            LanguageItems.Remove(translation.Key);
+        }
+        Categories.Remove(category);
+    }
 #endif
     private void ParseLanguageData(string languageData)
     {

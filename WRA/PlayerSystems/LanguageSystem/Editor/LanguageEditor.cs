@@ -49,8 +49,22 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
 
         private void OnGUI()
         {
+            LanguageSelection();
+            CategorySelection();
+            AddingTranslation();
+            DrawLangView();
+        }
+
+        private void LanguageSelection()
+        {
             GUILayout.BeginHorizontal();
-            
+            var tempLang = EditorGUILayout.Popup(choicedLang, langs.Select(ctg => ctg.ShortLanguageName).ToArray());
+            if (choicedLang != tempLang)
+            {
+                missingTranslations.Clear();
+                choicedLang = tempLang;
+                choicedCategory = 0;
+            }
             if (GUILayout.Button("Reload languages"))
             {
                 InitLangs();
@@ -61,27 +75,34 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
                 SaveLanguages();
                 return;
             }
-            
             GUILayout.EndHorizontal();
-
+        }
+        
+        private void CategorySelection()
+        {
             GUILayout.BeginHorizontal();
-            var tempLang = EditorGUILayout.Popup(choicedLang, langs.Select(ctg => ctg.ShortLanguageName).ToArray());
             var tempCategory = EditorGUILayout.Popup(choicedCategory, langs[choicedLang].Categories.ToArray());
-            GUILayout.EndHorizontal();
-            
-            GUILayout.BeginHorizontal();
-            
+            if (choicedCategory != tempCategory)
+            {
+                choicedCategory = tempCategory;
+            }
             newCategory = EditorGUILayout.TextField(newCategory);
             if (GUILayout.Button("Add category"))
             {
                 langs[choicedLang].Categories.Add(newCategory);
+                choicedCategory = langs[choicedLang].Categories.Count - 1;
             }
             if (GUILayout.Button("Remove category"))
             {
-                langs[choicedLang].Categories.RemoveAt(choicedCategory);
+                langs[choicedLang].RemoveCategory(langs[choicedLang].Categories[choicedCategory]);
+                choicedCategory = 0;
+                return;
             }
             GUILayout.EndHorizontal();
-            
+        }
+        
+        private void AddingTranslation()
+        {
             GUILayout.BeginHorizontal();
             
             newKey = EditorGUILayout.TextField(newKey);
@@ -95,20 +116,6 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
                 });
             }
             GUILayout.EndHorizontal();
-
-            if (choicedLang != tempLang)
-            {
-                missingTranslations.Clear();
-                choicedLang = tempLang;
-                choicedCategory = 0;
-            }
-            
-            if (choicedCategory != tempCategory)
-            {
-                choicedCategory = tempCategory;
-            }
-
-            DrawLangView();
         }
 
         private void DrawLangView()
@@ -127,7 +134,7 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
                 langs[choicedLang].LanguageItems[translation.Key].Translation = tempStr;
                 if (GUILayout.Button("-", GUILayout.Width(20)))
                 {
-                    langs[choicedLang].LanguageItems.Remove(translation.Key);
+                    langs[choicedLang].RemoveTranslation(translation.Key);
                 }
                 GUILayout.EndHorizontal();
             }

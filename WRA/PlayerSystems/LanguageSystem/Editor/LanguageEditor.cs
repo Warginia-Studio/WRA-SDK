@@ -88,7 +88,7 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
             newTranslation = EditorGUILayout.TextField(newTranslation);
             if (GUILayout.Button("Add translation"))
             {
-                langs[choicedLang].AddTranslation(newTranslation, new LanguageItem()
+                langs[choicedLang].AddTranslation(newKey, new LanguageItem()
                 {
                     Category = langs[choicedLang].Categories[choicedCategory],
                     Translation = newTranslation

@@ -53,6 +53,12 @@ public class Language
     }
 
 #if UNITY_EDITOR
+    
+    public bool HasTranslation(string key)
+    {
+        return LanguageItems.ContainsKey(key);
+    }
+    
     public string GetLanguageAsXml()
     {
         XmlDocument doc = new XmlDocument();
@@ -83,6 +89,14 @@ public class Language
     public void AddTranslation(string key, LanguageItem languageItem)
     {
         LanguageItems.Add(key, languageItem);
+        if (Categories.Contains(languageItem.Category))
+            return;
+        Categories.Add(languageItem.Category);
+    }
+    
+    public void AddTranslation(LanguageItem languageItem)
+    {
+        LanguageItems.Add(languageItem.Key, languageItem);
         if (Categories.Contains(languageItem.Category))
             return;
         Categories.Add(languageItem.Category);
@@ -148,6 +162,7 @@ public class Language
     private void AddTranslation(string key, string category, string translation)
     {
         LanguageItem languageItem = new LanguageItem();
+        languageItem.Key = key;
         languageItem.Category = category;
         languageItem.Translation = translation;
         LanguageItems.Add(key, languageItem);

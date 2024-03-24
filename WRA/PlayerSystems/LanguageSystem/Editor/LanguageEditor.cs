@@ -14,7 +14,7 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
     {
         private List<Language> langs = new List<Language>();
 
-        private Dictionary<string, string> missingTranslations = new Dictionary<string, string>();
+        private List<LanguageItemEditor> missingTranslations = new();
 
         private int choicedLang = 0;
         private int choicedCategory = 0;
@@ -43,8 +43,22 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
         
         private void InitLangs()
         {
+            AssetDatabase.Refresh();
             LanguageManager.LoadLanguage();
             langs = LanguageManager.Languages;
+            missingTranslations.Clear();
+            LanguageMissingTranslationsLogger.LoadMissingTranslations();
+            LanguageMissingTranslationsLogger.MissingTranslations.ForEach(ctg =>
+            {
+                missingTranslations.Add(new LanguageItemEditor()
+                {
+                    Key = ctg,
+                    Category = "Missing",
+                    Translation = ctg,
+                    IsMissing = true
+                });
+            });
+            RefreshStateOfMissingTranslations();
         }
 
         private void OnGUI()
@@ -52,7 +66,11 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
             LanguageSelection();
             CategorySelection();
             AddingTranslation();
+            
+            scrollView = GUILayout.BeginScrollView(scrollView);
             DrawLangView();
+            DrawMissingTranslations();
+            GUILayout.EndScrollView();
         }
 
         private void LanguageSelection()
@@ -61,21 +79,27 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
             var tempLang = EditorGUILayout.Popup(choicedLang, langs.Select(ctg => ctg.ShortLanguageName).ToArray());
             if (choicedLang != tempLang)
             {
-                missingTranslations.Clear();
                 choicedLang = tempLang;
                 choicedCategory = 0;
+                RefreshStateOfMissingTranslations();
             }
             if (GUILayout.Button("Reload languages"))
             {
                 InitLangs();
-                return;
             }
             if (GUILayout.Button("Save language"))
             {
                 SaveLanguages();
-                return;
             }
             GUILayout.EndHorizontal();
+        }
+        
+        private void RefreshStateOfMissingTranslations()
+        {
+            missingTranslations.ForEach(ctg =>
+            {
+                ctg.IsMissing = !langs[choicedLang].HasTranslation(ctg.Key);
+            });
         }
         
         private void CategorySelection()
@@ -111,6 +135,7 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
             {
                 langs[choicedLang].AddTranslation(newKey, new LanguageItem()
                 {
+                    Key = newKey,
                     Category = langs[choicedLang].Categories[choicedCategory],
                     Translation = newTranslation
                 });
@@ -120,31 +145,52 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
 
         private void DrawLangView()
         {
-            scrollView = GUILayout.BeginScrollView(scrollView);
-
-        
             EditorGUILayout.HelpBox("Translations", MessageType.Info);
 
             var translations = langs[choicedLang].GetTranslationsByCategory(langs[choicedLang].Categories[choicedCategory]);
             
             foreach (var translation in translations)
             {
-                GUILayout.BeginHorizontal();
-                var tempStr = EditorGUILayout.TextField(translation.Key, translation.Value.Translation);
-                langs[choicedLang].LanguageItems[translation.Key].Translation = tempStr;
-                if (GUILayout.Button("-", GUILayout.Width(20)))
-                {
-                    langs[choicedLang].RemoveTranslation(translation.Key);
-                }
-                GUILayout.EndHorizontal();
+                DrawSingleTranslationLine(translation.Value, "-", RemoveTranslation);
             }
-            
-        
-            EditorGUILayout.HelpBox("Missing translations", MessageType.Info);
-            
-            GUILayout.EndScrollView();
         }
         
+        private void DrawMissingTranslations()
+        {
+            EditorGUILayout.HelpBox("Missing translations", MessageType.Info);
+            foreach (var translation in missingTranslations)
+            {
+                if (translation.IsMissing)
+                {
+                    DrawSingleTranslationLine(translation, "+", AddMissingTranslation);
+                }
+            }
+        }
+
+        private void DrawSingleTranslationLine(LanguageItem languageItem, string buttonActionText,
+            Action<LanguageItem> onButtonClick)
+        {
+            GUILayout.BeginHorizontal();
+            languageItem.Translation = EditorGUILayout.TextField(languageItem.Key, languageItem.Translation);
+            if (GUILayout.Button(buttonActionText, GUILayout.Width(20)))
+            {
+                onButtonClick.Invoke(languageItem);
+            }
+            GUILayout.EndHorizontal();
+        }
+        
+        private void RemoveTranslation(LanguageItem languageItem)
+        {
+            langs[choicedLang].RemoveTranslation(languageItem.Key);
+            RefreshStateOfMissingTranslations();
+        }
+        
+        private void AddMissingTranslation(LanguageItem languageItem)
+        {
+            languageItem.Category = langs[choicedLang].Categories[choicedCategory];
+            langs[choicedLang].AddTranslation(languageItem);
+            RefreshStateOfMissingTranslations();
+        }
         
         private void SaveLanguages()
         {

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,79 +15,52 @@ namespace WRA.PlayerSystems.LanguageSystem
 {
     public class LanguageManager
     {
-        public static string LANG_PATH
-        {
-            get
-            {
-                return Application.dataPath + "/Resources/Configs/Langs/";
-            }
-        }
+        public static string LANG_PATH => Application.dataPath + "/Resources/Configs/Langs/";
+
         public static UnityEvent LanguageChanged = new UnityEvent();
         
-        private static Dictionary<string, string> LoadedLang;
+        public static string CurrentLanguage
+        {
+            get => ApplicationProfile.Instance.Language;
+            set
+            {
+                ApplicationProfile.Instance.Language = value;
+                PlayerPrefs.SetString("Language", value);
+                PlayerPrefs.Save();
+                CurrentLang = Languages.Find(x => x.ShortLanguageName == value);
+                LanguageChanged.Invoke();
+            }
+        }
+        public static Language CurrentLang { get; set; }
+        public static List<Language> Languages { get; private set; }
+        
         public static void LoadLanguage()
         {
-            var path = LANG_PATH + ApplicationProfile.Instance.Language + ".xml";
-        
-            XmlDocument doc = new XmlDocument();
-            doc.Load(path);
-        
-            Dictionary<string, string> d = new Dictionary<string, string>();
-            foreach (XmlNode n in doc.SelectNodes("/data/*"))
+            Languages = new List<Language>();
+            
+            ApplicationProfile.Instance.Langs.ForEach(ctg =>
             {
-                d.Add(n.Name, n.InnerText);
-            }
-
-            LoadedLang = d;
-            LanguageChanged.Invoke();
+                Languages.Add(new Language(ctg.text));
+            });
         }
         
-        public static Dictionary<string, string> GetLanguage(string lang)
-        {
-            var path = LANG_PATH + lang + ".xml";
-        
-            XmlDocument doc = new XmlDocument();
-            doc.Load(path);
-        
-            Dictionary<string, string> d = new Dictionary<string, string>();
-            foreach (XmlNode n in doc.SelectNodes("/data/*"))
-            {
-                d.Add(n.Name, n.InnerText);
-            }
-
-            return d;
-        }
-
-        public static string[] GetLanguagesList()
-        {
-            var langs =Directory.GetFiles(LANG_PATH, "*.xml");
-            for (int i = 0; i < langs.Length; i++)
-            {
-                langs[i] = Path.GetFileName(langs[i]);
-            }
-
-            return langs;
-        }
-
         public static string GetTranslation(string keyWord)
         {
-            if(LoadedLang==null)
+            if(Languages==null || Languages.Count==0)
                 LoadLanguage();
             if (string.IsNullOrEmpty(keyWord))
-                return ColorHelper.GetTextInColor("IS NULL OR EMPTY", Color.red);
-
-            string word = "";
-            try
             {
-                word = LoadedLang[keyWord];
+                return ColorHelper.GetTextInColor("KEYWORD IS NULL OR EMPTY", Color.red);
             }
-            catch (Exception e)
+            
+            var translation = CurrentLang.GetTranslation(keyWord);
+            if (string.IsNullOrEmpty(translation))
             {
                 WraDiagnostics.LogError("Not found key word: " + keyWord + " in language: " + ApplicationProfile.Instance.Language);
-                word = ColorHelper.GetTextInColor(keyWord + "NOT FOUND", Color.red);
+                return ColorHelper.GetTextInColor(keyWord + "_NF", Color.red);
             }
 
-            return word;
+            return translation;
         }
     }
 }

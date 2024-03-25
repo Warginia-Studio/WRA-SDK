@@ -10,10 +10,11 @@ namespace WRA.Utility.Raycasts
         public override RaycastHit2D Cast()
         {
             var rh = Physics2D.CircleCast(Origin, radius, Direction, distance, masks);
-        
+
+#if UNITY_EDITOR
             if(drawDebug)
                 raycastHitInfos.Add(new RaycastHitInfo<RaycastHit2D>() { RaycastHit2D = rh});
-
+#endif
             return rh;
         }
 
@@ -21,6 +22,7 @@ namespace WRA.Utility.Raycasts
         {
             var rhAll = Physics2D.CircleCastAll(Origin, radius, Direction, distance, masks);
 
+#if UNITY_EDITOR
             if (drawDebug)
             {
                 for (int i = 0; i < rhAll.Length; i++)
@@ -28,6 +30,7 @@ namespace WRA.Utility.Raycasts
                     raycastHitInfos.Add(new RaycastHitInfo<RaycastHit2D>(){ RaycastHit2D = rhAll[i]});        
                 }
             }
+#endif
         
             return rhAll;
         }

@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using WRA.CharacterSystems.InventorySystem.Slots;
 using WRA.UI.DragDropSystem.Controllers;
@@ -14,3 +16,4 @@ namespace WRA.CharacterSystems.InventorySystem.Editor
         }
     }
 }
+#endif

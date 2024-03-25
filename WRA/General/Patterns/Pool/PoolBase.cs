@@ -7,7 +7,7 @@ namespace WRA.General.Patterns.Pool
 {
     public class PoolBase<TObject> where TObject : PoolObjectBase 
     {
-        public PoolBase<TObject> Instance
+        public static PoolBase<TObject> Instance
         {
             get
             {
@@ -20,23 +20,21 @@ namespace WRA.General.Patterns.Pool
             }
         }
 
-        private PoolBase<TObject> instance;
-        private TObject prefab;
+        private static PoolBase<TObject> instance;
+        protected TObject prefab;
         
-        private List<TObject> pool = new List<TObject>();
+        protected List<TObject> pool = new List<TObject>();
 
-        PoolBase()
+        protected PoolBase()
         {
-            prefab = Resources.Load<TObject>($"PooledObjects/{typeof(TObject).Name}");
+            LoadPrefab();       
         }
 
         public void FillPool(int count)
         {
             for (int i = 0; i < count; i++)
             {
-                pool.Add(Object.Instantiate(prefab));
-                pool[i].OnInit();
-                pool[i].SetActive(false);
+                InitObject();
             }
         }
         
@@ -48,7 +46,7 @@ namespace WRA.General.Patterns.Pool
             }
         }
 
-        public virtual TObject GetObject()
+        public virtual TObject SpawnObject()
         {
             TObject obj = null;
             for (int i = 0; i < pool.Count; i++)
@@ -63,12 +61,26 @@ namespace WRA.General.Patterns.Pool
             if (obj == null)
             {
                 WraDiagnostics.LogWarning($"Pool is empty, creating new object. Type: {typeof(TObject).Name}");
-                obj = Object.Instantiate(prefab);
-                pool.Add(obj);
+                InitObject();
+                obj = pool[^1];
             }
 
             obj.OnSpawn();
             return obj;
+        }
+
+        protected virtual void LoadPrefab()
+        {
+            prefab = Resources.Load<TObject>($"PooledObjects/{typeof(TObject).Name}");
+        }
+        
+        private void InitObject()
+        {
+            TObject obj = Object.Instantiate(prefab);
+            obj.gameObject.name += "_Pooled_ID=" + pool.Count;
+            obj.OnInit();
+            obj.SetActive(false);
+            pool.Add(obj);
         }
     }
 }

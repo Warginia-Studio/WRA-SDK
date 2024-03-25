@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
@@ -14,3 +16,5 @@ namespace WRA.Tools.Editor
         }
     }
 }
+
+#endif

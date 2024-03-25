@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -29,3 +31,4 @@ namespace WRA.Procedural.Arrow.Editor
         }
     }
 }
+#endif

@@ -30,7 +30,7 @@ public class PanelAnimationMove : PanelAnimationBase
         tweenerCore.onComplete += () =>
         {
             OnStatusChangedEvent(PanelAnimationStatus.Show);
-            onComplete.Invoke();
+            onComplete?.Invoke();
         };
     }
 
@@ -43,7 +43,7 @@ public class PanelAnimationMove : PanelAnimationBase
         tweenerCore.onComplete += () =>
         {
             OnStatusChangedEvent(PanelAnimationStatus.Hide);
-            onComplete.Invoke();
+            onComplete?.Invoke();
         };
     }
     

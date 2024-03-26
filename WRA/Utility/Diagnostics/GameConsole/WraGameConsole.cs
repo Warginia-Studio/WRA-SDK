@@ -12,6 +12,12 @@ namespace WRA.Utility.Diagnostics.GameConsole
 {
     public class WraGameConsole : PanelBase
     {
+        public static List<ICommand> Commands { get; protected set; } = new List<ICommand>()
+        {
+            new HelpCommand(),
+            new LanguageCommand()
+        };
+        
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private Transform logContainer;
         [SerializeField] private SimpleLog simpleLogPrefab;
@@ -55,12 +61,34 @@ namespace WRA.Utility.Diagnostics.GameConsole
         //     OnCommandWrite(inputField.text);
         //     lastText = inputField.text;
         // }
-    
+
+        public override void OnOpen()
+        {
+            base.OnOpen();
+            var data =GetDataAsType<PanelDataBase>();
+            if(data.StartAsHide)
+                HideThisPanel();
+        }
+
         public override void OnClose()
         {
             PanelManager.Instance.ClosePanel<WraGameConsole, PanelDataBase>(null);
         }
-    
+
+        public override void OnShow()
+        {
+            base.OnShow();
+            transform.SetAsLastSibling();
+            canvasGroup.alpha = 1;
+            transform.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        }
+
+        public override void OnHide()
+        {
+            base.OnHide();
+            canvasGroup.alpha = 0;
+        }
+
         // public void OnCommandWrite(string command)
         // {
         //     commandInputHelper.ShowCommands(command + "test", command + "test2", command + "test3");
@@ -68,10 +96,25 @@ namespace WRA.Utility.Diagnostics.GameConsole
 
         public void ExecuteCommand(string command)
         {
+            
             inputField.text = "";
+            if (string.IsNullOrEmpty(command))
+                return;
             executedCommands.Add(command);
             var splited = command.Split(" ");
             WraDiagnostics.Log(command, "CMD");
+            if (splited.Length == 0)
+            {
+                WraDiagnostics.LogError("Command is empty");
+                return;
+            }
+            var cmd = Commands.Find(ctg => ctg.Name == splited[0]);
+            if (cmd == null)
+            {
+                WraDiagnostics.LogError($"Command '{splited[0]}' not found");
+                return;
+            }
+            cmd.Execute(splited);
         }
     
         public void ClearLogs()

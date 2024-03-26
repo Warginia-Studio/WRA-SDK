@@ -29,18 +29,6 @@ namespace WRA.UI.PanelsSystem
             DestroyPanel(panelBase, null);
         }
         
-        public void LazlyShow(PanelBase panelBase)
-        {
-            OnPanelShow.Invoke(panelBase);
-            panelBase.OnShow();
-        }
-        
-        public void LazlyHide(PanelBase panelBase)
-        {
-            OnPanelHide.Invoke(panelBase);
-            panelBase.OnHide();
-        }
-        
         public T OpenPanel<T>() where T : PanelBase
         {
             return OpenPanel<T, PanelDataBase>(new PanelDataBase());

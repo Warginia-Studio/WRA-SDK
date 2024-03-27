@@ -14,7 +14,7 @@ public class PanelAnimationMove : PanelAnimationBase
     [SerializeField] private float showSpeed = 1;
     [SerializeField] private float hideSpeed = 1;
     
-    private RectTransform rectTransform;
+    protected RectTransform rectTransform;
 
     public override void OnPanelInit()
     {

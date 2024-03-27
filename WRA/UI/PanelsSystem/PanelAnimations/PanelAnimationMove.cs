@@ -9,10 +9,10 @@ public class PanelAnimationMove : PanelAnimationBase
 {
     // Todo: Add handle EASE type
     
-    [SerializeField] private Vector2 showPosition;
-    [SerializeField] private Vector2 hidePosition;
-    [SerializeField] private float showSpeed = 1;
-    [SerializeField] private float hideSpeed = 1;
+    [SerializeField] protected Vector2 showPosition;
+    [SerializeField] protected Vector2 hidePosition;
+    [SerializeField] protected float showSpeed = 1;
+    [SerializeField] protected float hideSpeed = 1;
     
     protected RectTransform rectTransform;
 

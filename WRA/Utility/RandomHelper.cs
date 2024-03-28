@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class RandomHelper
@@ -42,5 +43,23 @@ public static class RandomHelper
         }
 
         return numbers;
+    }
+    
+    public static int RandomNumberExcludeNumbers(int min, int max, List<int> exclude)
+    {
+        var count = max - min;
+        if (count <= exclude.Count)
+        {
+            Debug.LogError("Exclude list is bigger than range");
+            return -1;
+        }
+        
+        if(count == 0 || count == 1)
+            return min;
+
+        var numbers = Enumerable.Range(min, max).ToList();
+        exclude.ForEach(x => numbers.Remove(x));
+        
+        return numbers[Random.Range(0, numbers.Count)];
     }
 }

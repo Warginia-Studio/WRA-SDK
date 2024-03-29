@@ -9,12 +9,12 @@ public class PanelAnimationMove : PanelAnimationBase
 {
     // Todo: Add handle EASE type
     
-    [SerializeField] private Vector2 showPosition;
-    [SerializeField] private Vector2 hidePosition;
-    [SerializeField] private float showSpeed = 1;
-    [SerializeField] private float hideSpeed = 1;
+    [SerializeField] protected Vector2 showPosition;
+    [SerializeField] protected Vector2 hidePosition;
+    [SerializeField] protected float showSpeed = 1;
+    [SerializeField] protected float hideSpeed = 1;
     
-    private RectTransform rectTransform;
+    protected RectTransform rectTransform;
 
     public override void OnPanelInit()
     {
@@ -30,7 +30,7 @@ public class PanelAnimationMove : PanelAnimationBase
         tweenerCore.onComplete += () =>
         {
             OnStatusChangedEvent(PanelAnimationStatus.Show);
-            onComplete.Invoke();
+            onComplete?.Invoke();
         };
     }
 
@@ -43,7 +43,7 @@ public class PanelAnimationMove : PanelAnimationBase
         tweenerCore.onComplete += () =>
         {
             OnStatusChangedEvent(PanelAnimationStatus.Hide);
-            onComplete.Invoke();
+            onComplete?.Invoke();
         };
     }
     

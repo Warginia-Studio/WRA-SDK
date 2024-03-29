@@ -45,6 +45,7 @@ public static class LanguageMissingTranslationsLogger
         {
             AddMissingTranslations(line);
         }
+        sr.Close();
     }
     
     private static void CheckPath()
@@ -69,5 +70,6 @@ public static class LanguageMissingTranslationsLogger
         {
             sw.WriteLine(key);
         }
+        sw.Close();
     }
 }

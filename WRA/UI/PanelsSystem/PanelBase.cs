@@ -39,13 +39,13 @@ namespace WRA.UI.PanelsSystem
         public void ShowThisPanel()
         {
             IsShow = true;
-            PanelManager.Instance.LazlyShow(this);
+            OnShow();
         }
 
         public void HideThisPanel()
         {
             IsShow = false;
-            PanelManager.Instance.LazlyHide(this);
+            OnHide();
         }
         
         public void SwitchHideThisPanel()

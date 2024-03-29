@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace WRA.Utility.Diagnostics.Logs
 {
-    public class WraLogData : MonoBehaviour
+    public class WraLogData
     {
         public WraLogType LogType { get; set; }
         public Color LogColor { get; set; }

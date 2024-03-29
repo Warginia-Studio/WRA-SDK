@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -28,6 +29,11 @@ namespace WRA.PlayerSystems.LanguageSystem
         {
             tmpText = GetComponent<TMP_Text>();
             RegisterEvents();
+            UpdateLang();
+        }
+
+        private void OnEnable()
+        {
             UpdateLang();
         }
 

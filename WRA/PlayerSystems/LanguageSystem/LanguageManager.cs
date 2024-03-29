@@ -19,19 +19,8 @@ namespace WRA.PlayerSystems.LanguageSystem
 
         public static UnityEvent LanguageChanged = new UnityEvent();
         
-        public static string CurrentLanguage
-        {
-            get => ApplicationProfile.Instance.Language;
-            set
-            {
-                ApplicationProfile.Instance.Language = value;
-                PlayerPrefs.SetString("Language", value);
-                PlayerPrefs.Save();
-                CurrentLang = Languages.Find(x => x.ShortLanguageName == value);
-                LanguageChanged.Invoke();
-            }
-        }
-        public static Language CurrentLang { get; set; }
+        public static string CurrentLanguage { get; private set; }
+        public static Language CurrentLanguageData { get; set; }
         public static List<Language> Languages { get; private set; }
         
         public static void LoadLanguage()
@@ -42,6 +31,25 @@ namespace WRA.PlayerSystems.LanguageSystem
             {
                 Languages.Add(new Language(ctg.text));
             });
+
+
+            CurrentLanguage = ApplicationProfile.Instance.Language;
+            if (PlayerPrefs.HasKey("Language"))
+            {
+                CurrentLanguage = PlayerPrefs.GetString("Language");
+            }
+
+            SetLanguage(CurrentLanguage);
+        }
+        
+        public static void SetLanguage(string language)
+        {
+            CurrentLanguage = language;
+            PlayerPrefs.SetString("Language", language);
+            PlayerPrefs.Save();
+            CurrentLanguageData = Languages.FirstOrDefault(x =>
+                x.ShortLanguageName == CurrentLanguage || x.LanguageName == CurrentLanguage);
+            LanguageChanged.Invoke();
         }
         
         public static string GetTranslation(string keyWord)
@@ -53,7 +61,7 @@ namespace WRA.PlayerSystems.LanguageSystem
                 return ColorHelper.GetTextInColor("KEYWORD IS NULL OR EMPTY", Color.red);
             }
             
-            var translation = CurrentLang.GetTranslation(keyWord);
+            var translation = CurrentLanguageData.GetTranslation(keyWord);
             if (string.IsNullOrEmpty(translation))
             {
                 WraDiagnostics.LogError("Not found key word: " + keyWord + " in language: " + ApplicationProfile.Instance.Language);

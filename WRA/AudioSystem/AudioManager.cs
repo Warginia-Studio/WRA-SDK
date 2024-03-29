@@ -18,12 +18,7 @@ namespace WRA.AudioSystem
             { AudioType.music , 1},
             { AudioType.voices , 1},
         };
-
-        private void Awake()
-        {
-            OnCreate();
-        }
-
+        
         protected override void OnCreate()
         {
             var volumesSettings = UnityFileManagment.LoadObject<Dictionary<AudioType, float>>("/Configs/AudioConfig.cfg");

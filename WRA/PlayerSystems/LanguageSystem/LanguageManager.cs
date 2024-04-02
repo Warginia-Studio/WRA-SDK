@@ -22,6 +22,11 @@ namespace WRA.PlayerSystems.LanguageSystem
         public static string CurrentLanguage { get; private set; }
         public static Language CurrentLanguageData { get; set; }
         public static List<Language> Languages { get; private set; }
+
+        private static Dictionary<SystemLanguage, string> LANGS_MAPPING = new()
+        {
+            { SystemLanguage.Polish , "PL"}
+        };
         
         public static void LoadLanguage()
         {
@@ -33,12 +38,7 @@ namespace WRA.PlayerSystems.LanguageSystem
             });
 
 
-            CurrentLanguage = ApplicationProfile.Instance.Language;
-            if (PlayerPrefs.HasKey("Language"))
-            {
-                CurrentLanguage = PlayerPrefs.GetString("Language");
-            }
-
+            CurrentLanguage = GetLang();
             SetLanguage(CurrentLanguage);
         }
         
@@ -69,6 +69,18 @@ namespace WRA.PlayerSystems.LanguageSystem
             }
 
             return translation;
+        }
+
+        private static string GetLang()
+        {
+            var lang = Application.systemLanguage;
+            var shortLang = "EN";
+            if (LANGS_MAPPING.ContainsKey(lang))
+            {
+                shortLang = LANGS_MAPPING[lang];
+            }
+            shortLang = PlayerPrefs.GetString("Language", shortLang);
+            return shortLang;
         }
     }
 }

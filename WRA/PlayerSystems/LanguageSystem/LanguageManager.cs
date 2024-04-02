@@ -38,8 +38,22 @@ namespace WRA.PlayerSystems.LanguageSystem
             });
 
 
-            CurrentLanguage = GetLang();
+            CurrentLanguage = GetLangAsString(Application.systemLanguage);
             SetLanguage(CurrentLanguage);
+        }
+        
+        public static void SetLanguage(SystemLanguage language)
+        {
+            var shortLang = "EN";
+            if (LANGS_MAPPING.ContainsKey(language))
+            {
+                shortLang = LANGS_MAPPING[language];
+            }
+            else
+            {
+                WraDiagnostics.LogError($"Not found language: {language} in mapping. Using default language: EN");
+            }
+            SetLanguage(shortLang);
         }
         
         public static void SetLanguage(string language)
@@ -71,9 +85,8 @@ namespace WRA.PlayerSystems.LanguageSystem
             return translation;
         }
 
-        private static string GetLang()
+        private static string GetLangAsString(SystemLanguage lang = SystemLanguage.Unknown)
         {
-            var lang = Application.systemLanguage;
             var shortLang = "EN";
             if (LANGS_MAPPING.ContainsKey(lang))
             {

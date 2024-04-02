@@ -6,7 +6,7 @@ namespace WRA.UI.PanelsSystem.CinematicSystem.ManualTest
     {
         private void Awake()
         {
-            PanelManager.Instance.OpenPanel<CinematicCameraPanel, CinematicCameraData>(new CinematicCameraData() { StartAsShow = true});
+            PanelManager.Instance.OpenPanel<CinematicCameraPanel>(new CinematicCameraData() { StartAsShow = true});
         }
 
         private void Update()

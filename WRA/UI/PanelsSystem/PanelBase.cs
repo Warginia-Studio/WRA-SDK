@@ -130,7 +130,7 @@ namespace WRA.UI.PanelsSystem
                 throw(new Exception($"Data data is type: {data.GetType().FullName} expected {typeof(T).FullName}"));
             }
         
-            return (T)data;
+            return data as T;
         }
 
         protected void SetActive(bool active)

@@ -31,10 +31,10 @@ namespace WRA.UI.PanelsSystem
         
         public T OpenPanel<T>() where T : PanelBase
         {
-            return OpenPanel<T, PanelDataBase>(new PanelDataBase());
+            return OpenPanel<T>(new PanelDataBase());
         }
-        public T OpenPanel<T, TData>(TData data = null, PanelBase parrentPanel = null)
-            where T : PanelBase where TData : PanelDataBase
+        public T OpenPanel<T>(object data = null, PanelBase parrentPanel = null)
+            where T : PanelBase
         {
             var panel = GetPanel<T>() as T;
             if (panel != null)
@@ -56,7 +56,7 @@ namespace WRA.UI.PanelsSystem
             return panel;
         }
 
-        public T ShowPanel<T, TData>(TData data, bool openIfIsOff = false) where T : PanelBase where TData : PanelDataBase
+        public T ShowPanel<T>(object data, bool openIfIsOff = false) where T : PanelBase
         {
             var checkData = IsPanelOpened<T>();
 
@@ -67,14 +67,14 @@ namespace WRA.UI.PanelsSystem
             }
             else if (openIfIsOff)
             {
-                return OpenPanel<T, TData>(data);
+                return OpenPanel<T>(data);
             }
 
             OnPanelShow.Invoke(checkData.panel);
             return checkData.panel;
         }
 
-        public T HidePanel<T, TData>(TData data) where T : PanelBase where TData : PanelDataBase
+        public T HidePanel<T>(object data) where T : PanelBase
         {
             var checkData = IsPanelOpened<T>();
 
@@ -93,7 +93,7 @@ namespace WRA.UI.PanelsSystem
             return openedPanels.Find(ctg => ctg is T) as T;
         }
 
-        public void ClosePanel<T, TData>(TData data) where T : PanelBase where TData : PanelDataBase
+        public void ClosePanel<T>(object data) where T : PanelBase
         {
             var checkData = IsPanelOpened<T>();
 
@@ -146,7 +146,7 @@ namespace WRA.UI.PanelsSystem
             return createdPanel;
         }
 
-        private void DestroyPanel(PanelBase panelBase, PanelDataBase dataBase)
+        private void DestroyPanel(PanelBase panelBase, object dataBase)
         {
             panelBase.SetData(dataBase);
             panelBase.OnClose();

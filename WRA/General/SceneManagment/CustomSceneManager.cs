@@ -23,7 +23,7 @@ namespace WRA.General.SceneManagment
 
         public static void ChangeScene(string name, bool autoChangeScene = false)
         {
-            PanelManager.Instance.ShowPanel<ProgressPanel, PanelDataBase>(null, true);
+            PanelManager.Instance.ShowPanel<ProgressPanel>(null, true);
             nextSceneName = name;
             CreateLoadingProcess(autoChangeScene);
         }

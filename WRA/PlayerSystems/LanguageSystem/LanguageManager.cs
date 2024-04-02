@@ -66,6 +66,30 @@ namespace WRA.PlayerSystems.LanguageSystem
             LanguageChanged.Invoke();
         }
         
+        public static void NextLanguage()
+        {
+            var index = Languages.IndexOf(CurrentLanguageData);
+            index++;
+            if (index >= Languages.Count)
+            {
+                index = 0;
+            }
+            CurrentLanguageData = Languages[index];
+            SetLanguage(CurrentLanguageData.ShortLanguageName);
+        }
+        
+        public static void PreviousLanguage()
+        {
+            var index = Languages.IndexOf(CurrentLanguageData);
+            index--;
+            if (index < 0)
+            {
+                index = Languages.Count - 1;
+            }
+            CurrentLanguageData = Languages[index];
+            SetLanguage(CurrentLanguageData.ShortLanguageName);
+        }
+        
         public static string GetTranslation(string keyWord)
         {
             if(Languages==null || Languages.Count==0)

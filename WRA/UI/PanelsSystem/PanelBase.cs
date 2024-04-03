@@ -66,6 +66,12 @@ namespace WRA.UI.PanelsSystem
         
         public void InitPanelBase(object data = null)
         {
+            if (data == null)
+            {
+                WraDiagnostics.LogWarning($"Data is null in {this.GetType().Name}", Color.yellow, "panels");
+                data = new PanelDataBase();
+            }
+            
             SetData(data);
             InitNeededComponents();
             InitFragmentsAndAnimations();
@@ -138,18 +144,16 @@ namespace WRA.UI.PanelsSystem
             Animations.ForEach(ctg=>ctg.SetVisible(active));
         }
         
-        private void InitNeededComponents()
-        {
-            if (canvasGroup == null)
-            {
-                canvasGroup = GetComponent<CanvasGroup>();
-            }
-        }
-
-        private void InitFragmentsAndAnimations()
+        protected void InitFragmentsAndAnimations()
         {
             // TODO: It can't be like this because it can get fragments from other panel
             // fragments = new List<PanelFragment>(GetComponentsInChildren<PanelFragment>());
+            InitFragments();
+            InitAnimations();
+        }
+        
+        protected void InitFragments()
+        {
             fragments.ForEach(ctg =>
             {
                 if(ctg == null)
@@ -157,7 +161,10 @@ namespace WRA.UI.PanelsSystem
                 ctg.SetPanel(this);
                 ctg.OnPanelInit();
             });
-            
+        }
+        
+        protected void InitAnimations()
+        {
             animations.ForEach(ctg =>
             {
                 if (ctg == null)
@@ -166,5 +173,14 @@ namespace WRA.UI.PanelsSystem
                 ctg.OnPanelInit();
             });
         }
+        
+        private void InitNeededComponents()
+        {
+            if (canvasGroup == null)
+            {
+                canvasGroup = GetComponent<CanvasGroup>();
+            }
+        }
+        
     }
 }

@@ -56,7 +56,7 @@ namespace WRA.UI.PanelsSystem
             return panel;
         }
 
-        public T ShowPanel<T>(object data, bool openIfIsOff = false) where T : PanelBase
+        public T ShowPanel<T>(object data = null, bool openIfIsOff = false) where T : PanelBase
         {
             var checkData = IsPanelOpened<T>();
 
@@ -74,7 +74,7 @@ namespace WRA.UI.PanelsSystem
             return checkData.panel;
         }
 
-        public T HidePanel<T>(object data) where T : PanelBase
+        public T HidePanel<T>(object data = null) where T : PanelBase
         {
             var checkData = IsPanelOpened<T>();
 
@@ -93,7 +93,7 @@ namespace WRA.UI.PanelsSystem
             return openedPanels.Find(ctg => ctg is T) as T;
         }
 
-        public void ClosePanel<T>(object data) where T : PanelBase
+        public void ClosePanel<T>(object data = null) where T : PanelBase
         {
             var checkData = IsPanelOpened<T>();
 

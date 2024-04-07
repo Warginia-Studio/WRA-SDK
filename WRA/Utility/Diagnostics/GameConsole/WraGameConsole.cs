@@ -15,7 +15,8 @@ namespace WRA.Utility.Diagnostics.GameConsole
         public static List<ICommand> Commands { get; protected set; } = new List<ICommand>()
         {
             new HelpCommand(),
-            new LanguageCommand()
+            new LanguageCommand(),
+            new ConsoleCommand()
         };
         
         [SerializeField] private TMP_InputField inputField;
@@ -68,6 +69,10 @@ namespace WRA.Utility.Diagnostics.GameConsole
             var data =GetDataAsType<PanelDataBase>();
             if(data.StartAsHide)
                 HideThisPanel();
+            else
+            {
+                ShowThisPanel();
+            }
         }
 
         public override void OnClose()
@@ -79,14 +84,14 @@ namespace WRA.Utility.Diagnostics.GameConsole
         {
             base.OnShow();
             transform.SetAsLastSibling();
-            canvasGroup.alpha = 1;
-            transform.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+            // canvasGroup.alpha = 1;
+            // transform.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
 
         public override void OnHide()
         {
             base.OnHide();
-            canvasGroup.alpha = 0;
+            // canvasGroup.alpha = 0;
         }
 
         // public void OnCommandWrite(string command)

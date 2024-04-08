@@ -15,10 +15,11 @@ public class PanelAnimationMove : PanelAnimationBase
     [SerializeField] protected float hideSpeed = 1;
     
     protected RectTransform rectTransform;
-
-    public override void OnPanelInit()
+    
+    public override void OnFragmentInit()
     {
         rectTransform = GetComponent<RectTransform>();
+        base.OnFragmentInit();
     }
 
     public override void ShowAnimation(Action onComplete)

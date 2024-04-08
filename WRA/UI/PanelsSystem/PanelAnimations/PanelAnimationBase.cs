@@ -5,38 +5,46 @@ using UnityEngine;
 using UnityEngine.Events;
 using WRA.UI.PanelsSystem;
 
-public abstract class PanelAnimationBase : MonoBehaviour
+public abstract class PanelAnimationBase : PanelFragmentBase
 {
     public UnityEvent OnShow;
     public UnityEvent OnHide;
     public UnityEvent<PanelAnimationStatus> OnStatusChanged;
     public PanelAnimationStatus Status { get; protected set; }
-    public PanelBase ParentPanel { get; set; }
 
     public void SetPanel(PanelBase panelBase)
     {
         ParentPanel = panelBase;
     }
 
-    public virtual void OnPanelInit()
+    public override void OnFragmentInit()
     {
+        base.OnFragmentInit();
+        SetVisible(!ParentPanel.GetDataAsType<PanelDataBase>().StartAsHide);
     }
 
-    public virtual void ShowAnimation(Action onComplete)
+    public virtual void ShowAnimation(Action onComplete = null)
     {
         OnStatusChangedEvent(PanelAnimationStatus.Show);
-        onComplete.Invoke();
+        onComplete?.Invoke();
     }
 
-    public virtual void HideAnimation(Action onComplete)
+    public virtual void HideAnimation(Action onComplete = null)
     {
         OnStatusChangedEvent(PanelAnimationStatus.Hide);
-        onComplete.Invoke();
+        onComplete?.Invoke();
     }
     
     public virtual void SetVisible(bool visible)
     {
-        
+        if (visible)
+        {
+            ShowAnimation(null);
+        }
+        else
+        {
+            HideAnimation(null);
+        }
     }
     
     protected void OnStatusChangedEvent(PanelAnimationStatus newStatus)

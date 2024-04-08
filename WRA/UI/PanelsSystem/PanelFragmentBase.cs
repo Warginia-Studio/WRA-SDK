@@ -7,10 +7,11 @@ public abstract class PanelFragmentBase : MonoBehaviour
 {
     public PanelBase ParentPanel { get; set; }
 
-    public void SetPanel(PanelBase panelBase)
+    public void InitFragment(PanelBase panelBase)
     {
         ParentPanel = panelBase;
+        OnFragmentInit();
     }
 
-    public virtual void OnPanelInit() { }
+    public virtual void OnFragmentInit() { }
 }

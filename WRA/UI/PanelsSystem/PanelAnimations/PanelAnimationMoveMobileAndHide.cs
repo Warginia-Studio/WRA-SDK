@@ -2,20 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 
 public class PanelAnimationMoveMobileAndHide : PanelAnimationMoveMobileFix
 {
+    private TweenerCore<float, float, FloatOptions> lastTween;
+    
     public override void ShowAnimation(Action onComplete)
     {
+        if(lastTween!=null)
+            lastTween.Kill();
         gameObject.SetActive(true);
-        var tweenerCore = CreateTweener(0, 1, showSpeed).OnComplete(() => onComplete?.Invoke());
+        lastTween = CreateTweener(1, showSpeed).OnComplete(() => onComplete?.Invoke());
     }
     
     public override void HideAnimation(Action onComplete)
     {
-        var tweenerCore = CreateTweener(1, 0, hideSpeed).OnComplete(() => onComplete?.Invoke());
-        tweenerCore.onComplete += () => gameObject.SetActive(false);
+        if(lastTween!=null)
+            lastTween.Kill();
+        lastTween = CreateTweener(0, hideSpeed).OnComplete(() => onComplete?.Invoke());
+        lastTween.onComplete += () => gameObject.SetActive(false);
     }
 
     public override void SetVisible(bool visible)

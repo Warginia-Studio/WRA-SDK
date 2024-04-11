@@ -67,12 +67,6 @@ namespace WRA.Utility.Diagnostics.GameConsole
         {
             base.OnOpen();
             var data =GetDataAsType<PanelDataBase>();
-            if(data.StartAsHide)
-                HideThisPanel();
-            else
-            {
-                ShowThisPanel();
-            }
         }
 
         public override void OnClose()

@@ -72,7 +72,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
 
         public override void OnClose()
         {
-            PanelManager.Instance.ClosePanel<WraGameConsole>(null);
+            // PanelManager.Instance.ClosePanel<WraGameConsole>(null);
         }
 
         public override void OnShow()

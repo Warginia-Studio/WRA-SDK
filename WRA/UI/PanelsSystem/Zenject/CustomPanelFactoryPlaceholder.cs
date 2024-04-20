@@ -4,25 +4,29 @@ using UnityEngine;
 using WRA.UI.PanelsSystem;
 using Zenject;
 
-public class CustomPanelFactoryPlaceholder : IFactory<string, PanelBase>
+public class CustomPanelFactoryPlaceholder : IFactory<string, PanelDataBase, PanelBase>
 {
-    private List<PanelBase> _panelBases;
-    private DiContainer _container;
+    private readonly List<PanelBase> panelBases;
+    private readonly DiContainer container;
+    private readonly PanelManager panelManager;
     
-    public CustomPanelFactoryPlaceholder(DiContainer container, List<PanelBase> panelBases)
+    public CustomPanelFactoryPlaceholder(DiContainer container, List<PanelBase> panelBases, PanelManager panelManager)
     {
-        _panelBases = panelBases;
-        _container = container;
+        this.panelBases = panelBases;
+        this.container = container;
+        this.panelManager = panelManager;
     }
-    
-    public PanelBase Create(string param)
+
+    public PanelBase Create(string panelName, PanelDataBase data)
     {
-        Debug.Log("Create panel: "+param);
-        foreach (var panelBase in _panelBases)
+        Debug.Log("Create panel: "+panelName);
+        foreach (var panelBase in panelBases)
         {
-            if (panelBase.name == param)
+            if (panelBase.name == panelName)
             {
-                return _container.InstantiatePrefab(panelBase.gameObject).GetComponent<PanelBase>();
+                var panel = container.InstantiatePrefab(panelBase.gameObject, panelManager.transform).GetComponent<PanelBase>();
+                panel.InitPanelBase(data);
+                return panel;
             }
         }
         return null;

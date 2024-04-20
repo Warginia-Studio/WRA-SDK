@@ -20,15 +20,15 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
             var command = args[1];
             if (command.ToLower() == "open")
             {
-                PanelManager.Instance.ShowPanel<WraGameConsole>();
+                // PanelManager.Instance.ShowPanel<WraGameConsole>();
             }
             else if (command.ToLower() == "close")
             {
-                PanelManager.Instance.HidePanel<WraGameConsole>();
+                // PanelManager.Instance.HidePanel<WraGameConsole>();
             }
             else if(command.ToLower() == "switch")
             {
-                PanelManager.Instance.GetPanel<WraGameConsole>().SwitchHideThisPanel();
+                // PanelManager.Instance.GetPanel<WraGameConsole>().SwitchHideThisPanel();
             }
         }
     }

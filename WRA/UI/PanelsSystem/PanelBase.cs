@@ -14,8 +14,6 @@ namespace WRA.UI.PanelsSystem
     [RequireComponent(typeof(CanvasGroup))]
     public class PanelBase : MonoBehaviour
     {
-        [Inject(Id = "TEST")]
-        public string test = "test";
         public UnityEvent OnOpenEvent;
         public UnityEvent OnCloseEvent;
         public UnityEvent OnShowEvent;
@@ -27,6 +25,7 @@ namespace WRA.UI.PanelsSystem
         public List<PanelAnimationBase> Animations => animations;
         
         [SerializeField] private List<PanelFragmentBase> fragments = new List<PanelFragmentBase>();
+        [Inject] PanelManager panelManager;
         private List<PanelAnimationBase> animations = new List<PanelAnimationBase>();
         
         protected CanvasGroup canvasGroup;
@@ -38,7 +37,7 @@ namespace WRA.UI.PanelsSystem
         /// </summary>
         public void CloseThisPanel()
         {
-            PanelManager.Instance.LazlyClose(this);
+            // PanelManager.Instance.LazlyClose(this);
         }
         
         public void ShowThisPanel()

@@ -17,7 +17,7 @@ namespace WRA.UI.PanelsSystem.Zenject
             LoadPanels();
             Container.Bind < List<PanelBase>>().FromInstance(panels);
             Container.Bind<PanelManager>().FromInstance(FindFirstObjectByType<PanelManager>());
-            Container.BindFactory<string, PanelBase, PanelFactory>().FromFactory<CustomPanelFactoryPlaceholder>();
+            Container.BindFactory<string, PanelDataBase, PanelBase, PanelFactory>().FromFactory<CustomPanelFactoryPlaceholder>();
         }
         
         private void LoadPanels()

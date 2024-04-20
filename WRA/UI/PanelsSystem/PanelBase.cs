@@ -7,12 +7,15 @@ using UnityEngine.Events;
 using WRA.UI.PanelsSystem.PanelAnimations;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using Zenject;
 
 namespace WRA.UI.PanelsSystem
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public abstract class PanelBase : MonoBehaviour
+    public class PanelBase : MonoBehaviour
     {
+        // [Inject(Id = "TEST")]
+        // public string test = "test";
         public UnityEvent OnOpenEvent;
         public UnityEvent OnCloseEvent;
         public UnityEvent OnShowEvent;

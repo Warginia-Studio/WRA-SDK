@@ -14,8 +14,8 @@ namespace WRA.UI.PanelsSystem
     [RequireComponent(typeof(CanvasGroup))]
     public class PanelBase : MonoBehaviour
     {
-        // [Inject(Id = "TEST")]
-        // public string test = "test";
+        [Inject(Id = "TEST")]
+        public string test = "test";
         public UnityEvent OnOpenEvent;
         public UnityEvent OnCloseEvent;
         public UnityEvent OnShowEvent;

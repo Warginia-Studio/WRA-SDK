@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WRA.UI.PanelsSystem;
+using WRA.Utility.Diagnostics.GameConsole.Commands;
 using WRA.Utility.Diagnostics.Logs;
 
 namespace WRA.Utility.Diagnostics.GameConsole

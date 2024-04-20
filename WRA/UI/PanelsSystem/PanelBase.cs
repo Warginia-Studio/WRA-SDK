@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using WRA.UI.PanelsSystem.PanelAnimations;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 

@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum PanelAnimationStatus
+namespace WRA.UI.PanelsSystem.PanelAnimations
 {
-    None,
-    Show,
-    Hide,
-    ShowingAnimation,
-    HidingAnimation
+    public enum PanelAnimationStatus
+    {
+        None,
+        Show,
+        Hide,
+        ShowingAnimation,
+        HidingAnimation
+    }
 }

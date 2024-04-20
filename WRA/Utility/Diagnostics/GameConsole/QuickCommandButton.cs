@@ -1,21 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using WRA.UI.PanelsSystem;
-using WRA.Utility.Diagnostics.GameConsole;
 
-public class QuickCommandButton : MonoBehaviour, IPointerDownHandler
+namespace WRA.Utility.Diagnostics.GameConsole
 {
-    [SerializeField] private string command;
+    public class QuickCommandButton : MonoBehaviour, IPointerDownHandler
+    {
+        [SerializeField] private string command;
     
-    public void ExecuteCommand()
-    {
-        PanelManager.Instance.GetPanel<WraGameConsole>().ExecuteCommand(command);
-    }
+        public void ExecuteCommand()
+        {
+            PanelManager.Instance.GetPanel<WraGameConsole>().ExecuteCommand(command);
+        }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        ExecuteCommand();
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            ExecuteCommand();
+        }
     }
 }

@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ICommand
+namespace WRA.Utility.Diagnostics.GameConsole.Commands
 {
-    string Name { get; }
+    public interface ICommand
+    {
+        string Name { get; }
     
-    string Description { get; }
+        string Description { get; }
     
-    void Execute(params string[] args);
+        void Execute(params string[] args);
+    }
 }

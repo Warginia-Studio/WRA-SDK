@@ -1,75 +1,77 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
 
-public static class LanguageMissingTranslationsLogger
+namespace WRA.PlayerSystems.LanguageSystem
 {
-    private const string MISSING_TRANSLATIONS_FILE = "MissingTranslations.data";
-    private static readonly string MISSING_TRANSLATIONS_PATH = Application.streamingAssetsPath + "/Data/";
-    private static readonly string MISSING_TRANSLATIONS_FILE_PATH =
-        MISSING_TRANSLATIONS_PATH + MISSING_TRANSLATIONS_FILE;
-    
-    public static List<string> MissingTranslations => missingKeys;
-    
-    private static List<string> missingKeys = new();
-    private static bool isMissingKeysLoaded = false;
-    
-    public static void AddMissingTranslations(string key)
+    public static class LanguageMissingTranslationsLogger
     {
-        if (missingKeys.Contains(key))
-            return;
-        missingKeys.Add(key);
-    }
-
-    public static void SaveMissingTranslations()
-    {
-        CheckPath();
-        LoadMissingTranslations();
-        WriteMissingTranslations();
-    }
+        private const string MISSING_TRANSLATIONS_FILE = "MissingTranslations.data";
+        private static readonly string MISSING_TRANSLATIONS_PATH = Application.streamingAssetsPath + "/Data/";
+        private static readonly string MISSING_TRANSLATIONS_FILE_PATH =
+            MISSING_TRANSLATIONS_PATH + MISSING_TRANSLATIONS_FILE;
     
-    public static void LoadMissingTranslations()
-    {
-        if (isMissingKeysLoaded)
-            return;
-        if (!Directory.Exists(MISSING_TRANSLATIONS_PATH))
+        public static List<string> MissingTranslations => missingKeys;
+    
+        private static List<string> missingKeys = new();
+        private static bool isMissingKeysLoaded = false;
+    
+        public static void AddMissingTranslations(string key)
         {
-            Directory.CreateDirectory(MISSING_TRANSLATIONS_PATH);
+            if (missingKeys.Contains(key))
+                return;
+            missingKeys.Add(key);
         }
 
-        StreamReader sr = new StreamReader(MISSING_TRANSLATIONS_FILE_PATH);
-        string line;
-        while ((line = sr.ReadLine()) != null)
+        public static void SaveMissingTranslations()
         {
-            AddMissingTranslations(line);
+            CheckPath();
+            LoadMissingTranslations();
+            WriteMissingTranslations();
         }
-        sr.Close();
-    }
     
-    private static void CheckPath()
-    {
-        if (!Directory.Exists(MISSING_TRANSLATIONS_PATH))
+        public static void LoadMissingTranslations()
         {
-            Directory.CreateDirectory(MISSING_TRANSLATIONS_PATH);
-            isMissingKeysLoaded = true;
-        }
+            if (isMissingKeysLoaded)
+                return;
+            if (!Directory.Exists(MISSING_TRANSLATIONS_PATH))
+            {
+                Directory.CreateDirectory(MISSING_TRANSLATIONS_PATH);
+            }
 
-        if (!File.Exists(MISSING_TRANSLATIONS_FILE_PATH))
-        {
-            File.Create(MISSING_TRANSLATIONS_FILE_PATH);
-            isMissingKeysLoaded = true;
+            StreamReader sr = new StreamReader(MISSING_TRANSLATIONS_FILE_PATH);
+            string line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                AddMissingTranslations(line);
+            }
+            sr.Close();
         }
-    }
     
-    private static void WriteMissingTranslations()
-    {
-        StreamWriter sw = new StreamWriter(MISSING_TRANSLATIONS_FILE_PATH, false, Encoding.Default);
-        foreach (var key in missingKeys)
+        private static void CheckPath()
         {
-            sw.WriteLine(key);
+            if (!Directory.Exists(MISSING_TRANSLATIONS_PATH))
+            {
+                Directory.CreateDirectory(MISSING_TRANSLATIONS_PATH);
+                isMissingKeysLoaded = true;
+            }
+
+            if (!File.Exists(MISSING_TRANSLATIONS_FILE_PATH))
+            {
+                File.Create(MISSING_TRANSLATIONS_FILE_PATH);
+                isMissingKeysLoaded = true;
+            }
         }
-        sw.Close();
+    
+        private static void WriteMissingTranslations()
+        {
+            StreamWriter sw = new StreamWriter(MISSING_TRANSLATIONS_FILE_PATH, false, Encoding.Default);
+            foreach (var key in missingKeys)
+            {
+                sw.WriteLine(key);
+            }
+            sw.Close();
+        }
     }
 }

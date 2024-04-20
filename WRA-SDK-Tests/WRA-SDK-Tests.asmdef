@@ -1,5 +1,5 @@
 {
-    "name": "EditTests",
+    "name": "WRA-SDK-Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",

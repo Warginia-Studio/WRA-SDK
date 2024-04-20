@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
+using WRA.Utility.Diagnostics.Logs;
 using Zenject;
 
 namespace WRA.UI.PanelsSystem.Zenject
@@ -13,13 +14,10 @@ namespace WRA.UI.PanelsSystem.Zenject
         private List<PanelBase> panels;
         public override void InstallBindings()
         {
-            Container.Bind<string>().WithId("TEST").FromInstance("XD");
-            // Container.Bind<PanelBase>().AsSingle().NonLazy();
             LoadPanels();
-
             Container.Bind < List<PanelBase>>().FromInstance(panels);
+            Container.Bind<PanelManager>().FromInstance(FindFirstObjectByType<PanelManager>());
             Container.BindFactory<string, PanelBase, PanelFactory>().FromFactory<CustomPanelFactoryPlaceholder>();
-            // Container.BindFactory<IEnemy, EnemyFactory>().FromFactory<CustomEnemyFactory>().WithArguments();
         }
         
         private void LoadPanels()
@@ -33,7 +31,8 @@ namespace WRA.UI.PanelsSystem.Zenject
                     panels.AddRange(loadedPanels);
                 }
             }
-            Debug.Log("loaded panels: "+panels.Count);
+
+            WraDiagnostics.Log("loaded panels: " + panels.Count, "PanelFactoryInstaller");
         }
     }
 }

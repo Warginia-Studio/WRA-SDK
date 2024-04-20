@@ -31,6 +31,7 @@ namespace WRA.Utility.Diagnostics.Logs
         public static void ClearLogs()
         {
             WraLogDatas.Clear();
+            
         }
         
         public static void Log(object message, string logTag = "default")

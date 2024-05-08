@@ -29,6 +29,16 @@ namespace WRA.General.Patterns.Pool
         {
             LoadPrefab();       
         }
+        
+        public void LoadPrefab(string path)
+        {
+            prefab = Resources.Load<TObject>(path);
+        }
+        
+        public void LoadPrefab(TObject prefab)
+        {
+            this.prefab = prefab;
+        }
 
         public void FillPool(int count)
         {

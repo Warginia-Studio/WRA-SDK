@@ -10,12 +10,14 @@ namespace WRA.Zenject
     public class PanelFactoryInstaller : ScriptableObjectInstaller<PanelFactoryInstaller>
     {
         [SerializeField] private string[] dictionaryPaths = new []{ "SDK/Panels/" };
-        [SerializeField] private string[] panelsNames = new[] { "WraGameConsole", "FadeManager" };
+        // [SerializeField] private string[] panelsNames = new[] { "WraGameConsole", "FadeManager" };
+        
+        [SerializeField] private ResourcePaths resourcePaths;
         private List<PanelBase> panels;
         public override void InstallBindings()
         {
             LoadPanels();
-            Container.Bind < List<PanelBase>>().FromInstance(panels);
+            // Container.Bind < List<PanelBase>>().FromInstance(panels);
             // Container.Bind<PanelManager>().FromInstance(FindFirstObjectByType<PanelManager>());
             Container.BindFactory<string, PanelDataBase, PanelBase, PanelFactory>().FromFactory<PanelFactory>();
         }
@@ -31,6 +33,8 @@ namespace WRA.Zenject
                     panels.AddRange(loadedPanels);
                 }
             }
+            
+            Container.Bind < List<PanelBase>>().FromInstance(panels);
 
             WraDiagnostics.Log("loaded panels: " + panels.Count, "PanelFactoryInstaller");
         }

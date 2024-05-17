@@ -4,7 +4,7 @@ using Zenject;
 
 namespace WRA.Zenject
 {
-    public class PoolObjectFactory : IFactory<string, PoolObjectBase>
+    public class PoolObjectFactory : PlaceholderFactory<string, PoolObjectBase>
     {
         private readonly DiContainer container;
         private readonly List<PoolObjectBase> poolObjects;

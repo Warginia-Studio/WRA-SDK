@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using WRA.Zenject;
 using Zenject;
 
 namespace WRA.General.Patterns.Pool

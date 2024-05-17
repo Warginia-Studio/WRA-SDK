@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.World.Map
+namespace WRA.World
 {
     public class RandomPrefabOnStart : MonoBehaviour
     {

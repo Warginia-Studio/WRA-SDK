@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using WRA.UI.PanelsSystem;
 using Zenject;
 
-public class PanelManagerInstaller : MonoInstaller
+namespace WRA.Zenject
 {
-    [SerializeField] private PanelManager panelManager;
-    
-    public override void InstallBindings()
+    public class PanelManagerInstaller : MonoInstaller
     {
-        Container.Bind<PanelManager>().FromInstance(panelManager).AsSingle();
+        [SerializeField] private PanelManager panelManager;
+    
+        public override void InstallBindings()
+        {
+            Container.Bind<PanelManager>().FromInstance(panelManager).AsSingle();
+        }
     }
 }

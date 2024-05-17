@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using NUnit.Framework;
 using UnityEngine;
+using WRA.UI.PanelsSystem;
 using WRA.Utility.Diagnostics.Logs;
 using Zenject;
 
-namespace WRA.UI.PanelsSystem.Zenject
+namespace WRA.Zenject
 {
     [CreateAssetMenu(fileName = "PanelFactoryInstaller", menuName = "thief01/WRA-SDK/Installers/PanelFactoryInstaller")]
     public class PanelFactoryInstaller : ScriptableObjectInstaller<PanelFactoryInstaller>

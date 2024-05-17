@@ -1,16 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneObject : MonoBehaviour
+namespace WRA.General
 {
-    public static SceneObject Instance { get; private set; }
-
-    private void Awake()
+    public class SceneObject : MonoBehaviour
     {
-        if (Instance != null)
-            return;
-        Instance = this;
+        public static SceneObject Instance { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance != null)
+                return;
+            Instance = this;
+        }
     }
 }

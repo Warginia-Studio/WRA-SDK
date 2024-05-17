@@ -1,30 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using WRA.General.Patterns.Pool;
 using Zenject;
 
-public class PoolObjectFactory : IFactory<string, PoolObjectBase>
+namespace WRA.Zenject
 {
-    private readonly DiContainer container;
-    private readonly List<PoolObjectBase> poolObjects;
-    
-    public PoolObjectFactory(DiContainer container, List<PoolObjectBase> poolObjects)
+    public class PoolObjectFactory : IFactory<string, PoolObjectBase>
     {
-        this.container = container;
-        this.poolObjects = poolObjects;
-    }
+        private readonly DiContainer container;
+        private readonly List<PoolObjectBase> poolObjects;
     
-    public PoolObjectBase Create(string param)
-    {
-        foreach (var poolObject in poolObjects)
+        public PoolObjectFactory(DiContainer container, List<PoolObjectBase> poolObjects)
         {
-            if (poolObject.name == param)
-            {
-                var pool = container.InstantiatePrefab(poolObject.gameObject).GetComponent<PoolObjectBase>();
-                return pool;
-            }
+            this.container = container;
+            this.poolObjects = poolObjects;
         }
-        return null;
+    
+        public PoolObjectBase Create(string param)
+        {
+            foreach (var poolObject in poolObjects)
+            {
+                if (poolObject.name == param)
+                {
+                    var pool = container.InstantiatePrefab(poolObject.gameObject).GetComponent<PoolObjectBase>();
+                    return pool;
+                }
+            }
+            return null;
+        }
     }
 }

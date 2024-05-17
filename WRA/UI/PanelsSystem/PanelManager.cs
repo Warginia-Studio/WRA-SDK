@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using WRA.General.Patterns;
 using WRA.General.Patterns.Singletons;
-using WRA.UI.PanelsSystem.Zenject;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using WRA.Zenject;
 using Zenject;
 
 namespace WRA.UI.PanelsSystem

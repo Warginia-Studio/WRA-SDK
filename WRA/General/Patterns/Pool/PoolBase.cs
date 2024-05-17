@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using Zenject;
 
 namespace WRA.General.Patterns.Pool
 {
-    public class PoolBase<TObject> where TObject : PoolObjectBase 
+    public class PoolBase<TObject> : IPool where TObject : PoolObjectBase
     {
         public static PoolBase<TObject> Instance
         {
@@ -19,6 +20,8 @@ namespace WRA.General.Patterns.Pool
                 return instance;
             }
         }
+        
+        [Inject] private PoolObjectFactory poolObjectFactory;
 
         private static PoolBase<TObject> instance;
         protected TObject prefab;
@@ -30,16 +33,6 @@ namespace WRA.General.Patterns.Pool
             LoadPrefab();       
         }
         
-        public void LoadPrefab(string path)
-        {
-            prefab = Resources.Load<TObject>(path);
-        }
-        
-        public void LoadPrefab(TObject prefab)
-        {
-            this.prefab = prefab;
-        }
-
         public void FillPool(int count)
         {
             for (int i = 0; i < count; i++)
@@ -47,13 +40,28 @@ namespace WRA.General.Patterns.Pool
                 InitObject();
             }
         }
-        
+
+        public void FreePool()
+        {
+            
+        }
+
         public void KillAll()
         {
             for (int i = 0; i < pool.Count; i++)
             {
                 pool[i].Kill();
             }
+        }
+
+        public void SetPrefab(string name)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public TObject SpawnObject<TObject>() where TObject : PoolObjectBase
+        {
+            throw new System.NotImplementedException();
         }
 
         public virtual TObject SpawnObject()

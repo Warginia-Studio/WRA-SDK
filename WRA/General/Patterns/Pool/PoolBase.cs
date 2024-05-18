@@ -9,30 +9,11 @@ namespace WRA.General.Patterns.Pool
 {
     public class PoolBase<TObject> : IPool where TObject : PoolObjectBase
     {
-        public static PoolBase<TObject> Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new PoolBase<TObject>();
-                }
-
-                return instance;
-            }
-        }
-        
         [Inject] public PoolObjectFactory poolObjectFactory;
-
-        private static PoolBase<TObject> instance;
-        protected TObject prefab;
+        
+        private string prefabName;
         
         protected List<TObject> pool = new List<TObject>();
-
-        public PoolBase()
-        {
-            LoadPrefab();       
-        }
         
         public void FillPool(int count)
         {
@@ -44,7 +25,11 @@ namespace WRA.General.Patterns.Pool
 
         public void FreePool()
         {
-            
+            for (int i = 0; i < pool.Count; i++)
+            {
+                GameObject.Destroy(pool[i].gameObject);
+            }
+            pool.Clear();
         }
 
         public void KillAll()
@@ -55,8 +40,6 @@ namespace WRA.General.Patterns.Pool
             }
         }
         
-        private string prefabName;
-
         public void SetPrefab(string name)
         {
             prefabName = name;
@@ -89,15 +72,9 @@ namespace WRA.General.Patterns.Pool
             obj.OnSpawn();
             return obj;
         }
-
-        protected virtual void LoadPrefab()
-        {
-            prefab = Resources.Load<TObject>($"PooledObjects/{typeof(TObject).Name}");
-        }
         
         private void InitObject()
         {
-            // TObject obj = Object.Instantiate(prefab);
             TObject obj = poolObjectFactory.Create(prefabName) as TObject;
             obj.gameObject.name += "_Pooled_ID=" + pool.Count;
             obj.OnInit();

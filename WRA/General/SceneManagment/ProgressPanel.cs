@@ -14,6 +14,8 @@ namespace WRA.General.SceneManagment
         [SerializeField] private TextMeshProUGUI progressText;
         [SerializeField] private TextTranslator sceneIsReadyText;
         [SerializeField] private KeyCode continueKey;
+        
+        private ILoadingStatus loadingStatus;
 
         private void Awake()
         {
@@ -22,26 +24,29 @@ namespace WRA.General.SceneManagment
 
         private void Update()
         {
+            if(loadingStatus == null)
+                return;
+            
             if (progressBar != null)
             {
-                progressBar.fillAmount = CustomSceneManager.PercentOfLoad;
+                progressBar.fillAmount = loadingStatus.GetProgress();
             }
 
             if (progressText != null)
             {
-                progressText.text = CustomSceneManager.PercentOfLoad.ToString("P");
+                progressText.text = loadingStatus.GetProgress().ToString("P");
             }
 
-            sceneIsReadyText.gameObject.SetActive(CustomSceneManager.SceneIsReady);
-            if (CustomSceneManager.SceneIsReady && Input.GetKeyDown(continueKey))
+            sceneIsReadyText.gameObject.SetActive(loadingStatus.IsReady());
+            if (loadingStatus.IsReady() && Input.GetKeyDown(continueKey))
             {
-                CustomSceneManager.SetActiveNextScene();
+                loadingStatus.StartScene();
             }
         }
 
-        public void SetActiveNextScene()
+        public override void OnOpen()
         {
-            CustomSceneManager.SetActiveNextScene();
+            loadingStatus = (ILoadingStatus) data;
         }
     }
 }

@@ -24,6 +24,6 @@ namespace WRA.General.Patterns.Singletons
             }
         }
 
-        private static T instance;
+        protected static T instance;
     }
 }

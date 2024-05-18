@@ -4,7 +4,7 @@ using WRA.UI.PanelsSystem;
 using WRA.Utility.Diagnostics.Logs;
 using Zenject;
 
-namespace WRA.Zenject
+namespace WRA.Zenject.Panels
 {
     [CreateAssetMenu(fileName = "PanelFactoryInstaller", menuName = "thief01/WRA-SDK/Installers/PanelFactoryInstaller")]
     public class PanelFactoryInstaller : ScriptableObjectInstaller<PanelFactoryInstaller>

@@ -8,6 +8,7 @@ using WRA.General.Patterns.Singletons;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using WRA.Zenject;
+using WRA.Zenject.Panels;
 using Zenject;
 
 namespace WRA.UI.PanelsSystem

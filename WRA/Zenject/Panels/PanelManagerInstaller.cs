@@ -2,7 +2,7 @@ using UnityEngine;
 using WRA.UI.PanelsSystem;
 using Zenject;
 
-namespace WRA.Zenject
+namespace WRA.Zenject.Panels
 {
     public class PanelManagerInstaller : MonoInstaller
     {

@@ -3,6 +3,7 @@ using UnityEngine;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using WRA.Zenject;
+using WRA.Zenject.Pool;
 using Zenject;
 
 namespace WRA.General.Patterns.Pool

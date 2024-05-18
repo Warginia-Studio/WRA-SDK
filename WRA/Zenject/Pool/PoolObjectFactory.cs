@@ -3,7 +3,7 @@ using WRA.General.Patterns.Pool;
 using WRA.Utility.Diagnostics.Logs;
 using Zenject;
 
-namespace WRA.Zenject
+namespace WRA.Zenject.Pool
 {
     public class PoolObjectFactory : PlaceholderFactory<string, PoolObjectBase>
     {

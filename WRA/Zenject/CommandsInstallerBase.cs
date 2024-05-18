@@ -1,16 +1,17 @@
 using UnityEngine;
+using WRA.Utility.Diagnostics.GameConsole.Commands;
 using Zenject;
 
-namespace WRA.Utility.Diagnostics.GameConsole.Commands
+namespace WRA.Zenject
 {
     [CreateAssetMenu(fileName = "CommandsInstaller", menuName = "thief01/WRA-SDK/Installers/CommandsInstaller")]
     public class CommandsInstallerBase : ScriptableObjectInstaller<CommandsInstallerBase>
     {
         public override void InstallBindings()
         {
-            Container.Bind<ICommand>().To<ConsoleCommand>();
-            Container.Bind<ICommand>().To<HelpCommand>();
-            Container.Bind<ICommand>().To<LanguageCommand>();
+            Container.Bind<ConsoleCommand>().FromInstance(new ConsoleCommand());
+            Container.Bind<HelpCommand>().FromInstance(new HelpCommand());
+            Container.Bind<LanguageCommand>().FromInstance(new LanguageCommand());
         }
     }
 }

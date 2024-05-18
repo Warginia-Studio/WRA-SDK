@@ -1,30 +1,31 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-[System.Serializable]
-public class ResourcePaths 
+namespace WRA.Zenject
 {
-    [SerializeField] private string[] dictionaryPaths = new []{ "SDK/" };
-    [SerializeField] private string[] objectNames = new[] { "SomeObject" };
-
-    private List<string> allPaths;
-
-    public List<string> GetAllPaths()
+    [System.Serializable]
+    public class ResourcePaths 
     {
-        if (allPaths != null)
-            return allPaths;
-        allPaths = new List<string>();
-        foreach (var path in dictionaryPaths)
+        [SerializeField] private string[] dictionaryPaths = new []{ "SDK/" };
+        [SerializeField] private string[] objectNames = new[] { "SomeObject" };
+
+        private List<string> allPaths;
+
+        public List<string> GetAllPaths()
         {
-            foreach (var name in objectNames)
+            if (allPaths != null)
+                return allPaths;
+            allPaths = new List<string>();
+            foreach (var path in dictionaryPaths)
             {
-                allPaths.Add(Path.Combine(path, name));
+                foreach (var name in objectNames)
+                {
+                    allPaths.Add(Path.Combine(path, name));
+                }
             }
-        }
         
-        return allPaths;
+            return allPaths;
+        }
     }
 }

@@ -22,14 +22,14 @@ namespace WRA.General.Patterns.Pool
             }
         }
         
-        [Inject] private PoolObjectFactory poolObjectFactory;
+        [Inject] public PoolObjectFactory poolObjectFactory;
 
         private static PoolBase<TObject> instance;
         protected TObject prefab;
         
         protected List<TObject> pool = new List<TObject>();
 
-        protected PoolBase()
+        public PoolBase()
         {
             LoadPrefab();       
         }
@@ -54,15 +54,17 @@ namespace WRA.General.Patterns.Pool
                 pool[i].Kill();
             }
         }
+        
+        private string prefabName;
 
         public void SetPrefab(string name)
         {
-            throw new System.NotImplementedException();
+            prefabName = name;
         }
 
         public TObject SpawnObject<TObject>() where TObject : PoolObjectBase
         {
-            throw new System.NotImplementedException();
+            return SpawnObject() as TObject;
         }
 
         public virtual TObject SpawnObject()
@@ -95,7 +97,8 @@ namespace WRA.General.Patterns.Pool
         
         private void InitObject()
         {
-            TObject obj = Object.Instantiate(prefab);
+            // TObject obj = Object.Instantiate(prefab);
+            TObject obj = poolObjectFactory.Create(prefabName) as TObject;
             obj.gameObject.name += "_Pooled_ID=" + pool.Count;
             obj.OnInit();
             obj.SetActive(false);

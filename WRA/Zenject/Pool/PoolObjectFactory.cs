@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using WRA.General.Patterns.Pool;
+using WRA.Utility.Diagnostics.Logs;
 using Zenject;
 
 namespace WRA.Zenject
@@ -15,16 +16,33 @@ namespace WRA.Zenject
             this.poolObjects = poolObjects;
         }
     
-        public PoolObjectBase Create(string param)
+        public PoolObjectBase Create(string name)
         {
             foreach (var poolObject in poolObjects)
             {
-                if (poolObject.name == param)
-                {
-                    var pool = container.InstantiatePrefab(poolObject.gameObject).GetComponent<PoolObjectBase>();
-                    return pool;
-                }
+                if (poolObject.name != name)
+                    continue;
+
+                var pool = container.InstantiatePrefab(poolObject.gameObject).GetComponent<PoolObjectBase>();
+                return pool;
+
             }
+
+            return null;
+        }
+        
+        public TObject Create<TObject>(string name) where TObject : PoolObjectBase
+        {
+            foreach (var poolObject in poolObjects)
+            {
+                if (poolObject is not TObject)
+                    continue;
+                var pool = container.InstantiatePrefab(poolObject.gameObject).GetComponent<TObject>();
+                return pool;
+            }
+            
+            WraDiagnostics.LogError("PoolObjectFactory: Create: PoolObject not found. Name: " + name + " Type: " + typeof(TObject).Name);
+
             return null;
         }
     }

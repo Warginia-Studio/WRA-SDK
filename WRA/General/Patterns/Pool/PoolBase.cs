@@ -44,42 +44,49 @@ namespace WRA.General.Patterns.Pool
         {
             prefabName = name;
         }
-
-        public TObject SpawnObject<TObject>() where TObject : PoolObjectBase
+        
+        public TObject SpawnObjectAsType()
         {
-            return SpawnObject() as TObject;
+            return (TObject)SpawnObject();
         }
-
-        public virtual TObject SpawnObject()
+        
+        public PoolObjectBase SpawnObject()
         {
             TObject obj = null;
-            for (int i = 0; i < pool.Count; i++)
-            {
-                if (!pool[i].gameObject.activeSelf)
-                {
-                    obj = pool[i];
-                    break;
-                }
-            }
+            obj = FindAvailableObject();
+            
 
             if (obj == null)
             {
                 WraDiagnostics.LogWarning($"Pool is empty, creating new object. Type: {typeof(TObject).Name}");
-                InitObject();
-                obj = pool[^1];
+                obj = InitObject();
             }
 
             obj.OnSpawn();
             return obj;
         }
         
-        private void InitObject()
+        private TObject FindAvailableObject()
         {
-            TObject obj = poolObjectFactory.Create(prefabName) as TObject;
+            for (int i = 0; i < pool.Count; i++)
+            {
+                if (!pool[i].gameObject.activeSelf)
+                    return pool[i];
+                
+            }
+            return null;
+        }
+        
+        
+        private TObject InitObject()
+        {
+            TObject obj = poolObjectFactory.Create<TObject>(prefabName);
             obj.gameObject.name += "_Pooled_ID=" + pool.Count;
             obj.OnInit();
             obj.SetActive(false);
             pool.Add(obj);
+            
+            return obj;
         }
     }
 }

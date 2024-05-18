@@ -9,7 +9,7 @@
         void KillAll();
         
         void SetPrefab(string name);
-        
-        TObject SpawnObject<TObject>() where TObject : PoolObjectBase;
+
+        PoolObjectBase SpawnObject();
     }
 }

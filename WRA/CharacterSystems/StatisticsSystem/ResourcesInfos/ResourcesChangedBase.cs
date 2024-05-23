@@ -4,7 +4,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.ResourcesInfos
 {
     public class ResourcesChangedBase
     {
-        public Transform Owner;
+        public CharacterSystemBase Owner;
         public float CalculatedValueChanged;
         public float RelValueChanged;
     }

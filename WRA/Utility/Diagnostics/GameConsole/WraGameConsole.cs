@@ -18,7 +18,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
         {
             new HelpCommand(),
             new LanguageCommand(),
-            new ConsoleCommand()
+            // new ConsoleCommand()
         };
         
         [SerializeField] private TMP_InputField inputField;

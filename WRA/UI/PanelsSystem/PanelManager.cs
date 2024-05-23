@@ -70,7 +70,7 @@ namespace WRA.UI.PanelsSystem
             return true;
         }
         
-        public void ShowPanel(string panelName, PanelDataBase panelDataBase)
+        public void ShowPanel(string panelName, PanelDataBase panelDataBase = null)
         {
             var panel = GetPanel(panelName);
             if (panel == null)
@@ -81,7 +81,7 @@ namespace WRA.UI.PanelsSystem
             panel.ShowThisPanel();
         }
         
-        public void HidePanel(string panelName, PanelDataBase panelDataBase)
+        public void HidePanel(string panelName, PanelDataBase panelDataBase = null)
         {
             var panel = GetPanel(panelName);
             if (panel == null)

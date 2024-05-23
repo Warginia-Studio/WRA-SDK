@@ -1,5 +1,6 @@
 using UnityEngine;
 using WRA.UI.PanelsSystem;
+using Zenject;
 
 namespace WRA.Utility.Diagnostics.GameConsole.Commands
 {
@@ -7,6 +8,14 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
     {
         public string Name => "cmd";
         public string Description => "Description";
+        public string Usage => "Usage: cmd <open/close/switch>";
+        private PanelManager panelManager;
+
+        public ConsoleCommand(PanelManager panelManager)
+        {
+            this.panelManager = panelManager;
+        }
+        
         public void Execute(params string[] args)
         {
             if(args.Length == 0)
@@ -20,15 +29,19 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
             var command = args[1];
             if (command.ToLower() == "open")
             {
-                // PanelManager.Instance.ShowPanel<WraGameConsole>();
+                panelManager.OpenPanel("GameConsole");
             }
             else if (command.ToLower() == "close")
             {
-                // PanelManager.Instance.HidePanel<WraGameConsole>();
+                panelManager.HidePanel("GameConsole");
             }
             else if(command.ToLower() == "switch")
             {
-                // PanelManager.Instance.GetPanel<WraGameConsole>().SwitchHideThisPanel();
+                var pan = panelManager.GetPanel("GameConsole");
+                if(pan == null)
+                    panelManager.OpenPanel("GameConsole");
+                else
+                    pan.SwitchHideThisPanel();
             }
         }
     }

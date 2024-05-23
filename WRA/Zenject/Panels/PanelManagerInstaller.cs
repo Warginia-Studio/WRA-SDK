@@ -10,7 +10,7 @@ namespace WRA.Zenject.Panels
     
         public override void InstallBindings()
         {
-            Container.Bind<PanelManager>().FromInstance(panelManager).AsSingle();
+            Container.Bind<PanelManager>().To<PanelManager>().FromInstance(panelManager).CopyIntoAllSubContainers();
         }
     }
 }

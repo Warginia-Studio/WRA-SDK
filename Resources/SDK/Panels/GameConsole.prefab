@@ -1933,7 +1933,7 @@ GameObject:
   - component: {fileID: 6554713450913415800}
   - component: {fileID: 6554713450913415801}
   m_Layer: 0
-  m_Name: WraGameConsole
+  m_Name: GameConsole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -36,7 +36,7 @@ namespace WRA.Utility.Diagnostics.Logs
         
         public static void LogFromObject(this Object ob, object message, LogType logType=LogType.log, string logTag = "default")
         {
-            Log(message, Color.gray, logTag);
+            Log(message, Color.gray, logTag, ob);
         }
         
         public static void Log(object message, LogType logType=LogType.log, string logTag = "default")
@@ -44,22 +44,18 @@ namespace WRA.Utility.Diagnostics.Logs
             Log(message, Color.gray, logTag);
         }
 
-        // public static void LogWarning(object message, string logTag = "default")
-        // {
-        //     LogWarning(message, Color.yellow, logTag);
-        // }
-        //
-        // public static void LogError(object message, string logTag = "default")
-        // {
-        //     LogError(message, Color.red, logTag);
-        // }
-
-        public static void Log(object message, Color color, string logTag ="default")
+        public static string GetTime()
+        {
+            if (Application.isEditor)
+                return "";
+            return System.DateTime.Now.ToString(" [ HH:mm:ss ] ");
+        }
+        public static void Log(object message, Color color, string logTag ="default", Object ob = null)
         {
             AddTag(logTag);
             
-            var logData = new LogData() { Message = (string)message, LogType = LogType.log, LogTag = logTag};
-            Debug.LogError(logData.GetFinalMessage());
+            var logData = new LogData() { Message = (string)message, LogType = LogType.log, LogTag = logTag, Time = GetTime()};
+            Debug.Log(logData.GetFinalMessage(), ob);
             WraLogDatas.Add(logData);
             OnLog.Invoke(logData);
         }

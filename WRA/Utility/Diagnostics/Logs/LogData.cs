@@ -18,11 +18,12 @@ namespace WRA.Utility.Diagnostics.Logs
         public LogType LogType { get; set; }
         public string Message { get; set; }
         public string LogTag { get; set; }
+        public string Time { get; set; }
         
         public string GetFinalMessage()
         {
             var logType = ColorHelper.GetTextInColor(LogType.ToString().ToUpper(), LOG_COLORS[(int)LogType]);
-            return $"[ {logType} ] {Message}";
+            return $"[ {logType} ]{Time}{Message}";
         }
     }
 }

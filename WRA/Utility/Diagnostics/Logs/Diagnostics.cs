@@ -38,29 +38,13 @@ namespace WRA.Utility.Diagnostics.Logs
         {
             Log(message, logType, logTag, ob);
         }
-
-        public static void Log(object message)
-        {
-            Log(message, LogType.log);
-        }
         
-        public static void Log(object message, LogType logType)
+        public static void Log(object message, LogType logType = LogType.log, string logTag ="default")
         {
-            Log(message, logType, "default");
-        }
-        
-        public static void Log(object message, LogType logType, string logTag)
-        {
-            Log(message, logType, logTag);
+            Log(message, logType, logTag, null);
         }
 
-        public static string GetTime()
-        {
-            if (Application.isEditor)
-                return "";
-            return System.DateTime.Now.ToString(" [ HH:mm:ss ] ");
-        }
-        public static void Log(object message, LogType logType, string logTag, Object ob)
+        private static void Log(object message, LogType logType, string logTag, Object ob)
         {
             AddTag(logTag);
             
@@ -68,6 +52,13 @@ namespace WRA.Utility.Diagnostics.Logs
             Debug.Log(logData.GetFinalMessage(), ob);
             WraLogDatas.Add(logData);
             OnLog.Invoke(logData);
+        }
+        
+        public static string GetTime()
+        {
+            if (Application.isEditor)
+                return "";
+            return System.DateTime.Now.ToString(" [ HH:mm:ss ] ");
         }
 
         public static List<LogData> GetLogsWithTag(string tag = "all")

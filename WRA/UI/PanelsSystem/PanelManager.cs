@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using WRA.General.Patterns;
 using WRA.General.Patterns.Singletons;
+using WRA.UI.PanelsSystem.PanelAnimations;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using WRA.Zenject;
@@ -44,38 +45,44 @@ namespace WRA.UI.PanelsSystem
             return panelFactory.Create(panelName, data);
         }
         
-        public PanelBase ClosePanel(string panelName, PanelDataBase data = null)
+        public void ClosePanel(PanelBase panelBase, PanelDataBase data = null)
+        {
+            ClosePanel(panelBase.name, data);
+        }
+
+        
+        public bool ClosePanel(string panelName, PanelDataBase data = null)
         {
             if (IsPanelOpened(panelName))
             {
                 var panel = GetPanel(panelName);
                 panel.SetData(data);
                 panel.CloseThisPanel();
-                return panel;
+                return true;
             }
-            return null;
+            return false;
         }
         
-        public void ShowPanel(string panelName)
+        public void ShowPanel(string panelName, PanelDataBase panelDataBase)
         {
-            if (IsPanelOpened(panelName))
-            {
-                GetPanel(panelName).ShowThisPanel();
-            }
-            else
-            {
-                OpenPanel(panelName);
-            }
+            var panel = GetPanel(panelName);
+            if (panel == null)
+                return;
+            if(panel.Status == PanelAnimationStatus.ShowingAnimation || panel.Status == PanelAnimationStatus.Show)
+                return;
+            panel.SetData(panelDataBase);
+            panel.ShowThisPanel();
         }
         
-        public PanelBase HidePanel(string panelName)
+        public void HidePanel(string panelName, PanelDataBase panelDataBase)
         {
-            if (IsPanelOpened(panelName))
-            {
-                GetPanel(panelName).HideThisPanel();
-                return GetPanel(panelName);
-            }
-            return null;
+            var panel = GetPanel(panelName);
+            if (panel == null)
+                return;
+            if(panel.Status == PanelAnimationStatus.HidingAnimation || panel.Status == PanelAnimationStatus.Hide)
+                return;
+            panel.SetData(panelDataBase);
+            panel.HideThisPanel();
         }
         
         public PanelBase GetPanel(string panelName)

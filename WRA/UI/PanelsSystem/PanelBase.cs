@@ -20,6 +20,8 @@ namespace WRA.UI.PanelsSystem
         public UnityEvent OnHideEvent;
         
         public bool IsShow { get; private set; }
+
+        public PanelAnimationStatus Status => animations.Where(ctg => ctg.UseAnimationFromPanel).Max(ctg => ctg.Status);
         
         public List<PanelFragmentBase> Fragments => fragments;
         public List<PanelAnimationBase> Animations => animations;
@@ -32,12 +34,10 @@ namespace WRA.UI.PanelsSystem
         protected object data;
         
         #region LAZLY_FUNC
-        /// <summary>
-        /// These functionsare used to open, close, show, hide panels, from buttons, or other panels.
-        /// </summary>
+
         public void CloseThisPanel()
         {
-            // PanelManager.Instance.LazlyClose(this);
+            panelManager.ClosePanel(this);
         }
         
         public void ShowThisPanel()
@@ -102,6 +102,8 @@ namespace WRA.UI.PanelsSystem
             {
                 if (ctg == null)
                     return;
+                if(!ctg.UseAnimationFromPanel)
+                    return;
                 ctg.ShowAnimation(null);
             });
         }
@@ -113,6 +115,8 @@ namespace WRA.UI.PanelsSystem
             Animations.ForEach(ctg =>
             {
                 if (ctg == null)
+                    return;
+                if(!ctg.UseAnimationFromPanel)
                     return;
                 ctg.HideAnimation(null);
             });

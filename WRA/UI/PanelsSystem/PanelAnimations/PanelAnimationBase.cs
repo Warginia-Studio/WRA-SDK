@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace WRA.UI.PanelsSystem.PanelAnimations
@@ -9,12 +10,15 @@ namespace WRA.UI.PanelsSystem.PanelAnimations
         public UnityEvent OnHide;
         public UnityEvent<PanelAnimationStatus> OnStatusChanged;
         public PanelAnimationStatus Status { get; protected set; }
+        
+        public bool UseAnimationFromPanel => useAnimationFromPanel;
 
+        [SerializeField] private bool useAnimationFromPanel = true;
         public void SetPanel(PanelBase panelBase)
         {
             ParentPanel = panelBase;
         }
-
+        
         public override void OnFragmentInit()
         {
             base.OnFragmentInit();
@@ -32,6 +36,7 @@ namespace WRA.UI.PanelsSystem.PanelAnimations
             OnStatusChangedEvent(PanelAnimationStatus.Hide);
             onComplete?.Invoke();
         }
+        
     
         public virtual void SetVisible(bool visible)
         {

@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.Tools.Editor
 {
@@ -51,7 +52,7 @@ namespace WRA.Tools.Editor
 
         private static void LogTodo(string file, string lineNumber, string commentTodo)
         {
-            Diagnostics.Log($"Found TODO in file {Path.GetFileName(file)} in line {lineNumber} comment TODO: {commentTodo}", Color.yellow);
+            Diagnostics.Log($"Found TODO in file {Path.GetFileName(file)} in line {lineNumber} comment TODO: {commentTodo}", LogType.warning);
         }
     }
 }

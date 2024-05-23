@@ -36,12 +36,22 @@ namespace WRA.Utility.Diagnostics.Logs
         
         public static void LogFromObject(this Object ob, object message, LogType logType=LogType.log, string logTag = "default")
         {
-            Log(message, Color.gray, logTag, ob);
+            Log(message, logType, logTag, ob);
+        }
+
+        public static void Log(object message)
+        {
+            Log(message, LogType.log);
         }
         
-        public static void Log(object message, LogType logType=LogType.log, string logTag = "default")
+        public static void Log(object message, LogType logType)
         {
-            Log(message, Color.gray, logTag);
+            Log(message, logType, "default");
+        }
+        
+        public static void Log(object message, LogType logType, string logTag)
+        {
+            Log(message, logType, logTag);
         }
 
         public static string GetTime()
@@ -50,11 +60,11 @@ namespace WRA.Utility.Diagnostics.Logs
                 return "";
             return System.DateTime.Now.ToString(" [ HH:mm:ss ] ");
         }
-        public static void Log(object message, Color color, string logTag ="default", Object ob = null)
+        public static void Log(object message, LogType logType, string logTag, Object ob)
         {
             AddTag(logTag);
             
-            var logData = new LogData() { Message = (string)message, LogType = LogType.log, LogTag = logTag, Time = GetTime()};
+            var logData = new LogData() { Message = (string)message, LogType = logType, LogTag = logTag, Time = GetTime()};
             Debug.Log(logData.GetFinalMessage(), ob);
             WraLogDatas.Add(logData);
             OnLog.Invoke(logData);

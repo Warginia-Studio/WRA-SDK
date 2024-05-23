@@ -2,14 +2,13 @@ using UnityEngine;
 
 namespace WRA.CharacterSystems.StatisticsSystem.ResourcesInfos
 {
-    public class KillInfo
+    public class KillInfo : InfoBase
     {
         public bool WillBeDead=true;
-        public CharacterSystemBase Killer;
-    
-        public KillInfo(CharacterSystemBase killer)
+
+        public KillInfo(CharacterSystemBase owner)
         {
-            Killer = killer;
+            Owner = owner;
         }
     }
 }

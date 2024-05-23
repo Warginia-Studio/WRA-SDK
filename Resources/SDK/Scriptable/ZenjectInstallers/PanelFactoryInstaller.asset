@@ -12,3 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3398625db123ef4bb9e818ebe0a9c37, type: 3}
   m_Name: PanelFactoryInstaller
   m_EditorClassIdentifier: 
+  dictionaryPaths:
+  - SDK/Panels/
+  - Panels/
+  resourcePaths:
+    dictionaryPaths:
+    - SDK/
+    objectNames:
+    - SomeObject

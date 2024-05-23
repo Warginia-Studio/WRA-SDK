@@ -13,13 +13,12 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
         {
             if (args.Length == 0)
             {
-                WraDiagnostics.Log("Please provide a language code", "language");
+                Logs.Diagnostics.Log("Please provide a language code", LogType.cmd, "language");
                 return;
             }
 
             string language = args[1];
             LanguageManager.SetLanguage(language);
-            WraDiagnostics.Log("Language changed to " + language, "language");
         }
     }
 }

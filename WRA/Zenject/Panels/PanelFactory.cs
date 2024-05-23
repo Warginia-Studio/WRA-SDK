@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using WRA.UI.PanelsSystem;
+using WRA.Utility.Diagnostics.Logs;
 using Zenject;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.Zenject.Panels
 {
@@ -20,16 +22,18 @@ namespace WRA.Zenject.Panels
         
         public override PanelBase Create(string panelName, PanelDataBase data)
         {
-            Debug.Log("Create panel: "+panelName);
+            Diagnostics.Log("Creating panel: "+ panelName);
             foreach (var panelBase in panelBases)
             {
                 if (panelBase.name == panelName)
                 {
+                    Diagnostics.Log("[ SUCCESS ] Create panel: "+panelName);
                     var panel = container.InstantiatePrefab(panelBase.gameObject, panelManager.transform).GetComponent<PanelBase>();
                     panel.InitPanelBase(data);
                     return panel;
                 }
             }
+            Diagnostics.Log("Create panel: "+panelName, LogType.failed);
             return null;
         }
     }

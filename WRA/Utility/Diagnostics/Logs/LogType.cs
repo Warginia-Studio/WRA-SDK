@@ -1,9 +1,12 @@
 namespace WRA.Utility.Diagnostics.Logs
 {
-    public enum WraLogType 
+    public enum LogType 
     {
         log,
         error,
-        warning
+        warning,
+        ok,
+        failed,
+        cmd
     }
 }

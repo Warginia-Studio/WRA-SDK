@@ -41,7 +41,7 @@ namespace WRA.Zenject.Pool
                 return pool;
             }
             
-            WraDiagnostics.LogError("PoolObjectFactory: Create: PoolObject not found. Name: " + name + " Type: " + typeof(TObject).Name);
+            Diagnostics.Log($"PoolObjectFactory: PoolObject not found. Name: {name} Type: {typeof(TObject).Name}", LogType.failed);
 
             return null;
         }

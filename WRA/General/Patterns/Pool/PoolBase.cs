@@ -5,6 +5,7 @@ using WRA.Utility.Diagnostics.Logs;
 using WRA.Zenject;
 using WRA.Zenject.Pool;
 using Zenject;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.General.Patterns.Pool
 {
@@ -59,7 +60,7 @@ namespace WRA.General.Patterns.Pool
 
             if (obj == null)
             {
-                WraDiagnostics.LogWarning($"Pool is empty, creating new object. Type: {typeof(TObject).Name}");
+                Diagnostics.Log($"Pool is empty, creating new object. Type: {typeof(TObject).Name}", LogType.warning);
                 obj = InitObject();
             }
 

@@ -2,7 +2,7 @@ using UnityEngine;
 using WRA.Utility.Diagnostics.GameConsole.Commands;
 using Zenject;
 
-namespace WRA.Zenject
+namespace WRA.Zenject.Commands
 {
     [CreateAssetMenu(fileName = "CommandsInstaller", menuName = "thief01/WRA-SDK/Installers/CommandsInstaller")]
     public class CommandsInstallerBase : ScriptableObjectInstaller<CommandsInstallerBase>

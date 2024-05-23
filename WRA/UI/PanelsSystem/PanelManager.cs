@@ -38,29 +38,36 @@ namespace WRA.UI.PanelsSystem
 
         public PanelBase OpenPanel(string panelName, PanelDataBase data = null)
         {
-            if (IsPanelOpened(panelName))
-            {
-                return GetPanel(panelName);
-            }
-            return panelFactory.Create(panelName, data);
+            var panel = GetPanel(panelName);
+            if (panel != null)
+                return panel;
+            panel = panelFactory.Create(panelName, data);
+            if (panel == null)
+                return null;
+            panel.SetData(data);
+            panel.OnOpen();
+            openedPanels.Add(panel);
+            OnPanelOpen?.Invoke(panel);
+            return panel;
         }
         
-        public void ClosePanel(PanelBase panelBase, PanelDataBase data = null)
+        public bool ClosePanel(PanelBase panelBase, PanelDataBase data = null)
         {
-            ClosePanel(panelBase.name, data);
+            return ClosePanel(panelBase.name, data);
         }
 
         
         public bool ClosePanel(string panelName, PanelDataBase data = null)
         {
-            if (IsPanelOpened(panelName))
-            {
-                var panel = GetPanel(panelName);
-                panel.SetData(data);
-                panel.CloseThisPanel();
-                return true;
-            }
-            return false;
+            var panel = GetPanel(panelName);
+            if (panel == null)
+                return false;
+            panel.SetData(data);
+            panel.OnClose();
+            openedPanels.Remove(panel);
+            OnPanelClose?.Invoke(panel);
+            Destroy(panel.gameObject);
+            return true;
         }
         
         public void ShowPanel(string panelName, PanelDataBase panelDataBase)

@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
-public interface IKillable
+namespace WRA.CharacterSystems.StatisticsSystem.Interfaces
 {
-    void Kill(KillInfo killInfo);
+    public interface IKillable
+    {
+        void Kill(KillInfo killInfo);
+    }
 }

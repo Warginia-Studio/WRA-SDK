@@ -8,6 +8,7 @@ using WRA.UI.PanelsSystem.PanelAnimations;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using Zenject;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.UI.PanelsSystem
 {
@@ -79,7 +80,7 @@ namespace WRA.UI.PanelsSystem
         {
             if (data is not PanelDataBase)
             {
-                WraDiagnostics.LogWarning($"Data is null or is not PanelDataBase in {this.GetType().Name}", Color.yellow, "panels");
+                this.LogFromObject($"Data is null or is not PanelDataBase in {this.GetType().Name}", LogType.warning, "panels");
                 data = new PanelDataBase();
             }
             this.data = data;
@@ -128,7 +129,7 @@ namespace WRA.UI.PanelsSystem
         {
             if (data is not T)
             {
-                WraDiagnostics.LogError($"Data data is type: {data.GetType().FullName} expected {typeof(T).FullName} \n" + System.Environment.StackTrace, Color.red);
+                this.LogFromObject($"Data data is type: {data.GetType().FullName} expected {typeof(T).FullName}", LogType.error, "panels");
                 throw(new Exception($"Data data is type: {data.GetType().FullName} expected {typeof(T).FullName}"));
             }
         

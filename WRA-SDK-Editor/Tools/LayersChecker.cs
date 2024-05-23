@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.Tools.Editor
 {
@@ -12,7 +13,7 @@ namespace WRA.Tools.Editor
         [MenuItem("thief01/Tests/Tag Manager test")]
         public static void TagManagerTest()
         {
-            WraDiagnostics.LogError("Test isn't added yet.", Color.red);
+            Diagnostics.Log("Test isn't added yet.", LogType.error);
         }
     }
 }

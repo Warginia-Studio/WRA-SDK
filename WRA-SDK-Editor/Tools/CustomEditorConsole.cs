@@ -29,7 +29,7 @@ namespace WRA.Tools.Editor
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, false, true);
         
 
-            var messages = WraDiagnostics.GetLogsWithTag();
+            var messages = Diagnostics.GetLogsWithTag();
             var msg = "";
         
             for (int i = 0; i < messages.Count; i++)

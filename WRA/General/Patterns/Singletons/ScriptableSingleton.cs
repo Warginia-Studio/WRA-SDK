@@ -1,6 +1,7 @@
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.General.Patterns.Singletons
 {
@@ -26,7 +27,7 @@ namespace WRA.General.Patterns.Singletons
                     instance = assets[0];
                     if (instance == null)
                     {
-                        WraDiagnostics.LogError($"No scriptable instance in resources: {typeof(T)}");
+                        Diagnostics.Log($"No scriptable instance in resources: {typeof(T)}", LogType.failed);
                     }
                 }
 

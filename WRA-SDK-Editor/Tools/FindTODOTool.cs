@@ -51,7 +51,7 @@ namespace WRA.Tools.Editor
 
         private static void LogTodo(string file, string lineNumber, string commentTodo)
         {
-            WraDiagnostics.Log($"Found TODO in file {Path.GetFileName(file)} in line {lineNumber} comment TODO: {commentTodo}", Color.yellow);
+            Diagnostics.Log($"Found TODO in file {Path.GetFileName(file)} in line {lineNumber} comment TODO: {commentTodo}", Color.yellow);
         }
     }
 }

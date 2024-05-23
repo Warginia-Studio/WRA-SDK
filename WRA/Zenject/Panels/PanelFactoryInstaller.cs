@@ -3,6 +3,7 @@ using UnityEngine;
 using WRA.UI.PanelsSystem;
 using WRA.Utility.Diagnostics.Logs;
 using Zenject;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.Zenject.Panels
 {
@@ -36,7 +37,7 @@ namespace WRA.Zenject.Panels
             
             Container.Bind < List<PanelBase>>().FromInstance(panels);
 
-            WraDiagnostics.Log("loaded panels: " + panels.Count, "PanelFactoryInstaller");
+            Diagnostics.Log($"loaded panels: {panels.Count}", LogType.log, "PanelFactoryInstaller");
         }
     }
 }

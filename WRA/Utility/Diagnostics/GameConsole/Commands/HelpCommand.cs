@@ -1,3 +1,4 @@
+
 using WRA.Utility.Diagnostics.Logs;
 
 namespace WRA.Utility.Diagnostics.GameConsole.Commands
@@ -13,7 +14,7 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
             var commands = WraGameConsole.Commands;
             foreach (var command in commands)
             {
-                WraDiagnostics.Log(command.Name + " - " + command.Description, "commands");
+                Logs.Diagnostics.Log(command.Name + " - " + command.Description, LogType.cmd, "commands");
             }
         }
     }

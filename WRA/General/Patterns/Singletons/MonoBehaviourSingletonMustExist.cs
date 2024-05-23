@@ -1,6 +1,7 @@
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.General.Patterns.Singletons
 {
@@ -15,7 +16,7 @@ namespace WRA.General.Patterns.Singletons
                     instance = FindObjectOfType<T>();
                     if (instance == null)
                     {
-                        WraDiagnostics.LogError($"Instance of {typeof(T)} must exist in the scene.");
+                        Diagnostics.Log($"Instance of {typeof(T)} must exist in the scene.", LogType.failed);
                         return null;
                     }
 

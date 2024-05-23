@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ILoadingStatus
+namespace WRA.General.SceneManagment
 {
-    bool IsReady();
-    float GetProgress();
+    public interface ILoadingStatus
+    {
+        bool IsReady();
+        float GetProgress();
     
-    void StartScene();
+        void StartScene();
+    }
 }

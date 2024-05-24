@@ -24,7 +24,7 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
             var commandInstaller = Object.FindAnyObjectByType<WraGameConsole>();
 
             var commands = commandInstaller.Commands;
-            if (args.Length == 0)
+            if (args.Length == 0 || args.Length == 1)
             {
                 for (int i = 0; i < commands.Count; i++)
                 {

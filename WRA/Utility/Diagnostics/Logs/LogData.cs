@@ -12,7 +12,8 @@ namespace WRA.Utility.Diagnostics.Logs
             Color.red,
             Color.yellow,
             Color.green,
-            Color.red
+            Color.red,
+            Color.cyan
         }; 
         
         public LogType LogType { get; set; }
@@ -23,7 +24,7 @@ namespace WRA.Utility.Diagnostics.Logs
         public string GetFinalMessage()
         {
             var logType = ColorHelper.GetTextInColor(LogType.ToString().ToUpper(), LOG_COLORS[(int)LogType]);
-            return $"[ {logType} ]{Time}{Message}";
+            return $"[ {logType} ] {Time}{Message}";
         }
     }
 }

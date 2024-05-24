@@ -58,7 +58,7 @@ namespace WRA.Utility.Diagnostics.Logs
         {
             if (Application.isEditor)
                 return "";
-            return System.DateTime.Now.ToString(" [ HH:mm:ss ] ");
+            return System.DateTime.Now.ToString("[ HH:mm:ss ] ");
         }
 
         public static List<LogData> GetLogsWithTag(string tag = "all")

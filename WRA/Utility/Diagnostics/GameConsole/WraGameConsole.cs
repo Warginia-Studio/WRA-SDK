@@ -18,7 +18,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
         {
             new HelpCommand(),
             new LanguageCommand(),
-            // new ConsoleCommand()
+            new ConsoleCommand()
         };
         
         [SerializeField] private TMP_InputField inputField;
@@ -49,22 +49,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
         {
             UnRegisterEvents();
         }
-
-        // private void Update()
-        // {
-        //     if (string.IsNullOrEmpty(inputField.text))
-        //     {
-        //         commandInputHelper.DestroyCommands();
-        //         return;
-        //     }
-        //
-        //     if (inputField.text == lastText)
-        //         return;
-        //     
-        //     OnCommandWrite(inputField.text);
-        //     lastText = inputField.text;
-        // }
-
+        
         public override void OnOpen()
         {
             base.OnOpen();
@@ -80,21 +65,8 @@ namespace WRA.Utility.Diagnostics.GameConsole
         {
             base.OnShow();
             transform.SetAsLastSibling();
-            // canvasGroup.alpha = 1;
-            // transform.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
-
-        public override void OnHide()
-        {
-            base.OnHide();
-            // canvasGroup.alpha = 0;
-        }
-
-        // public void OnCommandWrite(string command)
-        // {
-        //     commandInputHelper.ShowCommands(command + "test", command + "test2", command + "test3");
-        // }
-
+        
         public void ExecuteCommand(string command)
         {
             
@@ -106,13 +78,13 @@ namespace WRA.Utility.Diagnostics.GameConsole
             Logs.Diagnostics.Log(command, LogType.cmd, "CMD");
             if (splited.Length == 0)
             {
-                Logs.Diagnostics.Log("Command is empty", LogType.error);
+                Logs.Diagnostics.Log("Command is empty", LogType.cmd);
                 return;
             }
             var cmd = Commands.Find(ctg => ctg.Name == splited[0]);
             if (cmd == null)
             {
-                Logs.Diagnostics.Log($"Command '{splited[0]}' not found", LogType.error);
+                Logs.Diagnostics.Log($"Command '{splited[0]}' not found", LogType.cmd);
                 return;
             }
             cmd.Execute(splited);
@@ -135,10 +107,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
         private void RegisterEvenets()
         {
             tagSelector.onValueChanged.AddListener(OnTagChanged);
-            // inputField.onValueChanged.AddListener(OnCommandWrite);
             inputField.onSubmit.AddListener(ExecuteCommand);
-            // inputField.onSelect.AddListener(OnSelectedInputField);
-            // inputField.onDeselect.AddListener(OnDeselectInputField);
             Logs.Diagnostics.OnLog.AddListener(OnLog);
             Logs.Diagnostics.OnTagAdded.AddListener(OnTagAdded);
         }
@@ -146,10 +115,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
         private void UnRegisterEvents()
         {
             tagSelector.onValueChanged.RemoveListener(OnTagChanged);
-            // inputField.onValueChanged.RemoveListener(OnCommandWrite);
             inputField.onSubmit.RemoveListener(ExecuteCommand);
-            // inputField.onSelect.RemoveListener(OnSelectedInputField);
-            // inputField.onDeselect.RemoveListener(OnDeselectInputField);
             Logs.Diagnostics.OnLog.RemoveListener(OnLog);
             Logs.Diagnostics.OnTagAdded.RemoveListener(OnTagAdded);
         }
@@ -160,23 +126,11 @@ namespace WRA.Utility.Diagnostics.GameConsole
                 return;
         
             var log = Instantiate(simpleLogPrefab, logContainer);
-            log.Bind(arg0.Message, Color.gray);
+            log.Bind(arg0.GetFinalMessage());
             lastTween = DOTween.To(() => scrollRect.verticalNormalizedPosition, x => scrollRect.verticalNormalizedPosition = x, 0,
                 0.5f);
         }
-
-        // private void OnSelectedInputField(string arg0)
-        // {
-        //     commandInputHelper.DestroyCommands();
-        //     WraDiagnostics.LogWarning("Selected cmd input field but not implemented yet.");
-        // }
-    
-        // private void OnDeselectInputField(string arg0)
-        // {
-        //     commandInputHelper.DestroyCommands();
-        //     WraDiagnostics.LogWarning("Deselected cmd input field but not implemented yet.");
-        // }
-
+        
         private void OnTagAdded(string str)
         {
             tagSelector.ClearOptions();

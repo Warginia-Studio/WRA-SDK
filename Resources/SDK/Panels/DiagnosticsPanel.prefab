@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8412842270401222025}
   - component: {fileID: -4607748339947153845}
   m_Layer: 0
-  m_Name: WraDiagnosticsPanel
+  m_Name: DiagnosticsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

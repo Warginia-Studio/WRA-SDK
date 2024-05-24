@@ -8,18 +8,15 @@ using UnityEngine.UI;
 using WRA.UI.PanelsSystem;
 using WRA.Utility.Diagnostics.GameConsole.Commands;
 using WRA.Utility.Diagnostics.Logs;
+using Zenject;
 using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.Utility.Diagnostics.GameConsole
 {
     public class WraGameConsole : PanelBase
     {
-        public static List<ICommand> Commands { get; protected set; } = new List<ICommand>()
-        {
-            new HelpCommand(),
-            new LanguageCommand(),
-            new ConsoleCommand()
-        };
+        
+        [Inject] public List<ICommand> Commands;
         
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private Transform logContainer;

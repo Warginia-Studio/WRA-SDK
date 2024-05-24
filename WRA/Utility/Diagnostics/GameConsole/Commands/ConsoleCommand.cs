@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using WRA.UI.PanelsSystem;
 using WRA.Utility.Diagnostics.DiagnosticsPanel;
@@ -10,6 +11,14 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
         public string Name => "cmd";
         public string Description => "Description";
         public string Usage => "Usage: cmd <open/close/switch>";
+        public List<string> Arguments { get; } = new List<string>()
+        {
+            "open - Open console",
+            "close - Close console",
+            "switch - Switch console"
+        };
+
+
         private PanelManager panelManager;
         
         

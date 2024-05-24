@@ -11,7 +11,7 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
     {
         public string Name => "help";
         public string Description => "Show all available commands";
-        public string Usage => "help ";
+        public string Usage => "help <command> or help -us <command>";
         
         public List<string> Arguments => new List<string>()
         {
@@ -26,6 +26,8 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
             var commands = commandInstaller.Commands;
             if (args.Length == 0 || args.Length == 1)
             {
+                Logs.Diagnostics.Log(Usage, LogType.cmd, "commands");
+                Logs.Diagnostics.Log("Available commands:", LogType.cmd, "commands");
                 for (int i = 0; i < commands.Count; i++)
                 {
                     ShowCommand(commands[i]);

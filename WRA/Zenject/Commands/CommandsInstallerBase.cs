@@ -17,7 +17,7 @@ namespace WRA.Zenject.Commands
         };
         public override void InstallBindings()
         {
-            Container.Bind<List<ICommand>>().FromInstance(Commands);
+            Container.Bind<List<ICommand>>().FromInstance(Commands).MoveIntoAllSubContainers();
             for (int i = 0; i < Commands.Count; i++)
             {
                 Container.Bind<ICommand>().FromInstance(Commands[i]).WithConcreteId(Commands[i].Name);

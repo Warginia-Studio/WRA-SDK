@@ -21,7 +21,9 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
 
         public void Execute(string[] args)
         {
-            var commands = GameObject.FindObjectsByType<CommandsInstallerBase>(FindObjectsInactive.Exclude, FindObjectsSortMode.None).First().Commands;
+            var commandInstaller = Object.FindAnyObjectByType<WraGameConsole>();
+
+            var commands = commandInstaller.Commands;
             if (args.Length == 0)
             {
                 for (int i = 0; i < commands.Count; i++)

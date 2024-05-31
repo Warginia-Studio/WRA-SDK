@@ -148,6 +148,7 @@ namespace WRA.PlayerSystems.LanguageSystem.Editor
             EditorGUILayout.HelpBox("Translations", MessageType.Info);
 
             var translations = langs[choicedLang].GetTranslationsByCategory(langs[choicedLang].Categories[choicedCategory]);
+            translations = translations.OrderBy(ctg => ctg.Key).ToDictionary(ctg => ctg.Key, ctg => ctg.Value);
             
             foreach (var translation in translations)
             {

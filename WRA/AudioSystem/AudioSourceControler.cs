@@ -35,6 +35,7 @@ namespace WRA.AudioSystem
         private void RegisterEvenets()
         {
             AudioManager.Instance.OnVolumeChanged.AddListener(UpdateVolume);
+            UpdateVolume(audioTypeController, AudioManager.Instance.GetVolumeForAudioType(audioTypeController));
         }
         
         private void UpdateVolume(AudioType audioType, float volume)

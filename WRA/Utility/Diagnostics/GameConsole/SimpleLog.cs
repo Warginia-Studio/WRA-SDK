@@ -9,27 +9,28 @@ namespace WRA.Utility.Diagnostics.GameConsole
     {
         private TMP_Text text;
         private Color color;
+        
+        [SerializeField] private Color hoverColor;
+        [SerializeField] private Color defaultColor;
 
         private void Awake()
         {
             text = GetComponent<TMP_Text>();
         }
     
-        public void Bind(string text, Color color)
+        public void Bind(string text)
         {
-            this.text.text = $"[ {DateTime.Now.ToShortTimeString()} ]" + text;
-            this.color = color;
-            this.text.color = color;
+            this.text.text = text;
         }
     
         public void OnPointerEnter(PointerEventData eventData)
         {
-            text.color = Color.white;
+            text.color = hoverColor;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            text.color = color;
+            text.color = defaultColor;
         }
 
         public void OnPointerClick(PointerEventData eventData)

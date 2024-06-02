@@ -4,6 +4,7 @@ using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using WRA.Utility.SmartObjects;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {
@@ -19,7 +20,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
             {
                 if (sourceValueFloat == null)
                 {
-                    WraDiagnostics.LogError($"Source value is null in: { GetType()}. You have to call Init(min, max) method. Value returned will be 0.");
+                    Diagnostics.Log($"Source value is null in: { GetType()}. You have to call Init(min, max) method. Value returned will be 0.", LogType.failed);
                     return 0;
                 }
 

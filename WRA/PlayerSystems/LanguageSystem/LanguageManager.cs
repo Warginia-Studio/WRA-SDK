@@ -10,6 +10,7 @@ using WRA.General;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using WRA.Utility.Math;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.PlayerSystems.LanguageSystem
 {
@@ -22,6 +23,11 @@ namespace WRA.PlayerSystems.LanguageSystem
         public static string CurrentLanguage { get; private set; }
         public static Language CurrentLanguageData { get; set; }
         public static List<Language> Languages { get; private set; }
+
+        private static Dictionary<SystemLanguage, string> LANGS_MAPPING = new()
+        {
+            { SystemLanguage.Polish , "PL"}
+        };
         
         public static void LoadLanguage()
         {
@@ -33,13 +39,23 @@ namespace WRA.PlayerSystems.LanguageSystem
             });
 
 
-            CurrentLanguage = ApplicationProfile.Instance.Language;
-            if (PlayerPrefs.HasKey("Language"))
-            {
-                CurrentLanguage = PlayerPrefs.GetString("Language");
-            }
-
+            CurrentLanguage = GetLangAsString(Application.systemLanguage);
             SetLanguage(CurrentLanguage);
+        }
+        
+        public static void SetLanguage(SystemLanguage language)
+        {
+            var shortLang = "EN";
+            if (LANGS_MAPPING.ContainsKey(language))
+            {
+                shortLang = LANGS_MAPPING[language];
+            }
+            else
+            {
+                Diagnostics.Log($"Not found language: {language} in mapping.", LogType.failed);
+                Diagnostics.Log($"Using default language: EN", LogType.log);
+            }
+            SetLanguage(shortLang);
         }
         
         public static void SetLanguage(string language)
@@ -50,6 +66,30 @@ namespace WRA.PlayerSystems.LanguageSystem
             CurrentLanguageData = Languages.FirstOrDefault(x =>
                 x.ShortLanguageName == CurrentLanguage || x.LanguageName == CurrentLanguage);
             LanguageChanged.Invoke();
+        }
+        
+        public static void NextLanguage()
+        {
+            var index = Languages.IndexOf(CurrentLanguageData);
+            index++;
+            if (index >= Languages.Count)
+            {
+                index = 0;
+            }
+            CurrentLanguageData = Languages[index];
+            SetLanguage(CurrentLanguageData.ShortLanguageName);
+        }
+        
+        public static void PreviousLanguage()
+        {
+            var index = Languages.IndexOf(CurrentLanguageData);
+            index--;
+            if (index < 0)
+            {
+                index = Languages.Count - 1;
+            }
+            CurrentLanguageData = Languages[index];
+            SetLanguage(CurrentLanguageData.ShortLanguageName);
         }
         
         public static string GetTranslation(string keyWord)
@@ -64,11 +104,22 @@ namespace WRA.PlayerSystems.LanguageSystem
             var translation = CurrentLanguageData.GetTranslation(keyWord);
             if (string.IsNullOrEmpty(translation))
             {
-                WraDiagnostics.LogError("Not found key word: " + keyWord + " in language: " + ApplicationProfile.Instance.Language);
+                Diagnostics.Log($"Not found key word: {keyWord} in language: {ApplicationProfile.Instance.Language}", LogType.failed);
                 return ColorHelper.GetTextInColor(keyWord + "_NF", Color.red);
             }
 
             return translation;
+        }
+
+        private static string GetLangAsString(SystemLanguage lang = SystemLanguage.Unknown)
+        {
+            var shortLang = "EN";
+            if (LANGS_MAPPING.ContainsKey(lang))
+            {
+                shortLang = LANGS_MAPPING[lang];
+            }
+            shortLang = PlayerPrefs.GetString("Language", shortLang);
+            return shortLang;
         }
     }
 }

@@ -2,34 +2,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using WRA.Zenject;
+using WRA.Zenject.Pool;
+using Zenject;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.General.Patterns.Pool
 {
-    public class PoolBase<TObject> where TObject : PoolObjectBase 
+    public class PoolBase<TObject> : IPool where TObject : PoolObjectBase
     {
-        public static PoolBase<TObject> Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new PoolBase<TObject>();
-                }
-
-                return instance;
-            }
-        }
-
-        private static PoolBase<TObject> instance;
-        protected TObject prefab;
+        [Inject] public PoolObjectFactory poolObjectFactory;
+        
+        private string prefabName;
         
         protected List<TObject> pool = new List<TObject>();
-
-        protected PoolBase()
-        {
-            LoadPrefab();       
-        }
-
+        
         public void FillPool(int count)
         {
             for (int i = 0; i < count; i++)
@@ -37,7 +24,16 @@ namespace WRA.General.Patterns.Pool
                 InitObject();
             }
         }
-        
+
+        public void FreePool()
+        {
+            for (int i = 0; i < pool.Count; i++)
+            {
+                GameObject.Destroy(pool[i].gameObject);
+            }
+            pool.Clear();
+        }
+
         public void KillAll()
         {
             for (int i = 0; i < pool.Count; i++)
@@ -45,42 +41,54 @@ namespace WRA.General.Patterns.Pool
                 pool[i].Kill();
             }
         }
-
-        public virtual TObject SpawnObject()
+        
+        public void SetPrefab(string name)
+        {
+            prefabName = name;
+        }
+        
+        public TObject SpawnObjectAsType()
+        {
+            return (TObject)SpawnObject();
+        }
+        
+        public PoolObjectBase SpawnObject()
         {
             TObject obj = null;
-            for (int i = 0; i < pool.Count; i++)
-            {
-                if (!pool[i].gameObject.activeSelf)
-                {
-                    obj = pool[i];
-                    break;
-                }
-            }
+            obj = FindAvailableObject();
+            
 
             if (obj == null)
             {
-                WraDiagnostics.LogWarning($"Pool is empty, creating new object. Type: {typeof(TObject).Name}");
-                InitObject();
-                obj = pool[^1];
+                Diagnostics.Log($"Pool is empty, creating new object. Type: {typeof(TObject).Name}", LogType.warning);
+                obj = InitObject();
             }
 
             obj.OnSpawn();
             return obj;
         }
-
-        protected virtual void LoadPrefab()
+        
+        private TObject FindAvailableObject()
         {
-            prefab = Resources.Load<TObject>($"PooledObjects/{typeof(TObject).Name}");
+            for (int i = 0; i < pool.Count; i++)
+            {
+                if (!pool[i].gameObject.activeSelf)
+                    return pool[i];
+                
+            }
+            return null;
         }
         
-        private void InitObject()
+        
+        private TObject InitObject()
         {
-            TObject obj = Object.Instantiate(prefab);
+            TObject obj = poolObjectFactory.Create<TObject>(prefabName);
             obj.gameObject.name += "_Pooled_ID=" + pool.Count;
             obj.OnInit();
             obj.SetActive(false);
             pool.Add(obj);
+            
+            return obj;
         }
     }
 }

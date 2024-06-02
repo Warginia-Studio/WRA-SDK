@@ -1,6 +1,7 @@
 using UnityEngine;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.General.Patterns.Singletons
 {
@@ -20,7 +21,7 @@ namespace WRA.General.Patterns.Singletons
 
                     if (objects == null || objects.Length == 0)
                     {
-                        WraDiagnostics.LogError($"Not found resources: {typeof(T)}");
+                        Diagnostics.Log($"Not found resources: {typeof(T)}", LogType.failed);
                         return null;
                     }
 

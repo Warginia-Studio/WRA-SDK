@@ -6,17 +6,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using WRA.UI.PanelsSystem;
+using WRA.Utility.Diagnostics.GameConsole.Commands;
 using WRA.Utility.Diagnostics.Logs;
+using Zenject;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.Utility.Diagnostics.GameConsole
 {
     public class WraGameConsole : PanelBase
     {
-        public static List<ICommand> Commands { get; protected set; } = new List<ICommand>()
-        {
-            new HelpCommand(),
-            new LanguageCommand()
-        };
+        
+        [Inject] public List<ICommand> Commands;
         
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private Transform logContainer;
@@ -46,54 +46,24 @@ namespace WRA.Utility.Diagnostics.GameConsole
         {
             UnRegisterEvents();
         }
-
-        // private void Update()
-        // {
-        //     if (string.IsNullOrEmpty(inputField.text))
-        //     {
-        //         commandInputHelper.DestroyCommands();
-        //         return;
-        //     }
-        //
-        //     if (inputField.text == lastText)
-        //         return;
-        //     
-        //     OnCommandWrite(inputField.text);
-        //     lastText = inputField.text;
-        // }
-
+        
         public override void OnOpen()
         {
             base.OnOpen();
             var data =GetDataAsType<PanelDataBase>();
-            if(data.StartAsHide)
-                HideThisPanel();
         }
 
         public override void OnClose()
         {
-            PanelManager.Instance.ClosePanel<WraGameConsole, PanelDataBase>(null);
+            // PanelManager.Instance.ClosePanel<WraGameConsole>(null);
         }
 
         public override void OnShow()
         {
             base.OnShow();
             transform.SetAsLastSibling();
-            canvasGroup.alpha = 1;
-            transform.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
-
-        public override void OnHide()
-        {
-            base.OnHide();
-            canvasGroup.alpha = 0;
-        }
-
-        // public void OnCommandWrite(string command)
-        // {
-        //     commandInputHelper.ShowCommands(command + "test", command + "test2", command + "test3");
-        // }
-
+        
         public void ExecuteCommand(string command)
         {
             
@@ -102,16 +72,16 @@ namespace WRA.Utility.Diagnostics.GameConsole
                 return;
             executedCommands.Add(command);
             var splited = command.Split(" ");
-            WraDiagnostics.Log(command, "CMD");
+            Logs.Diagnostics.Log(command, LogType.cmd, "CMD");
             if (splited.Length == 0)
             {
-                WraDiagnostics.LogError("Command is empty");
+                Logs.Diagnostics.Log("Command is empty", LogType.cmd);
                 return;
             }
             var cmd = Commands.Find(ctg => ctg.Name == splited[0]);
             if (cmd == null)
             {
-                WraDiagnostics.LogError($"Command '{splited[0]}' not found");
+                Logs.Diagnostics.Log($"Command '{splited[0]}' not found", LogType.cmd);
                 return;
             }
             cmd.Execute(splited);
@@ -120,7 +90,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
         public void ClearLogs()
         {
             ClearView();
-            WraDiagnostics.ClearLogs();
+            Logs.Diagnostics.ClearLogs();
         }
 
         public void ClearView()
@@ -134,52 +104,34 @@ namespace WRA.Utility.Diagnostics.GameConsole
         private void RegisterEvenets()
         {
             tagSelector.onValueChanged.AddListener(OnTagChanged);
-            // inputField.onValueChanged.AddListener(OnCommandWrite);
             inputField.onSubmit.AddListener(ExecuteCommand);
-            // inputField.onSelect.AddListener(OnSelectedInputField);
-            // inputField.onDeselect.AddListener(OnDeselectInputField);
-            WraDiagnostics.OnLog.AddListener(OnLog);
-            WraDiagnostics.OnTagAdded.AddListener(OnTagAdded);
+            Logs.Diagnostics.OnLog.AddListener(OnLog);
+            Logs.Diagnostics.OnTagAdded.AddListener(OnTagAdded);
         }
     
         private void UnRegisterEvents()
         {
             tagSelector.onValueChanged.RemoveListener(OnTagChanged);
-            // inputField.onValueChanged.RemoveListener(OnCommandWrite);
             inputField.onSubmit.RemoveListener(ExecuteCommand);
-            // inputField.onSelect.RemoveListener(OnSelectedInputField);
-            // inputField.onDeselect.RemoveListener(OnDeselectInputField);
-            WraDiagnostics.OnLog.RemoveListener(OnLog);
-            WraDiagnostics.OnTagAdded.RemoveListener(OnTagAdded);
+            Logs.Diagnostics.OnLog.RemoveListener(OnLog);
+            Logs.Diagnostics.OnTagAdded.RemoveListener(OnTagAdded);
         }
 
-        private void OnLog(WraLogData arg0)
+        private void OnLog(LogData arg0)
         {
-            if (currentTagIndex != 0 && arg0.LogTag != WraDiagnostics.GetTags()[currentTagIndex])
+            if (currentTagIndex != 0 && arg0.LogTag != Logs.Diagnostics.GetTags()[currentTagIndex])
                 return;
         
             var log = Instantiate(simpleLogPrefab, logContainer);
-            log.Bind(arg0.Message, arg0.LogColor);
+            log.Bind(arg0.GetFinalMessage());
             lastTween = DOTween.To(() => scrollRect.verticalNormalizedPosition, x => scrollRect.verticalNormalizedPosition = x, 0,
                 0.5f);
         }
-
-        // private void OnSelectedInputField(string arg0)
-        // {
-        //     commandInputHelper.DestroyCommands();
-        //     WraDiagnostics.LogWarning("Selected cmd input field but not implemented yet.");
-        // }
-    
-        // private void OnDeselectInputField(string arg0)
-        // {
-        //     commandInputHelper.DestroyCommands();
-        //     WraDiagnostics.LogWarning("Deselected cmd input field but not implemented yet.");
-        // }
-
+        
         private void OnTagAdded(string str)
         {
             tagSelector.ClearOptions();
-            tagSelector.AddOptions(WraDiagnostics.GetTags());
+            tagSelector.AddOptions(Logs.Diagnostics.GetTags());
             tagSelector.value = 0;
         }
 
@@ -194,7 +146,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
 
         private void GenerateLogs()
         {
-            var logs = WraDiagnostics.GetLogsWithTag(WraDiagnostics.GetTags()[currentTagIndex]);
+            var logs = Logs.Diagnostics.GetLogsWithTag(Logs.Diagnostics.GetTags()[currentTagIndex]);
             for (int i = 0; i < logs.Count; i++)
             {
                 OnLog(logs[i]);   

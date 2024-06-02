@@ -25,7 +25,8 @@ namespace WRA.PlayerSystems.LanguageSystem
 
         private static Dictionary<SystemLanguage, string> LANGS_MAPPING = new()
         {
-            { SystemLanguage.Polish , "PL"}
+            { SystemLanguage.Polish , "PL"},
+            { SystemLanguage.English, "EN" }
         };
         
         public static void LoadLanguage()
@@ -38,7 +39,11 @@ namespace WRA.PlayerSystems.LanguageSystem
             });
 
 
+#if UNITY_EDITOR
+            CurrentLanguage = GetLangAsString(ApplicationProfile.Instance.Language);
+#else
             CurrentLanguage = GetLangAsString(Application.systemLanguage);
+#endif
             SetLanguage(CurrentLanguage);
         }
         

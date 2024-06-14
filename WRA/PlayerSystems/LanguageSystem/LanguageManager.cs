@@ -13,7 +13,7 @@ using WRA.Utility.Math;
 
 namespace WRA.PlayerSystems.LanguageSystem
 {
-    public class LanguageManager
+    public static class LanguageManager
     {
         public static string LANG_PATH => Application.dataPath + "/Resources/Configs/Langs/";
 
@@ -93,6 +93,11 @@ namespace WRA.PlayerSystems.LanguageSystem
             }
             CurrentLanguageData = Languages[index];
             SetLanguage(CurrentLanguageData.ShortLanguageName);
+        }
+        
+        public static string Translate(this string keyWord)
+        {
+            return GetTranslation(keyWord);
         }
         
         public static string GetTranslation(string keyWord)

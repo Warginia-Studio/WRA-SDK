@@ -36,7 +36,11 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
             var command = args[1];
             if (command.ToLower() == "open")
             {
-                panelManager.OpenPanel("GameConsole");
+                var pan = panelManager.GetPanel("GameConsole");
+                if(pan == null)
+                    panelManager.OpenPanel("GameConsole");
+                else
+                    pan.ShowThisPanel();
             }
             else if (command.ToLower() == "close")
             {

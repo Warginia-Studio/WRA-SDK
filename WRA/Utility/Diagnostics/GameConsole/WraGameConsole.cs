@@ -66,7 +66,6 @@ namespace WRA.Utility.Diagnostics.GameConsole
         
         public void ExecuteCommand(string command)
         {
-            
             inputField.text = "";
             if (string.IsNullOrEmpty(command))
                 return;

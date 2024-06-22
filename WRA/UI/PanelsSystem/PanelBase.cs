@@ -202,12 +202,12 @@ namespace WRA.UI.PanelsSystem
             return PanelStatus.Show;
         }
 
-        private void SetCanvasGroup(bool acvtive)
+        private void SetCanvasGroup(bool active)
         {
-            if (canvasGroup == null)
+            if (canvasGroup == switchCanvasGroup)
                 return;
-            canvasGroup.interactable = acvtive;
-            canvasGroup.blocksRaycasts = acvtive;
+            canvasGroup.interactable = active;
+            canvasGroup.blocksRaycasts = active;
         }
         
     }

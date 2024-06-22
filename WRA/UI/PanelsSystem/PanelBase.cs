@@ -21,8 +21,6 @@ namespace WRA.UI.PanelsSystem
         public UnityEvent OnHideEvent;
         
         public bool IsShow { get; private set; }
-
-        public PanelAnimationStatus Status => animations.Where(ctg => ctg.UseAnimationFromPanel).Max(ctg => ctg.Status);
         
         public List<PanelFragmentBase> Fragments => fragments;
         public List<PanelAnimationBase> Animations => animations;
@@ -90,6 +88,21 @@ namespace WRA.UI.PanelsSystem
         {
             Animations.ForEach(ctg=>ctg.SetVisible(active));
         }
+
+        public PanelAnimationStatus GetStatus()
+        {
+            if(animations == null || animations.Count == 0)
+                return PanelAnimationStatus.None;
+            return animations.Where(ctg => ctg.UseAnimationFromPanel).Max(ctg => ctg.Status);
+        }
+        
+        public bool IsAnimationPlaying()
+        {
+            var isAnimating = animations.Any(ctg =>
+                ctg.Status == PanelAnimationStatus.ShowingAnimation ||
+                ctg.Status == PanelAnimationStatus.HidingAnimation);
+            return isAnimating;
+        }
         
         public virtual void OnOpen() {}
 
@@ -99,6 +112,13 @@ namespace WRA.UI.PanelsSystem
         {
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
+            
+            if (Animations == null || Animations.Count == 0)
+            {
+                canvasGroup.alpha = 1;
+                return;
+            }
+
             Animations.ForEach(ctg =>
             {
                 if (ctg == null)
@@ -113,6 +133,13 @@ namespace WRA.UI.PanelsSystem
         {
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
+            
+            if (Animations == null || Animations.Count == 0)
+            {
+                canvasGroup.alpha = 0;
+                return;
+            }
+            
             Animations.ForEach(ctg =>
             {
                 if (ctg == null)

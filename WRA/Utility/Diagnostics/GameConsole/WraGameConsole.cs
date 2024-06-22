@@ -30,7 +30,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
         private List<string> executedCommands = new List<string>();
 
         private TweenerCore<float, float, FloatOptions> lastTween;
-        private string currentTageName = "All";
+        private string currentTageName = "all";
 
         private string lastText = "";
         
@@ -78,6 +78,18 @@ namespace WRA.Utility.Diagnostics.GameConsole
         private void OnDestroy()
         {
             UnRegisterEvents();
+        }
+        
+        private void RegisterEvenets()
+        {
+            inputField.onSubmit.AddListener(ExecuteCommand);
+            Logs.Diagnostics.OnLog.AddListener(OnLog);
+        }
+    
+        private void UnRegisterEvents()
+        {
+            inputField.onSubmit.RemoveListener(ExecuteCommand);
+            Logs.Diagnostics.OnLog.RemoveListener(OnLog);
         }
         
         public override void OnOpen()
@@ -154,29 +166,6 @@ namespace WRA.Utility.Diagnostics.GameConsole
             }
         }
         
-        private void RegisterEvenets()
-        {
-            inputField.onSubmit.AddListener(ExecuteCommand);
-            Logs.Diagnostics.OnLog.AddListener(OnLog);
-        }
-    
-        private void UnRegisterEvents()
-        {
-            inputField.onSubmit.RemoveListener(ExecuteCommand);
-            Logs.Diagnostics.OnLog.RemoveListener(OnLog);
-        }
-
-        private void OnLog(LogData arg0)
-        {
-            if (currentTageName.ToLower() != arg0.LogTag.ToLower())
-                return;
-        
-            var log = Instantiate(simpleLogPrefab, logContainer);
-            log.Bind(arg0.GetFinalMessage());
-            lastTween = DOTween.To(() => scrollRect.verticalNormalizedPosition, x => scrollRect.verticalNormalizedPosition = x, 0,
-                0.5f);
-        }
-
         private void GenerateLogs()
         {
             var logs = Logs.Diagnostics.GetLogsWithTag(currentTageName);
@@ -185,5 +174,18 @@ namespace WRA.Utility.Diagnostics.GameConsole
                 OnLog(logs[i]);   
             }
         }
+
+        private void OnLog(LogData arg0)
+        {
+            if (currentTageName != "all" && currentTageName.ToLower() != arg0.LogTag.ToLower())
+                return;
+        
+            var log = Instantiate(simpleLogPrefab, logContainer);
+            log.Bind(arg0.GetFinalMessage());
+            lastTween = DOTween.To(() => scrollRect.verticalNormalizedPosition, x => scrollRect.verticalNormalizedPosition = x, 0,
+                0.5f);
+        }
+
+
     }
 }

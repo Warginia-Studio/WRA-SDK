@@ -95,17 +95,15 @@ namespace WRA.UI.PanelsSystem
             return animations.Where(ctg => ctg.UseAnimationFromPanel).Max(ctg => ctg.Status);
         }
         
-        public bool IsAnimationPlaying()
-        {
-            var isAnimating = animations.Any(ctg =>
-                ctg.Status == PanelStatus.ShowingAnimation ||
-                ctg.Status == PanelStatus.HidingAnimation);
-            return isAnimating;
-        }
-
         public virtual void OnOpen()
         {
             OnOpenEvent?.Invoke();
+            var data = GetDataAsType<PanelDataBase>();
+            if (data != null && data.StartAsHide)
+            {
+                HideThisPanel();
+            }
+                
         }
 
         public virtual void OnClose()

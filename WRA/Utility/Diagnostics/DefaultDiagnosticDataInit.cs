@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Profiling;
 using WRA.UI.PanelsSystem;
 using WRA.Utility.Diagnostics.DiagnosticsPanel;
 using Zenject;
@@ -46,7 +47,6 @@ public class DefaultDiagnosticDataInit : MonoBehaviour
         diagnosticsPanel = panelManager.OpenPanel("DiagnosticsPanel", panelData) as WraDiagnosticsPanel;
         diagnosticsPanel.AddRecord(fpsRecord);
         diagnosticsPanel.AddRecord(averageFpsRecord);
-        
     }
     
     private void Update()

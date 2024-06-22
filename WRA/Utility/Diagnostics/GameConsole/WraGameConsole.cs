@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using WRA.UI.PanelsSystem;
 using WRA.Utility.Diagnostics.GameConsole.Commands;
@@ -32,6 +34,8 @@ namespace WRA.Utility.Diagnostics.GameConsole
         private int currentTagIndex = 0;
 
         private string lastText = "";
+        
+        private int showintLastCommands = 0;
 
         private void Awake()
         {
@@ -41,6 +45,37 @@ namespace WRA.Utility.Diagnostics.GameConsole
         private void Start()
         {
             OnTagAdded("");
+        }
+
+        private void Update()
+        {
+            if (!IsEditing)
+                return;
+            
+
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            
+                showintLastCommands++;
+
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                showintLastCommands--;
+                if(showintLastCommands == 0)
+                    inputField.text = lastText;
+            }
+
+            showintLastCommands = Mathf.Clamp(showintLastCommands, 0, executedCommands.Count);
+            
+            if (showintLastCommands == 0)
+            {
+                lastText = inputField.text;
+            }
+            
+            if (showintLastCommands > 0)
+                inputField.text = executedCommands[^showintLastCommands];
+            
         }
 
         private void OnDestroy()
@@ -85,6 +120,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
                 return;
             }
             cmd.Execute(splited);
+            inputField.OnSelect(null);
         }
     
         public void ClearLogs()

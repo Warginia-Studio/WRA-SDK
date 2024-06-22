@@ -97,6 +97,11 @@ namespace WRA.UI.PanelsSystem
             return openedPanels.Find(panel => panel.name == panelName);
         }
         
+        public List<PanelBase> GetPanels()
+        {
+            return openedPanels;
+        }
+        
         public bool IsPanelOpened(string panelName)
         {
             return openedPanels.Exists(panel => panel.name == panelName);

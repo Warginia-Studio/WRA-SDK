@@ -13,7 +13,8 @@ namespace WRA.Zenject.Commands
         {
             new HelpCommand(),
             new LanguageCommand(),
-            new ConsoleCommand()
+            new ConsoleCommand(),
+            new PanelCommand()
         };
         public override void InstallBindings()
         {

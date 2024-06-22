@@ -25,7 +25,6 @@ namespace WRA.Utility.Diagnostics.GameConsole
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private Transform logContainer;
         [SerializeField] private SimpleLog simpleLogPrefab;
-        [SerializeField] private CommandInputHelper commandInputHelper;
         [SerializeField] private ScrollRect scrollRect;
     
         private List<string> executedCommands = new List<string>();

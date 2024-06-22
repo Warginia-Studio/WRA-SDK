@@ -15,6 +15,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
 {
     public class WraGameConsole : PanelBase
     {
+        public bool IsEditing => inputField.isFocused;
         
         [Inject] public List<ICommand> Commands;
         

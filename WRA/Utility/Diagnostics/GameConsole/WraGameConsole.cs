@@ -52,6 +52,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
         {
             base.OnOpen();
             var data =GetDataAsType<PanelDataBase>();
+            transform.SetAsLastSibling();
         }
 
         public override void OnClose()

@@ -22,15 +22,28 @@ namespace WRA.Utility.Diagnostics.DiagnosticsPanel
         }
 
         [SerializeField] private DiagnosticFragment fragmentPrefab;
+        [SerializeField] private Transform content;
         private List<DiagnosticFragment> records = new List<DiagnosticFragment>();
-        
+
+        public override void OnOpen()
+        {
+            base.OnOpen();
+            transform.SetAsLastSibling();
+        }
+
+        public override void OnShow()
+        {
+            base.OnShow();
+            transform.SetAsLastSibling();
+        }
+
         public void AddRecord(ValueRecord record)
         {
             if (records.Any(ctg => ctg.name == record.name))
             {
                 return;
             }
-            var fragment = Instantiate(fragmentPrefab, transform);
+            var fragment = Instantiate(fragmentPrefab, content);
             fragment.SetData(record);
             records.Add(fragment);
         }

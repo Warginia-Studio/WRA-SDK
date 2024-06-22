@@ -42,8 +42,8 @@ public class CoreInputInstaller : MonoBehaviour
     
     private void OnDebugPanelPressed()
     {
-        if(debugPanel == null)
-            debugPanel = panelManager.OpenPanel("DebugPanel");
+        if(debugPanel== null)
+            debugPanel = panelManager.OpenPanel("DiagnosticsPanel");
         
         debugPanel.SwitchHideThisPanel();
     }

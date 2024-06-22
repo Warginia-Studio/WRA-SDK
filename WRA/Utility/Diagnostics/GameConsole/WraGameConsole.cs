@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
@@ -26,12 +27,11 @@ namespace WRA.Utility.Diagnostics.GameConsole
         [SerializeField] private SimpleLog simpleLogPrefab;
         [SerializeField] private CommandInputHelper commandInputHelper;
         [SerializeField] private ScrollRect scrollRect;
-        [SerializeField] private TMP_Dropdown tagSelector;
     
         private List<string> executedCommands = new List<string>();
 
         private TweenerCore<float, float, FloatOptions> lastTween;
-        private int currentTagIndex = 0;
+        private string currentTageName = "All";
 
         private string lastText = "";
         
@@ -40,11 +40,6 @@ namespace WRA.Utility.Diagnostics.GameConsole
         private void Awake()
         {
             RegisterEvenets();
-        }
-
-        private void Start()
-        {
-            OnTagAdded("");
         }
 
         private void Update()
@@ -127,6 +122,25 @@ namespace WRA.Utility.Diagnostics.GameConsole
             inputField.OnSelect(null);
         }
     
+        public void SetTag(string name)
+        {
+            var existTag = Logs.Diagnostics.GetTags().Find(ctg => string.Equals(ctg, name, StringComparison.CurrentCultureIgnoreCase));
+            if (string.IsNullOrEmpty(existTag))
+            {
+                Logs.Diagnostics.Log($"Tag '{name}' not found", LogType.cmd);
+                return;
+            }
+            if (string.IsNullOrEmpty(currentTageName))
+            {
+                currentTageName = "all";
+            }
+            currentTageName = name;
+            ClearView();
+            GenerateLogs();
+            lastTween.Kill();
+            scrollRect.verticalNormalizedPosition = 0;
+        }
+        
         public void ClearLogs()
         {
             ClearView();
@@ -140,26 +154,22 @@ namespace WRA.Utility.Diagnostics.GameConsole
                 Destroy(VARIABLE.gameObject);
             }
         }
-
+        
         private void RegisterEvenets()
         {
-            tagSelector.onValueChanged.AddListener(OnTagChanged);
             inputField.onSubmit.AddListener(ExecuteCommand);
             Logs.Diagnostics.OnLog.AddListener(OnLog);
-            Logs.Diagnostics.OnTagAdded.AddListener(OnTagAdded);
         }
     
         private void UnRegisterEvents()
         {
-            tagSelector.onValueChanged.RemoveListener(OnTagChanged);
             inputField.onSubmit.RemoveListener(ExecuteCommand);
             Logs.Diagnostics.OnLog.RemoveListener(OnLog);
-            Logs.Diagnostics.OnTagAdded.RemoveListener(OnTagAdded);
         }
 
         private void OnLog(LogData arg0)
         {
-            if (currentTagIndex != 0 && arg0.LogTag != Logs.Diagnostics.GetTags()[currentTagIndex])
+            if (currentTageName.ToLower() != arg0.LogTag.ToLower())
                 return;
         
             var log = Instantiate(simpleLogPrefab, logContainer);
@@ -167,26 +177,10 @@ namespace WRA.Utility.Diagnostics.GameConsole
             lastTween = DOTween.To(() => scrollRect.verticalNormalizedPosition, x => scrollRect.verticalNormalizedPosition = x, 0,
                 0.5f);
         }
-        
-        private void OnTagAdded(string str)
-        {
-            tagSelector.ClearOptions();
-            tagSelector.AddOptions(Logs.Diagnostics.GetTags());
-            tagSelector.value = 0;
-        }
-
-        private void OnTagChanged(int arg0)
-        {
-            currentTagIndex = arg0;
-            ClearView();
-            GenerateLogs();
-            lastTween.Kill();
-            scrollRect.verticalNormalizedPosition = 0;
-        }
 
         private void GenerateLogs()
         {
-            var logs = Logs.Diagnostics.GetLogsWithTag(Logs.Diagnostics.GetTags()[currentTagIndex]);
+            var logs = Logs.Diagnostics.GetLogsWithTag(currentTageName);
             for (int i = 0; i < logs.Count; i++)
             {
                 OnLog(logs[i]);   

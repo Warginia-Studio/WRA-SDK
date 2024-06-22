@@ -15,7 +15,8 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
         {
             "open - Open console",
             "close - Close console",
-            "switch - Switch console"
+            "switch - Switch console",
+            "tag - Tag console"
         };
 
 
@@ -53,6 +54,18 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
                     panelManager.OpenPanel("GameConsole");
                 else
                     pan.SwitchHideThisPanel();
+            }
+            else if (command.ToLower() == "tag")
+            {
+                if(args.Length == 2)
+                {
+                    Logs.Diagnostics.Log("Usage: cmd tag <tag>", Logs.LogType.cmd);
+                    return;
+                }
+                
+                var tag = args[2];
+                var pan = panelManager.GetPanel("GameConsole") as WraGameConsole;
+                pan?.SetTag(tag);
             }
             else
             {

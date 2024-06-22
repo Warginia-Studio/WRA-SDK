@@ -24,7 +24,8 @@ public class DefaultDiagnosticDataInit : MonoBehaviour
     private List<float> fpsList = new List<float>();
     
     private float lastFps;
-
+    private float lastAverageFps;
+    
     private void Awake()
     {
         fpsRecord = new WraDiagnosticsPanel.ValueRecord
@@ -63,13 +64,14 @@ public class DefaultDiagnosticDataInit : MonoBehaviour
             fpsList.RemoveAt(0);
         }
         fpsList.Add(lastFps);
-        averageFpsRecord.value = fpsList.Average().ToString("0");
+        lastAverageFps = fpsList.Average();
+        averageFpsRecord.value = lastAverageFps.ToString("0");
     }
 
     private void UpdateFpsColorValue()
     {
-        fpsRecord.color = GetColorByFps((float)fpsRecord.value);
-        averageFpsRecord.color = GetColorByFps((float)averageFpsRecord.value);
+        fpsRecord.color = GetColorByFps(lastFps);
+        averageFpsRecord.color = GetColorByFps(lastAverageFps);
     }
     
     private Color GetColorByFps(float fps)

@@ -70,8 +70,8 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
             else if (action.ToLower() == "lh")
             {
                 var panels = panelManager.GetPanels().FindAll(ctg =>
-                    ctg.GetStatus() == PanelAnimationStatus.Hide ||
-                    ctg.GetStatus() == PanelAnimationStatus.HidingAnimation);
+                    ctg.GetStatus() == PanelStatus.Hide ||
+                    ctg.GetStatus() == PanelStatus.HidingAnimation);
                 Logs.Diagnostics.Log("Hidden panels:");
                 PrintPanels(panels);
             }

@@ -1,6 +1,6 @@
 namespace WRA.UI.PanelsSystem.PanelAnimations
 {
-    public enum PanelAnimationStatus
+    public enum PanelStatus
     {
         None,
         Show,

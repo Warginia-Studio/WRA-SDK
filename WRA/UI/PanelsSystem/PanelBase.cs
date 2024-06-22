@@ -20,12 +20,11 @@ namespace WRA.UI.PanelsSystem
         public UnityEvent OnShowEvent;
         public UnityEvent OnHideEvent;
         
-        public bool IsShow { get; private set; }
-        
         public List<PanelFragmentBase> Fragments => fragments;
         public List<PanelAnimationBase> Animations => animations;
         public PanelManager PanelManager => panelManager;
         
+        [SerializeField] private bool switchCanvasGroup = true;
         [SerializeField] private List<PanelFragmentBase> fragments = new List<PanelFragmentBase>();
         private List<PanelAnimationBase> animations = new List<PanelAnimationBase>();
         
@@ -42,23 +41,22 @@ namespace WRA.UI.PanelsSystem
         
         public void ShowThisPanel()
         {
-            IsShow = true;
             OnShow();
         }
 
         public void HideThisPanel()
         {
-            IsShow = false;
             OnHide();
         }
         
         public void SwitchHideThisPanel()
         {
-            if (IsShow)
+            var state = GetStatus();
+            if(state == PanelStatus.Show || state == PanelStatus.ShowingAnimation)
             {
                 HideThisPanel();
             }
-            else
+            else if (state == PanelStatus.Hide || state == PanelStatus.HidingAnimation)
             {
                 ShowThisPanel();
             }
@@ -90,18 +88,18 @@ namespace WRA.UI.PanelsSystem
             Animations.ForEach(ctg=>ctg.SetVisible(active));
         }
 
-        public PanelAnimationStatus GetStatus()
+        public PanelStatus GetStatus()
         {
-            if(animations == null || animations.Count == 0)
-                return PanelAnimationStatus.None;
+            if (animations == null || animations.Count == 0)
+                return GetDefaultStatus();
             return animations.Where(ctg => ctg.UseAnimationFromPanel).Max(ctg => ctg.Status);
         }
         
         public bool IsAnimationPlaying()
         {
             var isAnimating = animations.Any(ctg =>
-                ctg.Status == PanelAnimationStatus.ShowingAnimation ||
-                ctg.Status == PanelAnimationStatus.HidingAnimation);
+                ctg.Status == PanelStatus.ShowingAnimation ||
+                ctg.Status == PanelStatus.HidingAnimation);
             return isAnimating;
         }
 
@@ -118,8 +116,7 @@ namespace WRA.UI.PanelsSystem
         public virtual void OnShow()
         {
             OnShowEvent?.Invoke();
-            canvasGroup.interactable = true;
-            canvasGroup.blocksRaycasts = true;
+            SetCanvasGroup(true);
             
             if (Animations == null || Animations.Count == 0)
             {
@@ -140,8 +137,7 @@ namespace WRA.UI.PanelsSystem
         public virtual void OnHide()
         {
             OnHideEvent?.Invoke();
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
+            SetCanvasGroup(false);
             
             if (Animations == null || Animations.Count == 0)
             {
@@ -196,6 +192,22 @@ namespace WRA.UI.PanelsSystem
             {
                 canvasGroup = GetComponent<CanvasGroup>();
             }
+        }
+        
+        private PanelStatus GetDefaultStatus()
+        {
+            var alpha = canvasGroup.alpha;
+            if (alpha <= 0.1f)
+                return PanelStatus.Hide;
+            return PanelStatus.Show;
+        }
+
+        private void SetCanvasGroup(bool acvtive)
+        {
+            if (canvasGroup == null)
+                return;
+            canvasGroup.interactable = acvtive;
+            canvasGroup.blocksRaycasts = acvtive;
         }
         
     }

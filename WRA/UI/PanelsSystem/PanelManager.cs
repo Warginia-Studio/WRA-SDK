@@ -75,7 +75,7 @@ namespace WRA.UI.PanelsSystem
             var panel = GetPanel(panelName);
             if (panel == null)
                 return;
-            if(panel.GetStatus() == PanelAnimationStatus.ShowingAnimation || panel.GetStatus() == PanelAnimationStatus.Show)
+            if(panel.GetStatus() == PanelStatus.ShowingAnimation || panel.GetStatus() == PanelStatus.Show)
                 return;
             panel.SetData(panelDataBase);
             panel.ShowThisPanel();
@@ -86,7 +86,7 @@ namespace WRA.UI.PanelsSystem
             var panel = GetPanel(panelName);
             if (panel == null)
                 return;
-            if(panel.GetStatus() == PanelAnimationStatus.HidingAnimation || panel.GetStatus() == PanelAnimationStatus.Hide)
+            if(panel.GetStatus() == PanelStatus.HidingAnimation || panel.GetStatus() == PanelStatus.Hide)
                 return;
             panel.SetData(panelDataBase);
             panel.HideThisPanel();

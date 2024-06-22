@@ -325,6 +325,7 @@ MonoBehaviour:
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []
+  switchCanvasGroup: 0
   fragments:
   - {fileID: 1528542603411573980}
   fragmentPrefab: {fileID: -5177243758170870336, guid: 718f105d46f61a84fa0a828f6fb9d6a5, type: 3}

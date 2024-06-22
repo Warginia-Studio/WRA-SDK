@@ -23,26 +23,26 @@ namespace WRA.UI.PanelsSystem.PanelAnimations
 
         public override void ShowAnimation(Action onComplete)
         {
-            OnStatusChangedEvent(PanelAnimationStatus.ShowingAnimation);
+            OnStatusChangedEvent(PanelStatus.ShowingAnimation);
             var pos = rectTransform.anchoredPosition;
             var tweenerCore = DOTween.To(() => pos, x => pos = x, showPosition, showSpeed);
             tweenerCore.onUpdate += () => rectTransform.anchoredPosition = pos;
             tweenerCore.onComplete += () =>
             {
-                OnStatusChangedEvent(PanelAnimationStatus.Show);
+                OnStatusChangedEvent(PanelStatus.Show);
                 onComplete?.Invoke();
             };
         }
 
         public override void HideAnimation(Action onComplete)
         {
-            OnStatusChangedEvent(PanelAnimationStatus.HidingAnimation);
+            OnStatusChangedEvent(PanelStatus.HidingAnimation);
             var pos = rectTransform.anchoredPosition;
             var tweenerCore = DOTween.To(() => pos, x => pos = x, hidePosition, hideSpeed);
             tweenerCore.onUpdate += () => rectTransform.anchoredPosition = pos;
             tweenerCore.onComplete += () =>
             {
-                OnStatusChangedEvent(PanelAnimationStatus.Hide);
+                OnStatusChangedEvent(PanelStatus.Hide);
                 onComplete?.Invoke();
             };
         }

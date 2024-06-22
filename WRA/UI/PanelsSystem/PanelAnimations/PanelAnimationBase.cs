@@ -8,8 +8,10 @@ namespace WRA.UI.PanelsSystem.PanelAnimations
     {
         public UnityEvent OnShow;
         public UnityEvent OnHide;
-        public UnityEvent<PanelAnimationStatus> OnStatusChanged;
-        public PanelAnimationStatus Status { get; protected set; }
+        public UnityEvent<PanelStatus> OnStatusChanged;
+        
+        public bool IsAnimating => Status is PanelStatus.ShowingAnimation or PanelStatus.HidingAnimation;
+        public PanelStatus Status { get; protected set; }
         
         public bool UseAnimationFromPanel => useAnimationFromPanel;
 
@@ -27,13 +29,13 @@ namespace WRA.UI.PanelsSystem.PanelAnimations
 
         public virtual void ShowAnimation(Action onComplete = null)
         {
-            OnStatusChangedEvent(PanelAnimationStatus.Show);
+            OnStatusChangedEvent(PanelStatus.Show);
             onComplete?.Invoke();
         }
 
         public virtual void HideAnimation(Action onComplete = null)
         {
-            OnStatusChangedEvent(PanelAnimationStatus.Hide);
+            OnStatusChangedEvent(PanelStatus.Hide);
             onComplete?.Invoke();
         }
         
@@ -50,16 +52,16 @@ namespace WRA.UI.PanelsSystem.PanelAnimations
             }
         }
     
-        protected void OnStatusChangedEvent(PanelAnimationStatus newStatus)
+        protected void OnStatusChangedEvent(PanelStatus newStatus)
         {
             Status = newStatus;
             OnStatusChanged?.Invoke(newStatus);
             switch (newStatus)
             {
-                case PanelAnimationStatus.Show:
+                case PanelStatus.Show:
                     OnShow?.Invoke();
                     break;
-                case PanelAnimationStatus.Hide:
+                case PanelStatus.Hide:
                     OnHide?.Invoke();
                     break;
             }

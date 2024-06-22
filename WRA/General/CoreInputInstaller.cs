@@ -13,8 +13,16 @@ public class CoreInputInstaller : MonoBehaviour
     
     private WraGameConsole consolePanel;
     private PanelBase debugPanel;
+    
     private void Awake()
     {
+        InitInput();
+    }
+
+    private void InitInput()
+    {
+        if (coreInput != null)
+            return;
         coreInput = new CoreInput();
         coreInput.Enable();
         coreInput.General.Console.performed += ctx => OnConsolePressed();

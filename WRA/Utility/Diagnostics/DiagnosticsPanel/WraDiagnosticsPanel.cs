@@ -14,6 +14,7 @@ namespace WRA.Utility.Diagnostics.DiagnosticsPanel
             public string name;
             public object value;
             public Color color;
+            public bool IsVisible = true;
 
             public virtual string ToString()
             {

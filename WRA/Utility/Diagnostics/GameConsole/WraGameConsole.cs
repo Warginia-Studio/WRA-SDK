@@ -52,30 +52,33 @@ namespace WRA.Utility.Diagnostics.GameConsole
             if (!IsEditing)
                 return;
             
-
-
             if (Input.GetKeyDown(KeyCode.UpArrow))
-            
+            {
                 showintLastCommands++;
-
-
+                RefreshInputField();
+            }
+            
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 showintLastCommands--;
-                if(showintLastCommands == 0)
-                    inputField.text = lastText;
+                RefreshInputField();
             }
-
-            showintLastCommands = Mathf.Clamp(showintLastCommands, 0, executedCommands.Count);
             
             if (showintLastCommands == 0)
             {
                 lastText = inputField.text;
             }
-            
-            if (showintLastCommands > 0)
-                inputField.text = executedCommands[^showintLastCommands];
-            
+        }
+        
+        private void RefreshInputField()
+        {
+            showintLastCommands = Mathf.Clamp(showintLastCommands, 0, executedCommands.Count);
+            if (showintLastCommands == 0)
+            {
+                inputField.text = lastText;
+                return;
+            }
+            inputField.text = executedCommands[^showintLastCommands];
         }
 
         private void OnDestroy()
@@ -102,6 +105,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
         
         public void ExecuteCommand(string command)
         {
+            showintLastCommands = 0;
             inputField.text = "";
             if (string.IsNullOrEmpty(command))
                 return;

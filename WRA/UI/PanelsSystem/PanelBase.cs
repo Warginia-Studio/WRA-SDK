@@ -24,11 +24,12 @@ namespace WRA.UI.PanelsSystem
         
         public List<PanelFragmentBase> Fragments => fragments;
         public List<PanelAnimationBase> Animations => animations;
+        public PanelManager PanelManager => panelManager;
         
         [SerializeField] private List<PanelFragmentBase> fragments = new List<PanelFragmentBase>();
-        [Inject] PanelManager panelManager;
         private List<PanelAnimationBase> animations = new List<PanelAnimationBase>();
         
+        [Inject] protected PanelManager panelManager;
         protected CanvasGroup canvasGroup;
         protected object data;
         
@@ -103,13 +104,20 @@ namespace WRA.UI.PanelsSystem
                 ctg.Status == PanelAnimationStatus.HidingAnimation);
             return isAnimating;
         }
-        
-        public virtual void OnOpen() {}
 
-        public virtual void OnClose() {}
+        public virtual void OnOpen()
+        {
+            OnOpenEvent?.Invoke();
+        }
+
+        public virtual void OnClose()
+        {
+            OnCloseEvent?.Invoke();
+        }
 
         public virtual void OnShow()
         {
+            OnShowEvent?.Invoke();
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
             
@@ -131,6 +139,7 @@ namespace WRA.UI.PanelsSystem
 
         public virtual void OnHide()
         {
+            OnHideEvent?.Invoke();
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
             

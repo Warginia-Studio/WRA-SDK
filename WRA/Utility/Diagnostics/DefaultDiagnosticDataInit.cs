@@ -51,7 +51,7 @@ public class DefaultDiagnosticDataInit : MonoBehaviour
     private void Update()
     {
         lastFps = 1 / Time.deltaTime;
-        fpsRecord.value = lastFps;
+        fpsRecord.value = lastFps.ToString("0");
         UpdateAverageFps();
         UpdateFpsColorValue();
     }
@@ -63,7 +63,7 @@ public class DefaultDiagnosticDataInit : MonoBehaviour
             fpsList.RemoveAt(0);
         }
         fpsList.Add(lastFps);
-        averageFpsRecord.value = fpsList.Average();
+        averageFpsRecord.value = fpsList.Average().ToString("0");
     }
 
     private void UpdateFpsColorValue()

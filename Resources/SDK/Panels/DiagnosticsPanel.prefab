@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 4984587230711230354}
   - component: {fileID: 8412842270401222025}
   - component: {fileID: -4607748339947153845}
+  - component: {fileID: 1528542603411573980}
   m_Layer: 0
   m_Name: DiagnosticsPanel
   m_TagString: Untagged
@@ -173,7 +174,8 @@ MonoBehaviour:
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []
-  fragments: []
+  fragments:
+  - {fileID: 1528542603411573980}
   fragmentPrefab: {fileID: -5177243758170870336, guid: 718f105d46f61a84fa0a828f6fb9d6a5, type: 3}
   content: {fileID: 1574141051216016290}
 --- !u!225 &-4607748339947153845
@@ -188,3 +190,16 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &1528542603411573980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4984587230711230365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43293818d6be76748a430e37156ba9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveOnOpenOtherPanel: 1

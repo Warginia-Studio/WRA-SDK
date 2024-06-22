@@ -3181,6 +3181,7 @@ GameObject:
   - component: {fileID: 6554713450913415804}
   - component: {fileID: 6554713450913415802}
   - component: {fileID: 6554713450913415801}
+  - component: {fileID: 5464176759061092672}
   m_Layer: 0
   m_Name: GameConsole
   m_TagString: Untagged
@@ -3278,7 +3279,8 @@ MonoBehaviour:
   OnHideEvent:
     m_PersistentCalls:
       m_Calls: []
-  fragments: []
+  fragments:
+  - {fileID: 5464176759061092672}
   inputField: {fileID: 6465650492899369943}
   logContainer: {fileID: 5664761131177602245}
   simpleLogPrefab: {fileID: 5741575613089078466, guid: 4cd0ab906727e3b4283b3b2f29cca7dd, type: 3}
@@ -3297,6 +3299,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &5464176759061092672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6554713450913415806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43293818d6be76748a430e37156ba9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveOnOpenOtherPanel: 1
 --- !u!1 &6554713451047039737
 GameObject:
   m_ObjectHideFlags: 0

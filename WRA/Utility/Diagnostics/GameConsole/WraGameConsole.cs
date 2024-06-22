@@ -181,7 +181,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
                 return;
         
             var log = Instantiate(simpleLogPrefab, logContainer);
-            log.Bind(arg0.GetFinalMessage());
+            log.Bind(arg0.GetFinalMessage(), arg0.Message);
             lastTween = DOTween.To(() => scrollRect.verticalNormalizedPosition, x => scrollRect.verticalNormalizedPosition = x, 0,
                 0.5f);
         }

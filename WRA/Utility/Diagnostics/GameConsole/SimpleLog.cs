@@ -8,6 +8,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
     public class SimpleLog : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         private TMP_Text text;
+        private string copyMessage;
         private Color color;
         
         [SerializeField] private Color hoverColor;
@@ -18,9 +19,10 @@ namespace WRA.Utility.Diagnostics.GameConsole
             text = GetComponent<TMP_Text>();
         }
     
-        public void Bind(string text)
+        public void Bind(string text, string copyMessage)
         {
             this.text.text = text;
+            this.copyMessage = copyMessage;
         }
     
         public void OnPointerEnter(PointerEventData eventData)
@@ -35,7 +37,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            GUIUtility.systemCopyBuffer = text.text;
+            GUIUtility.systemCopyBuffer = copyMessage;
         }
     }
 }

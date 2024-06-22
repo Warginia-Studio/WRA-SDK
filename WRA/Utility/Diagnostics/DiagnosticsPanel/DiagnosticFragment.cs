@@ -19,7 +19,7 @@ namespace WRA.Utility.Diagnostics.DiagnosticsPanel
 
         public void SetData(WraDiagnosticsPanel.ValueRecord record)
         {
-            label.text = record.name;
+            label.text = record.name + ": ";
             Record = record;
         }
     }

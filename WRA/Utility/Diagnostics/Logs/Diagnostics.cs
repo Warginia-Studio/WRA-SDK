@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using WRA.Utility.Math;
+using Object = UnityEngine.Object;
 
 /**********************************************************************
  * Upgrades TODO:
@@ -18,7 +20,7 @@ namespace WRA.Utility.Diagnostics.Logs
     public static class Diagnostics
     {
         private static List<LogData> WraLogDatas = new List<LogData>();
-        private static List<string> tags = new List<string>() { "all" , "logs", "warnings", "errors", "character" };
+        private static List<string> tags = new List<string>() { "all" , "log", "warning", "error", "character", "ok" };
         public static UnityEvent<LogData> OnLog = new UnityEvent<LogData>();
         public static UnityEvent<string> OnTagAdded = new UnityEvent<string>();
 
@@ -65,7 +67,7 @@ namespace WRA.Utility.Diagnostics.Logs
         {
             if (tag == "all")
                 return WraLogDatas;
-            return WraLogDatas.Where(ctg => ctg.LogTag == tag).ToList();
+            return WraLogDatas.Where(ctg => string.Equals(ctg.LogTag, tag, StringComparison.CurrentCultureIgnoreCase)).ToList();
         }
 
         public static List<string> GetTags()

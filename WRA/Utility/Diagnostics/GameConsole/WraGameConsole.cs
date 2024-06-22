@@ -111,6 +111,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
         
         public void ExecuteCommand(string command)
         {
+            inputField.OnSelect(null);
             showintLastCommands = 0;
             inputField.text = "";
             if (string.IsNullOrEmpty(command))
@@ -130,7 +131,6 @@ namespace WRA.Utility.Diagnostics.GameConsole
                 return;
             }
             cmd.Execute(splited);
-            inputField.OnSelect(null);
         }
     
         public void SetTag(string name)
@@ -177,7 +177,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
 
         private void OnLog(LogData arg0)
         {
-            if (currentTageName != "all" && currentTageName.ToLower() != arg0.LogTag.ToLower())
+            if (currentTageName != "all" && !string.Equals(currentTageName, arg0.LogTag, StringComparison.CurrentCultureIgnoreCase))
                 return;
         
             var log = Instantiate(simpleLogPrefab, logContainer);

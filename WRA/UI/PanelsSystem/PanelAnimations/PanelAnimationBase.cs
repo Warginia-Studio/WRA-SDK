@@ -21,10 +21,9 @@ namespace WRA.UI.PanelsSystem.PanelAnimations
             ParentPanel = panelBase;
         }
         
-        public override void OnFragmentInit()
+        public override void OnPanelCreated()
         {
-            base.OnFragmentInit();
-            SetVisible(!ParentPanel.GetDataAsType<PanelDataBase>().StartAsHide);
+            SetVisible(!false);
         }
 
         public virtual void ShowAnimation(Action onComplete = null)

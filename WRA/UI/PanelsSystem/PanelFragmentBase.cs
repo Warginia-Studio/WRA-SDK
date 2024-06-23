@@ -9,9 +9,11 @@ namespace WRA.UI.PanelsSystem
         public void InitFragment(PanelBase panelBase)
         {
             ParentPanel = panelBase;
-            OnFragmentInit();
+            OnPanelCreated();
         }
-
-        public virtual void OnFragmentInit() { }
+        
+        public virtual void OnPanelCreated() { }
+        
+        public virtual void OnPanelDataChanged() { }
     }
 }

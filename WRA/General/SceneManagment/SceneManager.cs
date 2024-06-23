@@ -41,7 +41,7 @@ namespace WRA.General.SceneManagment
             asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
         
             if(useProgressScreen)
-                panelManager.OpenPanel("ProgressPanel", new PanelDataBase() { Data = this });
+                panelManager.ShowPanel("ProgressPanel", new PanelDataBase() { Data = this });
         
             asyncOperation.allowSceneActivation = autoStartScene;
         }
@@ -53,7 +53,7 @@ namespace WRA.General.SceneManagment
             asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneIndex);
         
             if(useProgressScreen)
-                panelManager.OpenPanel("ProgressPanel", new PanelDataBase() { Data = this });
+                panelManager.ShowPanel("ProgressPanel", new PanelDataBase() { Data = this });
         
             asyncOperation.allowSceneActivation = autoStartScene;
         }

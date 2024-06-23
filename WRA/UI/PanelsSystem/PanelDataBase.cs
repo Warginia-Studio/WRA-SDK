@@ -2,7 +2,7 @@ namespace WRA.UI.PanelsSystem
 {
     public class PanelDataBase
     {
-        public bool StartAsHide { get; set; }
+        // public bool StartAsHide { get; set; }
 
         public object Data { get; set; }
 

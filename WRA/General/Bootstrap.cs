@@ -20,7 +20,7 @@ namespace WRA.General
 
         private void Start()
         {
-            panelManager.OpenPanel("ProgressPanel");
+            panelManager.ShowPanel("ProgressPanel");
         }
     }
 }

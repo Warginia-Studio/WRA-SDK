@@ -12,7 +12,7 @@ namespace WRA.UI.PanelsSystem.CinematicSystem
         private float currentDelta = 0;
         private TweenerCore<float, float, FloatOptions> currentTween;
 
-        public override void OnOpen()
+        public override void OnCreate()
         {
             var cinematicCameraData = GetDataAsType<CinematicCameraData>();
 

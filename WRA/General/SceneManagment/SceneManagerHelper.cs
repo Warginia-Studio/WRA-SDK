@@ -40,7 +40,7 @@ namespace WRA.General.SceneManagment
             {
                 if (!dontHidePanels.Contains(panel.name))
                 {
-                    panel.HideThisPanel();
+                    panel.PanelActionsFragment.HideThisPanel();
                 }
             }
         }

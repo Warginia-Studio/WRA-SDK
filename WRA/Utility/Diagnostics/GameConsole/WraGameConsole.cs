@@ -92,9 +92,9 @@ namespace WRA.Utility.Diagnostics.GameConsole
             Logs.Diagnostics.OnLog.RemoveListener(OnLog);
         }
         
-        public override void OnOpen()
+        public override void OnCreate()
         {
-            base.OnOpen();
+            base.OnCreate();
             transform.SetAsLastSibling();
         }
 

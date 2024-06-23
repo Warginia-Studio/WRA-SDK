@@ -7,9 +7,9 @@ using WRA.UI.PanelsSystem;
 public class PanelFragmentSetAsLastSibling : PanelFragmentBase
 {
     [SerializeField] private bool moveOnOpenOtherPanel = true;
-    public override void OnFragmentInit()
+    public override void OnPanelCreated()
     {
-        base.OnFragmentInit();
+        base.OnPanelCreated();
         InitOnOntherPanel();
         // ParentPanel.OnOpenEvent.AddListener(OnThisPanelShow);
         ParentPanel.OnShowEvent.AddListener(OnThisPanelShow);

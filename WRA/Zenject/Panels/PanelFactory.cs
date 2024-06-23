@@ -31,6 +31,7 @@ namespace WRA.Zenject.Panels
                     var panel = container.InstantiatePrefab(panelBase.gameObject, panelManager.transform).GetComponent<PanelBase>();
                     panel.name = panelName;
                     panel.InitPanelBase(data);
+                    panel.OnCreate();
                     return panel;
                 }
             }

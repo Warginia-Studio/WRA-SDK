@@ -15,10 +15,10 @@ namespace WRA.UI.PanelsSystem.PanelAnimations
     
         protected RectTransform rectTransform;
     
-        public override void OnFragmentInit()
+        public override void OnPanelCreated()
         {
             rectTransform = GetComponent<RectTransform>();
-            base.OnFragmentInit();
+            base.OnPanelCreated();
         }
 
         public override void ShowAnimation(Action onComplete)

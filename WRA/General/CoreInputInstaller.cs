@@ -1,50 +1,50 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using WRA.UI.PanelsSystem;
 using WRA.Utility.Diagnostics.GameConsole;
 using Zenject;
 
-public class CoreInputInstaller : MonoBehaviour
+namespace WRA.General
 {
-    [Inject] private PanelManager panelManager;
-    private CoreInput coreInput;
-    
-    private WraGameConsole consolePanel;
-    private PanelBase debugPanel;
-    
-    private void Awake()
+    public class CoreInputInstaller : MonoBehaviour
     {
-        InitInput();
-    }
+        [Inject] private PanelManager panelManager;
+        private CoreInput coreInput;
+    
+        private WraGameConsole consolePanel;
+        private PanelBase debugPanel;
+    
+        private void Awake()
+        {
+            InitInput();
+        }
 
-    private void InitInput()
-    {
-        if (coreInput != null)
-            return;
-        coreInput = new CoreInput();
-        coreInput.Enable();
-        coreInput.General.Console.performed += ctx => OnConsolePressed();
-        coreInput.General.DebugPanel.performed += ctx => OnDebugPanelPressed();
-    }
+        private void InitInput()
+        {
+            if (coreInput != null)
+                return;
+            coreInput = new CoreInput();
+            coreInput.Enable();
+            coreInput.General.Console.performed += ctx => OnConsolePressed();
+            coreInput.General.DebugPanel.performed += ctx => OnDebugPanelPressed();
+        }
     
-    private void OnConsolePressed()
-    {
-        if(consolePanel == null)
-            consolePanel = panelManager.OpenPanel("GameConsole") as WraGameConsole;
+        private void OnConsolePressed()
+        {
+            if(consolePanel == null)
+                consolePanel = panelManager.ShowPanel("GameConsole") as WraGameConsole;
         
-        if(consolePanel.IsEditing)
-            return;
+            if(consolePanel.IsEditing)
+                return;
         
-        consolePanel.SwitchHideThisPanel();
-    }
+            consolePanel.PanelActionsFragment.SwitchHideThisPanel();
+        }
     
-    private void OnDebugPanelPressed()
-    {
-        if(debugPanel== null)
-            debugPanel = panelManager.OpenPanel("DiagnosticsPanel");
+        private void OnDebugPanelPressed()
+        {
+            if(debugPanel== null)
+                debugPanel = panelManager.ShowPanel("DiagnosticsPanel");
         
-        debugPanel.SwitchHideThisPanel();
+            debugPanel.PanelActionsFragment.SwitchHideThisPanel();
+        }
     }
 }

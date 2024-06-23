@@ -43,8 +43,8 @@ public class DefaultDiagnosticDataInit : MonoBehaviour
             color = Color.green
         };
         
-        PanelDataBase panelData = new PanelDataBase() { StartAsHide = true };
-        diagnosticsPanel = panelManager.OpenPanel("DiagnosticsPanel", panelData) as WraDiagnosticsPanel;
+
+        diagnosticsPanel = panelManager.ShowPanel("DiagnosticsPanel") as WraDiagnosticsPanel;
         diagnosticsPanel.AddRecord(fpsRecord);
         diagnosticsPanel.AddRecord(averageFpsRecord);
     }

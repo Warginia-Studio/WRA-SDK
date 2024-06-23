@@ -10,18 +10,13 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
     {
         public string Name => "cmd";
         public string Description => "Description";
-        public string Usage => "Usage: cmd <open/close/switch>";
+        public string Usage => "Usage: cmd tag";
         public List<string> Arguments { get; } = new List<string>()
         {
-            "open - Open console",
-            "close - Close console",
-            "switch - Switch console",
             "tag - Tag console"
         };
-
-
-        private PanelManager panelManager;
         
+        private PanelManager panelManager;
         
         public void Execute(params string[] args)
         {
@@ -35,27 +30,8 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
                 panelManager = GameObject.FindObjectOfType<PanelManager>();
             
             var command = args[1];
-            if (command.ToLower() == "open")
-            {
-                var pan = panelManager.GetPanel("GameConsole");
-                if(pan == null)
-                    panelManager.OpenPanel("GameConsole");
-                else
-                    pan.ShowThisPanel();
-            }
-            else if (command.ToLower() == "close")
-            {
-                panelManager.HidePanel("GameConsole");
-            }
-            else if(command.ToLower() == "switch")
-            {
-                var pan = panelManager.GetPanel("GameConsole");
-                if(pan == null)
-                    panelManager.OpenPanel("GameConsole");
-                else
-                    pan.SwitchHideThisPanel();
-            }
-            else if (command.ToLower() == "tag")
+
+            if (command.ToLower() == "tag")
             {
                 if(args.Length == 2)
                 {

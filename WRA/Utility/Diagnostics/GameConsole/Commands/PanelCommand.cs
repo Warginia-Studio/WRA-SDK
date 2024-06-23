@@ -12,7 +12,6 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
         public string Usage => "panel <action> <panelName>";
         public List<string> Arguments { get; } = new List<string>()
         {
-            "open - Open panel",
             "close - Close panel",
             "switch - Switch panel",
             "hide - Hide panel",
@@ -39,19 +38,15 @@ namespace WRA.Utility.Diagnostics.GameConsole.Commands
 
             var panelName = args.Length > 2 ? args[2] : "";
             var action = args[1];
-
-            if (action.ToLower() == "open")
-            {
-                panelManager.OpenPanel(panelName);
-            }
-            else if (action.ToLower() == "close")
+            
+            if (action.ToLower() == "close")
             {
                 panelManager.HidePanel(panelName);
             }
             else if (action.ToLower() == "switch")
             {
                 var panel = GetPanel(panelName);
-                panel?.SwitchHideThisPanel();
+                panel?.PanelActionsFragment.SwitchHideThisPanel();
             }
             else if (action.ToLower() == "hide")
             {

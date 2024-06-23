@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using WRA.UI.PanelsSystem.Fragments;
 using WRA.UI.PanelsSystem.PanelAnimations;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
@@ -12,7 +13,7 @@ using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.UI.PanelsSystem
 {
-    [RequireComponent(typeof(CanvasGroup))]
+    [RequireComponent(typeof(CanvasGroup), typeof(PanelActionsFragment))]
     public class PanelBase : MonoBehaviour
     {
         public UnityEvent OnOpenEvent;
@@ -23,7 +24,10 @@ namespace WRA.UI.PanelsSystem
         public List<PanelFragmentBase> Fragments => fragments;
         public List<PanelAnimationBase> Animations => animations;
         public PanelManager PanelManager => panelManager;
-        
+
+        public PanelActionsFragment PanelActionsFragment { get; private set; }
+
+        [SerializeField] private bool startAsHide;
         [SerializeField] private bool switchCanvasGroup = true;
         [SerializeField] private List<PanelFragmentBase> fragments = new List<PanelFragmentBase>();
         private List<PanelAnimationBase> animations = new List<PanelAnimationBase>();
@@ -31,43 +35,12 @@ namespace WRA.UI.PanelsSystem
         [Inject] protected PanelManager panelManager;
         protected CanvasGroup canvasGroup;
         protected object data;
-        
-        #region LAZLY_FUNC
-
-        public void CloseThisPanel()
-        {
-            panelManager.ClosePanel(this);
-        }
-        
-        public void ShowThisPanel()
-        {
-            OnShow();
-        }
-
-        public void HideThisPanel()
-        {
-            OnHide();
-        }
-        
-        public void SwitchHideThisPanel()
-        {
-            var state = GetStatus();
-            if(state == PanelStatus.Show || state == PanelStatus.ShowingAnimation)
-            {
-                HideThisPanel();
-            }
-            else if (state == PanelStatus.Hide || state == PanelStatus.HidingAnimation)
-            {
-                ShowThisPanel();
-            }
-        }
-        
-        #endregion
 
         #region FUNCS_CALLED_FROM_PANEL_MANAGER
         
         public void InitPanelBase(object data = null)
         {
+            PanelActionsFragment = GetComponent<PanelActionsFragment>();
             SetData(data);
             InitNeededComponents();
             InitFragmentsAndAnimations();
@@ -83,6 +56,7 @@ namespace WRA.UI.PanelsSystem
                     return;
             }
             this.data = data;
+            DataChanged();
         }
         
         public void SetActive(bool active)
@@ -97,22 +71,26 @@ namespace WRA.UI.PanelsSystem
             return animations.Where(ctg => ctg.UseAnimationFromPanel).Max(ctg => ctg.Status);
         }
         
-        public virtual void OnOpen()
+        /// <summary>
+        /// Called once while creating
+        /// </summary>
+        public virtual void OnCreate()
         {
             OnOpenEvent?.Invoke();
-            var data = GetDataAsType<PanelDataBase>();
-            if (data != null && data.StartAsHide)
-            {
-                HideThisPanel();
-            }
-                
+            SetActive(!startAsHide);
         }
 
+        /// <summary>
+        /// Called once while destroying
+        /// </summary>
         public virtual void OnClose()
         {
             OnCloseEvent?.Invoke();
         }
-
+        
+        /// <summary>
+        /// Called once while showing
+        /// </summary>
         public virtual void OnShow()
         {
             OnShowEvent?.Invoke();
@@ -134,6 +112,9 @@ namespace WRA.UI.PanelsSystem
             });
         }
 
+        /// <summary>
+        /// Called once while hiding
+        /// </summary>
         public virtual void OnHide()
         {
             OnHideEvent?.Invoke();
@@ -186,6 +167,16 @@ namespace WRA.UI.PanelsSystem
             });
         }
         
+        protected void DataChanged()
+        {
+            fragments.ForEach(ctg =>
+            {
+                if(ctg == null)
+                    return;
+                ctg.OnPanelDataChanged();
+            });
+        }
+        
         private void InitNeededComponents()
         {
             if (canvasGroup == null)
@@ -209,6 +200,5 @@ namespace WRA.UI.PanelsSystem
             canvasGroup.interactable = active;
             canvasGroup.blocksRaycasts = active;
         }
-        
     }
 }

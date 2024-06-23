@@ -46,7 +46,7 @@ namespace WRA.UI.PanelsSystem.SubPanels
             OpenSubPanel(correctSubPanel, data);
         }
 
-        public override void OnOpen()
+        public override void OnCreate()
         {
             var myData = GetDataAsType<SubViewsPanelData>();
             

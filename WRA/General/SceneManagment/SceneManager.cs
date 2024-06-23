@@ -15,7 +15,7 @@ namespace WRA.General.SceneManagment
         public UnityEvent OnSceneReady { get; } = new UnityEvent();
         public UnityEvent OnSceneStart { get; } = new UnityEvent();
         
-        public LoadingStatus Status { get; private set; }
+        public LoadingStatus Status { get; private set; } = LoadingStatus.Running;
         
         [SerializeField] private PanelManager panelManager;
         

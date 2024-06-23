@@ -16,7 +16,7 @@ namespace WRA.General.SceneManagment
         [SerializeField] private TextTranslator sceneIsReadyText;
         [SerializeField] private KeyCode continueKey;
         
-        [Inject] private ILoadingStatus loadingStatus;
+        [Inject] private ILoadingScene loadingScene;
 
         private void Awake()
         {
@@ -25,23 +25,23 @@ namespace WRA.General.SceneManagment
 
         private void Update()
         {
-            if(loadingStatus == null)
+            if(loadingScene == null)
                 return;
             
             if (progressBar != null)
             {
-                progressBar.fillAmount = loadingStatus.GetProgress();
+                progressBar.fillAmount = loadingScene.GetProgress();
             }
 
             if (progressText != null)
             {
-                progressText.text = loadingStatus.GetProgress().ToString("P");
+                progressText.text = loadingScene.GetProgress().ToString("P");
             }
 
-            sceneIsReadyText.gameObject.SetActive(loadingStatus.IsReady());
-            if (loadingStatus.IsReady() && Input.GetKeyDown(continueKey))
+            sceneIsReadyText.gameObject.SetActive(loadingScene.IsReady());
+            if (loadingScene.IsReady() && Input.GetKeyDown(continueKey))
             {
-                loadingStatus.StartScene();
+                loadingScene.StartScene();
             }
         }
 

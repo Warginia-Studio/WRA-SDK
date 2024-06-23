@@ -17,17 +17,17 @@ namespace WRA.General.SceneManagment
         private void Awake()
         {
             // sceneManager = GetComponent<SceneManager>();
-            sceneManager.OnSceneStartLoading.AddListener(OnSceneStartLoading);
-            sceneManager.OnSceneReady.AddListener(HidePanels);
+            sceneManager.OnSceneStartLoading.AddListener(ClearScene);
+            sceneManager.OnSceneReady.AddListener(ClearScene);
         }
 
         private void OnDestroy()
         {
-            sceneManager.OnSceneStartLoading.RemoveListener(OnSceneStartLoading);
-            sceneManager.OnSceneReady.RemoveListener(HidePanels);
+            sceneManager.OnSceneStartLoading.RemoveListener(ClearScene);
+            sceneManager.OnSceneReady.RemoveListener(ClearScene);
         }
 
-        private void OnSceneStartLoading()
+        private void ClearScene()
         {
             HidePanels();
             foreach (var pool in pools)

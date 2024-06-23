@@ -9,8 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1748751458612818136}
-  - component: {fileID: 8473629588265515155}
-  - component: {fileID: 1510778246850650415}
+  - component: {fileID: 365643988835375736}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -33,22 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5431124646602797786}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8473629588265515155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 572773838271234200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 132218c74264a31458bd2a4e5241ba21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panelManager: {fileID: 4213820518080821231}
-  useProgressScreen: 1
-  autoStartScene: 1
---- !u!114 &1510778246850650415
+--- !u!114 &365643988835375736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,6 +300,7 @@ GameObject:
   - component: {fileID: 7220636359205168626}
   - component: {fileID: 7936179448594659659}
   - component: {fileID: -6090276877144222796}
+  - component: {fileID: 4725590688908575302}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -359,7 +344,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7f3e485641ff07e4983ae422c969e6af, type: 2}
   _monoInstallers:
   - {fileID: 7220636359205168626}
-  - {fileID: 8473629588265515155}
+  - {fileID: 4725590688908575302}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 0
   _editorReflectionBakingCoverageMode: 0
@@ -424,3 +409,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recordFpsFromSeconds: 5
+--- !u!114 &4725590688908575302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535296146189128580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 132218c74264a31458bd2a4e5241ba21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelManager: {fileID: 4213820518080821231}
+  useProgressScreen: 1
+  autoStartScene: 0

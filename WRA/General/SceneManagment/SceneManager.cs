@@ -59,13 +59,17 @@ namespace WRA.General.SceneManagment
             if(asyncOperation == null)
                 return;
             asyncOperation.allowSceneActivation = true;
+            if(useProgressScreen)
+                panelManager.ClosePanel("ProgressPanel");
+            OnSceneStart.Invoke();
         }
 
         public bool IsReady()
         {
             if(asyncOperation == null)
                 return false;
-            return asyncOperation.progress >= 0.99f;
+            
+            return asyncOperation.progress >= 0.9f;
         }
 
         public float GetProgress()

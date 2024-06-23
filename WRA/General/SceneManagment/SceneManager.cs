@@ -15,6 +15,8 @@ namespace WRA.General.SceneManagment
         public UnityEvent OnSceneReady { get; } = new UnityEvent();
         public UnityEvent OnSceneStart { get; } = new UnityEvent();
         
+        public LoadingStatus Status { get; private set; }
+        
         [SerializeField] private PanelManager panelManager;
         
         [SerializeField] private bool useProgressScreen = true;
@@ -34,6 +36,7 @@ namespace WRA.General.SceneManagment
 
         public void LoadScene(string sceneName)
         {
+            Status = LoadingStatus.Loading;
             OnSceneStartLoading.Invoke();
             asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
         
@@ -45,6 +48,7 @@ namespace WRA.General.SceneManagment
         
         public void LoadScene(int sceneIndex)
         {
+            Status = LoadingStatus.Loading;
             OnSceneStartLoading.Invoke();
             asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneIndex);
         
@@ -61,6 +65,7 @@ namespace WRA.General.SceneManagment
             asyncOperation.allowSceneActivation = true;
             if(useProgressScreen)
                 panelManager.ClosePanel("ProgressPanel");
+            Status = LoadingStatus.Running;
             OnSceneStart.Invoke();
         }
 
@@ -69,7 +74,13 @@ namespace WRA.General.SceneManagment
             if(asyncOperation == null)
                 return false;
             
-            return asyncOperation.progress >= 0.9f;
+            var ready = asyncOperation.progress >= 0.9f;
+            if(ready)
+            {
+                Status = LoadingStatus.Ready;
+                OnSceneReady.Invoke();
+            }
+            return ready;
         }
 
         public float GetProgress()

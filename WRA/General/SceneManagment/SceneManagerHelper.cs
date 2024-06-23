@@ -18,13 +18,11 @@ namespace WRA.General.SceneManagment
         {
             // sceneManager = GetComponent<SceneManager>();
             sceneManager.OnSceneStartLoading.AddListener(ClearScene);
-            sceneManager.OnSceneReady.AddListener(ClearScene);
         }
 
         private void OnDestroy()
         {
             sceneManager.OnSceneStartLoading.RemoveListener(ClearScene);
-            sceneManager.OnSceneReady.RemoveListener(ClearScene);
         }
 
         private void ClearScene()

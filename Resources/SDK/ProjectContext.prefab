@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1748751458612818136}
   - component: {fileID: 8473629588265515155}
+  - component: {fileID: 1510778246850650415}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -45,10 +46,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelManager: {fileID: 4213820518080821231}
-  dontHidePanels:
-  - GameConsole
   useProgressScreen: 1
   autoStartScene: 1
+--- !u!114 &1510778246850650415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572773838271234200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7428ce5243538b4cbacd6f46fc7d9e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontHidePanels:
+  - GameConsole
 --- !u!1 &1000740285674028086
 GameObject:
   m_ObjectHideFlags: 0

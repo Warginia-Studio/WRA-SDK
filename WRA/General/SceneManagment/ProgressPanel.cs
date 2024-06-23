@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UI;
 using WRA.PlayerSystems.LanguageSystem;
 using WRA.UI.PanelsSystem;
+using Zenject;
 
 namespace WRA.General.SceneManagment
 {
@@ -15,7 +16,7 @@ namespace WRA.General.SceneManagment
         [SerializeField] private TextTranslator sceneIsReadyText;
         [SerializeField] private KeyCode continueKey;
         
-        private ILoadingStatus loadingStatus;
+        [Inject] private ILoadingStatus loadingStatus;
 
         private void Awake()
         {
@@ -44,9 +45,11 @@ namespace WRA.General.SceneManagment
             }
         }
 
-        public override void OnOpen()
-        {
-            loadingStatus = (ILoadingStatus) data;
-        }
+        // public override void OnOpen()
+        // {
+        //     var data = (PanelDataBase)base.data;
+        //     var progressData = (ILoadingStatus) data.Data;
+        //     loadingStatus = progressData;
+        // }
     }
 }

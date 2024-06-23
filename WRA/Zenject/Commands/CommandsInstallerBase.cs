@@ -14,7 +14,8 @@ namespace WRA.Zenject.Commands
             new HelpCommand(),
             new LanguageCommand(),
             new ConsoleCommand(),
-            new PanelCommand()
+            new PanelCommand(),
+            new SceneCommand()
         };
         public override void InstallBindings()
         {

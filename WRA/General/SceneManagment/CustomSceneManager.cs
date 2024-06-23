@@ -17,7 +17,7 @@ namespace WRA.General.SceneManagment
 
         public static void ChangeScene(int buildId, bool autoChangeScene = false)
         {
-            nextSceneName = SceneManager.GetSceneByBuildIndex(buildId).name;
+            nextSceneName = UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(buildId).name;
             CreateLoadingProcess(autoChangeScene);
         }
 
@@ -36,7 +36,7 @@ namespace WRA.General.SceneManagment
 
         private static void CreateLoadingProcess(bool autoChangeScene = false)
         {
-            asyncOperation = SceneManager.LoadSceneAsync(nextSceneName);
+            asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nextSceneName);
             asyncOperation.allowSceneActivation = autoChangeScene;
         }
     }

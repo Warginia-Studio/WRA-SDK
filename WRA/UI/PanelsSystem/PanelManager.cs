@@ -55,7 +55,6 @@ namespace WRA.UI.PanelsSystem
         {
             return ClosePanel(panelBase.name, data);
         }
-
         
         public bool ClosePanel(string panelName, PanelDataBase data = null)
         {

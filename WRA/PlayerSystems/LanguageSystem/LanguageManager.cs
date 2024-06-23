@@ -26,7 +26,7 @@ namespace WRA.PlayerSystems.LanguageSystem
 
         private static Dictionary<SystemLanguage, string> LANGS_MAPPING = new()
         {
-            { SystemLanguage.Polish , "PL"}
+            { SystemLanguage.Polish , "pl"}
         };
         
         public static void LoadLanguage()

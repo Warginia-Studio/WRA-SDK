@@ -79,6 +79,8 @@ namespace WRA.UI.PanelsSystem
             {
                 this.LogFromObject($"Data is null or is not PanelDataBase in {this.GetType().Name}", LogType.warning, "panels");
                 data = new PanelDataBase();
+                if (this.data != null)
+                    return;
             }
             this.data = data;
         }

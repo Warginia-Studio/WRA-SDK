@@ -40,7 +40,12 @@ namespace WRA.UI.PanelsSystem
         {
             var panel = GetPanel(panelName);
             if (panel != null)
+            {
+                panel.SetData(data);
+                panel.OnOpen();
                 return panel;
+            }
+
             panel = panelFactory.Create(panelName, data);
             if (panel == null)
                 return null;

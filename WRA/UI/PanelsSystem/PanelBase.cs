@@ -196,7 +196,7 @@ namespace WRA.UI.PanelsSystem
 
         private void SetCanvasGroup(bool active)
         {
-            if (canvasGroup == switchCanvasGroup)
+            if (!switchCanvasGroup)
                 return;
             canvasGroup.interactable = active;
             canvasGroup.blocksRaycasts = active;

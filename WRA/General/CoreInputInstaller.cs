@@ -41,9 +41,8 @@ namespace WRA.General
     
         private void OnDebugPanelPressed()
         {
-            if(debugPanel== null)
-                debugPanel = panelManager.ShowPanel("DiagnosticsPanel");
-        
+            if(debugPanel == null)
+                debugPanel = panelManager.GetPanel("DebugPanel");
             debugPanel.PanelActionsFragment.SwitchHideThisPanel();
         }
     }

@@ -165,6 +165,7 @@ namespace WRA.UI.PanelsSystem
                     return;
                 ctg.InitFragment(this);
             });
+            PanelActionsFragment.InitFragment(this);
         }
         
         protected void DataChanged()

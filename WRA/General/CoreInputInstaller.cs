@@ -31,7 +31,7 @@ namespace WRA.General
         private void OnConsolePressed()
         {
             if(consolePanel == null)
-                consolePanel = panelManager.ShowPanel("GameConsole") as WraGameConsole;
+                consolePanel = panelManager.GetPanel("GameConsole") as WraGameConsole;
         
             if(consolePanel.IsEditing)
                 return;

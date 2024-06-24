@@ -41,7 +41,7 @@ namespace WRA.UI.PanelsSystem
         public void InitPanelBase(object data = null)
         {
             PanelActionsFragment = GetComponent<PanelActionsFragment>();
-            data = data ?? new PanelDataBase();
+            this.data = data ?? new PanelDataBase();
             InitNeededComponents();
             InitFragmentsAndAnimations();
             OnDataChanged();

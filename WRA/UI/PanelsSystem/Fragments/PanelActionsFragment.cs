@@ -7,7 +7,7 @@ namespace WRA.UI.PanelsSystem.Fragments
         private PanelManager panelManager;
         public override void OnPanelCreated()
         {
-            
+            panelManager = ParentPanel.PanelManager;
         }
 
         public void CloseThisPanel()

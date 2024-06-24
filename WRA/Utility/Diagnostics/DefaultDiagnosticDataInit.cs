@@ -44,7 +44,7 @@ public class DefaultDiagnosticDataInit : MonoBehaviour
         };
         
 
-        diagnosticsPanel = panelManager.ShowPanel("DiagnosticsPanel") as WraDiagnosticsPanel;
+        diagnosticsPanel = panelManager.HidePanel("DiagnosticsPanel") as WraDiagnosticsPanel;
         diagnosticsPanel.AddRecord(fpsRecord);
         diagnosticsPanel.AddRecord(averageFpsRecord);
     }

@@ -41,9 +41,10 @@ namespace WRA.UI.PanelsSystem
         public void InitPanelBase(object data = null)
         {
             PanelActionsFragment = GetComponent<PanelActionsFragment>();
-            SetData(data);
+            data = data ?? new PanelDataBase();
             InitNeededComponents();
             InitFragmentsAndAnimations();
+            OnDataChanged();
         }
         
         public void SetData(object data)
@@ -56,7 +57,7 @@ namespace WRA.UI.PanelsSystem
                     return;
             }
             this.data = data;
-            DataChanged();
+            OnDataChanged();
         }
         
         public void SetActive(bool active)
@@ -168,7 +169,7 @@ namespace WRA.UI.PanelsSystem
             PanelActionsFragment.InitFragment(this);
         }
         
-        protected void DataChanged()
+        protected void OnDataChanged()
         {
             fragments.ForEach(ctg =>
             {

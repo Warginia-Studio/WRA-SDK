@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
+using WRA.CharacterSystems.StatisticsSystem.Controlers;
 using WRA.CharacterSystems.StatisticsSystem.Interfaces;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
-namespace WRA.CharacterSystems.StatisticsSystem.Controlers
+namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 {
     [RequireComponent(typeof(StatisticsControler))]
-    public class HealthSystemBaseControler : ResourceSystemBaseControler, IHealable, IDamageable
+    public class HealthSystemBaseController : ResourceSystemBaseControler, IHealable, IDamageable
     {
         [HideInInspector] public UnityEvent<HealInfo> OnBeforeHeal = new UnityEvent<HealInfo>();
         [HideInInspector] public UnityEvent<HealInfo> OnHealed = new UnityEvent<HealInfo>();
@@ -17,6 +18,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
         [HideInInspector] public UnityEvent<KillInfo> OnBeforeKill = new UnityEvent<KillInfo>();
         [HideInInspector] public UnityEvent<KillInfo> OnKilled = new UnityEvent<KillInfo>();
 
+        public bool Immortal { get; private set; }
         public override float PercentValue => CurrentValue / MaxValue;
         public override float MaxValue => statisticsControler.GetStatistics().Health.Value;
         
@@ -29,8 +31,14 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
             InitHealth();
         }
         
+        public void SetImmortal(bool value)
+        {
+            Immortal = value;
+        }
+        
         public virtual void Heal(HealInfo healInfo)
         {
+
             OnBeforeHeal.Invoke(healInfo);
             healInfo.FinalHeal = healInfo.HealValue + CurrentValue * healInfo.PercentHealValueOfCurrentHealth +
                                  MaxValue * healInfo.PercentHealValueOfMaxHealth;
@@ -42,9 +50,12 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
         /*
          * Here needs amors reduction rules etc.
          */
-
+        
+        
         public virtual void DealDamage(DamageInfo damageInfo)
         {
+            if(Immortal)
+                return;
             OnBeforeDamage.Invoke(damageInfo);
             RemoveValue(damageInfo);
             OnDamaged.Invoke(damageInfo);

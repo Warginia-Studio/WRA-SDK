@@ -14,7 +14,7 @@ using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.PlayerSystems.LanguageSystem
 {
-    public class LanguageManager
+    public static class LanguageManager
     {
         public static string LANG_PATH => Application.dataPath + "/Resources/Configs/Langs/";
 
@@ -26,7 +26,8 @@ namespace WRA.PlayerSystems.LanguageSystem
 
         private static Dictionary<SystemLanguage, string> LANGS_MAPPING = new()
         {
-            { SystemLanguage.Polish , "pl"}
+            { SystemLanguage.Polish , "PL"},
+            { SystemLanguage.English, "EN" }
         };
         
         public static void LoadLanguage()
@@ -39,7 +40,11 @@ namespace WRA.PlayerSystems.LanguageSystem
             });
 
 
+#if UNITY_EDITOR
+            CurrentLanguage = GetLangAsString(ApplicationProfile.Instance.Language);
+#else
             CurrentLanguage = GetLangAsString(Application.systemLanguage);
+#endif
             SetLanguage(CurrentLanguage);
         }
         
@@ -90,6 +95,11 @@ namespace WRA.PlayerSystems.LanguageSystem
             }
             CurrentLanguageData = Languages[index];
             SetLanguage(CurrentLanguageData.ShortLanguageName);
+        }
+        
+        public static string Translate(this string keyWord)
+        {
+            return GetTranslation(keyWord);
         }
         
         public static string GetTranslation(string keyWord)

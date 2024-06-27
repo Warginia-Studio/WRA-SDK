@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace WRA.AudioSystem
 {
@@ -9,6 +10,7 @@ namespace WRA.AudioSystem
     {
         public AudioSource AudioSource { get; private set; }
         [SerializeField] private AudioType audioTypeController;
+        [Inject] private AudioManager audioManager;
         
         private void Awake()
         {
@@ -34,8 +36,8 @@ namespace WRA.AudioSystem
 
         private void RegisterEvenets()
         {
-            AudioManager.Instance.OnVolumeChanged.AddListener(UpdateVolume);
-            UpdateVolume(audioTypeController, AudioManager.Instance.GetVolumeForAudioType(audioTypeController));
+            audioManager.OnVolumeChanged.AddListener(UpdateVolume);
+            UpdateVolume(audioTypeController, audioManager.GetVolumeForAudioType(audioTypeController));
         }
         
         private void UpdateVolume(AudioType audioType, float volume)
@@ -47,7 +49,7 @@ namespace WRA.AudioSystem
         
         private IEnumerator ChangeMusicAnimation(AudioClip clip)
         {
-            var volume = AudioManager.Instance.GetVolumeForAudioType(audioTypeController);
+            var volume = audioManager.GetVolumeForAudioType(audioTypeController);
 
             while (AudioSource.volume > 0)
             {

@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: 7936179448594659659}
   - component: {fileID: -6090276877144222796}
   - component: {fileID: 4725590688908575302}
+  - component: {fileID: 1446224877699410065}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -345,6 +346,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 7220636359205168626}
   - {fileID: 4725590688908575302}
+  - {fileID: 1446224877699410065}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 0
   _editorReflectionBakingCoverageMode: 0
@@ -424,3 +426,18 @@ MonoBehaviour:
   panelManager: {fileID: 4213820518080821231}
   useProgressScreen: 1
   autoStartScene: 0
+--- !u!114 &1446224877699410065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535296146189128580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42431233523f44f1911a25813003acd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnVolumeChanged:
+    m_PersistentCalls:
+      m_Calls: []

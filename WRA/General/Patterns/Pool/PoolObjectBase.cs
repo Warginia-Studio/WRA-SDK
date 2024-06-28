@@ -8,8 +8,8 @@ namespace WRA.General.Patterns.Pool
 {
     public abstract class PoolObjectBase : MonoBehaviour, IKillable
     {
-        public UnityEvent OnKillEvent;
-        public UnityEvent OnSpawnEvent;
+        public UnityEvent<PoolObjectBase> OnKillEvent;
+        public UnityEvent<PoolObjectBase> OnSpawnEvent;
         public abstract void OnInit();
         public abstract void OnSpawn();
     
@@ -28,7 +28,7 @@ namespace WRA.General.Patterns.Pool
             OnKill();
             SetActive(false);
             StopAllCoroutines();
-            OnKillEvent?.Invoke();
+            OnKillEvent?.Invoke(this);
         }
 
         public void Kill(float delay)

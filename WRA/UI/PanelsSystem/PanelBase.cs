@@ -150,6 +150,17 @@ namespace WRA.UI.PanelsSystem
             return data as T;
         }
         
+        public T GetFragment<T>() where T : PanelFragmentBase
+        {
+            var fragment = fragments.Find(ctg => ctg is T);
+            if (fragment == null)
+            {
+                this.LogFromObject($"Fragment {typeof(T).FullName} not found in {this.GetType().Name}", LogType.error, "panels");
+                throw(new Exception($"Fragment {typeof(T).FullName} not found in {this.GetType().Name}"));
+            }
+            return fragment as T;
+        }
+        
         protected void InitFragmentsAndAnimations()
         {
             InitFragments();

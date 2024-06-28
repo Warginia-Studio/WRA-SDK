@@ -6,7 +6,7 @@ using Zenject;
 namespace WRA.AudioSystem
 {
     [RequireComponent(typeof(AudioSource))]
-    public class AudioSourceControler : MonoBehaviour
+    public class AudioSourceController : MonoBehaviour
     {
         public AudioSource AudioSource { get; private set; }
         [SerializeField] private AudioType audioTypeController;

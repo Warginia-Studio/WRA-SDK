@@ -100,6 +100,13 @@ namespace WRA.UI.PanelsSystem
             OnPanelHide?.Invoke(panelBase);
         }
         
+        public int HideAllPanels()
+        {
+            var count = openedPanels.Count;
+            openedPanels.ForEach(ctg => HidePanel(ctg));
+            return count;
+        }
+        
         public void UpdatePanel(string panelName, PanelDataBase panelDataBase = null)
         {
             var panel = GetPanel(panelName);

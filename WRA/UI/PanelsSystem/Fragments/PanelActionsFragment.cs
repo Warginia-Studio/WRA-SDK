@@ -37,5 +37,10 @@ namespace WRA.UI.PanelsSystem.Fragments
         {
             panelManager.HidePanel(ParentPanel);
         }
+        
+        public void OpenPanel(string panelName)
+        {
+            panelManager.OpenPanel(panelName);
+        }
     }
 }

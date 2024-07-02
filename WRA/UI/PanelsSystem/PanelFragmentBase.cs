@@ -13,7 +13,13 @@ namespace WRA.UI.PanelsSystem
         }
         
         public virtual void OnPanelCreated() { }
+
+        public virtual void OnShow() { }
         
+        public virtual void OnHide() { }
+        
+        public virtual void OnClose() { }
+
         public virtual void OnPanelDataChanged() { }
     }
 }

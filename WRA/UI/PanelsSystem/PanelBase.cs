@@ -84,9 +84,31 @@ namespace WRA.UI.PanelsSystem
         /// <summary>
         /// Called once while destroying
         /// </summary>
-        public virtual void OnClose()
+        public virtual void OnDestroy()
         {
             OnCloseEvent?.Invoke();
+            
+            if (Animations == null || Animations.Count == 0)
+            {
+                canvasGroup.alpha = 0;
+                return;
+            }
+
+            Fragments.ForEach(ctg =>
+            {
+                if (ctg == null)
+                    return;
+                ctg.OnClose();
+            });
+            
+            Animations.ForEach(ctg =>
+            {
+                if (ctg == null)
+                    return;
+                if(!ctg.UseAnimationFromPanel)
+                    return;
+                ctg.HideAnimation(null);
+            });
         }
         
         /// <summary>
@@ -102,6 +124,13 @@ namespace WRA.UI.PanelsSystem
                 canvasGroup.alpha = 1;
                 return;
             }
+            
+            Fragments.ForEach(ctg =>
+            {
+                if (ctg == null)
+                    return;
+                ctg.OnShow();
+            });
 
             Animations.ForEach(ctg =>
             {
@@ -126,6 +155,13 @@ namespace WRA.UI.PanelsSystem
                 canvasGroup.alpha = 0;
                 return;
             }
+            
+            Fragments.ForEach(ctg =>
+            {
+                if (ctg == null)
+                    return;
+                ctg.OnHide();
+            });
             
             Animations.ForEach(ctg =>
             {

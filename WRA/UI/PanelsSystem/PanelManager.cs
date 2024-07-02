@@ -56,7 +56,6 @@ namespace WRA.UI.PanelsSystem
             if (panel == null)
                 return false;
             panel.SetData(data);
-            panel.OnClose();
             openedPanels.Remove(panel);
             OnPanelClose?.Invoke(panel);
             Destroy(panel.gameObject);

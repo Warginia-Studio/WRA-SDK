@@ -97,12 +97,7 @@ namespace WRA.Utility.Diagnostics.GameConsole
             base.OnCreate();
             transform.SetAsLastSibling();
         }
-
-        public override void OnClose()
-        {
-            // PanelManager.Instance.ClosePanel<WraGameConsole>(null);
-        }
-
+        
         public override void OnShow()
         {
             base.OnShow();

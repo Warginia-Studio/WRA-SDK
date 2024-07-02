@@ -74,15 +74,6 @@ namespace WRA.UI.PanelsSystem.SubPanels
             }
         }
 
-        public override void OnClose()
-        {
-            var myData = GetDataAsType<SubViewsPanelData>();
-            if (myData != null)
-            {
-                
-            }
-        }
-
         private int CheckIndex(int id)
         {
             if (id > allViews.Count)

@@ -34,24 +34,28 @@ namespace WRA.Utility.SmartObjects
         public static RangedValueFloat operator +(RangedValueFloat x, RangedValueFloat y)
         {
             x.value += y.value;
+            x.value = Mathf.Clamp(x.value, x.min, x.max);
             return x;
         }
     
         public static RangedValueFloat operator -(RangedValueFloat x, RangedValueFloat y)
         {
             x.value -= y.value;
+            x.value = Mathf.Clamp(x.value, x.min, x.max);
             return x;
         }
     
         public static RangedValueFloat operator /(RangedValueFloat x, RangedValueFloat y)
         {
             x.value /= y.value;
+            x.value = Mathf.Clamp(x.value, x.min, x.max);
             return x;
         }
     
         public static RangedValueFloat operator *(RangedValueFloat x, RangedValueFloat y)
         {
             x.value *= y.value;
+            x.value = Mathf.Clamp(x.value, x.min, x.max);
             return x;
         }
         
@@ -71,24 +75,28 @@ namespace WRA.Utility.SmartObjects
         public static RangedValueFloat operator +(RangedValueFloat x, float y)
         {
             x.value += y;
+            x.value = Mathf.Clamp(x.value, x.min, x.max);
             return x;
         }
     
         public static RangedValueFloat operator -(RangedValueFloat x, float y)
         {
             x.value -= y;
+            x.value = Mathf.Clamp(x.value, x.min, x.max);
             return x;
         }
     
         public static RangedValueFloat operator /(RangedValueFloat x, float y)
         {
             x.value /= y;
+            x.value = Mathf.Clamp(x.value, x.min, x.max);
             return x;
         }
     
         public static RangedValueFloat operator *(RangedValueFloat x, float y)
         {
             x.value *= y;
+            x.value = Mathf.Clamp(x.value, x.min, x.max);
             return x;
         }
     

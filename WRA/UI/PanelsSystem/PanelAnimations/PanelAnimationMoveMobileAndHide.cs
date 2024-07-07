@@ -1,34 +1,34 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
-using UnityEngine;
 
-public class PanelAnimationMoveMobileAndHide : PanelAnimationMoveMobileFix
+namespace WRA.UI.PanelsSystem.PanelAnimations
 {
-    private TweenerCore<float, float, FloatOptions> lastTween;
-    
-    public override void ShowAnimation(Action onComplete)
+    public class PanelAnimationMoveMobileAndHide : PanelAnimationMoveMobileFix
     {
-        if(lastTween!=null)
-            lastTween.Kill();
-        gameObject.SetActive(true);
-        lastTween = CreateTweener(1, showSpeed).OnComplete(() => onComplete?.Invoke());
-    }
+        private TweenerCore<float, float, FloatOptions> lastTween;
     
-    public override void HideAnimation(Action onComplete)
-    {
-        if(lastTween!=null)
-            lastTween.Kill();
-        lastTween = CreateTweener(0, hideSpeed).OnComplete(() => onComplete?.Invoke());
-        lastTween.onComplete += () => gameObject.SetActive(false);
-    }
+        public override void ShowAnimation(Action onComplete)
+        {
+            if(lastTween!=null)
+                lastTween.Kill();
+            gameObject.SetActive(true);
+            lastTween = CreateTweener(1, showSpeed).OnComplete(() => onComplete?.Invoke());
+        }
+    
+        public override void HideAnimation(Action onComplete)
+        {
+            if(lastTween!=null)
+                lastTween.Kill();
+            lastTween = CreateTweener(0, hideSpeed).OnComplete(() => onComplete?.Invoke());
+            lastTween.onComplete += () => gameObject.SetActive(false);
+        }
 
-    public override void SetVisible(bool visible)
-    {
-        base.SetVisible(visible);
-        gameObject.SetActive(visible);
+        public override void SetVisible(bool visible)
+        {
+            base.SetVisible(visible);
+            gameObject.SetActive(visible);
+        }
     }
 }

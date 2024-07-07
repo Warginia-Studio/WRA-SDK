@@ -1,11 +1,16 @@
-<data>
+<data languageShort="pl" languageName="polski">
+    <default>
         <Exit>Wyjście</Exit>
         <Start>Start</Start>
         <Options>Opcje</Options>
         <Load>Wczytaj</Load>
         <SceneIsReady>Scena jest gotowa wciśnij {0} żeby kontynuować.</SceneIsReady>
-        
-<!--WINDOW TITLEs-->
+    </default>
+
+    <!--WINDOW TITLEs-->
+    <windowTitles>
         <Inventory>Ekwipunek</Inventory>
         <Skills>Umiejętności</Skills>
+    </windowTitles>
+
 </data>

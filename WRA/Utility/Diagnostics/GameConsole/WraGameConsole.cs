@@ -1,125 +1,156 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using WRA.UI.PanelsSystem;
+using WRA.Utility.Diagnostics.GameConsole.Commands;
 using WRA.Utility.Diagnostics.Logs;
+using Zenject;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.Utility.Diagnostics.GameConsole
 {
     public class WraGameConsole : PanelBase
     {
-        public static List<ICommand> Commands { get; protected set; } = new List<ICommand>()
-        {
-            new HelpCommand(),
-            new LanguageCommand(),
-            new ConsoleCommand()
-        };
+        public bool IsEditing => inputField.isFocused;
+        
+        [Inject] public List<ICommand> Commands;
         
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private Transform logContainer;
         [SerializeField] private SimpleLog simpleLogPrefab;
-        [SerializeField] private CommandInputHelper commandInputHelper;
         [SerializeField] private ScrollRect scrollRect;
-        [SerializeField] private TMP_Dropdown tagSelector;
     
         private List<string> executedCommands = new List<string>();
 
         private TweenerCore<float, float, FloatOptions> lastTween;
-        private int currentTagIndex = 0;
+        private string currentTageName = "all";
 
         private string lastText = "";
+        
+        private int showintLastCommands = 0;
 
         private void Awake()
         {
             RegisterEvenets();
         }
 
-        private void Start()
+        private void Update()
         {
-            OnTagAdded("");
+            if (!IsEditing)
+                return;
+            
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                showintLastCommands++;
+                RefreshInputField();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                showintLastCommands--;
+                RefreshInputField();
+            }
+            
+            if (showintLastCommands == 0)
+            {
+                lastText = inputField.text;
+            }
+        }
+        
+        private void RefreshInputField()
+        {
+            showintLastCommands = Mathf.Clamp(showintLastCommands, 0, executedCommands.Count);
+            if (showintLastCommands == 0)
+            {
+                inputField.text = lastText;
+                return;
+            }
+            inputField.text = executedCommands[^showintLastCommands];
         }
 
         private void OnDestroy()
         {
             UnRegisterEvents();
         }
-
-        // private void Update()
-        // {
-        //     if (string.IsNullOrEmpty(inputField.text))
-        //     {
-        //         commandInputHelper.DestroyCommands();
-        //         return;
-        //     }
-        //
-        //     if (inputField.text == lastText)
-        //         return;
-        //     
-        //     OnCommandWrite(inputField.text);
-        //     lastText = inputField.text;
-        // }
-
-        public override void OnOpen()
+        
+        private void RegisterEvenets()
         {
-            base.OnOpen();
-            var data =GetDataAsType<PanelDataBase>();
+            inputField.onSubmit.AddListener(ExecuteCommand);
+            Logs.Diagnostics.OnLog.AddListener(OnLog);
         }
-
-        public override void OnClose()
+    
+        private void UnRegisterEvents()
         {
-            PanelManager.Instance.ClosePanel<WraGameConsole>(null);
+            inputField.onSubmit.RemoveListener(ExecuteCommand);
+            Logs.Diagnostics.OnLog.RemoveListener(OnLog);
         }
-
+        
+        public override void OnCreate()
+        {
+            base.OnCreate();
+            transform.SetAsLastSibling();
+        }
+        
         public override void OnShow()
         {
             base.OnShow();
             transform.SetAsLastSibling();
-            // canvasGroup.alpha = 1;
-            // transform.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
-
-        public override void OnHide()
-        {
-            base.OnHide();
-            // canvasGroup.alpha = 0;
-        }
-
-        // public void OnCommandWrite(string command)
-        // {
-        //     commandInputHelper.ShowCommands(command + "test", command + "test2", command + "test3");
-        // }
-
+        
         public void ExecuteCommand(string command)
         {
-            
+            inputField.OnSelect(null);
+            showintLastCommands = 0;
             inputField.text = "";
             if (string.IsNullOrEmpty(command))
                 return;
             executedCommands.Add(command);
             var splited = command.Split(" ");
-            WraDiagnostics.Log(command, "CMD");
+            Logs.Diagnostics.Log(command, LogType.cmd, "CMD");
             if (splited.Length == 0)
             {
-                WraDiagnostics.LogError("Command is empty");
+                Logs.Diagnostics.Log("Command is empty", LogType.cmd);
                 return;
             }
             var cmd = Commands.Find(ctg => ctg.Name == splited[0]);
             if (cmd == null)
             {
-                WraDiagnostics.LogError($"Command '{splited[0]}' not found");
+                Logs.Diagnostics.Log($"Command '{splited[0]}' not found", LogType.cmd);
                 return;
             }
             cmd.Execute(splited);
         }
     
+        public void SetTag(string name)
+        {
+            var existTag = Logs.Diagnostics.GetTags().Find(ctg => string.Equals(ctg, name, StringComparison.CurrentCultureIgnoreCase));
+            if (string.IsNullOrEmpty(existTag))
+            {
+                Logs.Diagnostics.Log($"Tag '{name}' not found", LogType.cmd);
+                return;
+            }
+            if (string.IsNullOrEmpty(currentTageName))
+            {
+                currentTageName = "all";
+            }
+            currentTageName = name;
+            ClearView();
+            GenerateLogs();
+            lastTween.Kill();
+            scrollRect.verticalNormalizedPosition = 0;
+        }
+        
         public void ClearLogs()
         {
             ClearView();
-            WraDiagnostics.ClearLogs();
+            Logs.Diagnostics.ClearLogs();
         }
 
         public void ClearView()
@@ -129,75 +160,27 @@ namespace WRA.Utility.Diagnostics.GameConsole
                 Destroy(VARIABLE.gameObject);
             }
         }
-
-        private void RegisterEvenets()
-        {
-            tagSelector.onValueChanged.AddListener(OnTagChanged);
-            // inputField.onValueChanged.AddListener(OnCommandWrite);
-            inputField.onSubmit.AddListener(ExecuteCommand);
-            // inputField.onSelect.AddListener(OnSelectedInputField);
-            // inputField.onDeselect.AddListener(OnDeselectInputField);
-            WraDiagnostics.OnLog.AddListener(OnLog);
-            WraDiagnostics.OnTagAdded.AddListener(OnTagAdded);
-        }
-    
-        private void UnRegisterEvents()
-        {
-            tagSelector.onValueChanged.RemoveListener(OnTagChanged);
-            // inputField.onValueChanged.RemoveListener(OnCommandWrite);
-            inputField.onSubmit.RemoveListener(ExecuteCommand);
-            // inputField.onSelect.RemoveListener(OnSelectedInputField);
-            // inputField.onDeselect.RemoveListener(OnDeselectInputField);
-            WraDiagnostics.OnLog.RemoveListener(OnLog);
-            WraDiagnostics.OnTagAdded.RemoveListener(OnTagAdded);
-        }
-
-        private void OnLog(WraLogData arg0)
-        {
-            if (currentTagIndex != 0 && arg0.LogTag != WraDiagnostics.GetTags()[currentTagIndex])
-                return;
         
-            var log = Instantiate(simpleLogPrefab, logContainer);
-            log.Bind(arg0.Message, arg0.LogColor);
-            lastTween = DOTween.To(() => scrollRect.verticalNormalizedPosition, x => scrollRect.verticalNormalizedPosition = x, 0,
-                0.5f);
-        }
-
-        // private void OnSelectedInputField(string arg0)
-        // {
-        //     commandInputHelper.DestroyCommands();
-        //     WraDiagnostics.LogWarning("Selected cmd input field but not implemented yet.");
-        // }
-    
-        // private void OnDeselectInputField(string arg0)
-        // {
-        //     commandInputHelper.DestroyCommands();
-        //     WraDiagnostics.LogWarning("Deselected cmd input field but not implemented yet.");
-        // }
-
-        private void OnTagAdded(string str)
-        {
-            tagSelector.ClearOptions();
-            tagSelector.AddOptions(WraDiagnostics.GetTags());
-            tagSelector.value = 0;
-        }
-
-        private void OnTagChanged(int arg0)
-        {
-            currentTagIndex = arg0;
-            ClearView();
-            GenerateLogs();
-            lastTween.Kill();
-            scrollRect.verticalNormalizedPosition = 0;
-        }
-
         private void GenerateLogs()
         {
-            var logs = WraDiagnostics.GetLogsWithTag(WraDiagnostics.GetTags()[currentTagIndex]);
+            var logs = Logs.Diagnostics.GetLogsWithTag(currentTageName);
             for (int i = 0; i < logs.Count; i++)
             {
                 OnLog(logs[i]);   
             }
         }
+
+        private void OnLog(LogData arg0)
+        {
+            if (currentTageName != "all" && !string.Equals(currentTageName, arg0.LogTag, StringComparison.CurrentCultureIgnoreCase))
+                return;
+        
+            var log = Instantiate(simpleLogPrefab, logContainer);
+            log.Bind(arg0.GetFinalMessage(), arg0.Message);
+            lastTween = DOTween.To(() => scrollRect.verticalNormalizedPosition, x => scrollRect.verticalNormalizedPosition = x, 0,
+                0.5f);
+        }
+
+
     }
 }

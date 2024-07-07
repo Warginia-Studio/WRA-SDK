@@ -1,17 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using WRA.UI.PanelsSystem;
 
-public abstract class PanelFragmentBase : MonoBehaviour
+namespace WRA.UI.PanelsSystem
 {
-    public PanelBase ParentPanel { get; set; }
-
-    public void InitFragment(PanelBase panelBase)
+    public abstract class PanelFragmentBase : MonoBehaviour
     {
-        ParentPanel = panelBase;
-        OnFragmentInit();
-    }
+        public PanelBase ParentPanel { get; set; }
 
-    public virtual void OnFragmentInit() { }
+        public void InitFragment(PanelBase panelBase)
+        {
+            ParentPanel = panelBase;
+            OnPanelCreated();
+        }
+        
+        public virtual void OnPanelCreated() { }
+
+        public virtual void OnShow() { }
+        
+        public virtual void OnHide() { }
+        
+        public virtual void OnClose() { }
+
+        public virtual void OnPanelDataChanged() { }
+    }
 }

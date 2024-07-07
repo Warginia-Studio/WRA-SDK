@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WRA.General.SceneManagment;
+using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace WRA.General.ApplicationEvents
 {

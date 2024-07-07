@@ -1,64 +1,69 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using WRA.UI.PanelsSystem;
 
-public abstract class PanelAnimationBase : PanelFragmentBase
+namespace WRA.UI.PanelsSystem.PanelAnimations
 {
-    public UnityEvent OnShow;
-    public UnityEvent OnHide;
-    public UnityEvent<PanelAnimationStatus> OnStatusChanged;
-    public PanelAnimationStatus Status { get; protected set; }
+    public abstract class PanelAnimationBase : PanelFragmentBase
+    {
+        public UnityEvent OnShow;
+        public UnityEvent OnHide;
+        public UnityEvent<PanelStatus> OnStatusChanged;
+        
+        public bool IsAnimating => Status is PanelStatus.ShowingAnimation or PanelStatus.HidingAnimation;
+        public PanelStatus Status { get; protected set; }
+        
+        public bool UseAnimationFromPanel => useAnimationFromPanel;
 
-    public void SetPanel(PanelBase panelBase)
-    {
-        ParentPanel = panelBase;
-    }
-
-    public override void OnFragmentInit()
-    {
-        base.OnFragmentInit();
-        SetVisible(!ParentPanel.GetDataAsType<PanelDataBase>().StartAsHide);
-    }
-
-    public virtual void ShowAnimation(Action onComplete = null)
-    {
-        OnStatusChangedEvent(PanelAnimationStatus.Show);
-        onComplete?.Invoke();
-    }
-
-    public virtual void HideAnimation(Action onComplete = null)
-    {
-        OnStatusChangedEvent(PanelAnimationStatus.Hide);
-        onComplete?.Invoke();
-    }
-    
-    public virtual void SetVisible(bool visible)
-    {
-        if (visible)
+        [SerializeField] private bool useAnimationFromPanel = true;
+        public void SetPanel(PanelBase panelBase)
         {
-            ShowAnimation(null);
+            ParentPanel = panelBase;
         }
-        else
+        
+        public override void OnPanelCreated()
         {
-            HideAnimation(null);
+            SetVisible(!false);
         }
-    }
-    
-    protected void OnStatusChangedEvent(PanelAnimationStatus newStatus)
-    {
-        Status = newStatus;
-        OnStatusChanged?.Invoke(newStatus);
-        switch (newStatus)
+
+        public virtual void ShowAnimation(Action onComplete = null)
         {
-            case PanelAnimationStatus.Show:
-                OnShow?.Invoke();
-                break;
-            case PanelAnimationStatus.Hide:
-                OnHide?.Invoke();
-                break;
+            OnStatusChangedEvent(PanelStatus.Show);
+            onComplete?.Invoke();
+        }
+
+        public virtual void HideAnimation(Action onComplete = null)
+        {
+            OnStatusChangedEvent(PanelStatus.Hide);
+            onComplete?.Invoke();
+        }
+        
+    
+        public virtual void SetVisible(bool visible)
+        {
+            if (visible)
+            {
+                ShowAnimation(null);
+            }
+            else
+            {
+                HideAnimation(null);
+            }
+        }
+    
+        protected void OnStatusChangedEvent(PanelStatus newStatus)
+        {
+            Status = newStatus;
+            OnStatusChanged?.Invoke(newStatus);
+            switch (newStatus)
+            {
+                case PanelStatus.Show:
+                    OnShow?.Invoke();
+                    break;
+                case PanelStatus.Hide:
+                    OnHide?.Invoke();
+                    break;
+            }
         }
     }
 }

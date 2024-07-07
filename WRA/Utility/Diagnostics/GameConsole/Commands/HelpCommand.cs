@@ -1,21 +1,90 @@
-using System.Collections;
+
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using WRA.Utility.Diagnostics.GameConsole;
-using WRA.Utility.Diagnostics.Logs;
+using WRA.Zenject.Commands;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
-public class HelpCommand : ICommand
+namespace WRA.Utility.Diagnostics.GameConsole.Commands
 {
-    public string Name => "help";
-    public string Description => "Show all available commands";
-    public string Usage => "help";
-
-    public void Execute(string[] args)
+    public class HelpCommand : ICommand
     {
-        var commands = WraGameConsole.Commands;
-        foreach (var command in commands)
+        public string Name => "help";
+        public string Description => "Show all available commands";
+        public string Usage => "help <command> or help -us <command>";
+        
+        public List<string> Arguments => new List<string>()
         {
-            WraDiagnostics.Log(command.Name + " - " + command.Description, "commands");
+            "-us - Show usage of command",
+            ""
+        };
+
+        public void Execute(string[] args)
+        {
+            var commandInstaller = Object.FindAnyObjectByType<WraGameConsole>();
+
+            var commands = commandInstaller.Commands;
+            if (args.Length == 0 || args.Length == 1)
+            {
+                Logs.Diagnostics.Log(Usage, LogType.cmd, "commands");
+                Logs.Diagnostics.Log("Available commands:", LogType.cmd, "commands");
+                for (int i = 0; i < commands.Count; i++)
+                {
+                    ShowCommand(commands[i]);
+                }
+
+                return;
+            }
+
+            var arg1 = args[1];
+            ICommand command;
+            if (arg1 == "-us")
+            {
+                if (args.Length == 2)
+                {
+                    Logs.Diagnostics.Log("Usage: help -us <command>", LogType.cmd, "commands");
+                    return;
+                }
+
+                var commandName = args[2];
+                command = commands.Find(x => x.Name == commandName);
+                if (command == null)
+                {
+                    Logs.Diagnostics.Log("Command not found", LogType.cmd, "commands");
+                    return;
+                }
+
+                ShowAllAboutCommand(command);
+            }
+        }
+
+
+
+        private void ShowCommand(ICommand command)
+        {
+            Logs.Diagnostics.Log(command.Name + " - " + command.Description, LogType.cmd, "commands");
+        }
+
+        
+        private void ShowUsage(ICommand command)
+        {
+            Logs.Diagnostics.Log(command.Usage, LogType.cmd, "commands");
+        }
+
+        private void ShowArguments(ICommand command)
+        {
+            var args = "";
+            for (int i = 0; i < command.Arguments.Count; i++)
+            {
+                args += command.Arguments[i] + "\n";
+            }
+            Logs.Diagnostics.Log(args, LogType.cmd, "commands");
+        }
+        
+        private void ShowAllAboutCommand(ICommand command)
+        {
+            ShowUsage(command);
+            ShowArguments(command);
         }
     }
 }

@@ -4,6 +4,7 @@ using WRA.General.Patterns;
 using WRA.General.Patterns.Singletons;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.General.SaveLoadSystem
 {
@@ -30,7 +31,7 @@ namespace WRA.General.SaveLoadSystem
             var obj = gameState.AllObjects.Find(ctg => ctg.ObjectData == saveableObject);
             if (obj != null)
             {
-                WraDiagnostics.LogError($"Objects is registered as saveable {saveableObject.GetType().Name}", Color.red);
+                Diagnostics.Log($"Objects is registered as saveable {saveableObject.GetType().Name}", LogType.warning);
                 return;
             }
 

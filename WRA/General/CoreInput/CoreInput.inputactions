@@ -1,0 +1,76 @@
+{
+    "name": "CoreInput",
+    "maps": [
+        {
+            "name": "General",
+            "id": "24c2d8f4-881a-4c40-874c-4edde72afbf3",
+            "actions": [
+                {
+                    "name": "Console",
+                    "type": "Button",
+                    "id": "e272f131-f89e-4b3a-9483-40a1091e9b7f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DebugPanel",
+                    "type": "Button",
+                    "id": "4ae40557-1092-4c3c-87c1-deb71a11069f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "018ee4ca-77c5-4860-a76a-590523aeaa0b",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Console",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "8cf16e07-ac81-4c43-b698-df6ebf463e63",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugPanel",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "48120f06-f9e3-4591-a0e4-904d9677d4cd",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "e34e91d2-997b-4d65-a671-2a865e61a28e",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugPanel",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

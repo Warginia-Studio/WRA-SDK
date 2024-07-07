@@ -10,6 +10,7 @@ using WRA.General;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using WRA.Utility.Math;
+using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.PlayerSystems.LanguageSystem
 {
@@ -56,7 +57,8 @@ namespace WRA.PlayerSystems.LanguageSystem
             }
             else
             {
-                WraDiagnostics.LogError($"Not found language: {language} in mapping. Using default language: EN");
+                Diagnostics.Log($"Not found language: {language} in mapping.", LogType.failed);
+                Diagnostics.Log($"Using default language: EN", LogType.log);
             }
             SetLanguage(shortLang);
         }
@@ -112,7 +114,7 @@ namespace WRA.PlayerSystems.LanguageSystem
             var translation = CurrentLanguageData.GetTranslation(keyWord);
             if (string.IsNullOrEmpty(translation))
             {
-                WraDiagnostics.LogError("Not found key word: " + keyWord + " in language: " + ApplicationProfile.Instance.Language);
+                Diagnostics.Log($"Not found key word: {keyWord} in language: {ApplicationProfile.Instance.Language}", LogType.failed);
                 return ColorHelper.GetTextInColor(keyWord + "_NF", Color.red);
             }
 

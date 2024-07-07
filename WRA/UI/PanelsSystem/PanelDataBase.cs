@@ -2,9 +2,13 @@ namespace WRA.UI.PanelsSystem
 {
     public class PanelDataBase
     {
-        /// <summary>
-        /// Your have to handle this data in your panel
-        /// </summary>
-        public bool StartAsHide { get; set; }
+        // public bool StartAsHide { get; set; }
+
+        public object Data { get; set; }
+
+        public TData GetData<TData>()
+        {
+            return (TData)Data;
+        }
     }
 }

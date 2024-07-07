@@ -6,10 +6,11 @@ using WRA.General;
 using WRA.General.Patterns;
 using WRA.General.Patterns.Singletons;
 using WRA.General.SaveLoadSystem;
+using Zenject;
 
 namespace WRA.AudioSystem
 {
-    public class AudioManager : MonoBehaviourSingletonAutoCreate<AudioManager>
+    public class AudioManager : MonoInstaller
     {
         public UnityEvent<AudioType, float> OnVolumeChanged = new UnityEvent<AudioType, float>();
         private Dictionary<AudioType, float> volumes =new Dictionary<AudioType, float>()
@@ -20,37 +21,34 @@ namespace WRA.AudioSystem
             { AudioType.music , 1},
             { AudioType.voices , 1},
         };
-        
-        protected override void OnCreate()
+
+        protected void Awake()
         {
-#if UNITY_ANDROID
+            OnCreate();
+        }
+
+        void OnCreate()
+        {
             volumes[AudioType.effects] = LoadVolume(AudioType.effects);
             volumes[AudioType.environment] = LoadVolume(AudioType.environment);
             volumes[AudioType.lector] = LoadVolume(AudioType.lector);
             volumes[AudioType.music] = LoadVolume(AudioType.music);
             volumes[AudioType.voices] = LoadVolume(AudioType.voices);
-#else
-            var volumesSettings = UnityFileManagment.LoadObject<Dictionary<AudioType, float>>("/Configs/AudioConfig.cfg");
-            if (volumesSettings != null)
-            {
-                volumes = volumesSettings;
-            }
-#endif
         }
 
         private void OnDestroy()
         {
-#if UNITY_ANDROID
             PlayerPrefs.SetFloat(AudioType.effects.ToString(), volumes[AudioType.effects]);
             PlayerPrefs.SetFloat(AudioType.environment.ToString(), volumes[AudioType.environment]);
             PlayerPrefs.SetFloat(AudioType.lector.ToString(), volumes[AudioType.lector]);
             PlayerPrefs.SetFloat(AudioType.music.ToString(), volumes[AudioType.music]);
             PlayerPrefs.SetFloat(AudioType.voices.ToString(), volumes[AudioType.voices]);
             PlayerPrefs.Save();
-#else
-            UnityFileManagment.SaveObject<Dictionary<AudioType, float>>("/Configs/AudioConfig.cfg", volumes);
-            OnVolumeChanged.RemoveAllListeners();
-#endif
+        }
+        
+        public override void InstallBindings()
+        {
+            Container.Bind<AudioManager>().FromInstance(this).AsSingle();
         }
 
         public void SetVolumeForAudioType(AudioType audioType, float volume)

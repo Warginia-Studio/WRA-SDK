@@ -17,13 +17,13 @@ namespace WRA.General.SceneManagment
 
         public static void ChangeScene(int buildId, bool autoChangeScene = false)
         {
-            nextSceneName = SceneManager.GetSceneByBuildIndex(buildId).name;
+            nextSceneName = UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(buildId).name;
             CreateLoadingProcess(autoChangeScene);
         }
 
         public static void ChangeScene(string name, bool autoChangeScene = false)
         {
-            PanelManager.Instance.ShowPanel<ProgressPanel, PanelDataBase>(null, true);
+            // PanelManager.Instance.ShowPanel<ProgressPanel>(null, true);
             nextSceneName = name;
             CreateLoadingProcess(autoChangeScene);
         }
@@ -36,7 +36,7 @@ namespace WRA.General.SceneManagment
 
         private static void CreateLoadingProcess(bool autoChangeScene = false)
         {
-            asyncOperation = SceneManager.LoadSceneAsync(nextSceneName);
+            asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(nextSceneName);
             asyncOperation.allowSceneActivation = autoChangeScene;
         }
     }

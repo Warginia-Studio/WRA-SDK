@@ -13,3 +13,8 @@ MonoBehaviour:
   m_Name: Configuration
   m_EditorClassIdentifier: 
   Language: pl
+  Langs:
+  - {fileID: 4900000, guid: 42ba362721ab11442b7a649aefac640e, type: 3}
+  CustomConsole: 0
+  CursorData: {fileID: 0}
+  fonts: []

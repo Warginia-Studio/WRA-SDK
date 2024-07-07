@@ -10,8 +10,7 @@ namespace WRA.General
     [CreateAssetMenu(menuName = "thief01/WRA-SDK/Profiles/Application Profile", fileName = "Application Profile")]
     public class ApplicationProfile : ScriptableSingleton<ApplicationProfile>
     {
-        public TextAsset soundSettings;
-        public string Language = "pl";
+        public SystemLanguage Language = SystemLanguage.English;
         public List<TextAsset> Langs;
         public bool CustomConsole = false;
 

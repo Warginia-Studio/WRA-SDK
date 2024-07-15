@@ -4,7 +4,7 @@ using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {
-    public class ConditionSystemBaseControler : ResourceSystemBaseControler, IConitionable
+    public class ConditionSystemBaseController : ResourceSystemBaseController, IConitionable
     {
         public UnityEvent<ConditionInfo> OnStaminaUse = new UnityEvent<ConditionInfo>();
         public UnityEvent<ConditionInfo> OnStaminaRegen = new UnityEvent<ConditionInfo>();

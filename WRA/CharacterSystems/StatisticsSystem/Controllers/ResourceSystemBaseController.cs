@@ -8,7 +8,7 @@ using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {
-    public abstract class ResourceSystemBaseControler : CharacterSystemBase
+    public abstract class ResourceSystemBaseController : CharacterSystemBase
     {
         [HideInInspector] public UnityEvent<float> OnValueChanged = new UnityEvent<float>();
         [HideInInspector] public UnityEvent<float> OnIncreaseValue = new UnityEvent<float>();

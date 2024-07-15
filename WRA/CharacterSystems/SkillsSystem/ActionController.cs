@@ -8,11 +8,11 @@ namespace WRA.CharacterSystems.SkillsSystem
         private List<ActionBase> activeActions = new List<ActionBase>();
         private List<Coroutine> coroutines = new List<Coroutine>();
 
-        private ActionData actionData;
+        private CharacterData characterData;
 
         public void BeginAction(ActionBase actionBase)
         {
-            var cor = StartCoroutine(actionBase.ActionEngine(actionData));
+            var cor = StartCoroutine(actionBase.ActionEngine(characterData));
             activeActions.Add(actionBase);
             coroutines.Add(cor);
         }

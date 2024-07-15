@@ -3,11 +3,11 @@ using UnityEngine;
 namespace WRA.CharacterSystems.SkillsSystem
 {
     [System.Serializable]
-    public class ActionData
+    public class CharacterData
     {
         public CharacterObject CharacterObject { get; set; }
 
-        public ActionData(CharacterObject characterObject)
+        public CharacterData(CharacterObject characterObject)
         {
             CharacterObject = characterObject;
         }

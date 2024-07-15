@@ -1,4 +1,5 @@
 using UnityEngine;
+using WRA.CharacterSystems.SkillsSystem;
 
 namespace WRA.CharacterSystems
 {
@@ -18,6 +19,7 @@ namespace WRA.CharacterSystems
             }
         }
         private CharacterObject characterObject;
+        private CharacterData characterData;
         public void SetCharacterObject(CharacterObject characterObject)
         {
             this.characterObject = characterObject;
@@ -27,6 +29,16 @@ namespace WRA.CharacterSystems
         public T GetCharacterSystem<T>() where T : CharacterSystemBase
         {
             return characterObject.GetCharacterSystem<T>();
+        }
+        
+        public CharacterData GetCharacterData()
+        {
+            if (characterData == null)
+            {
+                characterData = new CharacterData(CharacterObject);
+            }
+
+            return characterData;
         }
         
         public virtual void OnInitDone() {}

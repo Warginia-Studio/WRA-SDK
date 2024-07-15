@@ -7,7 +7,7 @@ namespace WRA.Environment
 {
     public class Trigger : MonoBehaviour, IInteractable
     {
-        public UnityEvent<InteractionControlerSystemBase>OnInteraction = new UnityEvent<InteractionControlerSystemBase>();
+        public UnityEvent<InteractionControllerSystemBase>OnInteraction = new UnityEvent<InteractionControllerSystemBase>();
 
         [SerializeField] private string textTranslation;
         private void Awake()
@@ -15,7 +15,7 @@ namespace WRA.Environment
             gameObject.layer = LayerMask.NameToLayer("Interaction");
         }
 
-        public void Interract(InteractionControlerSystemBase who)
+        public void Interract(InteractionControllerSystemBase who)
         {
             OnInteraction.Invoke(who);
         }

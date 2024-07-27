@@ -2,14 +2,10 @@
 {
     public interface IPool
     {
-        void FillPool(int count);
-        
         void FreePool();
         
         void KillAll();
         
-        void SetPrefab(string name);
-
-        PoolObjectBase SpawnObject();
+        PoolObjectBase SpawnObject(string prefabName, int id);
     }
 }

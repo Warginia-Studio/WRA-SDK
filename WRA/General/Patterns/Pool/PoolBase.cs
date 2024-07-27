@@ -13,18 +13,8 @@ namespace WRA.General.Patterns.Pool
     {
         [Inject] public PoolObjectFactory poolObjectFactory;
         
-        private string prefabName;
-        
         protected List<TObject> pool = new List<TObject>();
         
-        public void FillPool(int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                InitObject();
-            }
-        }
-
         public void FreePool()
         {
             for (int i = 0; i < pool.Count; i++)
@@ -42,37 +32,27 @@ namespace WRA.General.Patterns.Pool
             }
         }
         
-        public void SetPrefab(string name)
-        {
-            prefabName = name;
-        }
-        
-        public TObject SpawnObjectAsType()
-        {
-            return (TObject)SpawnObject();
-        }
-        
-        public PoolObjectBase SpawnObject()
+        public PoolObjectBase SpawnObject(string prefabName, int id = 0)
         {
             TObject obj = null;
-            obj = FindAvailableObject();
+            obj = FindAvailableObject(id);
             
 
             if (obj == null)
             {
                 Diagnostics.Log($"Pool is empty, creating new object. Type: {typeof(TObject).Name}", LogType.warning);
-                obj = InitObject();
+                obj = InitObject(prefabName, id);
             }
 
             obj.OnSpawn();
             return obj;
         }
         
-        private TObject FindAvailableObject()
+        private TObject FindAvailableObject(int id)
         {
             for (int i = 0; i < pool.Count; i++)
             {
-                if (!pool[i].gameObject.activeSelf)
+                if (!pool[i].gameObject.activeSelf && pool[i].VariantId == id)
                     return pool[i];
                 
             }
@@ -80,9 +60,9 @@ namespace WRA.General.Patterns.Pool
         }
         
         
-        private TObject InitObject()
+        private TObject InitObject(string prefabName, int id)
         {
-            TObject obj = poolObjectFactory.Create<TObject>(prefabName);
+            TObject obj = poolObjectFactory.Create<TObject>(prefabName, id);
             obj.gameObject.name += "_Pooled_ID=" + pool.Count;
             obj.OnInit();
             obj.SetActive(false);

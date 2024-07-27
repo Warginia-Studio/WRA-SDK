@@ -31,11 +31,11 @@ namespace WRA.Zenject.Pool
             return null;
         }
         
-        public TObject Create<TObject>(string name) where TObject : PoolObjectBase
+        public TObject Create<TObject>(string name, int id) where TObject : PoolObjectBase
         {
             foreach (var poolObject in poolObjects)
             {
-                if (poolObject is not TObject)
+                if (poolObject is not TObject || poolObject.name != name || poolObject.VariantId != id)
                     continue;
                 var pool = container.InstantiatePrefab(poolObject.gameObject).GetComponent<TObject>();
                 return pool;

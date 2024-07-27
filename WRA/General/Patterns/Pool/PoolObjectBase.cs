@@ -10,6 +10,8 @@ namespace WRA.General.Patterns.Pool
     {
         public UnityEvent<PoolObjectBase> OnKillEvent;
         public UnityEvent<PoolObjectBase> OnSpawnEvent;
+
+        public int VariantId = 0;
         public abstract void OnInit();
         public abstract void OnSpawn();
     

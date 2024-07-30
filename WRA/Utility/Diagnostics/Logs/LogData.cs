@@ -20,10 +20,13 @@ namespace WRA.Utility.Diagnostics.Logs
         public string Message { get; set; }
         public string LogTag { get; set; }
         public string Time { get; set; }
+        public int Count { get; set; } = 1;
         
         public string GetFinalMessage()
         {
             var logType = ColorHelper.GetTextInColor(LogType.ToString().ToUpper(), LOG_COLORS[(int)LogType]);
+            if(Count> 1)
+                return $"[ {logType} ] [ {Count} ] {Time}{Message}";
             return $"[ {logType} ] {Time}{Message}";
         }
     }

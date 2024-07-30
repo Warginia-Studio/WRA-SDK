@@ -56,13 +56,15 @@ namespace WRA.Utility.Diagnostics.Logs
             if (found is null)
             {
                 WraLogDatas.Add(logData);
+                OnLog.Invoke(logData);
             }
             else
             {
                 found.Count++;
+                OnLog.Invoke(found);
             }
 
-            OnLog.Invoke(logData);
+            
         }
         
         public static string GetTime()

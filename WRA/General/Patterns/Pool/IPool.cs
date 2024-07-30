@@ -6,6 +6,6 @@
         
         void KillAll();
         
-        PoolObjectBase SpawnObject(string prefabName, int id);
+        PoolObjectBase SpawnObject(int id);
     }
 }

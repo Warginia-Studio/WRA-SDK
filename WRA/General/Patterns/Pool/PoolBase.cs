@@ -32,7 +32,7 @@ namespace WRA.General.Patterns.Pool
             }
         }
         
-        public PoolObjectBase SpawnObject(string prefabName, int id = 0)
+        public PoolObjectBase SpawnObject(int id = 0)
         {
             TObject obj = null;
             obj = FindAvailableObject(id);
@@ -41,7 +41,7 @@ namespace WRA.General.Patterns.Pool
             if (obj == null)
             {
                 Diagnostics.Log($"Pool is empty, creating new object. Type: {typeof(TObject).Name}", LogType.warning);
-                obj = InitObject(prefabName, id);
+                obj = InitObject(id);
             }
 
             obj.OnSpawn();
@@ -60,9 +60,9 @@ namespace WRA.General.Patterns.Pool
         }
         
         
-        private TObject InitObject(string prefabName, int id)
+        private TObject InitObject(int id)
         {
-            TObject obj = poolObjectFactory.Create<TObject>(prefabName, id);
+            TObject obj = poolObjectFactory.Create<TObject>(id);
             obj.gameObject.name += "_Pooled_ID=" + pool.Count;
             obj.OnInit();
             obj.SetActive(false);

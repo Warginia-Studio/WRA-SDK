@@ -16,11 +16,11 @@ namespace WRA.Zenject.Pool
             this.poolObjects = poolObjects;
         }
     
-        public PoolObjectBase Create(string name)
+        public PoolObjectBase Create(int id)
         {
             foreach (var poolObject in poolObjects)
             {
-                if (poolObject.name != name)
+                if (poolObject.VariantId != id)
                     continue;
 
                 var pool = container.InstantiatePrefab(poolObject.gameObject).GetComponent<PoolObjectBase>();
@@ -31,17 +31,17 @@ namespace WRA.Zenject.Pool
             return null;
         }
         
-        public TObject Create<TObject>(string name, int id) where TObject : PoolObjectBase
+        public TObject Create<TObject>(int id) where TObject : PoolObjectBase
         {
             foreach (var poolObject in poolObjects)
             {
-                if (poolObject is not TObject || poolObject.name != name || poolObject.VariantId != id)
+                if (poolObject is not TObject || poolObject.VariantId != id)
                     continue;
                 var pool = container.InstantiatePrefab(poolObject.gameObject).GetComponent<TObject>();
                 return pool;
             }
             
-            Diagnostics.Log($"PoolObjectFactory: PoolObject not found. Name: {name} Type: {typeof(TObject).Name}", LogType.failed);
+            Diagnostics.Log($"PoolObjectFactory: PoolObject not found. ID: {id} Type: {typeof(TObject).Name}", LogType.failed);
 
             return null;
         }

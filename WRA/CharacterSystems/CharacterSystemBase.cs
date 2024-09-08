@@ -4,7 +4,7 @@ using WRA.CharacterSystems.SkillsSystem;
 namespace WRA.CharacterSystems
 {
     [RequireComponent(typeof(CharacterObject))]
-    public class CharacterSystemBase : MonoBehaviour
+    public class CharacterSystemBase : MonoBehaviour, ICharacterSystem 
     {
         public CharacterObject CharacterObject
         {

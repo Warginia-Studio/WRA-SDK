@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace WRA.CharacterSystems.BuffSystem
 {
     public class BuffController : CharacterSystemBase
     {
+        public UnityEvent<BuffBase> OnBuffAdded;
+        public UnityEvent<BuffBase> OnBuffRemoved;
+        
         public List<BuffBase> ActiveBuffs => activeBuffs;
         
         private List<BuffBase> activeBuffs = new List<BuffBase>();
@@ -17,8 +21,7 @@ namespace WRA.CharacterSystems.BuffSystem
                 activeBuffs[i].Duration -= Time.deltaTime;
                 if (activeBuffs[i].Duration <= 0)
                 {
-                    activeBuffs[i].OnEndBuff(GetCharacterData());
-                    activeBuffs.RemoveAt(i);
+                    RemoveBuff(activeBuffs[i]);
                 }
             }
         
@@ -27,7 +30,15 @@ namespace WRA.CharacterSystems.BuffSystem
         public void AddBuff(BuffBase buffBase)
         {
             activeBuffs.Add(Instantiate(buffBase));
-            buffBase.OnBeginBuff(GetCharacterData());
+            activeBuffs[^1].OnBeginBuff(GetCharacterData());
+            OnBuffAdded?.Invoke(activeBuffs[^1]);
+        }
+        
+        public void RemoveBuff(BuffBase buffBase)
+        {
+            activeBuffs[^1].OnEndBuff(GetCharacterData());
+            activeBuffs.Remove(buffBase);
+            OnBuffRemoved?.Invoke(buffBase);
         }
     }
 }

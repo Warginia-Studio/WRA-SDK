@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using WRA.Zenject;
@@ -12,6 +13,8 @@ namespace WRA.General.Patterns.Pool
     public class PoolBase<TObject> : IPool where TObject : PoolObjectBase
     {
         [Inject] public PoolObjectFactory poolObjectFactory;
+        
+        public UnityEvent<PoolObjectBase> OnCreateEvent = new UnityEvent<PoolObjectBase>();
         
         protected List<TObject> pool = new List<TObject>();
         
@@ -42,6 +45,7 @@ namespace WRA.General.Patterns.Pool
             {
                 Diagnostics.Log($"Pool is empty, creating new object. Type: {typeof(TObject).Name}", LogType.warning);
                 obj = InitObject(id);
+                OnCreateEvent?.Invoke(obj);
             }
 
             obj.OnSpawn();

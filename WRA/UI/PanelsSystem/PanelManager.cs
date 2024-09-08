@@ -67,9 +67,10 @@ namespace WRA.UI.PanelsSystem
             var panel = GetPanel(panelName);
             if (panel == null)
                 panel = OpenPanel(panelName, panelDataBase);
-            panel.SetData(panelDataBase);
-            if(panel.GetStatus() == PanelStatus.ShowingAnimation || panel.GetStatus() == PanelStatus.Show)
-                return panel;
+            // panel.SetData(panelDataBase);
+            // panel.OnShow();
+            // if(panel.GetStatus() == PanelStatus.ShowingAnimation || panel.GetStatus() == PanelStatus.Show)
+                // return panel;
             ShowPanel(panel, panelDataBase);
             return panel;
         }

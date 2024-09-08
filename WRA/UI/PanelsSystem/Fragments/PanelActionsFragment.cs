@@ -42,5 +42,15 @@ namespace WRA.UI.PanelsSystem.Fragments
         {
             panelManager.OpenPanel(panelName);
         }
+        
+        public void ShowPanel(string panelName)
+        {
+            panelManager.ShowPanel(panelName);
+        }
+        
+        public void ClosePanel(string panelName)
+        {
+            panelManager.ClosePanel(panelName);
+        }
     }
 }

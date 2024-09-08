@@ -9,7 +9,7 @@ namespace WRA.CharacterSystems
     {
         [HideInInspector] public UnityEvent OnSystemsRegistered;
         public bool SystemsRegistered { get; private set; }
-        private List<CharacterSystemBase> characterSystemBases;
+        private List<ICharacterSystem> characterSystemBases;
         private List<ICharacterChildren> characterChildrens = new List<ICharacterChildren>();
 
         private bool registeredSystems = false;
@@ -30,7 +30,7 @@ namespace WRA.CharacterSystems
             if (characterSystemBases != null)
                 return;
             registeredSystems = true;
-            characterSystemBases = GetComponents<CharacterSystemBase>().ToList();
+            characterSystemBases = GetComponents<ICharacterSystem>().ToList();
             characterSystemBases.ForEach(ctg=> ctg.SetCharacterObject(this));
         
             OnSystemsRegistered.Invoke();

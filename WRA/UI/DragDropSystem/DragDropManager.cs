@@ -8,47 +8,47 @@ namespace WRA.UI.DragDropSystem
 {
     public class DragDropManager : MonoBehaviourSingletonAutoLoad<DragDropManager>
     {
-    public UnityEvent<bool> OnDragChanged = new UnityEvent<bool>();
-    public DragData Dragging => dragging;
-    public bool IsDragging => isDragging;
+        public UnityEvent<bool> OnDragChanged = new UnityEvent<bool>();
+        public DragData Dragging => dragging;
+        public bool IsDragging => isDragging;
 
-    public DragDropProfile DragDropProfile
-    {
-        get
+        public DragDropProfile DragDropProfile
         {
-            if (dragDropProfile == null)
+            get
             {
-                dragDropProfile = Resources.Load<DragDropProfile>("DDP_Default");
+                if (dragDropProfile == null)
+                {
+                    dragDropProfile = Resources.Load<DragDropProfile>("DDP_Default");
+                }
+
+                return dragDropProfile;
             }
-
-            return dragDropProfile;
         }
-    }
 
-    [SerializeField] private DragDropProfile dragDropProfile;
+        [SerializeField] private DragDropProfile dragDropProfile;
 
-    // [SerializeField] private 
+        // [SerializeField] private 
 
-    private DragData dragging;
-    private bool isDragging;
+        private DragData dragging;
+        private bool isDragging;
 
-    public void BeginDragItem(DragData dragData)
-    {
-        dragging = dragData;
-        isDragging = true;
-        OnDragChanged.Invoke(isDragging);
-    }
+        public void BeginDragItem(DragData dragData)
+        {
+            dragging = dragData;
+            isDragging = true;
+            OnDragChanged.Invoke(isDragging);
+        }
 
-    public void EndDragItem()
-    {
-        dragging = null;
-        isDragging = false;
-        OnDragChanged.Invoke(isDragging);
-    }
+        public void EndDragItem()
+        {
+            dragging = null;
+            isDragging = false;
+            OnDragChanged.Invoke(isDragging);
+        }
 
-    protected override void OnLoad()
-    {
-        throw new System.NotImplementedException();
-    }
+        protected override void OnLoad()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

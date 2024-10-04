@@ -1,17 +1,24 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using WRA.CharacterSystems.StatisticsSystem.Interfaces;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
 namespace WRA.General.Patterns.Pool
 {
-    public abstract class PoolObjectBase : MonoBehaviour, IKillable
+    public abstract class PoolObjectBase : MonoBehaviour, IKillable, IPoolObject
     {
-        public UnityEvent<PoolObjectBase> OnKillEvent;
-        public UnityEvent<PoolObjectBase> OnSpawnEvent;
+        public UnityEvent<IPoolObject> OnKillEvent;
+        public UnityEvent<IPoolObject> OnSpawnEvent;
+        
+        public int VariantId
+        {
+            get => _variantId;
+            set => _variantId = value;
+        }
 
-        public int VariantId = 0;
+        [FormerlySerializedAs("VariantId")][SerializeField] private int _variantId = 0;
         public abstract void OnInit();
         public abstract void OnSpawn();
     

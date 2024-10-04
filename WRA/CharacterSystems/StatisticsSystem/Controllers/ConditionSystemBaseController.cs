@@ -11,14 +11,14 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
         public UnityEvent OnNotEnoughStamina = new UnityEvent();
     
         public override float PercentValue => CurrentValue / MaxValue;
-        public override float MaxValue => statisticsControler.GetStatistics().Condition.Value;
+        public override float MaxValue => statisticsController.GetStatistics().Condition.Value;
         
-        private StatisticsControler statisticsControler;
+        private StatisticsController statisticsController;
 
         protected override void Awake()
         {
-            statisticsControler = GetComponent<StatisticsControler>();
-            statisticsControler.OnStatisticsChanged.AddListener(InitStamina);
+            statisticsController = GetComponent<StatisticsController>();
+            statisticsController.OnStatisticsChanged.AddListener(InitStamina);
             InitStamina();
         }
 
@@ -42,7 +42,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
         private void InitStamina()
         {
-            InitAndRegen(0, statisticsControler.GetStatistics().Condition.Value);
+            InitAndRegen(0, statisticsController.GetStatistics().Condition.Value);
         }
 
     

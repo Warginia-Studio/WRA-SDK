@@ -1,3 +1,4 @@
+using UnityEngine.Serialization;
 using WRA.CharacterSystems.StatisticsSystem.Data;
 using WRA.PlayerSystems.LanguageSystem;
 
@@ -6,17 +7,24 @@ namespace WRA.CharacterSystems.StatisticsSystem.Statistics
     [System.Serializable]
     public class DynamicStatisticValue
     {
-        public DynamicStatisticEnum Statistic;
+        public string StatisticName;
         public float Value;
+
+
+        private DynamicStatisticInfo dynamicStatisticInfo;
+        public DynamicStatisticValue()
+        {
+            dynamicStatisticInfo = StatisticsProfile.Instance.StatisticInfos.Find(ctg => ctg.StatisticName == StatisticName);
+        }
         
         public string GetStatisticInString()
         {
-            return StatisticsProfile.Instance.StatisticInfos[Statistic.Id].GetStringForStatistic(Value);
+            return dynamicStatisticInfo.GetStringForStatistic(Value);
         }
 
         public string GetStatisticTranslation()
         {
-            return LanguageManager.GetTranslation("Statistic_" + StatisticsProfile.Instance.StatisticInfos[Statistic.Id].StatisticName);
+            return LanguageManager.GetTranslation("Statistic_" + dynamicStatisticInfo.StatisticName);
         }
 
         public string GetFullText()

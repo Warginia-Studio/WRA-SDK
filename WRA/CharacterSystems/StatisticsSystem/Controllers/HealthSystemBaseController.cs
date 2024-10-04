@@ -6,7 +6,7 @@ using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 {
-    [RequireComponent(typeof(StatisticsControler))]
+    [RequireComponent(typeof(StatisticsController))]
     public class HealthSystemBaseController : ResourceSystemBaseController, IHealable, IDamageable
     {
         [HideInInspector] public UnityEvent<HealInfo> OnBeforeHeal = new UnityEvent<HealInfo>();
@@ -20,14 +20,14 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 
         public bool Immortal { get; private set; }
         public override float PercentValue => CurrentValue / MaxValue;
-        public override float MaxValue => statisticsControler.GetStatistics().Health.Value;
+        public override float MaxValue => statisticsController.GetStatistics().Health.Value;
         
-        private StatisticsControler statisticsControler;
+        private StatisticsController statisticsController;
 
         protected override void Awake()
         {
-            statisticsControler = GetComponent<StatisticsControler>();
-            statisticsControler.OnStatisticsChanged.AddListener(InitHealth);
+            statisticsController = GetComponent<StatisticsController>();
+            statisticsController.OnStatisticsChanged.AddListener(InitHealth);
             InitHealth();
         }
         
@@ -73,7 +73,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 
         private void InitHealth()
         {
-            InitAndRegen(0, statisticsControler.GetStatistics().Health.Value);
+            InitAndRegen(0, statisticsController.GetStatistics().Health.Value);
         }
     }
 }

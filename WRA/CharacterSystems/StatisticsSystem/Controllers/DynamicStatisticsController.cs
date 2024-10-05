@@ -10,22 +10,28 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
         private void Awake()
         {
+            // for (int i = 0; i < baseStatistics.Count; i++)
+            // {
+            //     Debug.Log(baseStatistics[i].GetStatisticInString());
+            // }
+        }
+
+        public DynamicStatisticValue GetStatistic(int index)
+        {
+            return baseStatistics[index];
+        }
+        
+        public DynamicStatisticValue GetStatistic(string name)
+        {
             for (int i = 0; i < baseStatistics.Count; i++)
             {
-                Debug.Log(baseStatistics[i].GetStatisticInString());
+                if (baseStatistics[i].StatisticName.ToLower() == name.ToLower())
+                {
+                    return baseStatistics[i];
+                }
             }
-        }
 
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            return null;
         }
     }
 }

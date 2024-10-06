@@ -9,17 +9,14 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
         public UnityEvent<ConditionInfo> OnStaminaUse = new UnityEvent<ConditionInfo>();
         public UnityEvent<ConditionInfo> OnStaminaRegen = new UnityEvent<ConditionInfo>();
         public UnityEvent OnNotEnoughStamina = new UnityEvent();
-    
-        public override float PercentValue => CurrentValue / MaxValue;
-        public override float MaxValue => statisticsController.GetStatistics().Condition.Value;
         
         private StatisticsController statisticsController;
 
         protected override void Awake()
         {
-            statisticsController = GetComponent<StatisticsController>();
-            statisticsController.OnStatisticsChanged.AddListener(InitStamina);
-            InitStamina();
+            // statisticsController = GetComponent<StatisticsController>();
+            // statisticsController.OnStatisticsChanged.AddListener(InitStamina);
+            // InitStamina();
         }
 
         public bool TryUseStamina(ConditionInfo stamina)

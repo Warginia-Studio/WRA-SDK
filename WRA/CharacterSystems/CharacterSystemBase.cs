@@ -28,6 +28,10 @@ namespace WRA.CharacterSystems
     
         public T GetCharacterSystem<T>() where T : CharacterSystemBase
         {
+            if (characterObject == null)
+            {
+                characterObject = GetComponent<CharacterObject>();
+            }
             return characterObject.GetCharacterSystem<T>();
         }
         

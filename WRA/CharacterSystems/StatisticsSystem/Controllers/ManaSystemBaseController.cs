@@ -9,16 +9,11 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
         public UnityEvent<ManaInfo> OnManaUse = new UnityEvent<ManaInfo>();
         public UnityEvent<ManaInfo> OnManaRegen = new UnityEvent<ManaInfo>();
         public UnityEvent OnNotEnoughMana = new UnityEvent();
-    
-        public override float PercentValue => CurrentValue / MaxValue;
-        public override float MaxValue => statisticsController.GetStatistics().Mana.Value;
         
-        private StatisticsController statisticsController;
 
         protected override void Awake()
         {
-            statisticsController = GetComponent<StatisticsController>();
-            statisticsController.OnStatisticsChanged.AddListener(InitMana);
+            MaxValueStatistic = dynamicStatisticsController.GetStatistic("MaxMana");
             InitMana();
         }
 
@@ -43,7 +38,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
         private void InitMana()
         {
-            InitAndRegen(0, statisticsController.GetStatistics().Mana.Value);
+            InitAndRegen(0, MaxValueStatistic.Value);
         }
     
     }

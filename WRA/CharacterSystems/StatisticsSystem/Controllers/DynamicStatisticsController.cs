@@ -4,7 +4,7 @@ using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {
-    public class DynamicStatisticsController : MonoBehaviour
+    public class DynamicStatisticsController : CharacterSystemBase
     {
         [SerializeField] private List<DynamicStatisticValue> baseStatistics;
 

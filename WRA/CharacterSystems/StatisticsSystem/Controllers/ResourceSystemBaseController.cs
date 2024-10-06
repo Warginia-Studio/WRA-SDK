@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
+using WRA.CharacterSystems.StatisticsSystem.Statistics;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using WRA.Utility.SmartObjects;
@@ -28,14 +29,17 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
             }
         }
 
-        public abstract float PercentValue { get; }
+        public float PercentValue => CurrentValue / MaxValueStatistic.Value;
         
-        public abstract float MaxValue { get; }
+        public DynamicStatisticValue MaxValueStatistic { get; protected set; }
+
+        protected DynamicStatisticsController dynamicStatisticsController;
         
         private RangedValueFloat sourceValueFloat = new RangedValueFloat(0, 100);
 
         protected virtual void Awake()
         {
+            dynamicStatisticsController = GetCharacterSystem<DynamicStatisticsController>();
             Init(0, 100);
         }
 
@@ -59,7 +63,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
         protected float CalculateRealValueChanged(float change)
         {
             float previousValue = sourceValueFloat.Value;
-            float currentValue = Mathf.Clamp(sourceValueFloat.Value - change, 0, MaxValue);
+            float currentValue = Mathf.Clamp(sourceValueFloat.Value - change, 0, MaxValueStatistic.Value);
 
             return Mathf.Abs(previousValue - currentValue);
         }

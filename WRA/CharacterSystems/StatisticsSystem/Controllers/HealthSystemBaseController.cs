@@ -3,6 +3,7 @@ using UnityEngine.Events;
 using WRA.CharacterSystems.StatisticsSystem.Controlers;
 using WRA.CharacterSystems.StatisticsSystem.Interfaces;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
+using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 {
@@ -19,15 +20,13 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
         [HideInInspector] public UnityEvent<KillInfo> OnKilled = new UnityEvent<KillInfo>();
 
         public bool Immortal { get; private set; }
-        public override float PercentValue => CurrentValue / MaxValue;
-        public override float MaxValue => statisticsController.GetStatistics().Health.Value;
         
-        private StatisticsController statisticsController;
-
+        private DynamicStatisticValue maxHealth;
+        
         protected override void Awake()
         {
-            statisticsController = GetComponent<StatisticsController>();
-            statisticsController.OnStatisticsChanged.AddListener(InitHealth);
+            base.Awake();
+            MaxValueStatistic = dynamicStatisticsController.GetStatistic("MaxHealth");
             InitHealth();
         }
         
@@ -41,7 +40,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 
             OnBeforeHeal.Invoke(healInfo);
             healInfo.FinalHeal = healInfo.HealValue + CurrentValue * healInfo.PercentHealValueOfCurrentHealth +
-                                 MaxValue * healInfo.PercentHealValueOfMaxHealth;
+                                 MaxValueStatistic.Value * healInfo.PercentHealValueOfMaxHealth;
             AddValue(healInfo);
             OnHealed.Invoke(healInfo);
             
@@ -50,7 +49,6 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
         /*
          * Here needs amors reduction rules etc.
          */
-        
         
         public virtual void DealDamage(DamageInfo damageInfo)
         {
@@ -73,7 +71,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 
         private void InitHealth()
         {
-            InitAndRegen(0, statisticsController.GetStatistics().Health.Value);
+            InitAndRegen(0, MaxValueStatistic.Value);
         }
     }
 }

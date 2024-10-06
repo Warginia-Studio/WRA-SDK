@@ -4,13 +4,13 @@ using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 public interface IPoolObject
 {
     public int VariantId { get; set; }
-    public abstract void OnInit();
+    public void OnInit();
     
-    public abstract void OnSpawn();
+    public void OnSpawn();
     
-    public abstract void OnBeginKill(float delay);
+    public void OnBeginKill(float delay);
     
-    public abstract void OnKill();
+    public void OnKill();
     
     public void Spawn();
 

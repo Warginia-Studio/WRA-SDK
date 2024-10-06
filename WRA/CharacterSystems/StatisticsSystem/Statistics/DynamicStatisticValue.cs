@@ -14,7 +14,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Statistics
         private DynamicStatisticInfo dynamicStatisticInfo;
         public DynamicStatisticValue()
         {
-            dynamicStatisticInfo = StatisticsProfile.Instance.StatisticInfos.Find(ctg => ctg.StatisticName == StatisticName);
+            // dynamicStatisticInfo = StatisticsProfile.Instance.StatisticInfos.Find(ctg => ctg.StatisticName == StatisticName);
         }
         
         public string GetStatisticInString()

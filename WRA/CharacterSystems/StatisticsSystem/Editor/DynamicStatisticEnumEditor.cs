@@ -12,12 +12,12 @@ namespace WRA.CharacterSystems.StatisticsSystem.Editor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var prop = property.FindPropertyRelative("id");
-            var statisticsNames = StatisticsProfile.Instance.statisticsNames;
+            // var prop = property.FindPropertyRelative("id");
+            // var statisticsNames = StatisticsProfile.Instance.statisticsNames;
 
 
-            prop.intValue = EditorGUI.Popup(position, property.name, prop.intValue,
-                StatisticsProfile.Instance.statisticsNames.ToArray());
+            // prop.intValue = EditorGUI.Popup(position, property.name, prop.intValue,
+                // StatisticsProfile.Instance.statisticsNames.ToArray());
         }
     }
 }

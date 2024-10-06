@@ -7,15 +7,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
     public class DynamicStatisticsController : CharacterSystemBase
     {
         [SerializeField] private List<DynamicStatisticValue> baseStatistics;
-
-        private void Awake()
-        {
-            // for (int i = 0; i < baseStatistics.Count; i++)
-            // {
-            //     Debug.Log(baseStatistics[i].GetStatisticInString());
-            // }
-        }
-
+        
         public DynamicStatisticValue GetStatistic(int index)
         {
             return baseStatistics[index];

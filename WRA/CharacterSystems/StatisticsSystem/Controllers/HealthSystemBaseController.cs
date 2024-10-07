@@ -7,7 +7,6 @@ using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 {
-    [RequireComponent(typeof(StatisticsController))]
     public class HealthSystemBaseController : ResourceSystemBaseController, IHealable, IDamageable
     {
         [HideInInspector] public UnityEvent<HealInfo> OnBeforeHeal = new UnityEvent<HealInfo>();
@@ -43,7 +42,6 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
                                  MaxValueStatistic.Value * healInfo.PercentHealValueOfMaxHealth;
             AddValue(healInfo);
             OnHealed.Invoke(healInfo);
-            
         }
         
         /*

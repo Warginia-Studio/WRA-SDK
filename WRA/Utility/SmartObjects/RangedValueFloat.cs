@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace WRA.Utility.SmartObjects
 {
+    [System.Serializable]
     public class RangedValueFloat
     {
         public float Value

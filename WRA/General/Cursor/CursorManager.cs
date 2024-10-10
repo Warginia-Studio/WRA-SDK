@@ -23,7 +23,7 @@ namespace WRA.General.Cursor
         {
             if (useCustomCursor)
             {
-                UnityEngine.Cursor.visible = false;
+                //UnityEngine.Cursor.visible = false;
                 SetCursor(cursors.First().Name);
             }
         }

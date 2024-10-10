@@ -301,6 +301,9 @@ GameObject:
   - component: {fileID: -6090276877144222796}
   - component: {fileID: 4725590688908575302}
   - component: {fileID: 1446224877699410065}
+  - component: {fileID: 5980162433876890264}
+  - component: {fileID: 6417758674220264532}
+  - component: {fileID: 6027384293070573610}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -428,3 +431,48 @@ MonoBehaviour:
   OnVolumeChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5980162433876890264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535296146189128580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251c4ca55a6ad8047a48e26c75efeeba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorManager: {fileID: 6417758674220264532}
+  languageManager: {fileID: 6027384293070573610}
+  ApplicationProfile:
+    Language: 10
+    Langs: []
+    CustomConsole: 1
+    fonts: []
+--- !u!114 &6417758674220264532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535296146189128580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a662ee8f9f4164c852bc84a16b8147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursors: []
+  useCustomCursor: 1
+--- !u!114 &6027384293070573610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535296146189128580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8621eb642a74ad7449a6e7c40acedf3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

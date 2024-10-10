@@ -18,6 +18,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
         [HideInInspector] public UnityEvent<KillInfo> OnBeforeKill = new UnityEvent<KillInfo>();
         [HideInInspector] public UnityEvent<KillInfo> OnKilled = new UnityEvent<KillInfo>();
 
+        public bool Alive => CurrentValue > 0;
         public bool Immortal { get; private set; }
         
         private DynamicStatisticValue maxHealth;

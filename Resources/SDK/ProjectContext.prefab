@@ -450,6 +450,7 @@ MonoBehaviour:
     Langs: []
     CustomConsole: 1
     fonts: []
+  statisticsProfile: {fileID: 11400000, guid: e9c51ee5ea3d4814da93fe1e21da6d1f, type: 2}
 --- !u!114 &6417758674220264532
 MonoBehaviour:
   m_ObjectHideFlags: 0

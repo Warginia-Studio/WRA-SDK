@@ -21,15 +21,22 @@ namespace WRA.General.Cursor
 
         private void Start()
         {
+            if(cursors == null || cursors.Count == 0)
+            {
+                useCustomCursor=false;
+                return;
+            }
+            
             if (useCustomCursor)
             {
-                //UnityEngine.Cursor.visible = false;
                 SetCursor(cursors.First().Name);
             }
         }
 
         public void SetCursor(string cursorName)
         {
+            if (!useCustomCursor)
+                return;
             CursorData cursor = cursors.Find(c => c.Name == cursorName);
             if (cursor.Texture != null)
             {

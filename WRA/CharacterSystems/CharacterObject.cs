@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using WRA.General.Patterns.Pool;
 
 namespace WRA.CharacterSystems
 {
-    public class CharacterObject : MonoBehaviour
+    public abstract class CharacterObject : PoolObjectBase
     {
         [HideInInspector] public UnityEvent OnSystemsRegistered;
         public bool SystemsRegistered { get; private set; }

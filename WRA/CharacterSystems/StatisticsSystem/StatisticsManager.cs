@@ -6,8 +6,10 @@ using WRA.General.Patterns.Singletons;
 
 namespace WRA.CharacterSystems.StatisticsSystem
 {
-    public class StatisticsInfoManager : ScriptableSingleton<StatisticsInfoManager>
+    public class StatisticsManager : MonoBehaviour
     {
+        public List<StatisticInfo> StatisticInfos => statisticInfos;
+        
         [SerializeField] private List<StatisticInfo> statisticInfos = new List<StatisticInfo>();
 
         public StatisticInfo GetStatisticInfo(string statisticName)

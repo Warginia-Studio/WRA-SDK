@@ -3,19 +3,21 @@ using UnityEngine;
 using WRA.CharacterSystems.StatisticsSystem;
 using WRA.CharacterSystems.StatisticsSystem.Data;
 using WRA.Environment;
+using Zenject;
 
 namespace WRA.CharacterSystems.InteractionsSystem
 {
     public class InteractionControllerSystemBase : CharacterSystemBase
     {
         [SerializeField] protected MapLabel mapLabel;
+        [Inject] private StatisticsProfile statisticsProfile;
         protected List<IInteractable> interactables;
 
         protected int interactableId = 0;
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, StatisticsProfile.Instance.InteractionRange);
+            Gizmos.DrawWireSphere(transform.position, statisticsProfile.InteractionRange);
         }
         
         public void Interract()

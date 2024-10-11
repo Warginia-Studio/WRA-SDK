@@ -28,26 +28,23 @@ namespace WRA.Graphics
         {
             id = new RangedValueInt(0, sprites.Length - 1);
         }
-    
-        void Update()
-        {
-            UpdateTexture();
-        }
 
         public void Next()
         {
             Id.Next();
+            UpdateTexture();
         }
 
         public void Previous()
         {
             Id.Previous();
-        
+            UpdateTexture();
         }
 
         public void SetSpriteId(int id)
         {
             Id.Value = id;
+            UpdateTexture();
         }
     
         private void UpdateTexture()

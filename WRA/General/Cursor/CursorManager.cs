@@ -1,22 +1,47 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using WRA.General.Patterns.Singletons;
 
 namespace WRA.General.Cursor
 {
-    public class CursorManager : MonoBehaviourSingletonAutoCreate<CursorManager>
+    public class CursorManager : MonoBehaviour
     {
-        private CursorData cursorData;
-        
-        protected override void OnCreate()
+        [System.Serializable]
+        private struct CursorData
         {
-            UnityEngine.Cursor.visible = false;
-            cursorData = ApplicationProfile.Instance.CursorData;
-            SetCursor(CursorType.defaultCursor);
+            public Texture2D Texture;
+            public Vector2 HotSpot;
+            public string Name;
         }
         
-        public void SetCursor(CursorType cursorType)
+        [SerializeField] private List<CursorData> cursors;
+        [SerializeField] private bool useCustomCursor = true;
+
+        private void Start()
         {
-            UnityEngine.Cursor.SetCursor(cursorData.GetCursor(cursorType).Texture, cursorData.GetCursor(cursorType).HotSpot, CursorMode.Auto);
+            if(cursors == null || cursors.Count == 0)
+            {
+                useCustomCursor=false;
+                return;
+            }
+            
+            if (useCustomCursor)
+            {
+                SetCursor(cursors.First().Name);
+            }
+        }
+
+        public void SetCursor(string cursorName)
+        {
+            if (!useCustomCursor)
+                return;
+            CursorData cursor = cursors.Find(c => c.Name == cursorName);
+            if (cursor.Texture != null)
+            {
+                UnityEngine.Cursor.SetCursor(cursor.Texture, cursor.HotSpot, CursorMode.Auto);
+            }
         }
 
     }

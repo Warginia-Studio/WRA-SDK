@@ -6,7 +6,7 @@ using WRA.General.Patterns.Singletons;
 namespace WRA.CharacterSystems.StatisticsSystem.Data
 {
    [CreateAssetMenu(menuName = "thief01/WRA-SDK/Profiles/Statistics Profile", fileName = "Statistics Profile")]
-   public class StatisticsProfile : ScriptableSingleton<StatisticsProfile>
+   public class StatisticsProfile : ScriptableObject
    {
       public float InteractionRange = 5;
       public DamageProvider DamageProvider;

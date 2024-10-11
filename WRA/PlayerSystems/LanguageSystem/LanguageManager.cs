@@ -10,11 +10,12 @@ using WRA.General;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using WRA.Utility.Math;
+using Zenject;
 using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.PlayerSystems.LanguageSystem
 {
-    public static class LanguageManager
+    public class LanguageManager : MonoBehaviour
     {
         public static string LANG_PATH => Application.dataPath + "/Resources/Configs/Langs/";
 
@@ -30,18 +31,20 @@ namespace WRA.PlayerSystems.LanguageSystem
             { SystemLanguage.English, "EN" }
         };
         
+        [Inject] private static ApplicationProfile applicationProfile;
+        
         public static void LoadLanguage()
         {
             Languages = new List<Language>();
             
-            ApplicationProfile.Instance.Langs.ForEach(ctg =>
+            applicationProfile.Langs.ForEach(ctg =>
             {
                 Languages.Add(new Language(ctg.text));
             });
 
 
 #if UNITY_EDITOR
-            CurrentLanguage = GetLangAsString(ApplicationProfile.Instance.Language);
+            CurrentLanguage = GetLangAsString(applicationProfile.Language);
 #else
             CurrentLanguage = GetLangAsString(Application.systemLanguage);
 #endif
@@ -97,10 +100,10 @@ namespace WRA.PlayerSystems.LanguageSystem
             SetLanguage(CurrentLanguageData.ShortLanguageName);
         }
         
-        public static string Translate(this string keyWord)
-        {
-            return GetTranslation(keyWord);
-        }
+        // public static string Translate(this string keyWord)
+        // {
+        //     return GetTranslation(keyWord);
+        // }
         
         public static string GetTranslation(string keyWord)
         {
@@ -114,7 +117,7 @@ namespace WRA.PlayerSystems.LanguageSystem
             var translation = CurrentLanguageData.GetTranslation(keyWord);
             if (string.IsNullOrEmpty(translation))
             {
-                Diagnostics.Log($"Not found key word: {keyWord} in language: {ApplicationProfile.Instance.Language}", LogType.failed);
+                Diagnostics.Log($"Not found key word: {keyWord} in language: {applicationProfile.Language}", LogType.failed);
                 return ColorHelper.GetTextInColor(keyWord + "_NF", Color.red);
             }
 

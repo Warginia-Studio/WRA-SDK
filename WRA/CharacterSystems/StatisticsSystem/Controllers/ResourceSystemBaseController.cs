@@ -31,7 +31,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
         public float PercentValue => CurrentValue / MaxValueStatistic.Value;
         
-        public DynamicStatisticValue MaxValueStatistic { get; protected set; }
+        public DynamicStatisticValue MaxValueStatistic { get; protected set; } = new DynamicStatisticValue();
 
         protected DynamicStatisticsController dynamicStatisticsController;
         

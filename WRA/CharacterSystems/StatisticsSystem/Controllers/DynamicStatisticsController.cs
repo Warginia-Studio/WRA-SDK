@@ -25,5 +25,18 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
             return null;
         }
+
+#if UNITY_EDITOR
+        
+        public void SetStatistics(List<DynamicStatisticValue> statistics)
+        {
+            baseStatistics = statistics;
+        }
+        
+        public List<DynamicStatisticValue> GetStatistics()
+        {
+            return baseStatistics;
+        }
+#endif
     }
 }

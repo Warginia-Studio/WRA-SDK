@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 6027384293070573610}
   - component: {fileID: -7854137061038588418}
   - component: {fileID: 1707461093280640698}
+  - component: {fileID: 7827569744063199724}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -454,6 +455,8 @@ MonoBehaviour:
     fonts: []
   statisticsManager: {fileID: -7854137061038588418}
   audioManager: {fileID: 1707461093280640698}
+  gameManagerBase: {fileID: 0}
+  customSceneManager: {fileID: 7827569744063199724}
 --- !u!114 &6417758674220264532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,3 +511,18 @@ MonoBehaviour:
   OnVolumeChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7827569744063199724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535296146189128580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 132218c74264a31458bd2a4e5241ba21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panelManager: {fileID: 4213820518080821231}
+  useProgressScreen: 1
+  autoStartScene: 1

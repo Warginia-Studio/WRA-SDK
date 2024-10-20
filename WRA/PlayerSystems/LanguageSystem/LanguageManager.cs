@@ -30,21 +30,27 @@ namespace WRA.PlayerSystems.LanguageSystem
             { SystemLanguage.Polish , "PL"},
             { SystemLanguage.English, "EN" }
         };
-        
-        [Inject] private static ApplicationProfile applicationProfile;
+
+        [Inject] private static ApplicationProfile ApplicationProfile;
+
+        [Inject]
+        private void InitAppProfile(ApplicationProfile applicationProfile)
+        {
+            ApplicationProfile = applicationProfile;
+        }
         
         public static void LoadLanguage()
         {
             Languages = new List<Language>();
             
-            applicationProfile.Langs.ForEach(ctg =>
+            ApplicationProfile.Langs.ForEach(ctg =>
             {
                 Languages.Add(new Language(ctg.text));
             });
 
 
 #if UNITY_EDITOR
-            CurrentLanguage = GetLangAsString(applicationProfile.Language);
+            CurrentLanguage = GetLangAsString(ApplicationProfile.Language);
 #else
             CurrentLanguage = GetLangAsString(Application.systemLanguage);
 #endif
@@ -72,7 +78,7 @@ namespace WRA.PlayerSystems.LanguageSystem
             PlayerPrefs.SetString("Language", language);
             PlayerPrefs.Save();
             CurrentLanguageData = Languages.FirstOrDefault(x =>
-                x.ShortLanguageName == CurrentLanguage || x.LanguageName == CurrentLanguage);
+                x.ShortLanguageName.ToLower() == CurrentLanguage.ToLower() || x.LanguageName.ToLower() == CurrentLanguage.ToLower());
             LanguageChanged.Invoke();
         }
         
@@ -117,7 +123,7 @@ namespace WRA.PlayerSystems.LanguageSystem
             var translation = CurrentLanguageData.GetTranslation(keyWord);
             if (string.IsNullOrEmpty(translation))
             {
-                Diagnostics.Log($"Not found key word: {keyWord} in language: {applicationProfile.Language}", LogType.failed);
+                Diagnostics.Log($"Not found key word: {keyWord} in language: {ApplicationProfile.Language}", LogType.failed);
                 return ColorHelper.GetTextInColor(keyWord + "_NF", Color.red);
             }
 

@@ -4,6 +4,7 @@ using WRA.AudioSystem;
 using WRA.CharacterSystems.StatisticsSystem;
 using WRA.CharacterSystems.StatisticsSystem.Data;
 using WRA.General.Cursor;
+using WRA.General.SceneManagment;
 using WRA.PlayerSystems.LanguageSystem;
 using Zenject;
 
@@ -17,6 +18,7 @@ namespace WRA.General
         [SerializeField] private StatisticsManager statisticsManager;
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private GameManagerBase gameManagerBase;
+        [SerializeField] private SceneManager customSceneManager;
         
         public override void InstallBindings()
         {
@@ -26,6 +28,7 @@ namespace WRA.General
             Container.Bind<StatisticsManager>().FromInstance(statisticsManager).AsSingle();
             Container.Bind<AudioManager>().FromInstance(audioManager).AsSingle();
             Container.Bind<GameManagerBase>().FromInstance(gameManagerBase).AsSingle();
+            Container.Bind<SceneManager>().FromInstance(customSceneManager).AsSingle();
         }
     }
 }

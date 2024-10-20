@@ -29,11 +29,6 @@ namespace WRA.General.SceneManagment
             Container.Bind<ILoadingScene>().To<ILoadingScene>().FromInstance(this);
         }
 
-        private void Update()
-        {
-            
-        }
-
         public void LoadScene(string sceneName)
         {
             Status = LoadingStatus.Loading;

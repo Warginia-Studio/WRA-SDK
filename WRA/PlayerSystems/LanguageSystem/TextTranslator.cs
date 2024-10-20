@@ -54,7 +54,7 @@ namespace WRA.PlayerSystems.LanguageSystem
 
         public void SetTextsToFormat(params string[] texts)
         {
-            this.formatingTexts = texts;
+            formatingTexts = texts;
             UpdateLang();
         }
 

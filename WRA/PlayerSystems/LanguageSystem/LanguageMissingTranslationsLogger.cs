@@ -66,6 +66,7 @@ namespace WRA.PlayerSystems.LanguageSystem
     
         private static void WriteMissingTranslations()
         {
+            return;
             StreamWriter sw = new StreamWriter(MISSING_TRANSLATIONS_FILE_PATH, false, Encoding.Default);
             foreach (var key in missingKeys)
             {

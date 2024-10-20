@@ -57,7 +57,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
             RemoveValue(damageInfo);
             OnDamaged.Invoke(damageInfo);
             if(CurrentValue <= 0)
-                Kill(new KillInfo(damageInfo.Owner));
+                Kill(new KillInfo(damageInfo.Owner, damageInfo.Owner, this));
         }
 
         public virtual void Kill(KillInfo killInfo)

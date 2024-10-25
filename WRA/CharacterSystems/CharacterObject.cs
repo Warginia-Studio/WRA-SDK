@@ -6,7 +6,7 @@ using WRA.General.Patterns.Pool;
 
 namespace WRA.CharacterSystems
 {
-    public abstract class CharacterObject : PoolObjectBase
+    public abstract class CharacterObject : PoolObject
     {
         [HideInInspector] public UnityEvent OnSystemsRegistered;
         public bool SystemsRegistered { get; private set; }

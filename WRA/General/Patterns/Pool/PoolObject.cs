@@ -7,7 +7,7 @@ using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
 namespace WRA.General.Patterns.Pool
 {
-    public abstract class PoolObjectBase : MonoBehaviour, IKillable, IPoolObject
+    public abstract class PoolObject : MonoBehaviour, IKillable, IPoolObject
     {
         public UnityEvent<IPoolObject> OnKillEvent;
         public UnityEvent<IPoolObject> OnSpawnEvent;

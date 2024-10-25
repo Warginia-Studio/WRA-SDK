@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,11 +11,11 @@ using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.General.Patterns.Pool
 {
-    public class PoolBase<TObject> : IPool where TObject : PoolObjectBase
+    public class Pool<TObject> : IPool where TObject : PoolObject
     {
         [Inject] public PoolObjectFactory poolObjectFactory;
         
-        public UnityEvent<PoolObjectBase> OnCreateEvent = new UnityEvent<PoolObjectBase>();
+        public UnityEvent<PoolObject> OnCreateEvent = new UnityEvent<PoolObject>();
         
         protected List<TObject> pool = new List<TObject>();
         
@@ -34,20 +35,20 @@ namespace WRA.General.Patterns.Pool
                 pool[i].Kill();
             }
         }
-        
-        public PoolObjectBase SpawnObject(int id = 0)
+ 
+        public TObject SpawnObject(int id=0)
         {
             TObject obj = null;
             obj = FindAvailableObject(id);
             
-
+            
             if (obj == null)
             {
                 Diagnostics.Log($"Pool is empty, creating new object. Type: {typeof(TObject).Name}", LogType.warning);
                 obj = InitObject(id);
                 OnCreateEvent?.Invoke(obj);
             }
-
+            
             obj.Spawn();
             return obj;
         }

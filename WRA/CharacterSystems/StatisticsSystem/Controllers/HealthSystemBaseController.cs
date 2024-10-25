@@ -26,7 +26,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
         protected override void Awake()
         {
             base.Awake();
-            MaxValueStatistic = dynamicStatisticsController.GetStatistic("MaxHealth");
+            MaxValueStatistic = StatisticsController.GetStatistic("MaxHealth");
             InitHealth();
         }
         

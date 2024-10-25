@@ -13,7 +13,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
         protected override void Awake()
         {
-            MaxValueStatistic = dynamicStatisticsController.GetStatistic("MaxMana");
+            MaxValueStatistic = StatisticsController.GetStatistic("MaxMana");
             InitMana();
         }
 

@@ -11,7 +11,7 @@ using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA_SDK.WRA.CharacterSystems.StatisticsSystem.Controllers.Editor
 {
-    [CustomEditor(typeof(DynamicStatisticsController))]
+    [CustomEditor(typeof(StatisticsController))]
     public class DynamicStatisticsControllerEditor : UnityEditor.Editor
     {
         private StatisticsManager statisticsManager;
@@ -39,7 +39,7 @@ namespace WRA_SDK.WRA.CharacterSystems.StatisticsSystem.Controllers.Editor
             }
 
             statisticsManager = projectcontext.GetComponent<StatisticsManager>();
-            statistics = ((DynamicStatisticsController)target).GetStatistics();
+            statistics = ((StatisticsController)target).GetStatistics();
 
             foreach (var statistic in statisticsManager.StatisticInfos)
             {
@@ -87,7 +87,7 @@ namespace WRA_SDK.WRA.CharacterSystems.StatisticsSystem.Controllers.Editor
         
         private void UpdateStatistics()
         {
-            var dynamicStatisticsController = (DynamicStatisticsController) target;
+            var dynamicStatisticsController = (StatisticsController) target;
 
             foreach (var statistic in activeStatistics)
             {

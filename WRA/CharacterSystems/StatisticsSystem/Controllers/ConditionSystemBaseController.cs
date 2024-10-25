@@ -1,3 +1,4 @@
+using System;
 using UnityEngine.Events;
 using WRA.CharacterSystems.StatisticsSystem.Interfaces;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
@@ -39,7 +40,8 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
         private void InitStamina()
         {
-            InitAndRegen(0, statisticsController.GetStatistics().Condition.Value);
+            throw new NotImplementedException();
+            //InitAndRegen(0, statisticsController.GetStatistic("Condition").Value);
         }
 
     

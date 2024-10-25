@@ -48,7 +48,7 @@ namespace WRA.General.Patterns.Pool
                 OnCreateEvent?.Invoke(obj);
             }
 
-            obj.OnSpawn();
+            obj.Spawn();
             return obj;
         }
         

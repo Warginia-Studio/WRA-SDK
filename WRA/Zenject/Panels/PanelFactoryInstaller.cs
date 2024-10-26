@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using WRA.UI.PanelsSystem;
 using WRA.Utility.Diagnostics.Logs;
@@ -18,8 +19,6 @@ namespace WRA.Zenject.Panels
         public override void InstallBindings()
         {
             LoadPanels();
-            // Container.Bind < List<PanelBase>>().FromInstance(panels);
-            // Container.Bind<PanelManager>().FromInstance(FindFirstObjectByType<PanelManager>());
             Container.BindFactory<string, PanelDataBase, PanelBase, PanelFactory>().FromFactory<PanelFactory>();
         }
         
@@ -31,11 +30,13 @@ namespace WRA.Zenject.Panels
                 var loadedPanels = Resources.LoadAll<PanelBase>(path);
                 if (loadedPanels != null)
                 {
+                    loadedPanels.ToList().ForEach(ctg => panels.RemoveAll(ctg2 => ctg.name == ctg2.name));
+                    panels.RemoveAll(ctg => ctg.name == loadedPanels[0].name);
                     panels.AddRange(loadedPanels);
                 }
             }
             
-            Container.Bind < List<PanelBase>>().FromInstance(panels);
+            Container.Bind<List<PanelBase>>().FromInstance(panels);
 
             Diagnostics.Log($"loaded panels: {panels.Count}", LogType.log, "PanelFactoryInstaller");
         }

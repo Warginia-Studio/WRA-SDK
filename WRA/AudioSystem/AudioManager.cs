@@ -48,7 +48,7 @@ namespace WRA.AudioSystem
         
         public override void InstallBindings()
         {
-            Container.Bind<AudioManager>().FromInstance(this).AsSingle();
+            // Container.Bind<AudioManager>().FromInstance(this).AsSingle();
         }
 
         public void SetVolumeForAudioType(AudioType audioType, float volume)

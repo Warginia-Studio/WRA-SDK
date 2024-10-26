@@ -7,7 +7,7 @@ using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
 namespace WRA.General.Patterns.Pool
 {
-    public abstract class PoolObjectBase : MonoBehaviour, IKillable, IPoolObject
+    public abstract class PoolObject : MonoBehaviour, IKillable, IPoolObject
     {
         public UnityEvent<IPoolObject> OnKillEvent;
         public UnityEvent<IPoolObject> OnSpawnEvent;
@@ -19,12 +19,12 @@ namespace WRA.General.Patterns.Pool
         }
 
         [FormerlySerializedAs("VariantId")][SerializeField] private int _variantId = 0;
-        public abstract void OnInit();
-        public abstract void OnSpawn();
+        public virtual void OnInit() {}
+        public virtual void OnSpawn(){}
     
-        public abstract void OnBeginKill(float delay);
+        public virtual void OnBeginKill(float delay) {}
     
-        public abstract void OnKill();
+        public virtual void OnKill() {}
         
         public void Spawn()
         {

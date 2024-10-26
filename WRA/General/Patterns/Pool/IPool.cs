@@ -6,6 +6,5 @@
         
         void KillAll();
         
-        PoolObjectBase SpawnObject(int id);
     }
 }

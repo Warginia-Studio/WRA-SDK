@@ -31,15 +31,15 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
         public float PercentValue => CurrentValue / MaxValueStatistic.Value;
         
-        public DynamicStatisticValue MaxValueStatistic { get; protected set; }
+        public DynamicStatisticValue MaxValueStatistic { get; protected set; } = new DynamicStatisticValue();
 
-        protected DynamicStatisticsController dynamicStatisticsController;
+        protected StatisticsController StatisticsController;
         
         private RangedValueFloat sourceValueFloat = new RangedValueFloat(0, 100);
 
         protected virtual void Awake()
         {
-            dynamicStatisticsController = GetCharacterSystem<DynamicStatisticsController>();
+            StatisticsController = GetCharacterSystem<StatisticsController>();
             Init(0, 100);
         }
 

@@ -9,7 +9,7 @@ using Zenject;
 
 namespace WRA.General.SceneManagment
 {
-    public class ProgressPanel : PanelBase
+    public class ProgressPanel : PanelFragmentBase
     {
         [SerializeField] private Image progressBar;
         [SerializeField] private TextMeshProUGUI progressText;
@@ -25,9 +25,12 @@ namespace WRA.General.SceneManagment
 
         private void Update()
         {
-            if(loadingScene == null)
+            if (loadingScene == null)
+            {
+                progressText.text = "Loading Scene is null";
                 return;
-            
+            }
+
             if (progressBar != null)
             {
                 progressBar.fillAmount = loadingScene.GetProgress();
@@ -45,11 +48,9 @@ namespace WRA.General.SceneManagment
             }
         }
 
-        // public override void OnOpen()
-        // {
-        //     var data = (PanelDataBase)base.data;
-        //     var progressData = (ILoadingStatus) data.Data;
-        //     loadingStatus = progressData;
-        // }
+        public override void OnPanelDataChanged()
+        {
+            loadingScene = ParentPanel.GetDataAsType<PanelDataBase>().Data as ILoadingScene;
+        }
     }
 }

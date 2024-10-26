@@ -41,7 +41,9 @@ namespace WRA.UI.PanelsSystem.FadeSystem
 
         public void SetFadeAlpha(float alpha)
         {
-            CanvasGroup.alpha = alpha;
+            alpha = Mathf.Clamp01(alpha);
+            delta = alpha;
+            UpdateFadescreen();
         }
 
         public void SetFadeOptions(FadeOptions fadeOptions)
@@ -52,6 +54,7 @@ namespace WRA.UI.PanelsSystem.FadeSystem
         public void FadeIn(Action onEnd = null)
         {
             FadeCore(onEnd, 1, fadeOptions.FadeInTime);
+            
         }
 
         public void FadeOut(Action onEnd = null)
@@ -81,6 +84,7 @@ namespace WRA.UI.PanelsSystem.FadeSystem
         private void UpdateFadescreen()
         {
             CanvasGroup.alpha = delta;
+            transform.SetAsLastSibling();
         }
         
         private bool ResetFading()

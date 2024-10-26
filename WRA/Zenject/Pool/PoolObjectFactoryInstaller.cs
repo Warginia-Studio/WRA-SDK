@@ -13,16 +13,16 @@ namespace WRA.Zenject.Pool
         public override void InstallBindings()
         {
             LoadPrefabs();
-            Container.BindFactory<string, PoolObjectBase, PoolObjectFactory>().FromFactory<PoolObjectFactory>();
+            Container.BindFactory<string, PoolObject, PoolObjectFactory>().FromFactory<PoolObjectFactory>();
         }
     
         private void LoadPrefabs()
         {
-            var prefabs = new List<PoolObjectBase>();
+            var prefabs = new List<PoolObject>();
         
             foreach (var path in dictionaryPaths)
             {
-                var loadedPrefabs = Resources.LoadAll<PoolObjectBase>(path);
+                var loadedPrefabs = Resources.LoadAll<PoolObject>(path);
                 if (loadedPrefabs != null)
                 {
                     prefabs.AddRange(loadedPrefabs);
@@ -30,7 +30,7 @@ namespace WRA.Zenject.Pool
             }
 
 
-            Container.Bind<List<PoolObjectBase>>().FromInstance(prefabs);
+            Container.Bind<List<PoolObject>>().FromInstance(prefabs);
         }
     }
 }

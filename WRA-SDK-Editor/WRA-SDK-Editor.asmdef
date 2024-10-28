@@ -6,7 +6,8 @@
         "Zenject",
         "Unity.Burst",
         "Unity.TextMeshPro",
-        "Unity.InputSystem"
+        "Unity.InputSystem",
+        "Unity.VisualScripting.Core"
     ],
     "includePlatforms": [
         "Editor"

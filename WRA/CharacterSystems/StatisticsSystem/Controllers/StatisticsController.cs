@@ -4,7 +4,7 @@ using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {
-    public class StatisticsController : Transform
+    public class StatisticsController : CharacterSystemBase
     {
         [SerializeField] private List<DynamicStatisticValue> baseStatistics;
         

@@ -4,6 +4,6 @@ namespace WRA.CharacterSystems
 {
     public interface ICharacterChildren
     {
-        void OnInit(Transform transform);
+        void OnInit(CharacterSystemBase transform);
     }
 }

@@ -9,7 +9,7 @@ using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 {
-    public abstract class ResourceSystemBaseController : Transform
+    public abstract class ResourceSystemBaseController : CharacterSystemBase
     {
         [HideInInspector] public UnityEvent<float> OnValueChanged = new UnityEvent<float>();
         [HideInInspector] public UnityEvent<float> OnIncreaseValue = new UnityEvent<float>();
@@ -45,19 +45,19 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
         public virtual void AddValue(ResourcesChangedBase value)
         {
-            value.RelValueChanged = value.ModifiedValue;
+            value.ModifiedValue = value.ModifiedValue;
             sourceValueFloat += value.ModifiedValue;
-            OnValueChanged.Invoke(value.RelValueChanged);
-            OnIncreaseValue.Invoke(value.RelValueChanged);
+            OnValueChanged.Invoke(value.ModifiedValue);
+            OnIncreaseValue.Invoke(value.ModifiedValue);
         }
         
         public virtual void RemoveValue(ResourcesChangedBase value)
         {
-            value.RelValueChanged = CalculateRealValueChanged(value.ModifiedValue);
+            value.ModifiedValue = CalculateRealValueChanged(value.ModifiedValue);
             sourceValueFloat -= value.ModifiedValue;
-            value.RelValueChanged = value.ModifiedValue;
-            OnValueChanged.Invoke(value.RelValueChanged);
-            OnDecreaseValue.Invoke(value.RelValueChanged);
+            value.ModifiedValue = value.ModifiedValue;
+            OnValueChanged.Invoke(value.ModifiedValue);
+            OnDecreaseValue.Invoke(value.ModifiedValue);
         }
 
         protected float CalculateRealValueChanged(float change)

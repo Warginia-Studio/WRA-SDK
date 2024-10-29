@@ -2,7 +2,6 @@ using System.Diagnostics.Contracts;
 using UnityEngine;
 using WRA.CharacterSystems;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
-using Transform = WRA.CharacterSystems.Transform;
 
 namespace Character.Bullet
 {
@@ -16,10 +15,9 @@ namespace Character.Bullet
         private Vector3 TargetPosition { get; set; }
         private bool IsDummyTarget { get; set; }
         
-        public TargetInfo2D(Transform owner, Collider2D colliderTarget, LayerMask enemyLayer, bool isDummyTarget = false) : base(owner, null)
+        public TargetInfo2D(Transform owner, Collider2D colliderTarget, LayerMask enemyLayer, bool isDummyTarget = false) : base(owner, colliderTarget.transform)
         {
             Owner = owner;
-            Target = colliderTarget.gameObject.transform;
             ColliderTarget = colliderTarget;
             EnemyLayer = enemyLayer;
             IsDummyTarget = isDummyTarget;

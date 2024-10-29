@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace WRA.CharacterSystems
 {
     public interface ICharacterChildren

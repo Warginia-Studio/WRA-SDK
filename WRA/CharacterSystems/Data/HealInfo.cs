@@ -7,6 +7,14 @@ namespace WRA.CharacterSystems.StatisticsSystem.ResourcesInfos
         public float PercentHealValueOfCurrentHealth;
         public float FinalHeal;
 
+        public HealInfo(Transform caster, Transform target, float modifiedValue, float healValue, float percentHealValueOfMaxHealth, float percentHealValueOfCurrentHealth, float finalHeal) : base(caster, target, modifiedValue)
+        {
+            HealValue = healValue;
+            PercentHealValueOfMaxHealth = percentHealValueOfMaxHealth;
+            PercentHealValueOfCurrentHealth = percentHealValueOfCurrentHealth;
+            FinalHeal = finalHeal;
+        }
+
         public void BuffHeal(float multyiply)
         {
             HealValue *= multyiply;

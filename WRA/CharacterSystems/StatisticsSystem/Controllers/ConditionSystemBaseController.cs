@@ -22,7 +22,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
         public bool TryUseStamina(ConditionInfo stamina)
         {
-            if (CurrentValue < stamina.CalculatedValueChanged)
+            if (CurrentValue < stamina.ModifiedValue)
             {
                 OnNotEnoughStamina.Invoke();
                 return false;

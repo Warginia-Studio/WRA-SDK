@@ -19,7 +19,7 @@ namespace WRA.CharacterSystems
             RegisterAllSystems();
         }
 
-        public T GetCharacterSystem<T>() where T : CharacterSystemBase
+        public T GetCharacterSystem<T>() where T : Transform
         {
             if(!registeredSystems)
                 RegisterAllSystems();
@@ -40,7 +40,7 @@ namespace WRA.CharacterSystems
         
         public void RegisterChildren(ICharacterChildren characterChildren)
         {
-            characterChildren.OnInit(GetCharacterSystem<CharacterSystemBase>());
+            characterChildren.OnInit(GetCharacterSystem<Transform>());
             characterChildrens.Add(characterChildren);
         }
     }

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace WRA.CharacterSystems.BuffSystem
 {
-    public class BuffController : CharacterSystemBase
+    public class BuffController : Transform
     {
         public UnityEvent<BuffBase> OnBuffAdded;
         public UnityEvent<BuffBase> OnBuffRemoved;

@@ -19,7 +19,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
         public bool TryUseMana(ManaInfo mana)
         {
-            if (CurrentValue < mana.CalculatedValueChanged)
+            if (CurrentValue < mana.ModifiedValue)
             {
                 OnNotEnoughMana.Invoke();
                 return false;

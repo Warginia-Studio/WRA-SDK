@@ -2,7 +2,12 @@
     "name": "WRA-SDK-Editor",
     "rootNamespace": "",
     "references": [
-        "WRA-SDK"
+        "WRA-SDK",
+        "Zenject",
+        "Unity.Burst",
+        "Unity.TextMeshPro",
+        "Unity.InputSystem",
+        "Unity.VisualScripting.Core"
     ],
     "includePlatforms": [
         "Editor"

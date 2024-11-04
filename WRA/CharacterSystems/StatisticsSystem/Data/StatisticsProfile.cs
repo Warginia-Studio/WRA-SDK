@@ -9,7 +9,6 @@ namespace WRA.CharacterSystems.StatisticsSystem.Data
    public class StatisticsProfile : ScriptableObject
    {
       public float InteractionRange = 5;
-      public DamageProvider DamageProvider;
 
       public List<string> statisticsNames
       {

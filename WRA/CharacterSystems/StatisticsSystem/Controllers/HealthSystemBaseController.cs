@@ -39,8 +39,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
         {
 
             OnBeforeHeal.Invoke(healInfo);
-            healInfo.FinalHeal = healInfo.HealValue + CurrentValue * healInfo.PercentHealValueOfCurrentHealth +
-                                 MaxValueStatistic.Value * healInfo.PercentHealValueOfMaxHealth;
+            healInfo.ModifiedValue += healInfo.ModifiedValuePercent * MaxValueStatistic.Value;
             AddValue(healInfo);
             OnHealed.Invoke(healInfo);
         }
@@ -57,7 +56,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
             RemoveValue(damageInfo);
             OnDamaged.Invoke(damageInfo);
             if(CurrentValue <= 0)
-                Kill(new KillInfo(damageInfo.Owner, damageInfo.Owner, this));
+                Kill(new KillInfo(damageInfo.Caster, transform));
         }
 
         public virtual void Kill(KillInfo killInfo)

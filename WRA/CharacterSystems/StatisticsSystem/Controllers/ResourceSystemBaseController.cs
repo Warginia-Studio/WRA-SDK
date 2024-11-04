@@ -45,19 +45,19 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controlers
 
         public virtual void AddValue(ResourcesChangedBase value)
         {
-            value.RelValueChanged = value.CalculatedValueChanged;
-            sourceValueFloat += value.CalculatedValueChanged;
-            OnValueChanged.Invoke(value.RelValueChanged);
-            OnIncreaseValue.Invoke(value.RelValueChanged);
+            value.ModifiedValue = value.ModifiedValue;
+            sourceValueFloat += value.ModifiedValue;
+            OnValueChanged.Invoke(value.ModifiedValue);
+            OnIncreaseValue.Invoke(value.ModifiedValue);
         }
         
         public virtual void RemoveValue(ResourcesChangedBase value)
         {
-            value.RelValueChanged = CalculateRealValueChanged(value.CalculatedValueChanged);
-            sourceValueFloat -= value.CalculatedValueChanged;
-            value.RelValueChanged = value.CalculatedValueChanged;
-            OnValueChanged.Invoke(value.RelValueChanged);
-            OnDecreaseValue.Invoke(value.RelValueChanged);
+            value.ModifiedValue = CalculateRealValueChanged(value.ModifiedValue);
+            sourceValueFloat -= value.ModifiedValue;
+            value.ModifiedValue = value.ModifiedValue;
+            OnValueChanged.Invoke(value.ModifiedValue);
+            OnDecreaseValue.Invoke(value.ModifiedValue);
         }
 
         protected float CalculateRealValueChanged(float change)

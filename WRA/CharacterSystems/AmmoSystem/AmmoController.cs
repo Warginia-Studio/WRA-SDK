@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace WRA.CharacterSystems.AmmoSystem
 {
-    public class AmmoController : CharacterSystemBase
+    public class AmmoController : Transform
     {
         [HideInInspector] public UnityEvent<int, string> OnAddAmmo;
         [HideInInspector] public UnityEvent<int, string> OnRemoveAmmo;

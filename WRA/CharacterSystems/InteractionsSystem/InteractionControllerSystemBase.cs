@@ -7,7 +7,7 @@ using Zenject;
 
 namespace WRA.CharacterSystems.InteractionsSystem
 {
-    public class InteractionControllerSystemBase : CharacterSystemBase
+    public class InteractionControllerSystemBase : Transform
     {
         [SerializeField] protected MapLabel mapLabel;
         [Inject] private StatisticsProfile statisticsProfile;

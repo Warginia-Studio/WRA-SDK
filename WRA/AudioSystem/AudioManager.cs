@@ -10,7 +10,7 @@ using Zenject;
 
 namespace WRA.AudioSystem
 {
-    public class AudioManager : MonoInstaller
+    public class AudioManager : MonoBehaviour
     {
         public UnityEvent<AudioType, float> OnVolumeChanged = new UnityEvent<AudioType, float>();
         private Dictionary<AudioType, float> volumes =new Dictionary<AudioType, float>()
@@ -46,11 +46,6 @@ namespace WRA.AudioSystem
             PlayerPrefs.Save();
         }
         
-        public override void InstallBindings()
-        {
-            // Container.Bind<AudioManager>().FromInstance(this).AsSingle();
-        }
-
         public void SetVolumeForAudioType(AudioType audioType, float volume)
         {
             volumes[audioType] = volume;

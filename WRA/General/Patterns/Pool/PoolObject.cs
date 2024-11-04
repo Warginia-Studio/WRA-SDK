@@ -21,7 +21,6 @@ namespace WRA.General.Patterns.Pool
         [FormerlySerializedAs("VariantId")][SerializeField] private int _variantId = 0;
         public virtual void OnInit() {}
         public virtual void OnSpawn(){}
-    
         public virtual void OnBeginKill(float delay) {}
     
         public virtual void OnKill() {}
@@ -30,6 +29,7 @@ namespace WRA.General.Patterns.Pool
         {
             OnSpawn();
             SetActive(true);
+            OnSpawnEvent?.Invoke(this);
         }
     
         public void Kill()

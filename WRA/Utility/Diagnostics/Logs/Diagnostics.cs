@@ -52,8 +52,19 @@ namespace WRA.Utility.Diagnostics.Logs
             
             var logData = new LogData() { Message = (string)message, LogType = logType, LogTag = logTag, Time = GetTime()};
             Debug.Log(logData.GetFinalMessage(), ob);
-            WraLogDatas.Add(logData);
-            OnLog.Invoke(logData);
+            var found = WraLogDatas.Find(ctg => string.Equals(ctg.Message, logData.Message, StringComparison.CurrentCultureIgnoreCase));
+            if (found is null)
+            {
+                WraLogDatas.Add(logData);
+                OnLog.Invoke(logData);
+            }
+            else
+            {
+                found.Count++;
+                OnLog.Invoke(found);
+            }
+
+            
         }
         
         public static string GetTime()

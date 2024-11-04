@@ -2,14 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using WRA.General.Patterns.Pool;
 
 namespace WRA.CharacterSystems
 {
-    public class CharacterObject : MonoBehaviour
+    public abstract class CharacterObject : PoolObject
     {
         [HideInInspector] public UnityEvent OnSystemsRegistered;
         public bool SystemsRegistered { get; private set; }
-        private List<CharacterSystemBase> characterSystemBases;
+        private List<ICharacterSystem> characterSystemBases;
         private List<ICharacterChildren> characterChildrens = new List<ICharacterChildren>();
 
         private bool registeredSystems = false;
@@ -30,7 +31,7 @@ namespace WRA.CharacterSystems
             if (characterSystemBases != null)
                 return;
             registeredSystems = true;
-            characterSystemBases = GetComponents<CharacterSystemBase>().ToList();
+            characterSystemBases = GetComponents<ICharacterSystem>().ToList();
             characterSystemBases.ForEach(ctg=> ctg.SetCharacterObject(this));
         
             OnSystemsRegistered.Invoke();

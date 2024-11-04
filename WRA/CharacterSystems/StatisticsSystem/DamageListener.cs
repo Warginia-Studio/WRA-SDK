@@ -22,7 +22,6 @@ namespace WRA.CharacterSystems.StatisticsSystem
         
         public void DealDamage(DamageInfo damageInfo)
         {
-            damageInfo.ScalingDamage = scalingDamage;
             healthSystemBaseController.DealDamage(damageInfo);
         }
     }

@@ -7,7 +7,7 @@ namespace WRA.CharacterSystems.StatisticsSystem
 {
     public class ResourceEffect : MonoBehaviour
     {
-        [FormerlySerializedAs("targetResourceBase")] [FormerlySerializedAs("targetResource")] [SerializeField] private ResourceSystemBaseControler targetResourceSystemBase;
+        [FormerlySerializedAs("targetResourceBase")] [FormerlySerializedAs("targetResource")] [SerializeField] private ResourceSystemBaseController targetResourceSystemBase;
     
         [SerializeField] protected EffectBehaviourBase onIncreasedEffect;
         [SerializeField] protected EffectBehaviourBase onDecreaseEffect;

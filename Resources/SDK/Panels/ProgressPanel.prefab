@@ -300,6 +300,8 @@ GameObject:
   - component: {fileID: 4079274348943373419}
   - component: {fileID: 4079274348943373396}
   - component: {fileID: 1887068024106335035}
+  - component: {fileID: 6538165821011374050}
+  - component: {fileID: 5665631330433584326}
   m_Layer: 0
   m_Name: ProgressPanel
   m_TagString: Untagged
@@ -379,20 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d20328651f91bf64385872a998c2a369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnOpenEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCloseEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnShowEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnHideEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  switchCanvasGroup: 1
-  fragments: []
   progressBar: {fileID: 4079274347769671438}
   progressText: {fileID: 4079274348477565900}
   sceneIsReadyText: {fileID: 4079274348956858382}
@@ -409,6 +397,46 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &6538165821011374050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4079274348943373398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cffca6de333338942a37227ded52556d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5665631330433584326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4079274348943373398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edca6fae21ea9e04382d40ba37c7b129, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnOpenEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCloseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShowEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHideEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  startAsHide: 0
+  switchCanvasGroup: 1
+  fragments:
+  - {fileID: 4079274348943373396}
 --- !u!1 &4079274348956858378
 GameObject:
   m_ObjectHideFlags: 0

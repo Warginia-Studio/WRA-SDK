@@ -11,14 +11,14 @@ namespace WRA.CharacterSystems.SkillsSystem
     
         protected ActionController ActionController;
 
-        public void BeginAction<T>(T actionBaseData) where T : ActionData
+        public void BeginAction<T>(T actionBaseData) where T : CharacterData
         {
             actionBaseData.CharacterObject.StartCoroutine(ActionEngine(actionBaseData));
         }
     
-        public abstract string GetDescription<T>(T owner) where T : ActionData;
+        public abstract string GetDescription<T>(T owner) where T : CharacterData;
     
-        public abstract IEnumerator ActionEngine<T>(T actionBase) where T : ActionData;
+        public abstract IEnumerator ActionEngine<T>(T actionBase) where T : CharacterData;
         
     }
 }

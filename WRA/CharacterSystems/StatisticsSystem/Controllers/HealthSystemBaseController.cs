@@ -3,11 +3,11 @@ using UnityEngine.Events;
 using WRA.CharacterSystems.StatisticsSystem.Controlers;
 using WRA.CharacterSystems.StatisticsSystem.Interfaces;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
+using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 {
-    [RequireComponent(typeof(StatisticsControler))]
-    public class HealthSystemBaseController : ResourceSystemBaseControler, IHealable, IDamageable
+    public class HealthSystemBaseController : ResourceSystemBaseController, IHealable, IDamageable
     {
         [HideInInspector] public UnityEvent<HealInfo> OnBeforeHeal = new UnityEvent<HealInfo>();
         [HideInInspector] public UnityEvent<HealInfo> OnHealed = new UnityEvent<HealInfo>();
@@ -18,16 +18,15 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
         [HideInInspector] public UnityEvent<KillInfo> OnBeforeKill = new UnityEvent<KillInfo>();
         [HideInInspector] public UnityEvent<KillInfo> OnKilled = new UnityEvent<KillInfo>();
 
+        public bool Alive => CurrentValue > 0;
         public bool Immortal { get; private set; }
-        public override float PercentValue => CurrentValue / MaxValue;
-        public override float MaxValue => statisticsControler.GetStatistics().Health.Value;
         
-        private StatisticsControler statisticsControler;
-
+        private DynamicStatisticValue maxHealth;
+        
         protected override void Awake()
         {
-            statisticsControler = GetComponent<StatisticsControler>();
-            statisticsControler.OnStatisticsChanged.AddListener(InitHealth);
+            base.Awake();
+            MaxValueStatistic = StatisticsController.GetStatistic("MaxHealth");
             InitHealth();
         }
         
@@ -40,17 +39,14 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
         {
 
             OnBeforeHeal.Invoke(healInfo);
-            healInfo.FinalHeal = healInfo.HealValue + CurrentValue * healInfo.PercentHealValueOfCurrentHealth +
-                                 MaxValue * healInfo.PercentHealValueOfMaxHealth;
+            healInfo.ModifiedValue += healInfo.ModifiedValuePercent * MaxValueStatistic.Value;
             AddValue(healInfo);
             OnHealed.Invoke(healInfo);
-            
         }
         
         /*
          * Here needs amors reduction rules etc.
          */
-        
         
         public virtual void DealDamage(DamageInfo damageInfo)
         {
@@ -60,7 +56,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
             RemoveValue(damageInfo);
             OnDamaged.Invoke(damageInfo);
             if(CurrentValue <= 0)
-                Kill(new KillInfo(damageInfo.Owner));
+                Kill(new KillInfo(damageInfo.Caster, transform));
         }
 
         public virtual void Kill(KillInfo killInfo)
@@ -73,7 +69,7 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 
         private void InitHealth()
         {
-            InitAndRegen(0, statisticsControler.GetStatistics().Health.Value);
+            InitAndRegen(0, MaxValueStatistic.Value);
         }
     }
 }

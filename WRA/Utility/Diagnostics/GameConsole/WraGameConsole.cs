@@ -35,6 +35,8 @@ namespace WRA.Utility.Diagnostics.GameConsole
         private string lastText = "";
         
         private int showintLastCommands = 0;
+        
+        private List<SimpleLog> logs = new List<SimpleLog>();
 
         private void Awake()
         {
@@ -174,11 +176,21 @@ namespace WRA.Utility.Diagnostics.GameConsole
         {
             if (currentTageName != "all" && !string.Equals(currentTageName, arg0.LogTag, StringComparison.CurrentCultureIgnoreCase))
                 return;
-        
-            var log = Instantiate(simpleLogPrefab, logContainer);
-            log.Bind(arg0.GetFinalMessage(), arg0.Message);
-            lastTween = DOTween.To(() => scrollRect.verticalNormalizedPosition, x => scrollRect.verticalNormalizedPosition = x, 0,
-                0.5f);
+
+            var foundLog = logs.Find(ctg => ctg.LogData == arg0);
+            if (foundLog is null)
+            {
+                var log = Instantiate(simpleLogPrefab, logContainer);
+                log.Bind(arg0);
+                lastTween = DOTween.To(() => scrollRect.verticalNormalizedPosition,
+                    x => scrollRect.verticalNormalizedPosition = x, 0,
+                    0.5f);
+                logs.Add(log);
+            }
+            else
+            {
+                foundLog.Refresh();
+            }
         }
 
 

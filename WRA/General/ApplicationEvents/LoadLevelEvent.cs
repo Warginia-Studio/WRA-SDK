@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WRA.General.SceneManagment;
+using WRA.UI.PanelsSystem;
+using Zenject;
 using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 namespace WRA.General.ApplicationEvents
@@ -8,36 +10,16 @@ namespace WRA.General.ApplicationEvents
     public class LoadLevelEvent : MonoBehaviour
     {
         [SerializeField] private string levelName;
-        [SerializeField] private bool useLoaderScene;
-        [SerializeField] private bool autoStartScene;
+        [Inject] private WRA.General.SceneManagment.SceneManager customSceneManager;
 
         public void Startlevel()
         {
-            if (useLoaderScene)
-            {
-                CustomSceneManager.ChangeScene(levelName, autoStartScene);
-            }
-            else
-            {
-                SceneManager.LoadSceneAsync(levelName);
-            }
-        }
-        
-        public void StartLevel(string levelName)
-        {
-            if (useLoaderScene)
-            {
-                CustomSceneManager.ChangeScene(levelName, autoStartScene);
-            }
-            else
-            {
-                SceneManager.LoadSceneAsync(levelName);
-            }
+            customSceneManager.LoadScene(levelName);
         }
 
-        public void StartLevel(int id)
+        public void StartLevel(string levelName)
         {
-            CustomSceneManager.ChangeScene(id, autoStartScene);
+            customSceneManager.LoadScene(levelName);
         }
     }
 }

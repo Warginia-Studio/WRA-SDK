@@ -9,8 +9,8 @@ namespace WRA.General.Patterns.Pool
 {
     public abstract class PoolObject : MonoBehaviour, IKillable, IPoolObject
     {
-        public UnityEvent<IPoolObject> OnKillEvent;
-        public UnityEvent<IPoolObject> OnSpawnEvent;
+        public UnityEvent<PoolObject> OnKillEvent;
+        public UnityEvent<PoolObject> OnSpawnEvent;
         
         public int VariantId
         {

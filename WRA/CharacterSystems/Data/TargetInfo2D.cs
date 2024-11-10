@@ -3,7 +3,7 @@ using UnityEngine;
 using WRA.CharacterSystems;
 using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
-namespace Character.Bullet
+namespace Character.Data
 {
     public class TargetInfo2D : InfoBase
     {

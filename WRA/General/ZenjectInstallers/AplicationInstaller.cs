@@ -17,7 +17,6 @@ namespace WRA.General
         [SerializeField] private ApplicationProfile ApplicationProfile;
         [SerializeField] private StatisticsManager statisticsManager;
         [SerializeField] private AudioManager audioManager;
-        [SerializeField] private GameManagerBase gameManagerBase;
         [SerializeField] private SceneManager customSceneManager;
         
         public override void InstallBindings()
@@ -27,7 +26,6 @@ namespace WRA.General
             Container.Bind<ApplicationProfile>().FromInstance(ApplicationProfile).AsSingle();
             Container.Bind<StatisticsManager>().FromInstance(statisticsManager).AsSingle();
             Container.Bind<AudioManager>().FromInstance(audioManager).AsSingle();
-            Container.Bind<GameManagerBase>().FromInstance(gameManagerBase).AsSingle();
             Container.Bind<SceneManager>().FromInstance(customSceneManager).AsSingle();
         }
     }

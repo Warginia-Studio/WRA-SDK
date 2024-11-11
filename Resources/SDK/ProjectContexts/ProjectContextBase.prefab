@@ -351,7 +351,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 7220636359205168626}
   - {fileID: 4725590688908575302}
-  - {fileID: 1446224877699410065}
+  - {fileID: 5980162433876890264}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 0
   _editorReflectionBakingCoverageMode: 0
@@ -455,7 +455,6 @@ MonoBehaviour:
     fonts: []
   statisticsManager: {fileID: -7854137061038588418}
   audioManager: {fileID: 1707461093280640698}
-  gameManagerBase: {fileID: 0}
   customSceneManager: {fileID: 7827569744063199724}
 --- !u!114 &6417758674220264532
 MonoBehaviour:

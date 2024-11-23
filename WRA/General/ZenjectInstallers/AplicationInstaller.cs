@@ -1,5 +1,6 @@
 using UnityEngine;
 using WRA_SDK.WRA.General;
+using WRA_SDK.WRA.General.ZenjectInstallers;
 using WRA.AudioSystem;
 using WRA.CharacterSystems.StatisticsSystem;
 using WRA.CharacterSystems.StatisticsSystem.Data;
@@ -18,6 +19,7 @@ namespace WRA.General
         [SerializeField] private StatisticsManager statisticsManager;
         [SerializeField] private AudioManager audioManager;
         [SerializeField] private SceneManager customSceneManager;
+        [SerializeField] private ManagersHolder managersHolder;
         
         public override void InstallBindings()
         {
@@ -27,6 +29,7 @@ namespace WRA.General
             Container.Bind<StatisticsManager>().FromInstance(statisticsManager).AsSingle();
             Container.Bind<AudioManager>().FromInstance(audioManager).AsSingle();
             Container.Bind<SceneManager>().FromInstance(customSceneManager).AsSingle();
+            Container.Bind<ManagersHolder>().FromInstance(managersHolder).AsSingle();
         }
     }
 }

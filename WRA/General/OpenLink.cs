@@ -6,8 +6,9 @@ namespace WRA.General
     {
         [SerializeField] private string link;
 
-        public void OnOpenLink()
+        public void OpenURL()
         {
+            Debug.Log("Open link: " + link);
             Application.OpenURL(link);
         }
     }

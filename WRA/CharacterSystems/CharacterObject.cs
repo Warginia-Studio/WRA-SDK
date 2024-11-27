@@ -25,7 +25,7 @@ namespace WRA.CharacterSystems
                 RegisterAllSystems();
             return characterSystemBases.Find(ctg => ctg is T) as T;
         }
-
+        
         private void RegisterAllSystems()
         {
             if (characterSystemBases != null)

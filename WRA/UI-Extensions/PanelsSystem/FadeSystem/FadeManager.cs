@@ -14,6 +14,8 @@ namespace WRA.UI.PanelsSystem.FadeSystem
     {
         public bool IsFadding { get; private set; }
         
+        public float FadeDelta => delta;
+        
         [SerializeField] private FadeOptions fadeOptions = new FadeOptions();
         
         private CanvasGroup CanvasGroup

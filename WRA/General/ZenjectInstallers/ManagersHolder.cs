@@ -5,9 +5,9 @@ namespace WRA_SDK.WRA.General.ZenjectInstallers
 {
     public class ManagersHolder : MonoBehaviour
     {
-        [SerializeField] private List<ManagerBase> managers;
+        [SerializeField] private List<CustomManagerBase> managers;
         
-        public T GetManager<T>() where T : ManagerBase
+        public T GetManager<T>() where T : CustomManagerBase
         {
             foreach (var manager in managers)
             {

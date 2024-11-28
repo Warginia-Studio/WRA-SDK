@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using WRA_SDK.WRA.General;
 using WRA_SDK.WRA.General.ZenjectInstallers;
 using WRA.AudioSystem;
@@ -18,7 +19,7 @@ namespace WRA.General
         [SerializeField] private ApplicationProfile ApplicationProfile;
         [SerializeField] private StatisticsManager statisticsManager;
         [SerializeField] private AudioManager audioManager;
-        [SerializeField] private SceneManager customSceneManager;
+        [SerializeField] private SceneManager sceneManager;
         [SerializeField] private ManagersHolder managersHolder;
         
         public override void InstallBindings()
@@ -28,7 +29,7 @@ namespace WRA.General
             Container.Bind<ApplicationProfile>().FromInstance(ApplicationProfile).AsSingle();
             Container.Bind<StatisticsManager>().FromInstance(statisticsManager).AsSingle();
             Container.Bind<AudioManager>().FromInstance(audioManager).AsSingle();
-            Container.Bind<SceneManager>().FromInstance(customSceneManager).AsSingle();
+            Container.Bind<SceneManager>().FromInstance(sceneManager).AsSingle();
             Container.Bind<ManagersHolder>().FromInstance(managersHolder).AsSingle();
         }
     }

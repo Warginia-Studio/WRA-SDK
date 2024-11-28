@@ -16,7 +16,7 @@ namespace WRA.General.SceneManagment
         [SerializeField] private TextTranslator sceneIsReadyText;
         [SerializeField] private KeyCode continueKey;
         
-        [Inject] private ILoadingScene loadingScene;
+        [Inject] private SceneManager loadingScene;
 
         private void Awake()
         {
@@ -50,7 +50,7 @@ namespace WRA.General.SceneManagment
 
         public override void OnPanelDataChanged()
         {
-            loadingScene = ParentPanel.GetDataAsType<PanelDataBase>().Data as ILoadingScene;
+            loadingScene = ParentPanel.GetDataAsType<PanelDataBase>().Data as SceneManager;
         }
     }
 }

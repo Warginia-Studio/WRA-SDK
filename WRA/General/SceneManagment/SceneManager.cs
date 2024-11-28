@@ -9,7 +9,7 @@ using Zenject;
 
 namespace WRA.General.SceneManagment
 {
-    public class SceneManager : MonoInstaller, ILoadingScene
+    public class SceneManager : MonoBehaviour, ILoadingScene
     {
         public UnityEvent OnSceneStartLoading { get; } = new UnityEvent();
         public UnityEvent OnSceneReady { get; } = new UnityEvent();
@@ -23,12 +23,7 @@ namespace WRA.General.SceneManagment
         [SerializeField] private bool autoStartScene = true;
     
         private AsyncOperation asyncOperation;
-
-        public override void InstallBindings()
-        {
-            Container.Bind<ILoadingScene>().To<ILoadingScene>().FromInstance(this);
-        }
-
+        
         public void LoadScene(string sceneName)
         {
             Status = LoadingStatus.Loading;

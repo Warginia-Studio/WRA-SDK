@@ -5,7 +5,7 @@ namespace WRA.General.SceneManagment
 {
     public class SceneOpenEvent : MonoBehaviour
     {
-        [Inject] private ILoadingScene sceneManager;
+        [Inject] private SceneManager sceneManager;
         public void OpenScene(string sceneName)
         {
             var scene = sceneManager as SceneManager;

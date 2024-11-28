@@ -10,7 +10,7 @@ namespace WRA.General.SceneManagment
     public class SceneManagerHelper : MonoBehaviour
     {
         [SerializeField] private List<string> dontHidePanels;
-        [Inject] private ILoadingScene sceneManager;
+        [Inject] private SceneManager sceneManager;
         [Inject] private PanelManager panelManager;
         [Inject] private List<IPool> pools;
 

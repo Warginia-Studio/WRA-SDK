@@ -88,7 +88,11 @@ namespace WRA.UI.PanelsSystem
         {
             OnCloseEvent?.Invoke();
             
-
+            if (Animations == null || Animations.Count == 0)
+            {
+                canvasGroup.alpha = 0;
+                return;
+            }
 
             Fragments.ForEach(ctg =>
             {
@@ -96,11 +100,6 @@ namespace WRA.UI.PanelsSystem
                     return;
                 ctg.OnClose();
             });
-            
-            if (Animations.Count == 0)
-            {
-                canvasGroup.alpha = 0;
-            }
             
             Animations.ForEach(ctg =>
             {
@@ -120,19 +119,18 @@ namespace WRA.UI.PanelsSystem
             OnShowEvent?.Invoke();
             SetCanvasGroup(true);
             
-
+            if (Animations == null || Animations.Count == 0)
+            {
+                canvasGroup.alpha = 1;
+                return;
+            }
+            
             Fragments.ForEach(ctg =>
             {
                 if (ctg == null)
                     return;
                 ctg.OnShow();
             });
-            
-            if (Animations.Count == 0)
-            {
-                canvasGroup.alpha = 1;
-            }
-
 
             Animations.ForEach(ctg =>
             {
@@ -152,18 +150,18 @@ namespace WRA.UI.PanelsSystem
             OnHideEvent?.Invoke();
             SetCanvasGroup(false);
             
+            if (Animations == null || Animations.Count == 0)
+            {
+                canvasGroup.alpha = 0;
+                return;
+            }
+            
             Fragments.ForEach(ctg =>
             {
                 if (ctg == null)
                     return;
                 ctg.OnHide();
             });
-            
-            if (Animations == null)
-            {
-                canvasGroup.alpha = 0;
-                return;
-            }
             
             Animations.ForEach(ctg =>
             {

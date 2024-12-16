@@ -24,11 +24,16 @@ namespace WRA.CharacterSystems.BuffSystem
                     RemoveBuff(activeBuffs[i]);
                 }
             }
-        
         }
 
         public void AddBuff(BuffBase buffBase)
         {
+            var found = activeBuffs.Find(ctg => ctg.BuffName == buffBase.BuffName);
+            if (found != null)
+            {
+                found.Duration = buffBase.BaseDuration;
+                return;
+            }
             activeBuffs.Add(Instantiate(buffBase));
             activeBuffs[^1].OnBeginBuff(GetCharacterData());
             OnBuffAdded?.Invoke(activeBuffs[^1]);

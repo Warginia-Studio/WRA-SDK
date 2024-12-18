@@ -26,6 +26,13 @@ namespace WRA.CharacterSystems
             return characterSystemBases.Find(ctg => ctg is T) as T;
         }
         
+        public T[] GetCharacterSystems<T>() where T : CharacterSystemBase
+        {
+            if(!registeredSystems)
+                RegisterAllSystems();
+            return characterSystemBases.FindAll(ctg => ctg is T).Cast<T>().ToArray();
+        }
+        
         private void RegisterAllSystems()
         {
             if (characterSystemBases != null)

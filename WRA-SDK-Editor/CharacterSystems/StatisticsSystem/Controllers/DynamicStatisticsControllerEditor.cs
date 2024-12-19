@@ -37,7 +37,7 @@ namespace WRA_SDK.WRA.CharacterSystems.StatisticsSystem.Controllers.Editor
                 return;
             }
 
-            statisticsManager = projectcontext.GetComponent<StatisticsManager>();
+            statisticsManager = projectcontext.GetComponentInChildren<StatisticsManager>();
             statistics = ((StatisticsController)target).GetStatistics();
 
             foreach (var statistic in statisticsManager.StatisticInfos)

@@ -16,6 +16,8 @@ namespace WRA.General.Patterns.Pool
         [Inject] public PoolObjectFactory poolObjectFactory;
         
         public UnityEvent<PoolObject> OnCreateEvent = new UnityEvent<PoolObject>();
+        public UnityEvent<PoolObject> OnSpawnEvent = new UnityEvent<PoolObject>();
+        public UnityEvent<PoolObject> OnKillEvent = new UnityEvent<PoolObject>();
         
         protected List<TObject> pool = new List<TObject>();
         
@@ -50,6 +52,7 @@ namespace WRA.General.Patterns.Pool
             }
             
             obj.Spawn();
+            OnSpawnEvent?.Invoke(obj);
             return obj;
         }
         

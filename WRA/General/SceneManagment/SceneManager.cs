@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -29,11 +30,12 @@ namespace WRA.General.SceneManagment
             Status = LoadingStatus.Loading;
             OnSceneStartLoading.Invoke();
             asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
-        
+            asyncOperation.allowSceneActivation = autoStartScene;
+            
             if(useProgressScreen)
                 panelManager.ShowPanel("ProgressPanel", new PanelDataBase() { Data = this });
-        
-            asyncOperation.allowSceneActivation = autoStartScene;
+            
+            StartCoroutine(SceneLoadedEnumerator());
         }
         
         public void LoadScene(int sceneIndex)
@@ -41,11 +43,12 @@ namespace WRA.General.SceneManagment
             Status = LoadingStatus.Loading;
             OnSceneStartLoading.Invoke();
             asyncOperation = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneIndex);
-        
+            asyncOperation.allowSceneActivation = autoStartScene;
+            
             if(useProgressScreen)
                 panelManager.ShowPanel("ProgressPanel", new PanelDataBase() { Data = this });
-        
-            asyncOperation.allowSceneActivation = autoStartScene;
+            
+            StartCoroutine(SceneLoadedEnumerator());
         }
 
         public void StartScene()
@@ -78,6 +81,23 @@ namespace WRA.General.SceneManagment
             if(asyncOperation == null)
                 return 0;
             return asyncOperation.progress / 0.9f;
+        }
+        
+        private void OnLoadComplete(AsyncOperation operation)
+        {
+            Status = LoadingStatus.Running;
+            OnSceneReady.Invoke();
+        }
+
+        private IEnumerator SceneLoadedEnumerator()
+        {
+            while (!asyncOperation.isDone)
+            {
+                yield return null;
+            }
+            
+            panelManager.ClosePanel("ProgressPanel");
+            Status = LoadingStatus.Running;
         }
     }
 }

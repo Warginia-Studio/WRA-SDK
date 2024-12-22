@@ -62,6 +62,17 @@ namespace WRA.UI.PanelsSystem
             return true;
         }
         
+        public bool CloseAllPanels()
+        {
+            var count = openedPanels.Count;
+            for(int i = 0; i < openedPanels.Count; i++)
+            {
+                ClosePanel(openedPanels[i]);
+                i--;
+            }
+            return count > 0;
+        }
+        
         public PanelBase ShowPanel(string panelName, PanelDataBase panelDataBase = null)
         {
             var panel = GetPanel(panelName);

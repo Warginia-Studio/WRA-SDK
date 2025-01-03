@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WRA.General.SceneManagment;
-using WRA.UI.PanelsSystem;
 using Zenject;
 using SceneManager = UnityEngine.SceneManagement.SceneManager;
 

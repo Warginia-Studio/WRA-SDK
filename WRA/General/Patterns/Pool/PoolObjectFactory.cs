@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using WRA.General.Patterns.Pool;
 using WRA.Utility.Diagnostics.Logs;
 using Zenject;
 
-namespace WRA.Zenject.Pool
+namespace WRA.General.Patterns.Pool
 {
     public class PoolObjectFactory : PlaceholderFactory<string, PoolObject>
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using WRA.UI.PanelsSystem;
+using WRA.UI_Extensions.PanelsSystem;
 using WRA.Utility.Diagnostics.DiagnosticsPanel;
 using Zenject;
 

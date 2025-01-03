@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace WRA.UI.PanelsSystem.PanelAnimations
+namespace WRA.UI_Extensions.PanelsSystem.PanelAnimations
 {
     public abstract class PanelAnimationBase : PanelFragmentBase
     {

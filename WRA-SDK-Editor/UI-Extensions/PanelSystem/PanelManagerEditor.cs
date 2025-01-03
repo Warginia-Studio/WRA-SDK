@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using WRA.UI_Extensions.PanelsSystem;
 
 namespace WRA.UI.PanelsSystem.Editor
 {

@@ -1,6 +1,6 @@
-using WRA.UI.PanelsSystem.PanelAnimations;
+using WRA.UI_Extensions.PanelsSystem.PanelAnimations;
 
-namespace WRA.UI.PanelsSystem.Fragments
+namespace WRA.UI_Extensions.PanelsSystem.Fragments
 {
     public class PanelActionsFragment : PanelFragmentBase
     {

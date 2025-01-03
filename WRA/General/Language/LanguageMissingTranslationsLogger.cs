@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-namespace WRA.PlayerSystems.LanguageSystem
+namespace WRA.General.Language
 {
     public static class LanguageMissingTranslationsLogger
     {

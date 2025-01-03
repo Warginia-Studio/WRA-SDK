@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using WRA.UI.PanelsSystem;
+using WRA.UI_Extensions.PanelsSystem;
 using WRA.Utility.Math;
 
 namespace WRA.Utility.Diagnostics.DiagnosticsPanel

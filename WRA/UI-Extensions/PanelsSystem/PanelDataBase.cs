@@ -1,4 +1,4 @@
-namespace WRA.UI.PanelsSystem
+namespace WRA.UI_Extensions.PanelsSystem
 {
     public class PanelDataBase
     {

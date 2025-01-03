@@ -1,19 +1,13 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Xml;
 using UnityEngine;
 using UnityEngine.Events;
-using WRA.General;
-using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using WRA.Utility.Math;
 using Zenject;
 using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
-namespace WRA.PlayerSystems.LanguageSystem
+namespace WRA.General.Language
 {
     public class LanguageManager : MonoBehaviour
     {

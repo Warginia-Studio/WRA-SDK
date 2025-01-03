@@ -1,4 +1,4 @@
-namespace WRA.UI.PanelsSystem.PanelAnimations
+namespace WRA.UI_Extensions.PanelsSystem.PanelAnimations
 {
     public enum PanelStatus
     {

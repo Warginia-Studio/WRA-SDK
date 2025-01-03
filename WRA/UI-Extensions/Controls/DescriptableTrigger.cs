@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace WRA.UI.Controls
+namespace WRA.UI_Extensions.Controls
 {
     public abstract class DescriptableTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {

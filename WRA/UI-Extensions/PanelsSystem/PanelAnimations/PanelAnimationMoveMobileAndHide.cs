@@ -3,7 +3,7 @@ using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 
-namespace WRA.UI.PanelsSystem.PanelAnimations
+namespace WRA.UI_Extensions.PanelsSystem.PanelAnimations
 {
     public class PanelAnimationMoveMobileAndHide : PanelAnimationMoveMobileFix
     {

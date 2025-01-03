@@ -1,9 +1,8 @@
 using UnityEngine;
-using WRA.General.Patterns;
 using WRA.General.Patterns.Singletons;
-using WRA.UI.TextControl;
+using WRA.UI_Extensions.TextControl;
 
-namespace WRA.UI.PanelsSystem.FadeSystem
+namespace WRA.UI_Extensions.PanelsSystem.FadeSystem
 {
     [RequireComponent(typeof(TextControlerByWritting))]
     public class FadeTextWriterProviderManager : MonoBehaviourSingletonMustExist<FadeTextWriterProviderManager>

@@ -3,7 +3,7 @@ using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using UnityEngine;
 
-namespace WRA.UI.PanelsSystem.CinematicSystem
+namespace WRA.UI_Extensions.PanelsSystem.CinematicSystem
 {
     public class CinematicCameraPanel : PanelBase
     {

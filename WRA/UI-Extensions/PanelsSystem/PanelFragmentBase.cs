@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.UI.PanelsSystem
+namespace WRA.UI_Extensions.PanelsSystem
 {
     public abstract class PanelFragmentBase : MonoBehaviour
     {

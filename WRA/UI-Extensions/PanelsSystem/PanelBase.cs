@@ -1,17 +1,15 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
-using WRA.UI.PanelsSystem.Fragments;
-using WRA.UI.PanelsSystem.PanelAnimations;
-using WRA.Utility.Diagnostics;
+using WRA.UI_Extensions.PanelsSystem.Fragments;
+using WRA.UI_Extensions.PanelsSystem.PanelAnimations;
 using WRA.Utility.Diagnostics.Logs;
 using Zenject;
 using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
-namespace WRA.UI.PanelsSystem
+namespace WRA.UI_Extensions.PanelsSystem
 {
     [RequireComponent(typeof(CanvasGroup), typeof(PanelActionsFragment))]
     public class PanelBase : MonoBehaviour

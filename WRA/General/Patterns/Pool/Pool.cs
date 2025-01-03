@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
-using WRA.Zenject;
-using WRA.Zenject.Pool;
 using Zenject;
 using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 

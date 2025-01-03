@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace WRA.UI.TextControl
+namespace WRA.UI_Extensions.TextControl
 {
     public abstract class TextControler : MonoBehaviour
     {

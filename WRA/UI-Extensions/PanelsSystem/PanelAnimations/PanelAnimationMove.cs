@@ -2,7 +2,7 @@ using System;
 using DG.Tweening;
 using UnityEngine;
 
-namespace WRA.UI.PanelsSystem.PanelAnimations
+namespace WRA.UI_Extensions.PanelsSystem.PanelAnimations
 {
     public class PanelAnimationMove : PanelAnimationBase
     {

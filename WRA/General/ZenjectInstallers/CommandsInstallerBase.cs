@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
-using WRA.UI.PanelsSystem;
 using WRA.Utility.Diagnostics.GameConsole.Commands;
 using Zenject;
 
-namespace WRA.Zenject.Commands
+namespace WRA.General.ZenjectInstallers
 {
     [CreateAssetMenu(fileName = "CommandsInstaller", menuName = "thief01/WRA-SDK/Installers/CommandsInstaller")]
     public class CommandsInstallerBase : ScriptableObjectInstaller<CommandsInstallerBase>

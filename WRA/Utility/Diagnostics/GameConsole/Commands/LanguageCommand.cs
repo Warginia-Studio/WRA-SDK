@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using WRA.PlayerSystems.LanguageSystem;
+using WRA.General.Language;
 using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.Utility.Diagnostics.GameConsole.Commands

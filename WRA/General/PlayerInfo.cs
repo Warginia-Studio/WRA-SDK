@@ -1,7 +1,6 @@
-using WRA.General.Patterns;
 using WRA.General.Patterns.Singletons;
 
-namespace WRA.PlayerSystems
+namespace WRA.General
 {
     public class PlayerInfo : MonoBehaviourSingletonMustExist<PlayerInfo>
     {

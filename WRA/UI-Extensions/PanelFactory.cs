@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using UnityEngine;
-using WRA.UI.PanelsSystem;
+using WRA.UI_Extensions.PanelsSystem;
 using WRA.Utility.Diagnostics.Logs;
 using Zenject;
 using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
-namespace WRA.Zenject.Panels
+namespace WRA.UI_Extensions
 {
     public class PanelFactory : PlaceholderFactory<string, PanelDataBase, PanelBase>
     {

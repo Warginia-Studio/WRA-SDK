@@ -1,4 +1,4 @@
-namespace WRA.UI.PanelsSystem.CinematicSystem
+namespace WRA.UI_Extensions.PanelsSystem.CinematicSystem
 {
     public class CinematicCameraData : PanelDataBase
     {

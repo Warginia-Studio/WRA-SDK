@@ -1,4 +1,4 @@
-namespace WRA.PlayerSystems.LanguageSystem
+namespace WRA.General.Language
 {
     public class LanguageItem 
     {

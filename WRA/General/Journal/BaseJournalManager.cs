@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using WRA.General.Patterns;
 using WRA.General.Patterns.Singletons;
 
-namespace WRA.PlayerSystems.JournalSystem
+namespace WRA.General.Journal
 {
     public class BaseJournalManager<T> : MonoBehaviourSingletonAutoCreate<BaseJournalManager<T>> where T : JournalEntry
     {

@@ -1,16 +1,11 @@
 using UnityEngine;
-using UnityEngine.Serialization;
-using WRA_SDK.WRA.General;
-using WRA_SDK.WRA.General.ZenjectInstallers;
 using WRA.AudioSystem;
 using WRA.CharacterSystems.StatisticsSystem;
-using WRA.CharacterSystems.StatisticsSystem.Data;
-using WRA.General.Cursor;
+using WRA.General.Language;
 using WRA.General.SceneManagment;
-using WRA.PlayerSystems.LanguageSystem;
 using Zenject;
 
-namespace WRA.General
+namespace WRA.General.ZenjectInstallers
 {
     public class AplicationInstaller : MonoInstaller
     {

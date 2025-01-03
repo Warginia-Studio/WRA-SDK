@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using WRA.UI.PanelsSystem;
+using WRA.UI_Extensions.PanelsSystem;
 using Zenject;
 
 namespace WRA.Utility.Diagnostics.GameConsole

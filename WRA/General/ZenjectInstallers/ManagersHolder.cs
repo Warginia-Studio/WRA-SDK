@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WRA_SDK.WRA.General.ZenjectInstallers
+namespace WRA.General.ZenjectInstallers
 {
     public class ManagersHolder : MonoBehaviour
     {

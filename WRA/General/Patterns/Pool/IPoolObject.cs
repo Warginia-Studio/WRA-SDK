@@ -1,24 +1,26 @@
-using UnityEngine;
-using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
+using WRA.CharacterSystems.Data;
 
-public interface IPoolObject
+namespace WRA.General.Patterns.Pool
 {
-    public int VariantId { get; set; }
-    public void OnInit();
+    public interface IPoolObject
+    {
+        public int VariantId { get; set; }
+        public void OnInit();
     
-    public void OnSpawn();
+        public void OnSpawn();
     
-    public void OnBeginKill(float delay);
+        public void OnBeginKill(float delay);
     
-    public void OnKill();
+        public void OnKill();
     
-    public void Spawn();
+        public void Spawn();
 
-    public void Kill();
+        public void Kill();
     
-    public void Kill(float delay);
+        public void Kill(float delay);
     
-    public void SetActive(bool active);
+        public void SetActive(bool active);
     
-    public void Kill(KillInfo killInfo);
+        public void Kill(KillInfo killInfo);
+    }
 }

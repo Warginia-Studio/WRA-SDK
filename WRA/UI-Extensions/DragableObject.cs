@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-namespace WRA.UI
+namespace WRA.UI_Extensions
 {
     public class DragableObject : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
     {

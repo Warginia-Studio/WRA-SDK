@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using WRA.CharacterSystems.StatisticsSystem;
-using WRA.CharacterSystems.StatisticsSystem.Controlers;
+using WRA.CharacterSystems.StatisticsSystem.Controllers;
 using WRA.CharacterSystems.StatisticsSystem.Data;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 

@@ -3,8 +3,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using WRA.PlayerSystems.LanguageSystem;
-using WRA.UI.PanelsSystem;
+using WRA.General.Language;
+using WRA.UI_Extensions.PanelsSystem;
 using Zenject;
 
 namespace WRA.General.SceneManagment

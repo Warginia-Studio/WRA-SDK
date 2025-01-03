@@ -1,43 +1,42 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using WRA.UI.PanelsSystem;
 
-public class PanelFragmentSetAsLastSibling : PanelFragmentBase
+namespace WRA.UI_Extensions.PanelsSystem.Fragments
 {
-    [SerializeField] private bool moveOnOpenOtherPanel = true;
-    public override void OnPanelCreated()
+    public class PanelFragmentSetAsLastSibling : PanelFragmentBase
     {
-        base.OnPanelCreated();
-        InitOnOntherPanel();
-        // ParentPanel.OnOpenEvent.AddListener(OnThisPanelShow);
-        ParentPanel.OnShowEvent.AddListener(OnThisPanelShow);
-    }
+        [SerializeField] private bool moveOnOpenOtherPanel = true;
+        public override void OnPanelCreated()
+        {
+            base.OnPanelCreated();
+            InitOnOntherPanel();
+            // ParentPanel.OnOpenEvent.AddListener(OnThisPanelShow);
+            ParentPanel.OnShowEvent.AddListener(OnThisPanelShow);
+        }
 
-    private void InitOnOntherPanel()
-    {
-        if (!moveOnOpenOtherPanel)
-            return;
-        var panelManager = ParentPanel.PanelManager;
-        panelManager.OnPanelOpen.AddListener(OnOtherPanelOpened);
-        panelManager.OnPanelShow.AddListener(OnOtherPanelOpened);
-    }
+        private void InitOnOntherPanel()
+        {
+            if (!moveOnOpenOtherPanel)
+                return;
+            var panelManager = ParentPanel.PanelManager;
+            panelManager.OnPanelOpen.AddListener(OnOtherPanelOpened);
+            panelManager.OnPanelShow.AddListener(OnOtherPanelOpened);
+        }
 
-    private void OnDestroy()
-    {
-        var panelManager = ParentPanel.PanelManager;
-        panelManager.OnPanelOpen.RemoveListener(OnOtherPanelOpened);
-        panelManager.OnPanelShow.RemoveListener(OnOtherPanelOpened);
-    }
+        private void OnDestroy()
+        {
+            var panelManager = ParentPanel.PanelManager;
+            panelManager.OnPanelOpen.RemoveListener(OnOtherPanelOpened);
+            panelManager.OnPanelShow.RemoveListener(OnOtherPanelOpened);
+        }
 
-    private void OnOtherPanelOpened(PanelBase panel)
-    {
-        ParentPanel.transform.SetAsLastSibling();
-    }
+        private void OnOtherPanelOpened(PanelBase panel)
+        {
+            ParentPanel.transform.SetAsLastSibling();
+        }
     
-    private void OnThisPanelShow()
-    {
-        ParentPanel.transform.SetAsLastSibling();
+        private void OnThisPanelShow()
+        {
+            ParentPanel.transform.SetAsLastSibling();
+        }
     }
 }

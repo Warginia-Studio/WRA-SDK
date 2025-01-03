@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace WRA.Zenject
+namespace WRA.Utility
 {
     [System.Serializable]
     public class ResourcePaths 

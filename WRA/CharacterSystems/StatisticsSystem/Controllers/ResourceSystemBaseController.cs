@@ -1,13 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
-using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
+using WRA.CharacterSystems.Data;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
-using WRA.Utility.Diagnostics;
 using WRA.Utility.Diagnostics.Logs;
 using WRA.Utility.SmartObjects;
 using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
-namespace WRA.CharacterSystems.StatisticsSystem.Controlers
+namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 {
     public abstract class ResourceSystemBaseController : CharacterSystemBase
     {

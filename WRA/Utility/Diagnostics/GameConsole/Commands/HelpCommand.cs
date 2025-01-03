@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using WRA.Zenject.Commands;
 using LogType = WRA.Utility.Diagnostics.Logs.LogType;
 
 namespace WRA.Utility.Diagnostics.GameConsole.Commands

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.PlayerSystems.JournalSystem
+namespace WRA.General.Journal
 {
    public abstract class WikipediaEntry : JournalEntry
    {

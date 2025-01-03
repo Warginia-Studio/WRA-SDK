@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace WRA.UI.TextControl
+namespace WRA.UI_Extensions.TextControl
 {
     public class TextControlerByWritting : TextControler
     {

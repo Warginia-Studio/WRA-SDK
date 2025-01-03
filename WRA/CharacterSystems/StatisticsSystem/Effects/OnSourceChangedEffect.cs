@@ -1,7 +1,7 @@
 using UnityEngine;
-using WRA.CharacterSystems.StatisticsSystem.Controlers;
+using WRA.CharacterSystems.StatisticsSystem.Controllers;
 
-namespace WRA.CharacterSystems.StatisticsSystem.Effects.SourceEffects
+namespace WRA.CharacterSystems.StatisticsSystem.Effects
 {
     public abstract class OnSourceChangedEffect : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
+using WRA.CharacterSystems.Data;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Interfaces
 {

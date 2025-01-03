@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.UI.PanelsSystem.CinematicSystem
+namespace WRA.UI_Extensions.PanelsSystem.CinematicSystem
 {
     [System.Serializable]
     public struct Curtain

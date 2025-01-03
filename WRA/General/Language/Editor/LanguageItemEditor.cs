@@ -1,4 +1,4 @@
-﻿namespace WRA.PlayerSystems.LanguageSystem.Editor
+﻿namespace WRA.General.Language.Editor
 {
     public class LanguageItemEditor : LanguageItem
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using WRA.CharacterSystems.InteractionsSystem;
-using WRA.PlayerSystems.LanguageSystem;
+using WRA.General.Language;
 
 namespace WRA.Environment
 {

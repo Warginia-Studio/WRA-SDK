@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace WRA.UI.TextControl
+namespace WRA.UI_Extensions.TextControl
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class TextControlerByAlpha : TextControler

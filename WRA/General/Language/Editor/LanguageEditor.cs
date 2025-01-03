@@ -3,12 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using UnityEditor;
 using UnityEngine;
 
-
-namespace WRA.PlayerSystems.LanguageSystem.Editor
+namespace WRA.General.Language.Editor
 {
     public class LanguageEditor : EditorWindow
     {

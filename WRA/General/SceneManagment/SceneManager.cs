@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using WRA.General.Patterns.Singletons;
-using WRA.UI.PanelsSystem;
+using WRA.UI_Extensions.PanelsSystem;
 using Zenject;
 
 namespace WRA.General.SceneManagment

@@ -1,6 +1,6 @@
 using UnityEngine.Serialization;
 using WRA.CharacterSystems.StatisticsSystem.Data;
-using WRA.PlayerSystems.LanguageSystem;
+using WRA.General.Language;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Statistics
 {

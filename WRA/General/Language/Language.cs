@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
 
-namespace WRA.PlayerSystems.LanguageSystem
+namespace WRA.General.Language
 {
     public class Language
     {

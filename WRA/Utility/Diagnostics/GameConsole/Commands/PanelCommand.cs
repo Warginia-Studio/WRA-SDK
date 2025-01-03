@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using WRA.UI.PanelsSystem;
-using WRA.UI.PanelsSystem.PanelAnimations;
+using WRA.UI_Extensions.PanelsSystem;
+using WRA.UI_Extensions.PanelsSystem.PanelAnimations;
 
 namespace WRA.Utility.Diagnostics.GameConsole.Commands
 {

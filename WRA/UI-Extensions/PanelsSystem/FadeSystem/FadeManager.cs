@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace WRA.UI.PanelsSystem.FadeSystem
+namespace WRA.UI_Extensions.PanelsSystem.FadeSystem
 {
     [RequireComponent(typeof(Image), typeof(CanvasGroup))]
     public class FadeManager : PanelBase

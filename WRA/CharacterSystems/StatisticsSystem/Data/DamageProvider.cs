@@ -1,5 +1,5 @@
 using UnityEngine;
-using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
+using WRA.CharacterSystems.Data;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Data

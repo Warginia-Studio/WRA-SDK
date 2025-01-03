@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using WRA.General.Cursor;
 using WRA.General.Patterns.Singletons;
 
 namespace WRA.General

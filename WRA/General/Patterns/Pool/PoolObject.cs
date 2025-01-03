@@ -2,8 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using WRA.CharacterSystems.Data;
 using WRA.CharacterSystems.StatisticsSystem.Interfaces;
-using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
 namespace WRA.General.Patterns.Pool
 {

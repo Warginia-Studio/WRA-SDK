@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.CharacterSystems.StatisticsSystem.ResourcesInfos
+namespace WRA.CharacterSystems.Data
 {
     public class ManaInfo : ResourcesChangedBase
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.UI
+namespace WRA.UI_Extensions
 {
     public class FollowMouse : MonoBehaviour
     {

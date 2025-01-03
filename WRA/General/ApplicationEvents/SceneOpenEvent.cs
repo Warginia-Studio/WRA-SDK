@@ -1,7 +1,8 @@
 using UnityEngine;
+using WRA.General.SceneManagment;
 using Zenject;
 
-namespace WRA.General.SceneManagment
+namespace WRA.General.ApplicationEvents
 {
     public class SceneOpenEvent : MonoBehaviour
     {

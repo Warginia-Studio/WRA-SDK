@@ -1,9 +1,9 @@
 using UnityEngine;
-using WRA.UI.PanelsSystem;
+using WRA.UI_Extensions.PanelsSystem;
 using WRA.Utility.Diagnostics.GameConsole;
 using Zenject;
 
-namespace WRA.General
+namespace WRA.General.ZenjectInstallers
 {
     public class CoreInputInstaller : MonoBehaviour
     {

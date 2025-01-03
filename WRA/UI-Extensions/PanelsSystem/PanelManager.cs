@@ -1,18 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
-using WRA.General.Patterns;
-using WRA.General.Patterns.Singletons;
-using WRA.UI.PanelsSystem.PanelAnimations;
-using WRA.Utility.Diagnostics;
-using WRA.Utility.Diagnostics.Logs;
-using WRA.Zenject;
-using WRA.Zenject.Panels;
+using WRA.UI_Extensions.PanelsSystem.PanelAnimations;
 using Zenject;
 
-namespace WRA.UI.PanelsSystem
+namespace WRA.UI_Extensions.PanelsSystem
 {
     public class PanelManager : MonoBehaviour
     {

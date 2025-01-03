@@ -1,9 +1,9 @@
 using System;
 using UnityEngine.Events;
+using WRA.CharacterSystems.Data;
 using WRA.CharacterSystems.StatisticsSystem.Interfaces;
-using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
-namespace WRA.CharacterSystems.StatisticsSystem.Controlers
+namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 {
     public class ConditionSystemBaseController : ResourceSystemBaseController, IConitionable
     {

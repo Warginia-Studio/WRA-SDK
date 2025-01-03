@@ -1,4 +1,4 @@
-namespace WRA.PlayerSystems.JournalSystem
+namespace WRA.General.Journal
 {
     public class WikipediaManager : BaseJournalManager<WikipediaEntry>
     {

@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using WRA.General.Patterns.Singletons;
 
-namespace WRA.General.Cursor
+namespace WRA.General
 {
     public class CursorManager : MonoBehaviour
     {

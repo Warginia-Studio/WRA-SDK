@@ -4,7 +4,7 @@ using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using UnityEngine;
 
-namespace WRA.UI.PanelsSystem.PanelAnimations
+namespace WRA.UI_Extensions.PanelsSystem.PanelAnimations
 {
     public class PanelAnimationMoveMobileFix : PanelAnimationMove
     {

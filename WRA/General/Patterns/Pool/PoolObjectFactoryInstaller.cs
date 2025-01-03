@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using WRA.General.Patterns.Pool;
 using Zenject;
 
-namespace WRA.Zenject.Pool
+namespace WRA.General.Patterns.Pool
 {
     [CreateAssetMenu(fileName = "PoolObjectFactoryInstaller", menuName = "thief01/WRA-SDK/Installers/PoolObjectFactoryInstaller")]
     public class PoolObjectFactoryInstaller : ScriptableObjectInstaller<PoolObjectFactoryInstaller>

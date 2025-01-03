@@ -1,8 +1,8 @@
 using UnityEngine;
-using WRA.UI.PanelsSystem;
+using WRA.UI_Extensions.PanelsSystem;
 using Zenject;
 
-namespace WRA.Zenject.Panels
+namespace WRA.UI_Extensions
 {
     public class PanelManagerInstaller : MonoInstaller
     {

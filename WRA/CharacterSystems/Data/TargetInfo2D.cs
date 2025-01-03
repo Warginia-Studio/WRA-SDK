@@ -1,9 +1,6 @@
-using System.Diagnostics.Contracts;
 using UnityEngine;
-using WRA.CharacterSystems;
-using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 
-namespace Character.Data
+namespace WRA.CharacterSystems.Data
 {
     public class TargetInfo2D : InfoBase
     {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
-namespace WRA.CharacterSystems.StatisticsSystem.Controlers
+namespace WRA.CharacterSystems.StatisticsSystem.Controllers
 {
     public class StatisticsController : CharacterSystemBase
     {

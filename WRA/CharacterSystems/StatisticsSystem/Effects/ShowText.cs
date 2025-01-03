@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace WRA.CharacterSystems.StatisticsSystem.Effects.SourceEffects
+namespace WRA.CharacterSystems.StatisticsSystem.Effects
 {
     public class ShowText : OnSourceChangedEffect
     {

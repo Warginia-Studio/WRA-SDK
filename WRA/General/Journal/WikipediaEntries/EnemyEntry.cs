@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.PlayerSystems.JournalSystem.WikipediaEntries
+namespace WRA.General.Journal.WikipediaEntries
 {
     [CreateAssetMenu(menuName = Definitions.SCRIPTALBES_PATH+"Journal System/Wikipedia/Enemy Entry")]
     public class EnemyEntry : WikipediaEntry

@@ -1,4 +1,4 @@
-namespace WRA.UI.PanelsSystem.FadeSystem
+namespace WRA.UI_Extensions.PanelsSystem.FadeSystem
 {
     [System.Serializable]
     public class FadeOptions

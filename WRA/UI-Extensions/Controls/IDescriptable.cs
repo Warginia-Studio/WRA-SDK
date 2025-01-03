@@ -1,4 +1,4 @@
-namespace WRA.UI.Controls
+namespace WRA.UI_Extensions.Controls
 {
     public interface IDescriptable
     {

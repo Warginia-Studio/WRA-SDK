@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using WRA.General.Patterns;
 using WRA.General.Patterns.Singletons;
 
-namespace WRA.PlayerSystems.NavigationSystem
+namespace WRA.General.Navigation
 {
     public class NavigationManager : MonoBehaviourSingletonAutoCreate<NavigationManager>
     {

@@ -8,7 +8,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using WRA.UI.PanelsSystem;
+using WRA.UI_Extensions.PanelsSystem;
 using WRA.Utility.Diagnostics.GameConsole.Commands;
 using WRA.Utility.Diagnostics.Logs;
 using Zenject;

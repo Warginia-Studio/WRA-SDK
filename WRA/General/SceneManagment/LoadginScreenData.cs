@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace WRA.General
+namespace WRA.General.SceneManagment
 {
     [CreateAssetMenu(menuName = "thief01/WRA-SDK/Loading Screen Data")]
     public class LoadginScreenData : ScriptableObject

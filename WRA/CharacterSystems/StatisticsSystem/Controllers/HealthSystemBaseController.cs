@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
-using WRA.CharacterSystems.StatisticsSystem.Controlers;
+using WRA.CharacterSystems.Data;
 using WRA.CharacterSystems.StatisticsSystem.Interfaces;
-using WRA.CharacterSystems.StatisticsSystem.ResourcesInfos;
 using WRA.CharacterSystems.StatisticsSystem.Statistics;
 
 namespace WRA.CharacterSystems.StatisticsSystem.Controllers

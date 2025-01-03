@@ -25,7 +25,6 @@ namespace WRA.Zenject.Pool
 
                 var pool = container.InstantiatePrefab(poolObject.gameObject).GetComponent<PoolObject>();
                 return pool;
-
             }
 
             return null;

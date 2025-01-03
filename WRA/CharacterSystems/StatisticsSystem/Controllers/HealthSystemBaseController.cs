@@ -37,7 +37,6 @@ namespace WRA.CharacterSystems.StatisticsSystem.Controllers
         
         public virtual void Heal(HealInfo healInfo)
         {
-
             OnBeforeHeal.Invoke(healInfo);
             healInfo.ModifiedValue += healInfo.ModifiedValuePercent * MaxValueStatistic.Value;
             AddValue(healInfo);

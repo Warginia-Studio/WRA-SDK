@@ -24,7 +24,12 @@ namespace WRA.General.SceneManagment
         [SerializeField] private bool autoStartScene = true;
     
         private AsyncOperation asyncOperation;
-        
+
+        private void Awake()
+        {
+            
+        }
+
         public void LoadScene(string sceneName)
         {
             Status = LoadingStatus.Loading;

@@ -29,7 +29,7 @@ namespace WRA.UI_Extensions
             foreach (var path in dictionaryPaths)
             {
                 var loadedPanels = Resources.LoadAll<PanelBase>(path);
-                if (loadedPanels != null)
+                if (loadedPanels != null && loadedPanels.Length > 0)
                 {
                     loadedPanels.ToList().ForEach(ctg => panels.RemoveAll(ctg2 => ctg.name == ctg2.name));
                     panels.RemoveAll(ctg => ctg.name == loadedPanels[0].name);
